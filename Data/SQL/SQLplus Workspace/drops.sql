@@ -1,0 +1,13 @@
+DROP TABLE olods;
+DROP TABLE lector_andere_taken;
+DROP TABLE lectoren;
+DROP TABLE lector_lesopdracht;
+DROP TABLE studenten ;
+DROP TABLE gemeenten;
+DROP TABLE examenplanning;
+DROP TABLE lokalen;
+DROP TABLE examendatum_olod;
+DROP TABLE klas_perstudent_perolod;
+DROP TABLE examenkansen;
+DROP TABLE examenperiodes;
+DROP TABLE studentenscores;

@@ -1,0 +1,2 @@
+INSERT INTO inschrijvingen_kindgegevens VALUES(							82	,	'Cindy'	,	'Meertens'	, to_date('01/04/2002', 'dd/mm/yyyy'),	1.66	,	39	,	'J'	)
+/
