@@ -1,9 +1,0 @@
-try3.com
-
-mov ah,01
-int 21
-mov dl,al
-add dl,20
-mov ah,02
-int 21
-int 20
