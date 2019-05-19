@@ -1,0 +1,45 @@
+Alle restaurants in brooklyn en queens, toont naam en quisine, geen id
+db.restaurants.find( { $or: [ { borough:"Brooklyn" }, 
+				{ borough:"Queens" } ] },
+				{_id:0, name:1, cuisine:1} ).pretty()
+
+-----------
+Alle restaurants die cuisine chinese OF Donuts hebben EN in brooklyn OF queens zitten, GESORTEERD op borough
+db.restaurants.find( {
+    $and : [
+        { $or : [ { cuisine : "Chinese" }, { cuisine : "Donuts" } ] },
+        { $or : [ { borough : "Brooklyn" }, { borough : "Queens" } ] }
+    ]
+},{name:1, cuisine:1, _id:0, borough:1} ).sort({borough:1})
+
+-----------
+vind alle restaurants met score tussen 5 en 12 incl. /// toont ook scores boven 12 en minder dan 5 
+							 aangezien restaurants verschillende scores heeft
+db.restaurants.find( 
+		{ 'grades.score': {$gte:5, $lte:12}},
+{name:1, cuisine:1, _id:0, borough:1, 'grades.score':1, 'grades.grade':1} ).sort({borough:1}).pretty()
+
+
+-----------
+vind het restaurant met building nummer 3406, zipcode 11106 en borough Queens
+
+db.restaurants.find({$and: [
+	{'address.building': "3406"},
+	{'address.zipcode': "11106"},
+	{borough: "Queens"}
+]
+}).pretty()
+
+UITKOMST = Steve Chu'S Deli & Grocery
+
+-----------
+vind alle restaurants die in building 1 t.e.m. 100 ziten gesorteerd op building
+
+db.restaurants.find({'address.building': {$gte:"1", $lte:"100"}},
+{name:1, 'address.building':1}).sort({"address.building":1}).pretty()
+
+
+-----------
+vind alle restaurants die hun naam beginnen tussen M en P inclusief .
+
+db.restaurants.find({name : {$gte:"M", $lte:"P"}},{name:1}).sort({name:1}).pretty()

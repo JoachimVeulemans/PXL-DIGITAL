@@ -1,0 +1,71 @@
+ ---------
+|Opgave 1:|
+ ---------
+use examen;
+db.getCollection("restaurants").find({ "address.street" : /.*Avenue.*/i},{"address.building" : 1.0, "address.street" : 1.0, "address.zipcode" : 1.0, "_id" : 0.0});
+
+ ---------
+|Opgave 2:|
+ ---------
+Nee, er is geen Italian cuisine restaurant dat zowel locatose free als nut free producten aanbiedt! 
+db.getCollection("restaurants").find({"cuisine" : "Italian", "$and" : [{"dietary" : "lactose free"},{"dietary" : "nut free"}]}).count();
+
+ -----------
+|Opgave 2 A:|
+ -----------
+use examen;
+db.getCollection("restaurants").find({"cuisine" : "Italian", "$and" : [ {"dietary" : "lactose free"}, {"dietary" : "nut free"}]}, {"grades" : 0.0, "address" : 0.0});
+	
+ -----------
+|Opgave 2 B:|
+ -----------
+Geen namen om weer te geven.
+
+ -----------
+|Opgave 3 A:|
+ -----------
+use examen;
+db.getCollection("restaurants").find({"borough" : "Queens","$or" : [{"cuisine" : "Delicatessen"}, {"cuisine" : "Chinese"}]},{"address" : 1.0, "name" : 1.0, "cuisine" : 1.0, "_id" : 0.0}).pretty();
+
+ -----------
+|Opgave 3 B:|
+ -----------
+Ho Mei Restaurant; Sal'S Deli; Steve Chu'S Deli & Grocery; Tony'S Deli
+
+ -----------
+|Opgave 4 A:|
+ -----------
+use examen;
+db.getCollection("restaurants").find({"$and" : [{"grades.score" : {"$gte" : NumberInt(50)}}, {"grades.score" : {"$lte" : NumberInt(60)}}]},{"name" : 1.0, "_id" : 0.0}).pretty();
+
+ -----------
+|Opgave 4 B:|
+ -----------
+Como Pizza; May May Kitchen; Polish National Home
+
+ -----------
+|Opgave 5 A:|
+ -----------
+use examen;
+db.getCollection("restaurants").find({"cuisine" : "American"},{"name" : 1.0, "_id" : 0.0}).sort({"name" : 1.0}).skip(20).limit(1).pretty();
+
+ -----------
+|Opgave 5 B:|
+ -----------
+Melody Lanes
+
+ ---------
+|Opgave 6:|
+ ---------
+use pokemon
+db.createCollection("pokedex")
+
+ ---------
+|Opgave 7:|
+ ---------
+db.pokedex.insert([{_id: "001",	Name: "Squirtle", Type: "water", Sort: "tiny turtle", Evolution: "Wartortle, Blastoise"},{_id: "002", Name: "Wartortle", Type: "Water",	Weakness: "electric"},{_id:"003", Name: "Bulbasaur", Type: "grass, poison", Stats: ["AttackScore: 3", "DefenceScore: 2", "Speed: 3"]}])
+
+ ---------
+|Opgave 8:|
+ ---------
+db.pokedex.update({Type: "water"}, {$set: {Sort: "worm", Capacity: "torrent"}})
