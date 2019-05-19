@@ -1,0 +1,267 @@
+============= Hoofdstuk 1 ===============
+
+- DIU --> Device Independent Unit (Meeteenheid)
+
+============= Hoofdstuk 2 ===============
+
+- MSIL --> Microsoft Intermediate Language
+- CIL --> Common Intermediate Language
+- Rechterklik op methode --> go to definition (Geeft implementatie)
+- Besturingselementen = Controls = Dingen in uw toolbox
+- Event = Gebeurtenis
+- Methode --> Begint met hoofdletter (Dus --> Naam object ook --> Voor gegenereerde event handlers!)
+- Accolades altijd:
+{
+     …
+}
+
+============= Hoofdstuk 3 ===============
+
+- Variabelen namen ALTIJD voluit
+- Methodenaam --> Hoofdletter
+- Nulpunt coördinaten --> Links boven Canvas
+- Pad? --> NOOIT absolute paden, ALTIJD relatieve paden
+- Eigenschappen object instellen? Vb.:
+Ellipse ellipse = new Ellipse()
+{
+	width = 60,
+	height = 70
+}; 
+--> Compiler heeft quick fix hiervoor!
+- Oef 1 > Oef 1 --> "Projectmap"
+- Oef 1 > Oef 1 > bin > debug --> "Outputmap"
+
+============= Hoofdstuk 4 ===============
+
+- Variabele namen moeten beginnen met letter of underscore
+- Variabele namen voluit in Engels schrijven
+- Strings met kleine letter!!! --> string
+- Var declaraties altijd apart onder elkaar
+- Decimale notatie met punt!
+- Variabele naam --> beginnen met een kleine letter
+- int 1 / int 2 --> NIET 0.5 MAAR 0 (want int, rond niet af maar kapt af)
+- String.Format("{0} euro en {1} cent",euros, centen); --> Zo placeholders typen!
+OF $"{euros} euros and {centen} cents"; --> String interpolatie (BETER)
+- Placeholders in ppt leren!!! (+ op Online Help --> Standard numeric format strings)
+
+============= Hoofdstuk 5 ===============
+
+- Functie: Geeft iets terug (return) --> in een variabele steken wanneer je ze oproept (toekenning)
+- Methode: Geeft niets terug (void) --> gewoon DoeIets();
+- Breakpunt zetten --> in grijze ruimte naast nummering
+- F5 --> Tot volgende break-punt doorgaan
+- F11 --> Stap per stap uitvoeren
+- Gele pijl verplaatsen --> Zo kan je code skippen
+- Debug > Step-over --> Slaat code over in Debug, maar voert wel uit
+- Debug > Step-out --> Gaat uit methode waar je in zit naar de volgende stap buiten de methode, maar voert hem wel uit
+- Named parameters --> Parameters meegeven in andere volgorde
+	methode(width: 30, height: 50);
+- Overerving met dubbele punt
+	public partial class MainWindow : Window
+- Partial: Gedeeltelijk, een deel van de klasse wordt ergens anders gegenereerd
+- Java --> Main klasse is static --> DUS methodes zijn ook static
+- .NET --> Main klasse is niet static, kan een instantie gemaakt worden --> DUS methodes niet static
+- Visual studio --> file explorer --> show all files --> obj --> MainWindow.g.i.cs (Hier staat de code van MainWindow in, vooral vanaf blijven!)
+- Visual studio --> UML-schema genereren (in file ClassDiagram1.cd)
+	View --> View class diagram (Component class designer installeren)
+- Call-by-Reference --> veiliger dan call-by-value
+- SomEnVerschil(a,b,out s, out v)
+	--> 'out' --> geeft het adres van een (lege) variabele mee --> gebruiken in functie --> steekt waarde in dat meegegeven adres!
+	--> Zo meerdere waardes uit functie krijgen
+	--> waarde van de variabele buiten de functie kan niet worden gebruikt binnen de functie (éénrichtingsverkeer!)
+- 'out' vs 'ref' --> 'ref' is tweerichtingsverkeer, 'out' éénrichtingsverkeer
+- 'ref' --> Om variabele te gebruiken die al een waarde heeft, in methode met die waarde werken, en nieuwe waarde vanuit methode erin steken!
+- 'out' en 'ref' --> minder veilig!
+- 'ref' niet gebruiken als je de waarde buiten de functie niet wilt aanpassen
+
+========== Hoofdstuk 6 ==========
+
+- Klassevariabelen --> ALTIJD private
+- Veel punten af voor 'lazy' public variabelen (--> via property aanpassen = beter)
+- Altijd variabelen gebruiken binnen zo klein mogelijke scope --> beter voor geheugen & var kan niet ongewenst gewijzigd worden
+- Event handler aan methode koppelen
+	--> eventHandler += menthode;   --> Zonder haakjes!!!
+	--> Enige plaats waar een methode geen haakjes heeft!!!
+- Namespace: Klassen die logisch samenhoren zitten in één namespace
+	--> Alle bibliotheekklassen --> ingedeeld in Namespaces
+	--> Importeren met 'using'
+	--> Zo niet elke keer 'System.Windows.Messagebox. ..." moeten typen
+- Members: leden van klassen
+- Methoden en properties werken altijd op object-niveau (tenzij klassevariabele)
+	--> 'Object.Methode()'
+	--> 'Object.Property'
+- private Random random = new Random();
+	--> Genereert direct bij initialisatie een reeks random getallen
+	--> Met 'random.Next(10,100)' neemt hij het volgende getal in de reeks wat aan de voorwaarden voldoet
+- Bewegend beeld maken? ---> DispatcherTimer nodig!
+
+========== Hoofdstuk 13 ==========
+
+- ListBox --> Grafisch
+- (I) List werkt achter de schermen van ListBox
+- "ShoppingListBox.Items" --> Verwijst vaar (I)List achter de schermen (zie je niet)
+- "shoppingListBox.ItemsSource = list;"
+	--> Data Binding! (list is een generic list, wordt als bron van de ListBox gebruikt)
+	--> MAAR Item toevoegen aan generic list --> ListBox wordt niet aangepast!
+	--> Update wel automatisch wanneer je ipv. een List een 'ObservableCollection' gebruikt (zelfde initialisatie als List)
+- Initialisatie generic list:
+	--> "list = new List<string>() {"bread", "milk", "coffee"};
+- "<T>" in help:
+	--> Type
+	--> Wijst aan dat je met iets 'generic' bezig bent
+- ComboBox --> Zelfde als Listbox in werking (ook casten naar ComboBox.Items enzo)
+
+========== Hoofdstuk 17 ==========
+
+- Double.Parse() is bijna hetzelfde als Convert.ToDouble()
+- Echte applicatie maken? --> Altijd met muit over methodes gaan, zien welke exceptions er kunnen zijn
+	--> Exceptions opvangen
+- Keyword 'try' 
+	--> Rond code waar iets mis kan gaan
+	--> Ook rond code daarna die door errors niet mag uitgevoerd worden
+- Zelf exception schrijven?
+	--> Altijd overerven van ApplicationException
+	--> Naam van klasse moet altijd eindigen op 'Exception'
+- Meerdere 'catch' blokken
+	--> Meer specifiek: vanboven
+	--> Meer algemeen: vanonder
+- 'throw' meestal als gevolg van 'if' of 'else'
+- 'finally'
+	--> Altijd uitgevoerd, of er nu errors zijn of niet
+	--> Altijd schrijven, bv. om externe resources te sluiten
+- Op examen 
+	--> Altijd zelf een exception schrijven!!!
+	--> Zeker nakijken hoe je dit doet! (Zie ppt H17)
+- Bij exceptions (BELANGRIJK voor structuur van EXAMEN):
+	--> Schrijver van de klasse zegt "Hier kan het misgaan" --> Throw
+	--> Gebruiker van de klasse moet zeggen hoe de exception opgevangen wordt --> Catch
+	--> Het is gebruikelijk om een throw te doen binnen een methode van een klasse
+
+========== Hoofdstuk 18 ===========
+
+- Bestanden sluiten? --> Altijd in 'finally'
+- Environment.SpecialFolder bevat constanten voor folders zoals:
+	--> MyDocuments	
+	--> MyPictures
+	--> MyDesktop
+	--> ...
+- Op examen --> MOET een try, catch, finally in staan
+
+- Op examen --> Zeker met bestanden werken (System.IO)
+- Trim() verwijderd leading en trailing spaties (voor en achter)
+- MessageBox.Show() heeft meerdere argumenten
+	--> Knoppen, titel,... aanpassen
+- Bij OpenFileDialog(In verkenner files kiezen) --> Filter voor type files
+	--> Gewoon met regex
+	--> Zie ppt
+- Nullable bool --> 3 waardes: true, false, null
+	--> Als je de inhoud nog niet weet
+- MenuItem met header "_File"	
+	--> Underscore underlined eerste letter!
+	--> Bij E_xit --> x wordt underlined
+	--> Alt + (underlined key) 'klikt' op de knop
+- Applicatie afsluiten? --> Environment.Exit(exitCode);
+	--> exitCode --> om te zien op welke plaats je uit programma gegaan bent
+	--> Mag random gekozen code zijn
+- StartupUri --> Kiezen welk scherm als eerste geopend wordt (bij meerdere windows)
+- Dialog-scherm --> Scherm dat afgewerkt moet zijn voor men terug naar het hoofdscherm kan gaan (bv. afdrukinstellingen)
+	--> Doen met ShowDialog() ipv. Show()
+
+========== Hoofdstuk 23 ========== 
+
+- Interface = "skelet voor een klasse"
+- interface implementeren?
+	--> Klasse : Interface
+	--> Interface gaat red underlined zijn --> 'Implement interface'
+- Interface naming convention 
+	--> Naam moet altijd met 'I' beginnen
+- Werken met klasse die nog niet af is? 
+	--> Interface gebruiken en hiervan een 'mock' implementatie maken
+	--> Weinig functionaliteit, maar je kan er mee werken
+	--> Bv. random value returnen in een methode (hetgeen je verwacht returnen)
+- Abstracte klasse
+	--> Kan geïmplementeerde methodes en niet-geïmplementeerde methodes hebben
+
+========== Hoofdstuk 14 ==========
+
+- Dictionary
+	--> Soort van array met 'waardeparen'
+	--> Heeft altijd een key en een value
+	--> Hiermee dingen opzoeken in 'array' 
+	--> 'private Dictionary <string, Object> naam = new Dictionary <string, Object>();'
+	--> Objecten opzoeken aan de hand van bv. strings
+	--> Object toevoegen? 'dict.Add("naam", Object);'
+	--> Zien if Dictionary een bepaalde sleutel bevat? 'dict.ContainsKey(key)'
+
+========== Hoofdstuk 24 ==========
+
+- Dynamic Dispatch: Pas tijdens runtime wordt er beslist welk object je hebt bij polymorfie
+	--> Bv. 'Shape' wordt dan pas gezien als 'Square'
+	--> Ook 'late binding' genoemd
+- Arraylist: Meegroeiende array, altijd maar 1 type
+	--> Hier is casten nodig bij polymorfie (Bij generische lijsten niet, want ze zijn generisch)
+
+========== Hoofdstuk 15 ==========
+
+- Tweedimensionale array maken 
+	--> int [,]
+	--> Declaratie: 'int [,] table= {{1,0,1},{2,0,2}};
+	--> Met komma
+	--> In Java was het int [][]
+	--> 'int [][]' bestaan in C# ook, dit is een "Jagged array"
+- Jagged array:
+	--> 2D array waar rijen een verschillend aantal kolommen hebben
+	--> "Arrays van arrays"
+	--> 'data[0] = new int [3]'
+	--> 'data[1] = new int [7]'
+- JaggedArray.Length
+	--> Geeft het aantal rijen
+- JaggedArray[0].Length
+	--> Geeft het aantal kolommen in de eerste rij
+- Eerste index: rijnummer, tweede index: kolomnummer
+- 2D array doorlopen?
+	--> Geneste for loop
+- 2DArray.GetLength(0)
+	--> Geeft aantal rijen
+- 2DArray.GetLength(1)
+	--> Geeft aantal kolommen
+- 2DArray.Length
+	--> Geeft maximaal elementen van de 2D array
+- 2D Array als argument in methode gebruiken?
+	--> Waarden worden buiten de methode ook aangepast
+
+========== Hoofdstuk 16 ==========
+
+- Strings vergelijken met ==
+	--> Niet met .Equals()
+- Woorden veranderen in String 
+	--> Met Change(string, teVervangen, vervanging)
+	--> Gaat ook met Replace()
+- Stringbuilder
+	--> Ook in C# (zelfde als in Java)
+
+========== Hoofdstuk 21 ==========
+
+- Namen WPF controls
+	--> LowerCamelCase met naam van control vanachter
+- Properties
+	--> Geen get/set in naam
+	--> Gewoon zelfstandig naamwoord
+- #region <naam> 
+	--> Hiertussen stukken code die te maken hebben met de naam
+	--> Om deze te kunnen collapsen
+	--> Einde region: #endregion
+
+========== Hoofdstuk 22 ==========
+
+- Blackbox testen: 
+	--> Functioneel testen
+	--> Zien of functie correct werkt
+	--> Testen op alle mogelijke situaties (<,>,=,...)
+- Whitebox testen: 
+	--> Structureel testen
+	--> Zorgen dat je alle takken (if..else) van het programma test
+	--> Zien of structuur van programma correct is
+- Bij beide vormen van testen
+	--> Resultaten van testen in schema zetten (voor rest van bedrijf)
+- 
