@@ -1,0 +1,56 @@
+// READER
+try (BufferedReader br = Files.newBufferedReader(lotteryFile)) {
+	String line = br.readLine();
+	String line = br.readLine();
+
+	while (line != null) {
+		String[] linePieces = line.split(";");
+		line = br.readLine();
+	}
+} catch (Exception e) {
+	try {
+		writeError(filename, e.getMessage(), errorFile, "");
+	} catch (IOException e1) {
+		e1.printStackTrace();
+	}
+}
+
+
+// WRITE ERROR
+if (!errorFile.toFile().exists() && ) {
+	errorFile.toFile().getParentFile().mkdirs();
+	errorFile.toFile().createNewFile();
+}
+try (BufferedWriter bw = Files.newBufferedWriter(errorFile, StandardOpenOption.APPEND)) {
+	bw.write(LocalDateTime.now().toString() + " - " + filename + " - " + errorMessage + "\n" + secondLine);
+} catch (IOException e) {
+	e.printStackTrace();
+}
+
+
+// TO LIST
+List<Customer> customersList = new ArrayList<>();
+customers.values().forEach(c -> customersList.add(c));
+return customersList;
+
+
+// EACH FILE IN DIR
+Path path = Paths.get(System.getProperty("user.dir"));
+path = path.resolve("resources");
+path = path.resolve("opgave1");
+Path errorPath = path.resolve("log").resolve("errors.log");
+System.out.println(errorPath);
+try (Stream<Path> filePathStream= Files.walk(path)) {
+	filePathStream.forEach(filePath -> {
+		if (Files.isRegularFile(filePath)) {
+			System.out.println(filePath);
+			allActivities.addAll(activityFileProcessor.processActivities(filePath, errorPath));
+		}
+	});
+} catch (IOException e) {
+	e.printStackTrace();
+}
+
+/TIME
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("EEE MMM dd HH:mm:ss z yyyy", Locale.US);
+        ZonedDateTime saleDate = ZonedDateTime.parse(propertyPieces[8], formatter);
