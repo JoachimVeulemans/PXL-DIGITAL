@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Oefening 6</title>
+    <style>
+        .knoppen {
+            margin-left: 20px;
+        }
+    </style>
+    <script>
+        function vorig() {
+            let nummer = document.getElementById('beeld').src.substr(-6, 2);
+
+            if (nummer.substr(0, 1) === "-") {
+                nummer = nummer.substr(1, 1);
+            }
+
+            if (nummer === "0") {
+                nummer = "20";
+            }
+            document.getElementById('beeld').src = afbeeldingen[parseInt(nummer) - 1];
+        }
+        function volgend() {
+            let nummer = document.getElementById('beeld').src.substr(-6, 2);
+
+            if (nummer.substr(0, 1) === "-") {
+                nummer = nummer.substr(1, 1);
+            }
+
+            if (nummer === "19") {
+                nummer = "-1";
+            }
+            document.getElementById('beeld').src = afbeeldingen[parseInt(nummer) + 1];
+        }
+        let afbeeldingen = [];
+        let tijd;
+        for (let i = 0; i < 20;i++) {
+            afbeeldingen[i] = "images/konijn-" + i + ".jpg";
+        }
+    </script>
+</head>
+<body>
+<h1>De zelfmoordkonijntjes</h1>
+<img id="beeld" src="images/konijn-0.jpg" width="400px" height="400px"/><br />
+<img onclick="vorig()" class="knoppen" src="images/vorig.png">
+<img onclick="volgend()" class="knoppen" src="images/volgend.png">
+<img onclick="tijd = setInterval(volgend, 3000)" class="knoppen" src="images/vooruit.png">
+<img onclick="clearInterval(tijd)" class="knoppen" src="images/stop.png">
+</body>
+</html>

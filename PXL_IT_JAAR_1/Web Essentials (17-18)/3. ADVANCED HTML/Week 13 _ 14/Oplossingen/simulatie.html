@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Simulatie</title>
+    <script src="resources/poules/poules.js"></script>
+    <style>
+        h1 {
+            color: gray;
+            text-align: center;
+        }
+
+        #groepsfase {
+            width: 38%;
+            height: 100vh;
+            margin: 0;
+            overflow: scroll;
+        }
+
+        #knockoutfase {
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+            width: 58%;
+        }
+        section {
+            display: inline-block;
+        }
+
+        article {
+            border: black 1px solid;
+            width: 300px;
+            margin: 20px;
+            float: left;
+        }
+
+        article h2 {
+            background: gray;
+            padding: 10px;
+            margin: 0 0 5px 0;
+            text-align: center;
+        }
+        article img {
+            width: 30px;
+            padding-top: 5px;
+
+        }
+        article span {
+            font-weight: bold;
+            margin-left: 10px;
+        }
+        p{
+            margin-left: 143px;
+            font-weight: bold;
+            margin-bottom: 0;
+        }
+        .knoppen{
+            float: right;
+            margin-right: 120px;
+            margin-top: 5px;
+
+        }
+        #lijn{
+            border-left: 6px black dotted;
+            height: 100vh;
+            margin: 0 0 0 30px;
+            display: inline-block;
+        }
+        .knockoutArticles {
+            width: 200px;
+            float: left;
+        }
+    </style>
+    <script>
+        function groepsfaseClicked(sender) {
+            let row = sender.title;
+            let positie = "8_" + row + "_" + sender.alt;
+            document.getElementById(positie).innerHTML = sender.value;
+        }
+
+        function achtsteFinaleClicked(sender) {
+            let positie = sender.id.substr(0, 1) / 2;
+            positie += "_";
+            positie += sender.id.substr(2, 1);
+            document.getElementById(positie).innerHTML = sender.innerHTML;
+        }
+
+        function kwartFinaleClicked(sender) {
+            let positie;
+            let poule = sender.id.substr(2, 1);
+            if (poule === "A" || poule === "B") {
+                positie = "2_1";
+            } else if (poule === "C" || poule === "D") {
+                positie = "2_2";
+            } else if (poule === "E" || poule === "F") {
+                positie = "2_3";
+            } else {
+                positie = "2_4";
+            }
+            document.getElementById(positie).innerHTML = sender.innerHTML;
+        }
+
+        function halveFinaleClicked(sender) {
+            let positie;
+            let poule = sender.id.substr(2, 1);
+            if (poule === "1" || poule === "2") {
+                positie = "1_1";
+            } else {
+                positie = "1_2";
+            }
+            document.getElementById(positie).innerHTML = sender.innerHTML;
+        }
+
+        function createPoules() {
+            for (sleutel in poules) {
+                let temp = "<article><h2>Poule " + sleutel + "</h2>";
+                temp += "<p>1e 2e</p>"
+                let currentCountry = poules[sleutel];
+                for (let land = 0; land < currentCountry.length; land++) {
+                    temp += "<img src='" + currentCountry[land].vlag + "' /><span>" + currentCountry[land].land + "</span><div class='knoppen'>" +
+                        "<input alt='1' title='" + sleutel + "' onclick='groepsfaseClicked(this)' type='radio' name='"+ sleutel + "1' value = '" + currentCountry[land].land + "'>" +
+                        "<input alt='2' title='" + sleutel + "' onclick='groepsfaseClicked(this)' type='radio' name='"+ sleutel + "2' value = '" + currentCountry[land].land + "'></div><br>";
+                }
+                document.getElementById("groepsfase").innerHTML += temp + "</article>";
+            }
+
+        }
+    </script>
+
+</head>
+<body onload="createPoules()">
+<section id="groepsfase">
+    <h1>GROEPSFASE</h1>
+</section>
+<div id="lijn"></div>
+<section id="knockoutfase">
+    <h1>KNOCKOUT FASE</h1>
+    <article class="knockoutArticles">
+        <h2>Achtste finale</h2>
+        <span id="8_A_1" onclick="achtsteFinaleClicked(this)"></span><span>-</span><span id="8_A_2" onclick="achtsteFinaleClicked(this)"></span><br>
+        <span id="8_B_1" onclick="achtsteFinaleClicked(this)"></span><span>-</span><span id="8_B_2" onclick="achtsteFinaleClicked(this)"></span><br>
+        <span id="8_C_1" onclick="achtsteFinaleClicked(this)"></span><span>-</span><span id="8_C_2" onclick="achtsteFinaleClicked(this)"></span><br>
+        <span id="8_D_1" onclick="achtsteFinaleClicked(this)"></span><span>-</span><span id="8_D_2" onclick="achtsteFinaleClicked(this)"></span><br>
+        <span id="8_E_1" onclick="achtsteFinaleClicked(this)"></span><span>-</span><span id="8_E_2" onclick="achtsteFinaleClicked(this)"></span><br>
+        <span id="8_F_1" onclick="achtsteFinaleClicked(this)"></span><span>-</span><span id="8_F_2" onclick="achtsteFinaleClicked(this)"></span><br>
+        <span id="8_G_1" onclick="achtsteFinaleClicked(this)"></span><span>-</span><span id="8_G_2" onclick="achtsteFinaleClicked(this)"></span><br>
+        <span id="8_H_1" onclick="achtsteFinaleClicked(this)"></span><span>-</span><span id="8_H_2" onclick="achtsteFinaleClicked(this)"></span><br>
+    </article>
+    <article class="knockoutArticles">
+        <h2>Kwartfinale</h2>
+        <span id="4_A" onclick="kwartFinaleClicked(this)"></span><span>-</span><span id="4_B" onclick="kwartFinaleClicked(this)"></span><br>
+        <span id="4_C" onclick="kwartFinaleClicked(this)"></span><span>-</span><span id="4_D" onclick="kwartFinaleClicked(this)"></span><br>
+        <span id="4_E" onclick="kwartFinaleClicked(this)"></span><span>-</span><span id="4_F" onclick="kwartFinaleClicked(this)"></span><br>
+        <span id="4_G" onclick="kwartFinaleClicked(this)"></span><span>-</span><span id="4_H" onclick="kwartFinaleClicked(this)"></span><br>
+    </article>
+    <article class="knockoutArticles">
+        <h2>Halve finale</h2>
+        <span id="2_1" onclick="halveFinaleClicked(this)"></span><span>-</span><span id="2_2" onclick="halveFinaleClicked(this)"></span><br>
+        <span id="2_3" onclick="halveFinaleClicked(this)"></span><span>-</span><span id="2_4" onclick="halveFinaleClicked(this)"></span><br>
+    </article>
+    <article class="knockoutArticles">
+        <h2>Finale</h2>
+        <span id="1_1"></span><span>-</span><span id="1_2"></span><br>
+    </article>
+</section>
+</body>
+</html>

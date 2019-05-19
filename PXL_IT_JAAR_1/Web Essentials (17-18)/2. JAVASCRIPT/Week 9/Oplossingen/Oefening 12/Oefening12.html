@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        input {
+            width: 100px;
+            margin: 5px;
+        }
+    </style>
+    <meta charset="UTF-8">
+    <title>Oefening 12: Javascript</title>
+    <script>
+        "use strict";
+        function reverse(phrase, filter) {
+            let text = phrase.split(' ');
+            let output = "";
+            let wordsFiltered = 0;
+
+            for (let i = text.length - 1; i >= 0; i--) {
+                if (filter === "" || !text[i].includes(filter)) {
+                    output += text[i] + " ";
+                } else {
+                    wordsFiltered++;
+                }
+            }
+
+            output += "<br />" + wordsFiltered + " word(s) filtered.";
+            document.getElementById("output").innerHTML = output;
+        }
+    </script>
+</head>
+<body>
+<h1>Sentence Reverser!</h1>
+<form id="form" onsubmit="return false" >
+    <label>Phrase:</label>
+    <input type="text" id="phrase" /><br />
+    <label>Filter:</label>
+    <input type="text" id="filter" /><br />
+    <button onclick="reverse(form.phrase.value, form.filter.value)">Go!</button>
+</form>
+<p id="output"></p>
+</body>
+</html>

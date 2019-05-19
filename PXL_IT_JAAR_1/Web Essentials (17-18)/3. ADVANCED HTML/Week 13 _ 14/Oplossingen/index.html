@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>WK 2018</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-size: 0;
+        }
+
+        img {
+            height: 100vh;
+            width: 25%;
+            overflow: hidden;
+        }
+
+        .div_choices {
+            font-size: 20pt;
+            color: white;
+            position: absolute;
+            z-index: 1;
+            margin-top: 5%;
+            font-family: "Comic Sans MS", serif;
+            text-align: center;
+            width: 25vw;
+        }
+        img:hover {
+            filter: brightness(50%);
+        }
+        #header {
+            display: inline-block;
+            z-index: 2;
+            width: 300px;
+            height: 150px;
+        }
+        #clock {
+            display: inline-block;
+            font-size: 20pt;
+            color: white;
+            background: gray;
+            z-index: 3;
+            padding: 20px;
+            border-radius: 25px;
+            bottom: 20px;
+        }
+        #clockdiv {
+            text-align: center;
+            width: 100vw;
+            position: absolute;
+            bottom: 0;
+            z-index: 3;
+        }
+        #headerdiv {
+            text-align: center;
+            width: 100vw;
+            position: absolute;
+            top: 0;
+            z-index: 3;
+            height: 150px;
+        }
+    </style>
+    <script>
+        function clock () {
+            "use strict";
+            // Set the date we're counting down to
+            let countDownDate = new Date("Jun 6, 2018 00:00:00").getTime();
+
+            // Update the count down every 1 second
+            let countdownfunction = setInterval(function() {
+
+                // Get todays date and time
+                let now = new Date().getTime();
+
+                // Find the distance between now an the count down date
+                let distance = countDownDate - now;
+
+                // Time calculations for days, hours, minutes and seconds
+                let days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                let hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                let minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                let seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+                // Output the result in an element with id="demo"
+                document.getElementById("clock").innerHTML = days + "d " + hours + "h "
+                    + minutes + "m " + seconds + "s ";
+
+                // If the count down is over, write some text
+                if (distance < 0) {
+                    clearInterval(countdownfunction);
+                    document.getElementById("clock").innerHTML = "WK Begindatum voorbij";
+                }
+            }, 1000);
+        }
+        </script>
+</head>
+<body onload="clock()">
+<div id="clockdiv">
+    <pre id="clock"></pre>
+</div>
+<div id="headerdiv">
+    <img id="header" src="resources/index/header.png">
+</div>
+
+<div class="div_choices"><h2>Ploegen</h2></div>
+<div class="div_choices" style="margin-left: 25vw"><h2>Stadions</h2></div>
+<div class="div_choices" style="margin-left: 50vw"><h2>Opstelling</h2></div>
+<div class="div_choices" style="margin-left: 75vw"><h2>Simulatie</h2></div>
+<a href="ploegen.html"><img src="resources/index/ploegen.jpg" /></a>
+<a href="stadions.html"><img src="resources/index/stadions.jpg" /></a>
+<a href="opstelling.html"><img src="resources/index/opstelling.jpg"></a>
+<a href="simulatie.html"><img src="resources/index/simulatie.jpg"></a>
+</body>
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        input {
+            width: 100px;
+            margin: 5px;
+        }
+    </style>
+    <meta charset="UTF-8">
+    <title>Oefening 9: Javascript</title>
+    <script>
+        "use strict";
+        function bereken(dag) {
+            let tekst = "is de ";
+
+            switch (dag) {
+                case "maandag":
+                    tekst += "eerste";
+                    break;
+                case "dinsdag":
+                    tekst += "tweede";
+                    break;
+                case "woensdag":
+                    tekst += "derde";
+                    break;
+                case "donderdag":
+                    tekst += "vierde";
+                    break;
+                case "vrijdag":
+                    tekst += "vijfde";
+                    break;
+                case "zaterdag":
+                    tekst += "zesde";
+                    break;
+                case "zondag":
+                    tekst += "zevende";
+                    break;
+                default:
+                    tekst += "niet-bestaande";
+                    break;
+
+            }
+
+            tekst += " dag van de week";
+
+            document.getElementById("output").value = tekst;
+        }
+    </script>
+</head>
+<body>
+<!--DEEL 1-->
+<form id="form" onsubmit="return false" >
+    <label>Geef een dag in:</label>
+    <input type="text" id="dag" /><br />
+    <button onclick="bereken(form.dag.value)">Genereer tekst</button>
+    <input style="width: 308px;" id="output" type="text" />
+</form>
+</body>
+</html>

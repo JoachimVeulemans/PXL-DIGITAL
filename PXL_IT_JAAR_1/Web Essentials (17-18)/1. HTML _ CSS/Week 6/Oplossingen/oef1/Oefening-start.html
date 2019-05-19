@@ -1,0 +1,91 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vraag3</title>
+<style type="text/css">
+
+#container {
+	padding: 5px;
+	width: 960px;
+	margin: 0 auto;
+}
+#head {
+ 	background-color:black;
+	color:white;
+}
+#main {
+	width: 840px;
+	float: left;
+}
+#logo {
+	border:5px dotted red;
+	width: 100px;
+	float: right;
+
+
+}
+#footnote {
+	border-top: 1px solid black;
+	clear: both;
+	text-align:center;
+}
+
+@media  screen and (max-width: 980px) {
+	#logo {
+		width: 15%;
+	}
+
+	#container {
+		width: 100%
+	}
+
+	#main {
+		width: 80%;
+	}
+}
+@media screen and (max-width: 700px) {
+		#logo{
+			text-align: center;
+			float: none;
+			clear: both;
+			width: 100%;
+			box-sizing: border-box;
+		}
+		#footnote{
+			display: none;
+		}
+	}
+
+	@media screen and (max-width: 400px) {
+	#logo{
+		display: none;
+	}
+	}
+
+</style>
+</head>
+
+<body>
+<div id="container">
+	<div id="head">
+		<h1>Corporate ipsum</h1>
+	</div>
+	<div id="main">
+		<h2>Ipsum</h2>
+		<p>Leverage agile frameworks to provide a robust synopsis for high level overviews. Iterative approaches to corporate strategy foster collaborative thinking to further the overall value proposition. Organically grow the holistic world view of disruptive innovation via workplace diversity and empowerment.</p>
+
+		<p>Bring to the table win-win survival strategies to ensure proactive domination. At the end of the day, going forward, a new normal that has evolved from generation X is on the runway heading towards a streamlined cloud solution. User generated content in real-time will have multiple touchpoints for offshoring.</p>
+
+	</div>
+	<div id="logo">
+		<img style="max-width: 100%" src="logo.png" alt="pxl"/>
+	</div>
+	<div id="footnote">
+		footnote
+	</div>
+</div>
+</body>
+</html>
+

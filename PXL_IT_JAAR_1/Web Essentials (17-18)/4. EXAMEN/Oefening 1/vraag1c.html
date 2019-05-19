@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Oefening 1</title>
+    <link rel="stylesheet" href="stijl/stijl.css">
+    <script>
+        function addSelection() {
+            let tekst = '';
+
+            tekst += '<tr><td><select name="mocktail' + (gemaakteMocktails + 1) + '" id="mocktail' + (gemaakteMocktails + 1) + '"></select></td><td><input type="number" id="aantal_mocktail' + (gemaakteMocktails + 1) + '" name="aantal_mocktail' + (gemaakteMocktails + 1) + '" value="" size="20" maxlength="20"></td></tr><tr id="add2"></tr>';
+
+            document.getElementById("add" + gemaakteMocktails).innerHTML = tekst;
+            let rij = document.getElementById("tabel").insertRow(6);
+            rij.id = 'add' + (gemaakteMocktails + 1);
+            document.getElementById("aantal_mocktail" + (gemaakteMocktails + 1)).addEventListener("change", valueChanged);
+
+            gemaakteMocktails++;
+
+            tekst = '';
+
+            for (let i = 0; i < mocktails.length; i++) {
+                tekst += '<option title="' + mocktailPrijzen[i] + '" value="' + mocktails[i] + '">' + mocktails[i] + '</option>';
+            }
+
+            document.getElementById("mocktail" + gemaakteMocktails).innerHTML = tekst;
+        }
+        function valueChanged() {
+            let totaal = 0;
+
+            for (let i = 1; i <= gemaakteMocktails; i++) {
+                let hoeveelheid = document.getElementById("aantal_mocktail" + i).value;
+                if (hoeveelheid !== "") {
+                    if (parseInt(hoeveelheid) < 0) {
+                        alert("De hoeveelheid kan niet negatief zijn!");
+                    } else {
+                        let waarde = document.getElementById("mocktail" + i);
+                        waarde = waarde[waarde.selectedIndex].title;
+                        totaal += parseInt(hoeveelheid) + parseFloat(waarde);
+                    }
+                }
+            }
+
+            document.getElementById("totaal").innerHTML = "Totaal: " + totaal + "€";
+        }
+
+        let mocktails = ['Funny mocktails', 'Roze bubbels', 'Passion sunrise'];
+        let mocktailPrijzen = [3.5, 4.2, 4.3];
+        let gemaakteMocktails = 1;
+    </script>
+</head>
+<body>
+<header class="center" id="informatie">
+    <h1>Bestellen</h1>
+    <nav>
+        <a href="vraag1a.html">terug naar mocktails</a>
+    </nav>
+</header>
+<section class="center">
+   <article>
+       <p>Bestel hier alles om tijdens jouw feestje de lekkerste mocktails te serveren. Op de door u gekozen datum worden alle ingrediënten op het opgegeven adres geleverd.</p>
+       <form method="POST" action="mailto:Joachim.Veulemans@student.pxl.be?subject=Bestelling mocktails">
+           <table id="tabel" class="tableBestellen" border="0px" cellspacing="2" cellpadding="2">
+               <tbody>
+               <tr>
+                   <td>
+                       <label for="voorNaam">Voornaam:</label>
+                   </td>
+                   <td>
+
+                       <input id="voorNaam" type="text" name="voorNaam" value="" size="20" maxlength="20">
+                   </td>
+                   <td>
+                       <label for="naam">Naam:</label>
+                   </td>
+                   <td colspan="3">
+                       <input id="naam" type="text" name="naam" value="" size="20" maxlength="20">
+                   </td>
+                   <td></td>
+                   <td></td>
+
+               </tr>
+               <tr>
+                   <td>
+                       <label for="straat">Straat en nr:</label>
+                   </td>
+                   <td colspan="4">
+                       <input id="straat" type="text" name="straat" value="" size="20" maxlength="20">
+                   </td>
+                   <td></td>
+                   <td></td>
+                   <td></td>
+               </tr>
+               <tr>
+                   <td>
+                       <label for="postcode">Postcode:</label>
+                   </td>
+                   <td>
+                       <input id="postcode" type="text" name="postcode" maxlength="4" size="4">
+                   </td>
+                   <td>
+                       <label for="gemeente">Gemeente:</label>
+                   </td>
+                   <td colspan="3">
+                       <input id="gemeente" type="text" name="gemeente" value="" size="20" maxlength="20">
+                   </td>
+               </tr>
+               <tr>
+                   <td>
+                       <label for="leverdatum">Leverdatum:</label>
+                   </td>
+                   <td>
+                       <input id="leverdatum" type="date" name="leverdatum" value="" size="20" maxlength="20">
+                   </td>
+                   <td>
+                   </td>
+                   <td colspan="3">
+                   </td>
+               </tr>
+               <tr>
+                   <td>
+                       <select name="mocktail1" id="mocktail1">
+                       </select>
+                   </td>
+                   <td>
+                       <input type="number" id="aantal_mocktail1" name="aantal_mocktail1" value="" size="20" maxlength="20">
+                   </td>
+                   <td>
+                       <button type="button" onclick="addSelection()">+</button>
+                   </td>
+               </tr>
+               <tr id="add1">
+               </tr>
+               <tr>
+                   <td id="totaal">
+                       Totaal: 0€
+                   </td>
+               </tr>
+               <tr>
+                   <td colspan="4">
+                       <input type="submit" value="Verzenden">
+                   </td>
+               </tr>
+               </tbody>
+           </table>
+       </form>
+   </article>
+</section>
+</body>
+<script>
+    let tekst = '';
+
+    for (let i = 0; i < mocktails.length; i++) {
+        tekst += '<option title="' + mocktailPrijzen[i] + '" value="' + mocktails[i] + '">' + mocktails[i] + '</option>';
+    }
+
+    document.getElementById("mocktail1").innerHTML = tekst;
+    document.getElementById("aantal_mocktail1").addEventListener("change", valueChanged);
+</script>
+</html>

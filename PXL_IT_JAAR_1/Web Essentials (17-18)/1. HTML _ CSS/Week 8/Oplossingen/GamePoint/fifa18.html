@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="css/aditionalCss.css">
+</head>
+<body>
+<header>
+    <h1>GAME<span class="header-title">POINT</span></h1>
+</header>
+
+<nav>
+    <div class="nav-visible">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="games.html" class="nav-link">Games</a>
+        <a href="uitverkoop.html" class="nav-link">Uitverkoop</a>
+        <a href="accessoires.html" class="nav-link">Accessoires</a>
+        <a href="contact.html" class="nav-link">Contact</a>
+    </div>
+    <div class="container" onclick="myFunction(this)">
+        <div class="bar1"></div>
+        <div class="bar2"></div>
+        <div class="bar3"></div>
+    </div>
+    <div class="hidden-small" id="hs">
+
+        <p><a href="index.html" class="nav-link">Home</a></p>
+        <p><a href="games.html" class="nav-link">Games</a></p>
+        <p><a href="uitverkoop.html" class="nav-link">Uitverkoop</a></p>
+        <p><a href="accessoires.html" class="nav-link">Accessoires</a></p>
+        <p><a href="contact.html" class="nav-link">Contact</a></p>
+    </div>
+
+</nav>
+<section class="detail-pagina-section">
+    <article class="detail-pagina-article" >
+        <img src="images/fifa18.png" alt="fifa">
+        <h2>FIFA18</h2>
+        <div class="rating">
+            <span><input type="radio" name="rating" id="str10" value="5"><label for="str5"></label></span>
+            <span><input type="radio" name="rating" id="str9" value="4"><label for="str4"></label></span>
+            <span><input type="radio" name="rating" id="str8" value="3"><label for="str3"></label></span>
+            <span><input type="radio" name="rating" id="str7" value="2"><label for="str2"></label></span>
+            <span><input type="radio" name="rating" id="str6" value="1"><label for="str1"></label></span>
+        </div>
+        <p>€ 69,99</p>
+        <p>€ 49.99</p>
+        <button>In de Winkelwagen</button>
+    </article>
+    <article class="review-article">
+        <h2>Reviews</h2>
+        <div class="rating-img-horizontal">
+            <img src="images/score.png">
+            <img src="images/score.png">
+            <img src="images/score.png">
+            <img src="images/score.png">
+        </div>
+        <span>8/10</span>
+        <p>the legend 27 | 5 Oktober 2017 | in de uitvoering: PS4</p>
+
+        <div class="rating-img-vertical">
+            <img src="images/score.png">
+            <span>Sommige speltypes te moeilijk voor beginners</span>
+        </div>
+        <div class="rating-img-vertical">
+            <img src="images/score.png">
+            <span>Graphics zijn geweldig</span>
+        </div>
+        <div class="rating-img-vertical">
+            <img src="images/low-score.png">
+            <span>Graphics zijn geweldig</span>
+        </div>
+
+    </article>
+    <hr>
+    <article class="review-article">
+        <div class="rating-img-horizontal">
+            <img src="images/score.png">
+            <img src="images/score.png">
+            <img src="images/score.png">
+            <img src="images/score.png">
+        </div>
+        <span>8/10</span>
+        <p>the legend 27 | 5 Oktober 2017 | in de uitvoering: PS4</p>
+
+        <div class="rating-img-vertical">
+            <img src="images/score.png">
+            <span>Sommige speltypes te moeilijk voor beginners</span>
+        </div>
+        <div class="rating-img-vertical">
+            <img src="images/score.png">
+            <span>Graphics zijn geweldig</span>
+        </div>
+        <div class="rating-img-vertical">
+            <img src="images/low-score.png">
+            <span>Graphics zijn geweldig</span>
+        </div>
+
+    </article>
+</section>
+
+
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function(){
+        // Check Radio-box
+        $(".rating input:radio").attr("checked", false);
+
+        $('.rating input').click(function () {
+            //$(".rating span").removeClass('checked');
+            $(this).parent().addClass('checked');
+        });
+    });
+</script>
+</body>
+</html>

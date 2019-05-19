@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        input {
+            width: 100px;
+            margin: 5px;
+        }
+    </style>
+    <meta charset="UTF-8">
+    <title>Oefening 2: Javascript</title>
+    <script>
+        "use strict";
+        function bereken(waarde1, waarde2) {
+            let product = waarde1.value * waarde2.value;
+            let boodschap;
+            if (Number.isNaN(product)) {
+                boodschap = 'U heeft geen geldige getallen ingegeven'
+            } else {
+                boodschap = 'Het product van ' + waarde1.value + ' en ' + waarde2.value + ' is ' + product;
+            }
+            document.getElementById("output").value = boodschap;
+        }
+        function bereken2(waarde1, waarde2) {
+            let product = waarde1.value * waarde2.value;
+            let boodschap2 = 'Product = ' + product;
+            document.getElementById("output2").innerHTML = boodschap2;
+            document.getElementById("output2").innerHTML = boodschap2;
+            console.log("test");
+        }
+    </script>
+</head>
+<body>
+<!--DEEL 1-->
+<form id="form" onsubmit="return false" >
+    <input type="text" id="waarde1" />
+    <label>X</label>
+    <input type="text" id="waarde2" />
+    <button onclick="bereken(form.waarde1, form.waarde2)">Bereken</button>
+</form>
+<input style="width: 308px;" id="output" type="text" />
+<!--DEEL 2-->
+<form id="form2" onsubmit="return false" oninput="bereken2(form2.waarde12, form2.waarde22)" >
+    <input type="number" id="waarde12" />
+    <label>X</label>
+    <input type="number" id="waarde22" />
+    <p style="margin: 0;" id="output2"></p>
+</form>
+</body>
+</html>

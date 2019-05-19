@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        input {
+            width: 300px;
+            margin: 5px;
+        }
+    </style>
+    <meta charset="UTF-8">
+    <title>Oefening 8: Javascript</title>
+    <script>
+        "use strict";
+        function splits(email) {
+            let posPunt = email.indexOf(".", 0);
+            let posAt = email.indexOf("@",0);
+            let posPunt2 = email.lastIndexOf(".");
+
+            document.getElementById("naam").value = email.substr(0, posPunt);
+            document.getElementById("naam2").value = email.substr(posPunt + 1, posAt - posPunt - 1);
+            document.getElementById("subdomein").value = email.substr(posAt + 1, posPunt2 - posAt - 1);
+            document.getElementById("domein").value = email.substr(posPunt2 + 1, email.length);
+        }
+    </script>
+</head>
+<body>
+<form id="form" onsubmit="return false" >
+    <label>Geef een geldig e-mailadres in</label>
+    <input type="email" id="email" /><br />
+    <label>naam</label>
+    <input style="margin-left: 166px;" type="text" id="naam" /><br />
+    <label>naam2</label>
+    <input style="margin-left: 158px;" type="text" id="naam2" /><br />
+    <label>subdomein</label>
+    <input style="margin-left: 132px;" type="text" id="subdomein" /><br />
+    <label>domein</label>
+    <input style="margin-left: 154px;" type="text" id="domein" /><br />
+    <button onclick="splits(form.email.value)">Splits op</button>
+</form>
+</body>
+</html>

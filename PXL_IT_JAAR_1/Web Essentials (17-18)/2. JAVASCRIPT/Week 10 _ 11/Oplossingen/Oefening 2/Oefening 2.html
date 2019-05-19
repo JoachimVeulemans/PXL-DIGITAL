@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Oefening 2</title>
+</head>
+<style>
+    body {
+        background-color: darkolivegreen;
+    }
+    h1 {
+        color: beige;
+    }
+    p {
+        color: lightgreen;
+    }
+    footer {
+        color:lawngreen;
+    }
+    button {
+        color: white;
+        border: white 1px solid;
+        background-color: forestgreen;
+    }
+</style>
+<script>
+    function opmaak1() {
+        document.getElementsByTagName('body').item(0).style.backgroundColor = 'darkolivegreen';
+        document.getElementsByTagName('h1').item(0).style.color = 'beige';
+        document.getElementsByTagName('p').item(0).style.color = 'lightgreen';
+        document.getElementsByTagName('footer').item(0).style.color = 'lawngreen';
+    }
+    function opmaak2() {
+        document.getElementsByTagName('body').item(0).style.backgroundColor = 'beige';
+        document.getElementsByTagName('h1').item(0).style.color = 'darkolivegreen';
+        document.getElementsByTagName('p').item(0).style.color = 'darkolivegreen';
+        document.getElementsByTagName('footer').item(0).style.color = 'grey';
+    }
+</script>
+<body>
+<button onclick="opmaak1()">Opmaak 1</button>
+<button onclick="opmaak2()">Opmaak 2</button>
+<h1>Veranderen van opmaak door dom-scripting</h1>
+<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec varius ullamcorper metus, vel cursus ipsum. Sed consequat pharetra turpis vel posuere. Nunc sit amet luctus justo, sed fermentum augue. In ultricies rutrum urna, congue vulputate lectus ullamcorper a. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed dapibus eros libero, eget porttitor tellus ornare quis. Donec ultrices nec arcu a aliquam. Donec malesuada efficitur sapien, vel ullamcorper sem varius porta. Suspendisse fringilla elementum ante ornare tempus. Sed bibendum neque eu nisl aliquam pretium. Phasellus fermentum risus sed dolor feugiat placerat. In lacinia erat nec sollicitudin vehicula. Ut euismod rhoncus magna et ullamcorper. Mauris fermentum ex rhoncus lorem congue placerat. Vestibulum vel elit ut lectus condimentum rutrum. Suspendisse vel porttitor felis.
+<br /><br />
+    Etiam est ex, lobortis vitae est sit amet, convallis vulputate turpis. Sed sed laoreet leo, in accumsan sapien. Pellentesque ultrices, sem quis egestas condimentum, quam leo aliquam elit, bibendum dictum est arcu a libero. Proin risus ipsum, dignissim id lectus vestibulum, ornare pulvinar dolor. In hac habitasse platea dictumst. Donec magna justo, blandit vitae molestie non, cursus quis mi. Praesent volutpat, justo nec porttitor luctus, felis ante commodo mi, ut tristique elit mauris vel nisi. Etiam pretium non nunc vitae auctor. Duis sit amet tempor massa. Phasellus sollicitudin tellus vel leo porttitor, quis commodo lectus scelerisque. Vestibulum lacinia elementum lacus, sit amet efficitur enim placerat sit amet. Maecenas viverra porttitor odio ac porttitor. Suspendisse in bibendum lectus. Sed non lorem a risus ornare fringilla a non sem. Donec efficitur ante est, id semper elit condimentum eu. Maecenas placerat odio ac nibh interdum porta.</p>
+<footer>Hogeschool PXL<br />Blackboard</footer>
+</body>
+</html>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Stadions</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            width: 100vw;
+        }
+        #googleMap {
+            width: 100vw;
+            height: 100vh;
+            position: relative;
+            z-index: 1;
+            }
+        dialog {
+            display: inline-block;
+            top: 25%;
+            width: 400px;
+        }
+        dialog img {
+            width: 200px;
+            float: left;
+            margin-right: 10px;
+            margin-bottom: 10px;
+        }
+        #dialogdiv {
+            visibility: hidden;
+            position: absolute;
+            z-index: 2;
+            width: 100vw;
+            height: 100vh;
+            top: 0;
+        }
+        .fat {
+            font-weight: bold;
+        }
+        #first {
+            float: none;
+            text-align: center;
+        }
+    </style>
+    <script src="resources/stadions/stadions.js"></script>
+</head>
+
+<body>
+<div id="googleMap"></div>
+
+<script>
+    function closeDialog() {
+        document.getElementById("dialogdiv").style = "visibility: hidden";
+    }
+    function myMap() {
+        let mapProp = {center:new google.maps.LatLng(51.508742,40.120850), zoom:5,mapTypeId: 'hybrid',};
+        let map = new google.maps.Map(document.getElementById("googleMap"),mapProp);
+
+        for (let i = 0; i < stadions.length; i++) {
+            let locatie = new google.maps.LatLng(stadions[i].lat, stadions[i].long);
+            let icon = {
+                url: "resources/icon_stadion.png",
+                scaledSize: new google.maps.Size(50, 50),
+            };
+            let marker = new google.maps.Marker({position:locatie, icon: icon});
+            marker.addListener('click', function() {
+                document.getElementById("dialog").innerHTML = "<p id=\"first\" class=\"fat\"><span class='fat'>" + stadions[i].name + "</span></p>" + "<img src=\"" + stadions[i].img + "\" /><p>" + "Locatie:<br><span class='fat'>" + stadions[i].city + "</span><br>Capaciteit:<br><span class='fat'>" + stadions[i].cap + "</span></p><button style='padding: 10px 150px; margin-left: 26px' onclick='closeDialog()'>Sluiten</button>";
+                document.getElementById("dialogdiv").style = "visibility: visible";
+            });
+            marker.setMap(map);
+        }
+    }
+</script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAkCm9AAJHpi2enAPYkG-48MbV-1CKkEkk&callback=myMap"></script>
+
+<div id="dialogdiv">
+    <dialog id="dialog" open></dialog>
+</div>
+</body>
+</html>

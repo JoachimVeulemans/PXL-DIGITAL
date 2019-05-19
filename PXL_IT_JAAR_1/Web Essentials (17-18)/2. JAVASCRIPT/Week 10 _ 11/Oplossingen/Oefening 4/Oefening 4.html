@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Oefening 4</title>
+    <script>
+        function reken() {
+            let getal = document.getElementById('getal').value;
+            if (getal != parseInt(getal)) {
+                document.getElementById('output').innerHTML = "Geen geheel getal opgegeven!";
+            } else {
+                let output = "";
+
+                for (let i = 1; i < 11; i++) {
+                    let uitkomst = i * getal;
+                    output += getal + " x " + i + " = " + uitkomst + "<br />";
+                }
+
+                document.getElementById('output').innerHTML = output;
+            }
+        }
+    </script>
+</head>
+<body>
+<h1>Tafels</h1>
+<input id="getal" type="number">
+<button onclick="reken()">Toon tafel</button>
+<p id="output"></p>
+</body>
+</html>

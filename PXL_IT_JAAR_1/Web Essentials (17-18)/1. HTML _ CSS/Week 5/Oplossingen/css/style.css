@@ -1,0 +1,73 @@
+* {
+    margin: 0;
+}
+
+header {
+    padding: 10px 0 10px 15px;
+}
+
+.grijzeKleur {
+    color: grey;
+}
+
+h1 {
+    color: limegreen;
+    font-size: 20pt;
+}
+
+nav {
+    background-color: grey;
+    padding: 12px 0 12px 0;
+    margin: 0;
+}
+
+a {
+    padding: 12px 10px 12px 10px;
+    color: white;
+    text-decoration: none;
+}
+
+nav a:hover {
+    text-decoration: underline;
+    background-color: lightslategrey;
+}
+
+main {
+    width: 80%;
+    height: 80vh;
+}
+
+.featured {
+    float: left;
+    display: inline-block;
+    width: 50%;
+}
+
+.best_sold {
+    float: right;
+    display: inline-block;
+    width: 50%;
+}
+
+p {
+    padding: 10px 10px 10px 10px;
+}
+
+footer {
+    border-top: black 2px solid;
+}
+
+.best_sold ol p {
+    display: inline-block;
+    position: relative;
+    color: lightseagreen;
+    font-size: 15pt;
+    font-family: "Comic Sans MS", serif;
+    float: right;
+}
+
+.best_sold ol li {
+    width: 150px;
+    margin: 0;
+    display: inline-block;
+}

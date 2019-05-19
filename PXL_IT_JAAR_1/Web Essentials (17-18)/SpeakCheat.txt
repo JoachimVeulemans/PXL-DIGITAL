@@ -1,0 +1,209 @@
+//INHOUD
+-----------------------------------
+//Opacity
+//Verwijder geselecteerd item
+//Video
+//Audio
+//Voor selection box
+//Standaard lay-out
+//Tekst-tags
+//Verticale nav
+//Speciale css elementen met coole effecten
+//Tabel
+//Tabel opmaak
+//Responsive
+//Interval zetten
+//Formulier
+//Web Storage
+
+//Opacity
+background: rgba(255, 255, 255, 0.5);
+
+//Verwijder geselecteerd item
+    function deleteItem() {
+        this.parentNode.removeChild(this);
+    }
+
+//Video
+<video width="320" height="240" controls>
+          <source src="movie.mp4" type="video/mp4">
+          <source src="movie.ogg" type="video/ogg">
+          Your browser does not support the video tag.
+</video>
+
+//Audio
+<audio controls>
+          <source src="horse.ogg" type="audio/ogg">
+          <source src="horse.mp3" type="audio/mpeg">
+          Your browser does not support the audio element.
+</audio>
+
+//Voor selection box
+  <script type="text/javascript">
+  	var selectBoxType = document.getElementById('type-select');
+              var i = selectBoxType.selectedIndex;
+              var type = selectBoxType.options[i].value;
+  </script>
+
+  <select id="type-select">
+      <option value="Ariel">Ariel</option>
+      <option value="Courier">Courier</option>
+      <option value="Georgia">Georgia</option>
+      <option value="Sans-serif">Sans-serif</option>
+      <option value="Serif">Serif</option>
+      <option value="Verdana">Verdana</option>
+  </select>
+
+//Standaard lay-out
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Webpagina - Basis</title>
+</head>
+<body>
+<p>Inhoud van een webpagina</p>
+</body>
+</html>
+
+//Tekst-tags
+<strong>…</strong> Belangrijk, urgent
+<em>…</em> Beklemtoond
+<sup>…</sup> Superscript
+<sub>…</sub> Subscript
+<ins>…</ins> Ingevoegd
+<del>…</del> Gewist
+<s>…</s> Niet langer relevant
+<b>…</b> Uitgelicht, maar zonder extra betekenis
+<i>…</i> Andere stemming
+<u>…</u> Met een onuitgesproken niet-tekstuele annotatie
+
+<abbr>…</abbr> verkorte weergave (afkorting, acroniem, …)
+<bdi>…</bdi> isoleert een stukje teskst voor de tekstrichting (bidirectional isolation)
+<bdo>…</bdo> richting van de tekst (bidirectional override)
+<cite>…</cite> voor citeren van de titel van een werk (lied, blogpost, programma, …)
+<dfn>…</dfn> voor definities.
+<small>…</small> Korte nevenbemerkingen
+<q>…</q> Quotes, te midden van andere tekst
+
+//Verticale nav
+nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #6a737b;
+    padding-left: 10px;
+}
+
+nav li {
+    float: left;
+}
+
+nav li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+nav li a:hover {
+    background-color: #73c167;
+}
+
+//Speciale css elementen met coole effecten
+overflow:auto 			-> div pakt alle content mee, ook float
+margin: # auto # auto;		-> centreert element in het midden
+text-shadow: #px #px #color 	-> schaduweffect rond text
+box-shadow: #px #px #color	-> schaduweffect rond box
+box-radius: #px;		-> afgeronde hoeken
+box-sizing: border-box;		-> width incl padding en border;
+border-collapse: collapse;	-> borders die dicht bij elkaar staan vallen samen tot 1, handig bij tabellen
+
+
+//Tabel
+KIJK WEEK 3 (oef1)
+table tr:first-of-type {
+background: black;
+color: white;
+text-align: left;
+}
+tr:nth-child(2n+1) {
+background: #aaa;
+color: #333;
+}
+tr:nth-child(2n) {
+background: #ccc;
+color:#666;
+}
+tr > td:first-child {
+background: black;
+color: white;
+}
+
+//Tabel opmaak met row en col
+.row{
+  margin: 10px;
+}
+
+.col1{
+  box-sizing: border-box;
+  width: 12%;
+  float: left;
+}
+
+.col2{
+  box-sizing: border-box;
+  width: 88%:;
+}
+
+//Responsive
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+@media screen and (max-width: 700px) {}
+		
+//Interval zetten
+onclick="tijd = setInterval(volgend, 3000)"
+onclick="clearInterval(tijd)"
+
+//Formulier
+KIJK WEEK 7 (oef6)
+
+//Drag & Drop
+        function drag(ev) {
+            ev.dataTransfer.setData("text", ev.target.id);
+        }
+        function dropm(ev) {
+            ev.preventDefault();
+            let data = ev.dataTransfer.getData("text");
+
+            ev.target.appendChild(document.getElementById(data));
+        }
+        function allowDrop(ev) {
+            ev.preventDefault();
+        }
+
+        function drop(ev) {
+            ev.preventDefault();
+            let data = ev.dataTransfer.getData("text");
+            let element = document.getElementById(data);
+            element.style.width = "50px";
+            element.style.height = "50px";
+            element.style.borderRadius = "50px";
+            ev.target.appendChild(element);
+
+        }
+
+		Draagbare objecten:
+		draggable="true" ondragstart="drag(event)"
+		Dropsites objecten:
+		ondrop="drop(event)" ondragover="allowDrop(event)"
+
+//Web Storage
+1.
+localStorage.lastname = "Veulemans";
+document.getElementById("output").innerHTML = localStorage.lastname;
+2.
+localStorage.setItem('itemInOpslag', JSON.stringify(object));
+let object = JSON.parse(localStorage.getItem('itemInOpslag'));

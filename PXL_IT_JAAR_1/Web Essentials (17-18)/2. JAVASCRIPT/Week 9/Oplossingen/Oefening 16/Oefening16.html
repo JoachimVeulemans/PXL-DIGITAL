@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Oefening 16</title>
+    <style>
+        body {
+            background-color: lightblue;
+        }
+        h1 {
+            color: darkred;
+        }
+        h1:hover {
+            color: lightblue;
+        }
+        #oranjeTekst {
+            color: orangered;
+            font-weight: bold;
+        }
+        img {
+            float: right;
+        }
+        .links {
+            float: left;
+            width: 60%;
+        }
+    </style>
+    <script>
+        function hideItem() {
+            this.style.display = "none";
+        }
+        function showItem() {
+            let tovenaar = document.getElementById('tovenaar');
+            tovenaar.style.display = "block";
+        }
+    </script>
+</head>
+<body>
+<div class="links">
+<h1>De verdwijnende tovenaar</h1><br />
+<p>De figuur verdwijnt als je erop klik en verschijnt opnieuw als je hier op het woord <span id="oranjeTekst">tovenaar</span> klikt. </p>
+</div>
+<img id="tovenaar" src="illusionist.jpg" />
+<script>
+    let afbeelding = document.getElementById('tovenaar');
+    afbeelding.addEventListener("click", hideItem);
+
+    let tovenaarTekst = document.getElementById('oranjeTekst');
+    tovenaarTekst.addEventListener("click", showItem);
+</script>
+</body>
+</html>

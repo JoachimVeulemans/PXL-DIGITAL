@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width">
+	<title>Hoofdstuk 7 Oefening 6</title>
+	<link rel="stylesheet" type="text/css" href="theme.css">
+</head>
+<body>
+	<form method="POST" action="mailto:Joachim.Veulemans@student.pxl.be?subject=Bestelling mocktails">
+		<fieldset id="personalInformationFieldset">
+			<legend>
+				<h2>Persoonlijke gegevens</h2>
+			</legend>
+			<div class="row">
+				<div class="col">
+					<label for="nameInput">Naam:</label>
+				</div>
+				<div class="col">
+					<input type="text" id="nameInput" name="nameInput" title="naam" size="20">
+				</div>
+			</div>
+			<div class="row">
+				<div class="col">
+					<label for="firstNameInput">
+						Voornaam:
+					</label>
+				</div>
+				<div class="col">
+					<input type="text" id="firstNameInput" name="firstNameInput" title="naam" size="20">
+				</div>
+			</div>
+			<div class="row">
+				<div class="col">
+					<label for="streetInput">
+						Straat: 
+					</label>
+				</div>
+				<div class="col">
+					<input type="text" name="streetInput" id="streetInput" title="straat" size="20">
+				</div>
+			</div>
+			<div class="row">
+				<div class="col">
+					<label for="streetNumberInput">
+						Nummer:
+					</label>
+				</div>
+				<div class="col">
+					<input type="text" id="streetNumberInput" name="streetNumberInput" title="Huisnummer" maxlength="5" size="5">
+				</div>
+			</div>
+			<div class="row">
+				<div class="col">
+					<label for="postcodeInput">
+						Postnummer:
+					</label>
+				</div>
+				<div class="col">
+					<input type="text" id="postcodeInput" name="postcodeInput" size="4" maxlength="4">
+				</div>
+			</div>
+			<div class="row">
+				<div class="col">
+					<label for="gemeenteInput">
+						Gemeente:
+					</label>
+				</div>
+				<div class="col">
+					<input type="text" id="gemeenteInput" name="gemeenteInput" title="Gemeente" size="20">
+				</div>
+			</div>
+		</fieldset>
+		<fieldset id="contactFieldset">
+			<legend>
+				<h2>Contactgegevens</h2>
+			</legend>
+			<fieldset>
+				<legend>
+					<h2>Hoe kunnen we je contacteren?</h2>
+				</legend>
+				<label for="emailRadioButtonInput">
+					<input id="emailRadioButtonInput" type="radio" name="contact" value="1">E-mail
+				</label>
+				<label for="cellphoneRadioButtonInput">
+					<input id="cellphoneRadioButtonInput" type="radio" name="contact" value="2">Mobiel
+				</label>
+			</fieldset>
+			<div class="row">
+				<div class="col">
+					<label for="emailInput">
+						E-mail:
+					</label>
+				</div>
+				<div class="col">
+					<input id="emailInput" type="email" name="emailInput" title="Please enter your e-mail adress" size="20">
+				</div>
+			</div>
+			<div class="row">
+				<div class="col">
+					<label for="phoneInput">
+						Mobiel nummer:
+					</label>
+				</div>
+				<div class="col">
+					<input id="phoneInput" type="text" name="phoneInput" title="Please enter your mobile phone number" size="20" maxlength="12">
+				</div>
+			</div>
+
+		</fieldset>
+		<fieldset id="questionFieldSet">
+			<legend>
+				<h2>Vraag</h2>
+			</legend>
+			<label for="contactMeForMoreInfo">
+				<input id="contactMeForMoreInfo" type="checkbox" name="contactMeForMoreInfo">Contacteer me voor verdere uitleg
+			</label>
+			<br>
+			<label for="sendMeBrochure">
+				<input id="sendMeBrochure" type="checkbox" name="sendMeBrochure">Stuur me een brochure
+			</label>
+			<br>
+			<label for="sendMeAnOfferte">
+				<input id="sendMeAnOfferte" type="checkbox" name="sendMeAnOfferte">Stuur me een offerte
+			</label>
+		</fieldset>
+		<input type="reset" name="resetInput" value="Alles wissen">
+		<input type="submit" name="submitInput" value="Verzenden">
+	</form>
+</body>
+</html>

@@ -1,0 +1,72 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+header {
+    background-color: blue;
+    padding-top: 20px;
+    padding-left: 40px;
+    padding-bottom: 10px;
+}
+
+header h2 {
+    font-style: italic;
+    color: white;
+}
+
+nav {
+    background-color: dodgerblue;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 40px;
+    border-bottom: 3px solid red;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    padding-right: 10px;
+}
+
+img {
+    float: right;
+    padding-top: 20px;
+}
+
+nav a:hover {
+    text-decoration: underline;
+}
+
+#bedrijf {
+    color: white;
+
+}
+
+.eersteLetter {
+    color: red;
+}
+
+section {
+    padding-bottom: 20px;
+}
+
+p {
+    font-family: "Gill Sans MT", serif;
+    padding-left: 40px;
+    padding-top: 20px;
+}
+
+section h1 {
+    color: red;
+    padding-left: 40px;
+    padding-top: 20px;
+}
+
+footer {
+    background-color: red;
+    color: white;
+    padding-left: 40px;
+    padding-top: 20px;
+    padding-bottom: 10px;
+}

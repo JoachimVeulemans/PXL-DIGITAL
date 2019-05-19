@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        img {
+            position: absolute;
+            z-index: 0;
+        }
+
+        iframe {
+            position: relative;
+            list-style: none;
+            color: lightblue;
+            width: 330px;
+            height: 475px;
+            top: 137px;
+            left: 40px;
+            z-index: 2;
+
+        }
+
+        nav {
+            position: relative;
+            z-index: 3;
+            background-color: gray;
+            width: 330px;
+            height: 480px;
+            bottom: 345px;
+            left: 48px;
+        }
+
+        nav:checked{
+            z-index: 0;
+        }
+    </style>
+</head>
+<body>
+    <img src="figuren/iphone.png">
+    <iframe name="iframe" src="#">
+
+    </iframe>
+
+    <nav>
+        <a href="https://stubru.be/" target="iframe">Link</a>
+    </nav>
+
+</body>
+</html>

@@ -1,0 +1,102 @@
+body{
+    margin: 0;
+    background-color:#e7e7e7;
+}
+#wrapper{
+    width: 886px;
+    margin:0 auto;
+}
+#hoofd{
+    background-image: url("../Resources/bovenrand.jpg");
+    height: 71px;
+    width: 886px;
+}
+
+#header {
+    background-image: url("../Resources/hoofding.jpg");
+    height: 78px;
+    width: 886px;
+    color: white;
+    text-align: center;
+}
+
+#navList {
+    margin-left: 100px;
+}
+
+#navList a {
+    font-size: 20px;
+    padding: 10px;
+    color: black;
+    /* margin-top: 5px; */
+    text-decoration: none;
+}
+
+#header h1{
+    text-align: center;
+    position: relative;
+    right: 70px;
+
+
+  }
+
+#header h2{
+    margin: 0;
+}
+
+#nav {
+    background-image: url("../Resources/navigatie.jpg");
+    height: 32px;
+    width: 886px;
+
+}
+
+#nav {
+    background-image: url("../Resources/navigatie.jpg");
+    height: 32px;
+    width: 886px;
+
+}
+
+#sectie {
+    background-image: url("../Resources/midden.jpg");
+    background-repeat:repeat;
+    height: 600px;
+    width: 886px;
+}
+#sectionWrapper {
+    width: 758px;
+    margin-left: 63px;
+}
+#sectionWrapper p,h1
+{
+    padding-left: 150px;
+    margin:0;
+
+}
+
+#koppenVoorbeeld {
+    float:left;
+    background-color: darkgrey;
+    width: 15%;
+    margin-left: 15px;
+    margin-top: 10px;
+    border: 1px solid black;
+}
+
+#koppenVoorbeeld p {
+    margin: 5px;
+    padding-left: 0;
+}
+
+#footer {
+    background-image: url("../Resources/voet.jpg");
+    height: 78px;
+    width: 886px;
+}
+
+#footer p {
+    font-size: 15px;
+    text-align: center;
+    margin:0;
+}

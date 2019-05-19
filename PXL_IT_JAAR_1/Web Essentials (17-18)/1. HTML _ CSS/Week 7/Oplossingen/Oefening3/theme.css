@@ -1,0 +1,33 @@
+#head{
+    text-align: center;
+    font-size: 30px;
+    border-bottom: 1px solid black;
+    color: green;
+    background-color: yellow;
+}
+
+#sect{
+    margin-top: 30px;
+}
+
+select{
+	background-color: green;
+}
+
+input, textarea {
+
+  background-color : #d1d1d1; 
+
+}
+
+input[type="reset"]{
+	background-color: lightblue;
+}
+
+input[type="submit"]{
+	background-color: orange;
+}
+
+body{
+	background-color: pink;
+}

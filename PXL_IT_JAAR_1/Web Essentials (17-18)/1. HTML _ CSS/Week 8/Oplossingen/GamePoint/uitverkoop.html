@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Uitverkoop</title>
+    <link rel="stylesheet" href="css/aditionalCss.css">
+</head>
+<body>
+<header>
+    <h1>GAME<span class="header-title">POINT</span></h1>
+</header>
+
+<nav>
+    <div class="nav-visible">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="games.html" class="nav-link">Games</a>
+        <a href="uitverkoop.html" class="nav-link">Uitverkoop</a>
+        <a href="accessoires.html" class="nav-link">Accessoires</a>
+        <a href="contact.html" class="nav-link">Contact</a>
+    </div>
+    <div class="container" onclick="myFunction(this)">
+        <div class="bar1"></div>
+        <div class="bar2"></div>
+        <div class="bar3"></div>
+    </div>
+    <div class="hidden-small" id="hs">
+
+        <p><a href="index.html" class="nav-link">Home</a></p>
+        <p><a href="games.html" class="nav-link">Games</a></p>
+        <p><a href="uitverkoop.html" class="nav-link">Uitverkoop</a></p>
+        <p><a href="accessoires.html" class="nav-link">Accessoires</a></p>
+        <p><a href="contact.html" class="nav-link">Contact</a></p>
+    </div>
+
+</nav>
+<h2 id="uitverkoop">Uitverkoop</h2>
+<div class="hidden-uitverkoop">
+    <p>Om geen aanbiedingen te missen, download onze app!</p>
+    <img src="images/appstore.png"> <img src="images/playstore1.jpg">
+</div>
+<table border="1">
+    <tr>
+        <th>
+
+        </th>
+        <th>
+            Games
+        </th>
+        <th>
+            Korting
+        </th>
+        <th>
+            Prijs
+        </th>
+    </tr>
+    <tr>
+        <td>
+            <img src="images/f1.png">
+        </td>
+        <td>
+            F1 2017
+        </td>
+        <td>
+            40%
+        </td>
+        <td>
+            €32.99
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <img src="images/minecraft.jpg">
+        </td>
+        <td>
+            Minecraft
+        </td>
+        <td>
+            -50%
+        </td>
+        <td>
+            €28.99
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <img src="images/nba.png">
+        </td>
+        <td>
+            NBA
+        </td>
+        <td>
+            -30%
+        </td>
+        <td>
+            €37.99
+        </td>
+    </tr>
+</table>
+
+<script>
+    function myFunction(x) {
+        x.classList.toggle("change");
+        var elements = document.getElementById('hs');
+
+        elements.style.display = "inherit";
+        elements.style.marginRight = "20px";
+    }
+</script>
+</body>
+</html>

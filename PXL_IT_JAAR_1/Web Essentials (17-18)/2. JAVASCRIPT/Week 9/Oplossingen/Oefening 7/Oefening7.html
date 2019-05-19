@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        input {
+            width: 300px;
+            margin: 5px;
+        }
+    </style>
+    <meta charset="UTF-8">
+    <title>Oefening 7: Javascript</title>
+    <script>
+        "use strict";
+        function bereken(getal) {
+            let boodschap = '';
+            if (getal.value < 2 || getal.value > 10) {
+                boodschap = 'Gelieve een correct getal in te geven!'
+            } else {
+                for (let i = 1; i <= getal.value; i++) {
+                    for (let j = 1; j <= i; j++) {
+                        boodschap += '* ';
+                    }
+                    boodschap += '\r\n';
+                }
+            }
+            document.getElementById("output").innerText = boodschap;
+        }
+    </script>
+</head>
+<body>
+<form id="form" onsubmit="return false" >
+    <label>Geef een getal tussen 2 en 10:</label>
+    <input type="text" id="getal" />
+    <button onclick="bereken(form.getal)">Teken pyramide</button>
+    <p id="output"></p>
+</form>
+</body>
+</html>

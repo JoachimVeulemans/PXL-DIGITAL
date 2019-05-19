@@ -1,0 +1,35 @@
+body {
+    background-color: #96b9f2;
+}
+
+img {
+    width: 223px;
+    height: 100px;
+}
+
+#webEssentials {
+    border: 1px solid black;
+    display:inline-block;
+    margin: 2px;
+    background-color: #2d455b;
+}
+
+
+#nav {
+    display: inline-block;
+    width: 150px;
+    border: 1px solid black;
+    margin: 2px;
+    background-color: #2d455b;
+    height: 600px;
+}
+
+#competentieBeschrijving {
+    display: inline-block;
+    width: 550px;
+    border: 1px solid black;
+    margin: 2px;
+    background-color: #79a6ce;
+    height: 600px;
+}
+

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Ploegen</title>
+    <script>
+        function voegLandToe() {
+            let naam = document.getElementById("naam").value;
+            let shortcode = document.getElementById("shortcode").value;
+            let beschrijving = document.getElementById("beschrijving").value;
+
+            document.getElementById("landen").innerHTML += "<div class='land'><img alt='" + naam + "' src='resources/landen/" + shortcode + ".png'" + " /><h2>" + naam + "</h2><p>" + beschrijving + "</p></div>";
+        }
+    </script>
+    <style>
+        form {
+            border: black 1px solid;
+            padding: 20px;
+            font-size: 20pt;
+            font-weight: bold;
+            width: 50%;
+        }
+        .land {
+            border: black 1px solid;
+            padding: 5px;
+            width: 400px;
+            margin-left: 20px;
+            float: left;
+            margin-top: 20px;
+        }
+        .land img {
+            float: left;
+        }
+        .land h2 {
+            float: left;
+            padding-left: 10px;
+        }
+        .land p {
+            clear: left;
+            padding-top: 10px;
+        }
+    </style>
+</head>
+<body>
+<form onsubmit="return false">
+    <label id="naamLabel">Naam:</label>
+    <input type="text" id="naam"  title="naamLabel"/><br>
+    <label id="shortcodeLabel">Shortcode:</label>
+    <input type="text" id="shortcode" title="shortcodeLabel"/><br>
+    <label id="beschrijvingLabel">Beschrijving:</label>
+    <input type="text" id="beschrijving" title="beschrijvingLabel" /><br>
+    <button onclick="voegLandToe()">Toevoegen</button>
+</form>
+
+<div id="landen">
+
+
+</div>
+
+</body>
+</html>

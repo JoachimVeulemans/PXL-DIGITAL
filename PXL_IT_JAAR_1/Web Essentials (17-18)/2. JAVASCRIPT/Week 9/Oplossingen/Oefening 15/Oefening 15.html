@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Oefening 15</title>
+</head>
+<style>
+    body {
+        background-color: purple;
+    }
+</style>
+<script>
+    function dubbelKlik() {
+        this.width *= 2;
+        this.height *= 2;
+
+        document.getElementById('naamDier').innerHTML = this.alt;
+
+        this.removeEventListener("dblclick", dubbelKlik);
+        this.addEventListener("click", klik);
+    }
+    function klik() {
+        this.width /= 2;
+        this.height /= 2;
+
+        document.getElementById('naamDier').innerHTML = "";
+
+        this.addEventListener("dblclick", dubbelKlik);
+        this.removeEventListener("click", klik);
+    }
+</script>
+<body>
+<p id="naamDier"></p>
+<img id="elephant" src="elephant.png" alt="Olifant" height="256" width="256"/>
+<img id="rhino" src="rhino.png" alt="Neushoorn" height="256" width="256"/>
+<img id="mouse" src="mouse.png" alt="Muis" height="256" width="256"/>
+<img id="rabbit" src="rabbit.png" alt="Konijn" height="256" width="256"/>
+<script>
+    let dier = document.getElementById("elephant");
+    dier.addEventListener("dblclick", dubbelKlik);
+
+    dier = document.getElementById("rhino");
+    dier.addEventListener("dblclick", dubbelKlik);
+
+    dier = document.getElementById("mouse");
+    dier.addEventListener("dblclick", dubbelKlik);
+
+    dier = document.getElementById("rabbit");
+    dier.addEventListener("dblclick", dubbelKlik);
+
+
+</script>
+</body>
+</html>

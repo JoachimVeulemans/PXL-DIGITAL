@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        input {
+            width: 100px;
+            margin: 5px;
+        }
+    </style>
+    <meta charset="UTF-8">
+    <title>Oefening 3: Javascript</title>
+    <script>
+        "use strict";
+        function bereken(voornaam, achternaam) {
+            let boodschap;
+            if (!voornaam.value || !achternaam.value ) {
+                boodschap = 'Vul alle velden in, a.u.b.'
+            } else {
+                boodschap = 'Welkom, ' + voornaam.value + ' ' + achternaam.value;
+            }
+            document.getElementById("output").value = boodschap;
+        }
+    </script>
+</head>
+<body>
+<!--DEEL 1-->
+<form id="form" onsubmit="return false" >
+    <label>Voornaam</label>
+    <input style="margin-left: 62px" type="text" id="voornaam" /><br />
+    <label>Achternaam</label>
+    <input style="margin-left: 50px;" type="text" id="achternaam" /><br />
+    <button onclick="bereken(form.voornaam, form.achternaam)">Genereer melding</button>
+    <input style="width: 308px;" id="output" type="text" />
+</form>
+</body>
+</html>

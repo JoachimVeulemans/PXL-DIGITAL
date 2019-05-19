@@ -1,0 +1,107 @@
+body {
+    background-image: url("../figuren/back.jpg");
+}
+
+header {
+    margin-bottom: 20px;
+}
+
+.center {
+    width: 60%;
+    margin-left: 20%;
+    border: red solid 1pt;
+    border-radius: 10pt;
+
+    background: rgba(255, 255, 255, 0.5);
+}
+
+nav {
+    background-color: #f8060c;
+}
+
+nav>ul>li {
+    display: inline-block;
+    padding: 5px 5px 5px 0;
+    border-right: white solid 1pt;
+}
+
+a:hover {
+    background-color: gray;
+}
+
+section {
+    overflow: auto;
+}
+
+.title {
+    text-align: center;
+    text-shadow: black;
+}
+
+nav ul a {
+    color: white;
+    text-decoration: none;
+}
+
+section>article>ul {
+    list-style: square;
+}
+
+header h1 {
+    color: #f8060c;
+    margin-left: 20px;
+    font-family: "Times New Roman", serif;
+
+}
+
+h1 {
+    margin-left: 10px;
+}
+
+.links {
+    float: left;
+    width: 40%;
+    clear: left;
+}
+
+.rechts {
+    float: right;
+    width: 55%;
+}
+
+img {
+    width: 100%;
+}
+
+#informatie>nav {
+    background-color: unset;
+    margin-left: 20px;
+    margin-bottom: 10px;
+}
+
+#informatie>nav>a {
+    color: red;
+}
+
+.centerInformatieSection {
+    text-align: center;
+}
+
+.tableInformatie {
+    background-color: white;
+    margin: 0 auto 0 auto;
+    border-collapse: collapse;
+}
+
+.tableBestellen {
+    margin: 0 auto 0 auto;
+}
+
+.table-blue {
+    background-color: lightseagreen;
+}
+
+#totaal {
+    font-size: 20pt;
+    font-weight: bold;
+}

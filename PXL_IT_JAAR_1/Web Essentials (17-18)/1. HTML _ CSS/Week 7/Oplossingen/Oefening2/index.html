@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link type="text/css" rel="stylesheet" href="theme.css">
+    <title>Hoofdstuk 7 Oefening 2</title>
+</head>
+<body>
+    <header id="head">
+        <h1>
+            Formulier
+        </h1>
+    </header>
+    <section id="sect">
+        <form>
+            <table>
+                <tbody>
+                    <tr>
+                        <td><label for="naam">Naam:</label></td>
+                        <td><input type="text" name="naam" size="20" maxlength="20" value="" title="Naam"></td>
+                    </tr>
+                    <tr>
+                        <td><label for="password">Passwoord:</label></td>
+                        <td><input type="password" name="password" size="20" value="" title="Wachtwoord"></td>
+                    </tr>
+                    <tr>
+                        <td><label for="land">Land:</label></td>
+                        <td> <select title="Land">
+                            <option>Afghanistan</option>
+                            <option selected>Belgie</option>
+                            <option>Nederland</option>
+                            <option>Duitsland</option>
+                            <option>USA</option>
+                            <option>Polen</option>
+                            <option>Irak</option>
+                            <option>Zweden</option>
+                        </select></td>
+                    </tr>
+                    <tr>
+                        <td><label for="gender">Geslacht</label></td>
+                        <td>
+                            <input type="radio" name="gender" value="A" title="geslacht">mannelijk<br>
+                            <input type="radio" name="gender" value="B" title="geslacht">vrouwelijk<br>
+                            <input type="radio" name="gender" value="C" title="geslacht">transsexueel<br>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label for="besturingssysteem">Besturingssysteem</label><br>
+                        </td>
+                        <td>
+                            <input type="checkbox" name="windows7" value="A" title="OS">Windows 7<br>
+                            <input type="checkbox" name="windows8" value="B" title="OS">Windows 8/8.1<br>
+                            <input type="checkbox" name="windows10" value="C" title="OS">Windows 10<br>
+                            <input type="checkbox" name="linux" value="D" title="OS">Linux<br>
+                            <input type="checkbox" name="MAC" value="E" title="OS">MAC OS<br>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td> <label for="opmerkingen">Opmerkingen</label></td>
+                        <td>
+                            <textarea name="opmerkingen" rows="10" cols="30" title="textarea"></textarea>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="submit" value="Formulier verzenden" title="submitbutton">
+                        </td>
+                        <td>
+                            <input type="reset" value="Alles wissen" title="resetbutton">
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </form>
+    </section>
+</body>
+</html>

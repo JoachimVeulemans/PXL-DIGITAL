@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Oefening 1</title>
+    <link rel="stylesheet" href="stijl/stijl.css">
+    <script>
+        function changeAfbeelding() {
+            let afb = document.getElementById("changeAfbeelding");
+            if (afb.alt === 'passion_sunrise') {
+                afb.alt = 'roze_bubbels';
+                afb.src = 'figuren/roze_bubbels.jpg';
+            } else {
+                afb.alt = 'passion_sunrise';
+                afb.src = 'figuren/passion_sunrise.jpg';
+            }
+        }
+    </script>
+</head>
+<body>
+<header class="center">
+    <h1>Mocktails 2017</h1>
+    <nav>
+        <ul>
+            <li><a href="#passion_sunrise">Op basis van grenadine</a></li>
+            <li><a href="vraag1b.html">Informatie</a></li>
+            <li><a href="vraag1c.html">Bestellen</a></li>
+        </ul>
+    </nav>
+</header>
+<section class="center" id="passion_sunrise">
+    <h1 class="title">Passion sunrise</h1>
+    <article class="links">
+        <h1>Ingrediënten</h1>
+        <ul>
+            <li>Groenten/Fruit
+                <ul>
+                    <li>0.5 Passievrucht</li>
+                </ul>
+            </li>
+            <li>Vloeistoffen
+            <ul>
+                <li>2 eetl. grenadine</li>
+                <li>20 cl sinaasappellimonade</li>
+            </ul>
+            </li>
+            <li>1 ijsblokje</li>
+        </ul>
+    </article>
+    <article class="rechts">
+        <img alt="passion_sunrise" id="changeAfbeelding" src="figuren/passion_sunrise.jpg" onclick="changeAfbeelding()">
+    </article>
+    <article class="links">
+        <h1>Bereiding</h1>
+        <ol>
+            <li>Doe het ijsblokje ne het vruchtvlees van de halve passievrucht in een londrinkglas.</li>
+            <li>Voeg de grenadine toe.</li>
+            <li>Giet er daarna de sinaasappellimonade langs de bolle kant van een lepel bij voor een mooi kleureffect.</li>
+        </ol>
+    </article>
+</section>
+</body>
+</html>

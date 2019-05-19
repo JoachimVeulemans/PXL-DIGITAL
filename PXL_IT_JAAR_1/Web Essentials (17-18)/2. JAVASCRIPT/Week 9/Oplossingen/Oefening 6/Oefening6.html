@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Oefening 6</title>
+    <script>
+        function birthday() {
+            let oneDay = 24*60*60*1000;
+            let dateNow = new Date();
+            let dateBirthday = new Date(dateNow.getFullYear() + '-02-17');
+            if (dateBirthday < dateNow) {
+                dateBirthday.setFullYear(dateBirthday.getFullYear() + 1);
+            }
+            let days = (dateBirthday - dateNow) / oneDay;
+            if (days > 0) {
+                let outputElement = document.getElementById('output');
+                outputElement.innerHTML = 'Nog ' + Math.round(days) + ' dagen tot je verjaardag.';
+            } else {
+                let parent = document.getElementById('parent');
+                let image = document.createElement('img');
+                image.src = 'happy_birthday.jpg';
+                parent.appendChild(image);
+
+            }
+        }
+    </script>
+</head>
+<body>
+<h1>Aftellen naar je verjaardag!</h1>
+<p id="output"></p>
+<div id="parent">
+
+</div>
+<script>
+    birthday();
+</script>
+</body>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        input {
+            width: 300px;
+            margin: 5px;
+        }
+    </style>
+    <meta charset="UTF-8">
+    <title>Oefening 4: Javascript</title>
+    <script>
+        "use strict";
+        function bereken(getal) {
+            let boodschap = '';
+            if (getal.value < 0 || getal.value > 50) {
+                boodschap = 'Gelieve een correct getal in te geven!'
+            } else {
+                for (let i = 1; i <= getal.value; i = i + 2) {
+                    boodschap += i;
+                    boodschap += ' ';
+                }
+            }
+            document.getElementById("output").value = boodschap;
+        }
+    </script>
+</head>
+<body>
+<!--DEEL 1-->
+<form id="form" onsubmit="return false" >
+    <label>Geef een getal tussen 0 en 50</label>
+    <input type="text" id="getal" /><br />
+    <button onclick="bereken(form.getal)">Genereer oneven getallen</button>
+    <input style="width: 440px; margin-left: 22px;" id="output" type="text" />
+</form>
+</body>
+</html>

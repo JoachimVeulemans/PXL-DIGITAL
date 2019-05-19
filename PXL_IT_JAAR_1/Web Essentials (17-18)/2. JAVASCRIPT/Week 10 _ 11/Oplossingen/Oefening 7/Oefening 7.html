@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Oefening 7</title>
+    <script>
+        function drawStreet() {
+            let canvas = document.getElementById('canvas');
+            let canvasContext = canvas.getContext('2d');
+
+            for (let i = 1; i < 5; i++) {
+                drawHouse(i * 20,i * 70, canvasContext);
+            }
+        }
+        function drawHouse(breedte, pos, canvasContext) {
+            drawTriangle(breedte, pos, canvasContext);
+            drawSquare(breedte, pos, canvasContext);
+        }
+        function drawTriangle(breedte, pos, c) {
+            c.moveTo(pos, 200);
+            c.lineTo(pos, 200 - breedte);
+            c.lineTo(pos + breedte, 200);
+            c.lineTo(pos, 200);
+            c.stroke();
+        }
+        function drawSquare(breedte, pos, c) {
+            c.moveTo(pos, 200);
+            c.lineTo(pos + breedte, 200);
+            c.lineTo(pos + breedte, 200 + breedte);
+            c.lineTo(pos, 200 + breedte);
+            c.lineTo(pos, 200);
+            c.stroke();
+        }
+    </script>
+</head>
+<body>
+<canvas id="canvas" width="400px" height="400px" ></canvas>
+<script>
+    drawStreet();
+</script>
+</body>
+</html>

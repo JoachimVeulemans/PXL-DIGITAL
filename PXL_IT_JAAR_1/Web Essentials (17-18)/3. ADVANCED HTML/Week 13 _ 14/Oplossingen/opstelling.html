@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Opstelling</title>
+    <style>
+        #groepsfase {
+            width: 42%;
+            height: 100vh;
+            margin: 0;
+            overflow: scroll;
+        }
+
+        #knockoutfase {
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+            width: 54%;
+        }
+        section {
+            display: inline-block;
+        }
+        #lijn{
+            border-left: 6px black dotted;
+            height: 100vh;
+            margin: 0 0 0 30px;
+            display: inline-block;
+        }
+        .speler {
+            display: inline-block;
+            border: black 1px solid;
+            margin: 5px;
+            width: 170px;
+        }
+        #veld {
+            margin-left: 100px;
+            margin-top: 200px;
+            position: absolute;
+        }
+        .dropPlace {
+            border: black 2px solid;
+            width: 50px;
+            height: 50px;
+            position: absolute;
+            display: inline-block;
+            margin: 0;
+            border-radius: 50px;
+        }
+    </style>
+    <script>
+        function drag(ev) {
+            ev.dataTransfer.setData("text", ev.target.id);
+        }
+        function dropm(ev) {
+            ev.preventDefault();
+            let data = ev.dataTransfer.getData("text");
+
+            ev.target.appendChild(document.getElementById(data));
+        }
+        function allowDrop(ev) {
+            ev.preventDefault();
+        }
+
+        function drop(ev) {
+            ev.preventDefault();
+            let data = ev.dataTransfer.getData("text");
+            let element = document.getElementById(data);
+            element.style.width = "50px";
+            element.style.height = "50px";
+            element.style.borderRadius = "50px";
+            ev.target.appendChild(element);
+
+        }
+
+    </script>
+</head>
+<body>
+<section id="groepsfase">
+    <div class="speler">
+        <img id="alderweireld" draggable="true" ondragstart="drag(event)" alt="" src="resources/spelers/alderweireld.jpg" />
+        <p>Toby Alderweireld</p>
+    </div>
+    <div class="speler">
+        <img id="batshuayi" draggable="true" ondragstart="drag(event)" alt="" src="resources/spelers/batshuayi.jpg" />
+        <p>Michy Batshuayi</p>
+    </div>
+    <div class="speler">
+        <img draggable="true" ondragstart="drag(event)" alt="" src="resources/spelers/carrasco.jpg" id="carrasco" />
+        <p>Yannick Ferreira Carrasco</p>
+    </div>
+    <div class="speler">
+        <img draggable="true" ondragstart="drag(event)" alt="" src="resources/spelers/ciman.jpg" id="ciman" />
+        <p>Laurent Ciman</p>
+    </div>
+    <div class="speler">
+        <img draggable="true" ondragstart="drag(event)" alt="" src="resources/spelers/courtois.jpg" id="courtois" />
+        <p>Thibaut Courtois</p>
+    </div>
+    <div class="speler">
+        <img draggable="true" ondragstart="drag(event)" alt="" src="resources/spelers/debruyne.jpg" id="debruyne" />
+        <p>Kevin De Bruyne</p>
+    </div>
+    <div class="speler">
+        <img draggable="true" ondragstart="drag(event)" alt="" src="resources/spelers/dembele.jpg" id="dembele" />
+        <p>Ousmane Dembélé</p>
+    </div>
+    <div class="speler">
+        <img draggable="true" ondragstart="drag(event)" alt="" src="resources/spelers/fellaini.jpg" id="fellaini" />
+        <p>Marouane Fellaini</p>
+    </div>
+    <div class="speler">
+        <img draggable="true" ondragstart="drag(event)" alt="" src="resources/spelers/hazard.jpg" id="hazard" />
+        <p>Eden Hazard</p>
+    </div>
+    <div class="speler">
+        <img draggable="true" ondragstart="drag(event)" alt="" src="resources/spelers/kompany.jpg" id="kompany" />
+        <p>Vincent Kompany</p>
+    </div>
+    <div class="speler">
+        <img draggable="true" ondragstart="drag(event)" alt="" src="resources/spelers/lukaku.jpg" id="lukaku" />
+        <p>Romelu Lukaku</p>
+    </div>
+    <div class="speler">
+        <img draggable="true" ondragstart="drag(event)" alt="" src="resources/spelers/mertens.jpg" id="mertens"/>
+        <p>Dries Mertens</p>
+    </div>
+    <div class="speler">
+        <img draggable="true" ondragstart="drag(event)" alt="" src="resources/spelers/meunier.jpg" id="meunier" />
+        <p>Thomas Meunier</p>
+    </div>
+    <div class="speler">
+        <img draggable="true" ondragstart="drag(event)" alt="" src="resources/spelers/mignolet.jpg" id="mignolet" />
+        <p>Simon Mignolet</p>
+    </div>
+    <div class="speler">
+        <img draggable="true" ondragstart="drag(event)" alt="" src="resources/spelers/mirallas.jpg" id="mirallas" />
+        <p>Kevin Mirallas</p>
+    </div>
+    <div class="speler">
+        <img draggable="true" ondragstart="drag(event)" alt="" src="resources/spelers/naingolan.jpg" id="naingolan" />
+        <p>Radja Nainggolan</p>
+    </div>
+    <div class="speler">
+        <img draggable="true" ondragstart="drag(event)" alt="" src="resources/spelers/origi.jpg" id="origi" />
+        <p>Divock Origi</p>
+    </div>
+    <div class="speler">
+        <img draggable="true" ondragstart="drag(event)" alt="" src="resources/spelers/tielemans.jpg" id="tielemans" />
+        <p>Youri Tielemans</p>
+    </div>
+    <div class="speler">
+        <img draggable="true" ondragstart="drag(event)" alt="" src="resources/spelers/vermaelen.jpg" id="vermaelen"/>
+        <p>Thomas Vermaelen</p>
+    </div>
+    <div class="speler">
+        <img draggable="true" ondragstart="drag(event)" alt="" src="resources/spelers/vertonghen.jpg" id="vertonghen" />
+        <p>Jan Vertonghen</p>
+    </div>
+    <div class="speler">
+        <img draggable="true" ondragstart="drag(event)" alt="" src="resources/spelers/witsel.jpg" id="witsel" />
+        <p>Alex Witsel</p>
+    </div>
+</section>
+<div id="lijn"></div>
+<section id="knockoutfase">
+    <img id="veld" src="resources/veld.jpg">
+    <div style="margin: 250px 0 0 300px" class="dropPlace" id="div1" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+    <div style="margin: 250px 0 0 500px" class="dropPlace" id="div2" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+    <div style="margin: 250px 0 0 700px" class="dropPlace" id="div3" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+    <div style="margin: 350px 0 0 300px" class="dropPlace" id="div4" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+    <div style="margin: 350px 0 0 500px" class="dropPlace" id="div5" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+    <div style="margin: 350px 0 0 700px" class="dropPlace" id="div6" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+    <div style="margin: 550px 0 0 400px" class="dropPlace" id="div7" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+    <div style="margin: 550px 0 0 600px" class="dropPlace" id="div8" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+    <div style="margin: 520px 0 0 200px" class="dropPlace" id="div9" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+    <div style="margin: 520px 0 0 800px" class="dropPlace" id="div10" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+    <div style="margin: 650px 0 0 500px" class="dropPlace" id="div11" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+</section>
+</body>
+</html>

@@ -1,0 +1,240 @@
+html {
+
+}
+
+body {
+  margin: 0;
+  font-family: 'Roboto', sans-serif;
+  color: #444;
+}
+
+header {
+  text-align: left;
+
+  font-family: 'Rajdhani', sans-serif;
+
+  padding-left: 25px;
+}
+
+header h1{
+    text-transform: uppercase;
+    color: #6a737b;
+    font-size: 2.8em;
+    padding: 20px 0 2px 0;
+    margin: 0;
+}
+
+header h1 span {
+  color: #73c167;
+}
+
+nav ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #6a737b;
+  padding-left: 10px;
+}
+
+nav li {
+  float: left;
+}
+
+nav li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+nav li a:hover {
+    background-color: #73c167;
+}
+
+main {
+  width: 70%;
+  margin: 0 auto;
+}
+
+article.featured {
+  float: left;
+
+  width: 50%;
+  padding: 10px 25px;
+  box-sizing: border-box;
+}
+
+article h2 {
+  font-family: 'Rajdhani', sans-serif;
+
+  font-size: 2.4em;
+  color: #73c167;
+}
+
+article.toprated {
+  float: right;
+
+  width: 50%;
+  padding: 10px 25px;
+  box-sizing: border-box;
+}
+
+article.featured section.left {
+  text-align: left;
+  width: 30%;
+  float: left;
+}
+
+article.featured section.left figure {
+  margin: 0;
+}
+
+.gameimage {
+  width: 100%;
+}
+
+article.featured section.right {
+  width: 70%;
+  margin: 0;
+  float: right;
+  padding: 0 20px;
+  box-sizing: border-box;
+}
+
+article.featured section.right p {
+  font-size: 0.9em;
+  margin: 0;
+}
+
+article.featured .rating {
+  margin-top: 10px;
+}
+
+article.featured .info {
+  margin-top: 10px;
+}
+
+article h3 {
+  font-family: 'Rajdhani', sans-serif;
+
+  font-size: 2.1em;
+  margin: 0;
+}
+
+article h3 a:link,
+article h3 a:visited,
+article h3 a:hover,
+article h3 a:active {
+    color: #3cc3b2;
+    text-decoration: none;
+}
+
+article h3 a:hover {
+  color: #6a737b;
+}
+
+.clr {
+  clear: both;
+}
+
+footer {
+  width: 70%;
+  margin: 0 auto;
+  border-top: 4px solid #73c167;
+  padding: 2em 1em;
+  margin-top: 4em;
+}
+
+/* UITVERKOOP */
+
+main.uitverkoop table {
+  width: 50%;
+  empty-cells: show;
+  border-collapse: collapse;
+}
+
+main.uitverkoop td {
+  border: 1px solid #73c167;
+  text-align: center;
+}
+
+main.uitverkoop tr td:nth-child(2) {
+  vertical-align: middle;
+}
+
+
+/*-------------------*/
+/* GAME DETAIL PAGES */
+/*-------------------*/
+
+.main-image{
+    float:left;
+    width: 300px;
+}
+
+button{
+    border-radius: 5px;
+    color: white;
+    cursor: pointer;
+    display: inline-block;
+    padding: 2em;
+    text-align: center;
+    text-decoration: none;
+    text-shadow: none;
+    background-color: #73c167;
+    width: 200px;
+}
+
+.topHeader{
+    margin-top: 40px;
+    margin-left: 30px;
+}
+
+.linethrough {
+  text-decoration: line-through;
+}
+
+main.detail header p {
+  font-size: 1.2em;
+}
+
+main.detail header p strong {
+  font-size: 1.3em;
+}
+
+.sidebox {
+  float: left;
+  margin-left: 40px;
+}
+
+.clear {
+  clear: both;
+}
+
+#reviews{
+    margin: 30px 30px 50px 20px;
+}
+
+.review {
+  margin: 16px 0;
+}
+
+.writerinfo{
+    color:gray;
+}
+
+.score-comment{
+    display:inline;
+    margin-left: 12px;
+}
+
+hr{
+    margin-top: 25px;
+    margin-bottom: 25px;
+}
+
+.gameimage{
+    float:left;
+}

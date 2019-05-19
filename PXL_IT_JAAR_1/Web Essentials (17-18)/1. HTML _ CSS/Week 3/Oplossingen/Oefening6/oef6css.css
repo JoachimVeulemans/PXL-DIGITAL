@@ -1,0 +1,69 @@
+body{
+    background-color: yellow;
+
+}
+table{
+    border: solid black 1px;
+    background-color: #ffb955;
+    border-radius: 15px
+}
+td{
+
+    border: 0.1em solid black;
+    border-radius: 15px
+}
+tr{
+    background-color: blue;
+    color: white;
+    text-align: right;
+    width: 200px;
+
+}
+tr:first-child{
+    text-align: center;
+    font-family: Verdana;
+    font-size: 19px;
+    color: white;
+    background-color: brown;
+
+}
+tr:nth-child(2){
+    text-align: center;
+    font-family: Georgia;
+    font-size: 13px;
+    color: white;
+    background-color: brown;
+
+}
+tr:nth-child(3) td:first-child{
+    width: 150px;
+    text-align: left;
+    font-family: Georgia;
+    font-size: 16px;
+    color: white;
+    background-color: brown;
+}
+tr:nth-child(4) td:first-child{
+    width: 150px;
+    text-align: left;
+    font-family: Georgia;
+    font-size: 16px;
+    color: white;
+    background-color: brown;
+}
+tr:nth-child(5) td:first-child{
+    width: 150px;
+    text-align: left;
+    font-family: Georgia;
+    font-size: 16px;
+    color: white;
+    background-color: brown;
+}
+tr:last-child{
+    text-align: center;
+    font-family: Verdana;
+    font-size: 12px;
+    color: white;
+    background-color: green;
+
+}

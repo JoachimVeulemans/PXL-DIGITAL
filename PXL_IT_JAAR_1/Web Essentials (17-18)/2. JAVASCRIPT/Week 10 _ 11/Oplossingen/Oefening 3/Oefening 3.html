@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Oefening 3</title>
+    <style>
+        img {
+            width: 250px;
+        }
+    </style>
+    <script>
+        function hover() {
+            this.src = this.id + ".jpg";
+            document.getElementById('output').innerHTML = "Gekozen processor=" + this.id.substr(4, 7);
+        }
+        function out() {
+            this.src = this.id + "_logo.gif";
+            document.getElementById('output').innerHTML = "Gekozen processor="
+        }
+    </script>
+</head>
+<body>
+<h1>
+    Sandy Bridge microarchitectuur
+</h1>
+<p>Beweeg over de logo's om de processor te zien.</p>
+<p id="output">Gekozen processor=</p>
+<img id="img/core_i3" src="img/core_i3_logo.gif">
+<img id="img/core_i5" src="img/core_i5_logo.gif">
+<img id="img/core_i7" src="img/core_i7_logo.gif">
+<script>
+    let afbeeldingen = document.getElementsByTagName('img');
+    for (let i = 0; i < afbeeldingen.length;i++) {
+        afbeeldingen.item(i).addEventListener("mouseover", hover);
+        afbeeldingen.item(i).addEventListener("mouseout", out);
+    }
+</script>
+</body>
+</html>

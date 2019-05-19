@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Oefening5</title>
+    <script>
+        "use strict";
+        function toonBoodschap() {
+
+            let hour = new Date();
+            hour = hour.getHours();
+            let outputElement = document.getElementById('output');
+
+            if (hour > 6 && hour < 9) {
+                outputElement.innerHTML = 'Breakfast is served.';
+            } else if (hour > 11 && hour < 13) {
+                outputElement.innerHTML = 'Time for lunch.';
+            } else if (hour > 17 && hour < 20) {
+                outputElement.innerHTML = 'It\'s dinner time.';
+            } else {
+                outputElement.innerHTML = 'Sorry, you\'ll have to wait, or go get a snack.';
+            }
+        }
+    </script>
+</head>
+<body>
+<p id="output"></p>
+<script>
+    toonBoodschap();
+</script>
+</body>
+</html>

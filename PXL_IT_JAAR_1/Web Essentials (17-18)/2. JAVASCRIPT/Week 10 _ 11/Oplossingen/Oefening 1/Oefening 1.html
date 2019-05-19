@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Oefening 1</title>
+    <script>
+        function lettertypeChange() {
+            let chosenOne = document.getElementById('lettertype').value;
+            document.getElementById('tekst').style.fontFamily = chosenOne;
+        }
+        function lettergrootteChange() {
+            let chosenOne = document.getElementById('lettergrootte').value;
+            document.getElementById('tekst').style.fontSize = chosenOne;
+        }
+    </script>
+</head>
+<body>
+<select id="lettertype">
+    <option>Arial</option>
+    <option>Times</option>
+    <option>Courier</option>
+    <option>Georgia</option>
+    <option>Sans-Serif</option>
+    <option>Serif</option>
+    <option>Verdana</option>
+</select>
+<select id="lettergrootte">
+    <option>8pt</option>
+    <option>10pt</option>
+    <option>12pt</option>
+    <option>16pt</option>
+    <option>20pt</option>
+    <option>24pt</option>
+    <option>28pt</option>
+</select>
+<script>
+    document.getElementById('lettertype').addEventListener("change", lettertypeChange);
+    document.getElementById('lettergrootte').addEventListener("change", lettergrootteChange);
+</script>
+<p id="tekst">Voorbeeld tekst om het lettertype te illustreren</p>
+</body>
+</html>

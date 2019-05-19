@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        input {
+            width: 300px;
+            margin: 5px;
+        }
+        button {
+            margin-left: 20px;
+        }
+        input:focus {
+            color: red;
+        }
+    </style>
+    <meta charset="UTF-8">
+    <title>Oefening 13: Javascript</title>
+    <script>
+        function submitClick() {
+            alert("Bedankt om het formulier te verzenden");
+        }
+        function resetClick() {
+            alert("Alle gegevens werden gewist");
+        }
+        function blurNow(input) {
+            input.style.backgroundColor = "darkgrey";
+        }
+    </script>
+</head>
+<body>
+<h1>Persoonlijke gegevens</h1>
+<form id="form" onsubmit="return false" >
+    <label>Voornaam</label>
+    <input onblur="blurNow(this)" style="margin-left: 20px;" type="text" id="voornaam" placeholder="voornaam" /><br />
+    <label>Achternaam</label>
+    <input onblur="blurNow(this)" style="margin-left: 8px;" type="text" id="achternaam" placeholder="naam" /><br />
+    <label>Adres</label>
+    <input onblur="blurNow(this)" style="margin-left: 48px;" type="text" id="adres" placeholder="adres" /><br />
+    <button type="submit" onclick="submitClick()">Verzenden</button>
+    <button type="reset" onclick="resetClick()">Wissen</button>
+</form>
+</body>
+</html>
