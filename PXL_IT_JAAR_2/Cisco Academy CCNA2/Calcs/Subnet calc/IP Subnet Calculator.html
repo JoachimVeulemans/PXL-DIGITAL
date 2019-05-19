@@ -1,0 +1,186 @@
+
+<!-- saved from url=(0052)https://www.calculator.net/ip-subnet-calculator.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">	<title>IP Subnet Calculator</title>
+	<meta name="description" content="This free online IP subnet calculator covers both IPv4 and IPv6 protocols, providing information such as IP address, network address, subnet mask, IP range, and more. Also, explore hundreds of other math, financial, fitness, and health calculators.">
+	<script src="./IP Subnet Calculator_files/common.js.download"></script>
+	<link rel="stylesheet" href="./IP Subnet Calculator_files/style2.css"><script type="text/javascript" async="" src="./IP Subnet Calculator_files/ga.js.download"></script></head>
+<body>
+<div id="headerout">
+	<div id="header">
+		<div id="logo"><a href="https://www.calculator.net/"><img src="./IP Subnet Calculator_files/calculator-white.svg" width="208" height="22"></a></div>
+			</div>
+</div>
+<div id="clear"></div><div id="contentout"><div id="content"><div class="smalltext smtbtop"><a href="https://www.calculator.net/">Home</a> / <a href="https://www.calculator.net/other-calculator.html">Other Calculators</a> / <a href="https://www.calculator.net/ip-subnet-calculator.html">IP Subnet Calculator</a></div>		<h1>IP Subnet Calculator</h1>
+<p>This calculator returns a variety of information regarding Internet Protocol version 4 (IPv4) and IPv6 subnets including possible network addresses, usable host ranges, subnet mask, and IP class, among others.</p>
+
+<h2>IPv4 Subnet Calculator</h2>
+<div class="panel">
+<form name="calform" action="https://www.calculator.net/ip-subnet-calculator.html">
+<table id="ipv4table" cellpadding="3">
+<tbody><tr>
+	<td>Network Class</td><td>
+	<label for="cclass0" class="cbcontainer"><input type="radio" name="cclass" id="cclass0" value="any" checked="" onclick="popSubnet(&#39;any&#39;);"><span class="rbmark"></span>Any</label> &nbsp; <label for="cclass1" class="cbcontainer"><input type="radio" name="cclass" id="cclass1" value="a" onclick="popSubnet(&#39;a&#39;);"><span class="rbmark"></span>A</label> &nbsp; <label for="cclass2" class="cbcontainer"><input type="radio" name="cclass" id="cclass2" value="b" onclick="popSubnet(&#39;b&#39;);"><span class="rbmark"></span>B</label> &nbsp; <label for="cclass3" class="cbcontainer"><input type="radio" name="cclass" id="cclass3" value="c" onclick="popSubnet(&#39;c&#39;);"><span class="rbmark"></span>C</label></td>
+</tr>
+<tr>
+	<td>Subnet</td><td>
+	<select name="csubnet" id="csubnet" onchange="return setSubnetV(this.value);"><option value="32">255.255.255.255 /32</option><option value="31">255.255.255.254 /31</option><option value="30">255.255.255.252 /30</option><option value="29">255.255.255.248 /29</option><option value="28">255.255.255.240 /28</option><option value="27">255.255.255.224 /27</option><option value="26">255.255.255.192 /26</option><option value="25">255.255.255.128 /25</option><option value="24">255.255.255.0 /24</option><option value="23">255.255.254.0 /23</option><option value="22">255.255.252.0 /22</option><option value="21">255.255.248.0 /21</option><option value="20">255.255.240.0 /20</option><option value="19">255.255.224.0 /19</option><option value="18">255.255.192.0 /18</option><option value="17">255.255.128.0 /17</option><option value="16">255.255.0.0 /16</option><option value="15">255.254.0.0 /15</option><option value="14">255.252.0.0 /14</option><option value="13">255.248.0.0 /13</option><option value="12">255.240.0.0 /12</option><option value="11">255.224.0.0 /11</option><option value="10">255.192.0.0 /10</option><option value="9">255.128.0.0 /9</option><option value="8">255.0.0.0 /8</option><option value="7">254.0.0.0 /7</option><option value="6">252.0.0.0 /6</option><option value="5">248.0.0.0 /5</option><option value="4">240.0.0.0 /4</option><option value="3">224.0.0.0 /3</option><option value="2">192.0.0.0 /2</option><option value="1">128.0.0.0 /1</option></select></td>
+</tr>
+<tr>
+	<td>IP Address</td><td>
+	<input type="text" name="cip" id="cip" value="84.194.188.254" class="inlonger" onkeyup="iptfieldCheck(this, &#39;r&#39;, &#39;&#39;);"></td>
+</tr>
+<tr>
+	<td>&nbsp;</td>
+	<td><input type="hidden" name="ctype" id="ctype" value="ipv4"><input name="printit" value="0" type="hidden"><input type="image" src="./IP Subnet Calculator_files/calculate.svg" value="Calculate" alt="Calculate" style="margin-top:10px;"></td>
+</tr>
+</tbody></table>
+</form></div>
+
+<a name="ipv6"></a>
+<br><h2>IPv6 Subnet Calculator</h2>
+<div class="panel">
+<form name="calform" action="https://www.calculator.net/ip-subnet-calculator.html#ipv6">
+<table cellpadding="3">
+<tbody><tr>
+	<td>Prefix Length:</td><td><select name="c6subnet"><option value="1">/1</option><option value="2">/2</option><option value="3">/3</option><option value="4">/4</option><option value="5">/5</option><option value="6">/6</option><option value="7">/7</option><option value="8">/8</option><option value="9">/9</option><option value="10">/10</option><option value="11">/11</option><option value="12">/12</option><option value="13">/13</option><option value="14">/14</option><option value="15">/15</option><option value="16">/16</option><option value="17">/17</option><option value="18">/18</option><option value="19">/19</option><option value="20">/20</option><option value="21">/21</option><option value="22">/22</option><option value="23">/23</option><option value="24">/24</option><option value="25">/25</option><option value="26">/26</option><option value="27">/27</option><option value="28">/28</option><option value="29">/29</option><option value="30">/30</option><option value="31">/31</option><option value="32">/32</option><option value="33">/33</option><option value="34">/34</option><option value="35">/35</option><option value="36">/36</option><option value="37">/37</option><option value="38">/38</option><option value="39">/39</option><option value="40">/40</option><option value="41">/41</option><option value="42">/42</option><option value="43">/43</option><option value="44">/44</option><option value="45">/45</option><option value="46">/46</option><option value="47">/47</option><option value="48">/48</option><option value="49">/49</option><option value="50">/50</option><option value="51">/51</option><option value="52">/52</option><option value="53">/53</option><option value="54">/54</option><option value="55">/55</option><option value="56">/56</option><option value="57">/57</option><option value="58">/58</option><option value="59">/59</option><option value="60">/60</option><option value="61">/61</option><option value="62">/62</option><option value="63">/63</option><option value="64" selected="">/64</option><option value="65">/65</option><option value="66">/66</option><option value="67">/67</option><option value="68">/68</option><option value="69">/69</option><option value="70">/70</option><option value="71">/71</option><option value="72">/72</option><option value="73">/73</option><option value="74">/74</option><option value="75">/75</option><option value="76">/76</option><option value="77">/77</option><option value="78">/78</option><option value="79">/79</option><option value="80">/80</option><option value="81">/81</option><option value="82">/82</option><option value="83">/83</option><option value="84">/84</option><option value="85">/85</option><option value="86">/86</option><option value="87">/87</option><option value="88">/88</option><option value="89">/89</option><option value="90">/90</option><option value="91">/91</option><option value="92">/92</option><option value="93">/93</option><option value="94">/94</option><option value="95">/95</option><option value="96">/96</option><option value="97">/97</option><option value="98">/98</option><option value="99">/99</option><option value="100">/100</option><option value="101">/101</option><option value="102">/102</option><option value="103">/103</option><option value="104">/104</option><option value="105">/105</option><option value="106">/106</option><option value="107">/107</option><option value="108">/108</option><option value="109">/109</option><option value="110">/110</option><option value="111">/111</option><option value="112">/112</option><option value="113">/113</option><option value="114">/114</option><option value="115">/115</option><option value="116">/116</option><option value="117">/117</option><option value="118">/118</option><option value="119">/119</option><option value="120">/120</option><option value="121">/121</option><option value="122">/122</option><option value="123">/123</option><option value="124">/124</option><option value="125">/125</option><option value="126">/126</option><option value="127">/127</option><option value="128">/128</option>	</select></td>
+</tr>
+<tr>
+	<td>IP Address:</td><td>	<input type="text" name="c6ip" value="2001:db8:85a3::8a2e:370:7334" class="infull" style="width: 300px;" onkeyup="iptfieldCheck(this, &#39;r&#39;, &#39;&#39;);"></td>
+</tr>
+<tr>
+	<td>&nbsp;</td><td>	<input type="hidden" name="ctype" id="ctype" value="ipv6"><input name="printit" value="0" type="hidden"><input type="image" src="./IP Subnet Calculator_files/calculate.svg" value="Calculate" alt="Calculate" style="margin-top:10px;"></td>
+</tr>
+</tbody></table>
+</form>
+</div>
+<br><p></p><fieldset><legend>Related</legend><a href="https://www.calculator.net/bandwidth-calculator.html">Bandwidth Calculator</a> | <a href="https://www.calculator.net/binary-calculator.html">Binary Calculator</a></fieldset><p></p>
+
+<br>
+<p>A subnet is division of an IP network (internet protocol suite), where an IP network is a set of communications protocols used on the Internet and other similar networks. It is commonly known as TCP/IP (Transmission Control Protocol/Internet Protocol). </p>
+<p>The act of dividing a network into at least two separate networks is called subnetting, and routers are devices that allow traffic exchange between subnetworks, serving as a physical boundary. IPv4 is the most common network addressing architecture used, though the use of IPv6 has been growing since 2006. </p>
+<p>An IP address is comprised of a network number (routing prefix) and a rest field (host identifier). A rest field is an identifier that is specific to a given host or network interface. A routing prefix is often expressed using Classless Inter-Domain Routing (CIDR) notation for both IPv4 and IPV6. CIDR is a method used to create unique identifiers for networks, as well as individual devices. For IPv4, networks can also be characterized using a subnet mask, which are sometimes expressed in dot-decimal notation, as shown in the "Subnet" field in the calculator. All hosts on a subnetwork have the same network prefix, unlike the host identifier which is a unique local identification. In IPv4, these subnet masks are used to differentiate the network number and host identifier. In IPv6, the network prefix performs a similar function as the subnet mask in IPv4, with the prefix length representing the number of bits in the address.</p>
+<p>Prior to the introduction of CIDR, IPv4 network prefixes could be directly obtained from the IP address based on the class (A, B, or C, which vary based on the range of IP addresses they include) of the address and the network mask. Since CIDRs introduction however, assigning an IP address to a network interface requires both an address and its network mask. </p>
+
+<br><p>Below is a table providing typical subnets for IPv4. </p>
+<table class="cinfoT" align="center">
+	<tbody><tr>
+		<td class="cinfoHd">Prefix size</td>
+		<td class="cinfoHdL">Network mask</td>
+		<td class="cinfoHdL">Usable hosts per subnet</td>
+	</tr>
+	<tr><td>/1</td><td>128.0.0.0</td><td align="right">2,147,483,646</td></tr>
+	<tr><td>/2</td><td>192.0.0.0</td><td align="right">1,073,741,822</td></tr>
+	<tr><td>/3</td><td>224.0.0.0</td><td align="right">536,870,910</td></tr>
+	<tr><td>/4</td><td>240.0.0.0</td><td align="right">268,435,454</td></tr>
+	<tr><td>/5</td><td>248.0.0.0</td><td align="right">134,217,726</td></tr>
+	<tr><td>/6</td><td>252.0.0.0</td><td align="right">67,108,862</td></tr>
+	<tr><td>/7</td><td>254.0.0.0</td><td align="right">33,554,430</td></tr>
+	<tr><td colspan="3" align="center"><b>Class A</b></td></tr>
+	<tr><td>/8</td><td>255.0.0.0</td><td align="right">16,777,214</td></tr>
+	<tr><td>/9</td><td>255.128.0.0</td><td align="right">8,388,606</td></tr>
+	<tr><td>/10</td><td>255.192.0.0</td><td align="right">4,194,302</td></tr>
+	<tr><td>/11</td><td>255.224.0.0</td><td align="right">2,097,150</td></tr>
+	<tr><td>/12</td><td>255.240.0.0</td><td align="right">1,048,574</td></tr>
+	<tr><td>/13</td><td>255.248.0.0</td><td align="right">524,286</td></tr>
+	<tr><td>/14</td><td>255.252.0.0</td><td align="right">262,142</td></tr>
+	<tr><td>/15</td><td>255.254.0.0</td><td align="right">131,070</td></tr>
+	<tr><td colspan="3" align="center"><b>Class B</b></td></tr>
+	<tr><td>/16</td><td>255.255.0.0</td><td align="right">65,534</td></tr>
+	<tr><td>/17</td><td>255.255.128.0</td><td align="right">32,766</td></tr>
+	<tr><td>/18</td><td>255.255.192.0</td><td align="right">16,382</td></tr>
+	<tr><td>/19</td><td>255.255.224.0</td><td align="right">8,190</td></tr>
+	<tr><td>/20</td><td>255.255.240.0</td><td align="right">4,094</td></tr>
+	<tr><td>/21</td><td>255.255.248.0</td><td align="right">2,046</td></tr>
+	<tr><td>/22</td><td>255.255.252.0</td><td align="right">1,022</td></tr>
+	<tr><td>/23</td><td>255.255.254.0</td><td align="right">510</td></tr>
+	<tr><td colspan="3" align="center"><b>Class C</b></td></tr>
+	<tr><td>/24</td><td>255.255.255.0</td><td align="right">254</td></tr>
+	<tr><td>/25</td><td>255.255.255.128</td><td align="right">126</td></tr>
+	<tr><td>/26</td><td>255.255.255.192</td><td align="right">62</td></tr>
+	<tr><td>/27</td><td>255.255.255.224</td><td align="right">30</td></tr>
+	<tr><td>/28</td><td>255.255.255.240</td><td align="right">14</td></tr>
+	<tr><td>/29</td><td>255.255.255.248</td><td align="right">6</td></tr>
+	<tr><td>/30</td><td>255.255.255.252</td><td align="right">2</td></tr>
+	<tr><td>/31</td><td>255.255.255.254</td><td align="right">0</td></tr>
+	<tr><td>/32</td><td>255.255.255.255</td><td align="right">0</td></tr>
+</tbody></table>
+
+
+
+<script>
+csubnet = '30'
+function setSubnetV(inval){
+	csubnet = inval;
+	return false;
+}
+
+function popSubnet(inval){
+	//alert(csubnet);
+	var lowerlimit = 0;
+	if (inval=='a') lowerlimit = 8;
+	if (inval=='b') lowerlimit = 16;
+	if (inval=='c') lowerlimit = 24;
+
+	var allSubnets = [[32, '255.255.255.255 /32'], [31, '255.255.255.254 /31'], [30, '255.255.255.252 /30'], [29, '255.255.255.248 /29'], [28, '255.255.255.240 /28'], [27, '255.255.255.224 /27'], [26, '255.255.255.192 /26'], [25, '255.255.255.128 /25'], [24, '255.255.255.0 /24'], [23, '255.255.254.0 /23'], [22, '255.255.252.0 /22'], [21, '255.255.248.0 /21'], [20, '255.255.240.0 /20'], [19, '255.255.224.0 /19'], [18, '255.255.192.0 /18'], [17, '255.255.128.0 /17'], [16, '255.255.0.0 /16'], [15, '255.254.0.0 /15'], [14, '255.252.0.0 /14'], [13, '255.248.0.0 /13'], [12, '255.240.0.0 /12'], [11, '255.224.0.0 /11'], [10, '255.192.0.0 /10'], [9, '255.128.0.0 /9'], [8, '255.0.0.0 /8'], [7, '254.0.0.0 /7'], [6, '252.0.0.0 /6'], [5, '248.0.0.0 /5'], [4, '240.0.0.0 /4'], [3, '224.0.0.0 /3'], [2, '192.0.0.0 /2'], [1, '128.0.0.0 /1']];
+	var thisSelect = gObj('csubnet');
+	thisSelect.options.length = 0;
+	for (i = 0; i < allSubnets.length; i++) {
+		if (allSubnets[i][0]>=lowerlimit){
+			var thisOption = document.createElement('option');
+			thisOption.value = allSubnets[i][0];
+			thisOption.innerHTML = allSubnets[i][1];
+			if (csubnet==allSubnets[i][0]) thisOption.selected = true;
+			thisSelect.appendChild(thisOption);
+		}
+	}
+}
+popSubnet('all');
+
+</script>
+
+</div>
+	<div id="right">
+		<div style="padding-top:10px;"><script async="" src="./IP Subnet Calculator_files/f.txt"></script>
+<!-- Calculator -->
+<ins class="adsbygoogle" style="display:inline-block;width:336px;height:280px" data-ad-client="ca-pub-2927677119936553" data-ad-slot="1395081263"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script></div>
+<div id="socialshare" style="padding-top: 16px;"><img src="./IP Subnet Calculator_files/social-share.svg" usemap="#socialsharemap" onmouseover="showSocialLikes();"><div id="sociallikediv"></div></div><br><div id="othercalc"><div id="octitle"><a href="https://www.calculator.net/other-calculator.html">Other Calculators</a></div><div id="occontent"><a href="https://www.calculator.net/love-calculator.html">Love</a><a href="https://www.calculator.net/ip-subnet-calculator.html">IP Subnet</a><a href="https://www.calculator.net/age-calculator.html">Age</a><a href="https://www.calculator.net/date-calculator.html">Date</a><a href="https://www.calculator.net/time-calculator.html">Time</a><a href="https://www.calculator.net/gas-mileage-calculator.html">Gas Mileage</a><a href="https://www.calculator.net/conversion-calculator.html">Conversion</a><a href="https://www.calculator.net/gpa-calculator.html">GPA</a><a href="https://www.calculator.net/grade-calculator.html">Grade</a><a href="https://www.calculator.net/time-card-calculator.html">Time Card</a><a href="https://www.calculator.net/time-zone-calculator.html">Time Zone</a><a href="https://www.calculator.net/height-calculator.html">Height</a><a href="https://www.calculator.net/gdp-calculator.html">GDP</a><a href="https://www.calculator.net/concrete-calculator.html">Concrete</a></div><div id="ocother"><a href="https://www.calculator.net/financial-calculator.html">Financial</a> | <a href="https://www.calculator.net/fitness-and-health-calculator.html">Fitness and Health</a> | <a href="https://www.calculator.net/math-calculator.html">Math</a> | <a href="https://www.calculator.net/other-calculator.html">Other</a></div></div>	</div>
+</div>
+<div id="clear"></div>
+<div id="footer"><div id="footerin"><div id="footernav"><a href="https://www.calculator.net/about-us.html">about us</a> | <a href="https://www.calculator.net/about-us.html#privacy">privacy policies</a> | <a href="https://www.calculator.net/sitemap.html">sitemap</a> © 2008 - 2019 <a href="https://www.calculator.net/">calculator.net</a></div></div></div>
+<script type="text/javascript">
+var _gaq = _gaq || [];
+_gaq.push(['_setAccount', 'UA-3068863-11']);
+_gaq.push(['_trackPageview','/ip-subnet-calculator.html_____Section_4_BE__do']);
+(function() {
+	var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+	ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+	(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ga);
+})();
+</script>
+<script async="">showTopNav(4);</script><div class="topNavAbs"><div class="topNavIn"><div class="topNavLeft" onclick="window.location=&#39;/&#39;;">&nbsp;</div><div class="topNavRight"><span class="dropdown"><span class="dropbtn" onclick="window.location=&#39;/financial-calculator.html&#39;;">Financial</span></span><span class="dropdown"><span class="dropbtn" onclick="window.location=&#39;/fitness-and-health-calculator.html&#39;;">Fitness &amp; Health</span></span><span class="dropdown"><span class="dropbtn" onclick="window.location=&#39;/math-calculator.html&#39;;">Math</span></span><span class="dropdown"><span class="dropbtn" style="background-color: #518428;" onclick="window.location=&#39;/other-calculator.html&#39;;">Other</span></span><script async="">
+	function linkSocialShare(){
+		lssoutput = '<img src="//d26tpo4cm8sb6k.cloudfront.net/img/svg/social-share.svg" usemap="#socialsharemap" onmouseover="showSocialLikes();">';
+		lssoutput += '<div id="sociallikediv"></div>';
+		lssObj = document.getElementById("socialshare");
+		if (lssObj!== null) lssObj.innerHTML = lssoutput;
+	}
+	function showSocialLikes(){
+		var tempval = document.getElementById("sociallikediv").innerHTML + "";
+		if (tempval.length<10){
+			lssURL = "https%3A%2F%2Fwww.calculator.net%2Fip-subnet-calculator.html";
+			lssTitle = "IP%2BSubnet%2BCalculator";
+			sslikeoutput = '<map name="socialsharemap"><area shape="rect" coords="0,0,52,38" href="http://facebook.com/sharer/sharer.php?u='+lssURL+'&title='+lssTitle+'">';
+			sslikeoutput += '<area shape="rect" coords="124,0,176,38" href="https://twitter.com/intent/tweet?url='+lssURL+'&text='+lssTitle+'">';
+			sslikeoutput += '<area shape="rect" coords="248,0,300,38" href="http://www.reddit.com/submit?url='+lssURL+'"></map>';
+			sslikeoutput += '<iframe src=\'/socialicons.php?url=http%3A%2F%2Fwww.calculator.net%2Fip-subnet-calculator.html\' scrolling=\'no\' frameborder=\'0\' style=\'border:none; overflow:hidden; width:300px; height:31px;\' allowTransparency=\'true\' align=\'top\'></iframe>';
+			gObj("sociallikediv").innerHTML = sslikeoutput;
+		}
+	}
+	linkSocialShare();
+</script>
+
+
+</div></div></div></body></html>

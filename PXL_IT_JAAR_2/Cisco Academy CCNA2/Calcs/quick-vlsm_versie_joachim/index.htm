@@ -1,0 +1,250 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Quick-VLSM: A Variable Length Subnet Masking Calculator</title>
+
+<!--
+                         *** VLSM CALCULATOR v1.4 ***
+						 
+This is the first version of the Variable Length Subnet Mask Calculator.
+Note that it has not been thoroughly tested yet and I am not responsible
+for any problems in your network if you use this calculator. The test problems
+that I have run through the calculator have been calculated correctly
+but I have not tested the calculator with every possible combination of
+masks and network sizes. You may use and distribute this calculator freely,
+however, please do not advertise it as anyone else's work but my own, Louis Chanady.
+If you are a javascript programmer and you think you can make the calculator
+better or add more functionality to the calculator, feel free to change the code
+and e-mail me your finished product and I will give you credit on all of the pages
+in the next release. If you have any questions or comments or you find a bug in
+the program, please e-mail me at lchanady@gmail.com with the subject "VLSM Calculator".
+
+If you are trying to interpret the code, I suggest you look at it in a program that
+will provide javascript code coloring such as Macromedia Dreamweaver. It will
+make it a lot easier to read. I have tried to comment the code as best as I can.
+
+Also keep in mind that this calculator uses a query string to pass the information, so
+theoretically, the only limit to the amount of networks that can be calculated at the
+same time is limited only by the maximum URL size of the browser, and/or the memory of
+your computer. It has been tested with Internet Explorer 6.0 and Netscape 7.0. Therfore,
+those are the only 2 browsers that I can guarantee it will work on for now.
+						 
+-->
+
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<script language="javascript1.2">
+var comma=0;  //sets up the commas for the network entries
+var numbers,numArray,howmanynumbers,querystring,cidradd,cidrmask,cidrblock;  //creates needed variables
+
+//function addNet is used to add the networks to the text box when the user clicks the Add button
+function addNet(){
+     var box=document.netform.networks;
+	 var newnum=document.netform.hostnum.value; //assigns the entered number to a variable
+	 
+	 if(newnum>=1){  //makes sure the number entered is positive.
+	 //This next part makes sure the number entered is an integer (a whole number) and has no decimal numbers other than 0.
+	 var checkinteger1;
+	 var checkinteger2;
+	 checkinteger1=newnum;
+	 checkinteger2=eval(newnum*10);
+	 checkinteger1=Math.round(checkinteger1);
+	 checkinteger2=Math.round(checkinteger2);
+	 checkinteger2=eval(checkinteger2/10);
+	 //alert("Integer 1= "+checkinteger1+" Integer 2= "+checkinteger2);  //uncomment this line to see what the outcome of the math is.
+	 if(checkinteger1==checkinteger2){
+	 if(comma==0){    //sets up the comma use
+	      box.value=newnum;
+		  comma=1;
+		  }
+	 else{
+	      box.value+=","+newnum;  //adds all of the entered numbers as a string of numbers separated by commas.
+		  }
+	 document.netform.hostnum.value="";  //clears the Add text box.
+	 document.netform.hostnum.focus();  //puts the cursor into the Add text box.
+	 return false;  //tells the form not to submit.
+	 }
+	 
+	 else{
+	      alert("That number is invalid. You must enter a positive integer");
+		  document.netform.hostnum.value="";  //clears the Add text box.
+	      document.netform.hostnum.focus();  //puts the cursor into the Add text box.
+       	  return false;  //tells the form not to submit.
+	 }
+	 
+	 }  //end of newnum positive integer check if statement.
+	 
+	 else{
+	      alert("That number is invalid. You must enter a positive integer");
+		  document.netform.hostnum.value="";  //clears the Add text box.
+	      document.netform.hostnum.focus();  //puts the cursor into the Add text box.
+       	  return false;  //tells the form not to submit.
+	 }
+}
+
+//function descending provides the sort() method a way to sort the entered numbers from highest to lowest.
+function descending(a,b){
+     return b-a;
+}
+
+//function sortNumbers sorts the entered numbers from highest to lowest
+function sortNumbers(){
+     numbers=document.netform.networks.value;  //puts the string of entered numbers into a variable.
+	 numArray=numbers.split(",");  //splits the string of numbers into an array of numbers. This also removes the commas.
+	 numArray=numArray.sort(descending);  //this is line that actually sorts the numbers. It uses the descending function as a guide.
+	 howmanynumbers=numArray.length;  //this figures out how many networks you entered.
+}
+
+//function sendInfo gets all the data that you entered ready to send to the calculation page via a query string attached to the URL.
+function sendInfo(){
+	 if(document.netform.cidr.value==""){   //checks to make sure you entered an Address Block address and mask.
+	      alert("You must enter an address block and Mask");
+		  document.netform.cidr.focus();  //puts the cursor into the address block text box.
+		  return false;  //stops all calculations past this point.
+	 }	
+	 cidrblock=document.netform.cidr.value;  //assigns your entered address block/mask to a variable.
+	 var cidrsplit=cidrblock.split("/");  //splits the address away from the mask making them separate. Also removes the slash.
+	 cidradd=cidrsplit[0];  //assigns the address to a variable.
+	 cidrmask=cidrsplit[1];  //assigns the mask to a variable.
+	 iparray=cidradd.split(".");  //splits the IP address into 4 octets. Also removes the periods.
+	 
+	 if(cidrsplit[1]==undefined){  //checks to make sure you entered a mask after your address.
+	      alert("You must enter a Mask for your address block");
+		  document.netform.cidr.focus();  //puts the cursor into the address block text box.
+		  return false;  //stops all calculations past this point.
+	 }
+	 if(iparray[0]>254||iparray[1]>255||iparray[2]>255||iparray[3]>254||iparray[4]||iparray[3]==undefined||iparray[2]==undefined||iparray[1]==undefined||iparray[0]==undefined||iparray[0]=="0"||iparray[0].length>3||iparray[1].length>3||iparray[2].length>3||iparray[3].length>3||iparray[0]==""||iparray[1]==""||iparray[2]==""||iparray[3]==""){  //checks for a valid IP address.
+	     alert("IP address is not valid. Please enter a valid IP address");
+		 document.netform.cidr.focus();  //puts the cursor into the address block text box.
+		 return false;  //stops all calculations past this point.
+		 }
+	 if(iparray[0]==127){
+	     alert("The 127.0.0.0 block of addresses is reserved for loopback and cannot be used for network addressing.\n\nPlease enter a different address.");  //makes sure your not using a 127.0.0.0 loopback address.
+		 document.netform.cidr.focus();  //puts the cursor into the address block text box.
+		 return false;  //stops all calculations past this point.
+	 }
+	 if(cidrmask>30||cidrmask<4){  //makes sure your using a valid mask.
+	     alert("The Subnet Mask is Invalid");
+		 document.netform.cidr.focus();  //puts the cursor into the address block text box.
+		 return false;  //stops all calculations past this point.
+	 }
+	 if(document.netform.networks.value==""){  //makes sure you entered your networks.
+	     alert("You must enter how many host addresses you want in your networks.");
+		 document.netform.hostnum.focus();  //puts the cursor into the address block text box.
+		 return false;  //stops all calculations past this point.
+	 }
+	 if(howmanynumbers==1){  //makes sure you don't only have 1 network.
+	     alert("You shouldn't use VLSM if you only have 1 network, sorry.");
+		 document.netform.hostnum.focus();  //puts the cursor into the address block text box.
+		 return false;  //stops all calculations past this point.
+	 }
+	 sortNumbers();  //after checking to make sure you entered everything correctly, this sorts the numbers entered for the networks in descending order.
+	 querystring="?address="+cidradd+"&mask="+cidrmask+"&";  //adds the address and the mask to the query string that will be passed to the calculation page. For example, for address 206.206.132.0 and mask 24, the string created is "?address=206.206.132.0&mask=24".
+	 //the following for loop creates the query string objects for each entered network. For example, if two networks, 10 & 5, are added it will create the string "network1=10&network2=5" and then append it to the existing query string variable.
+	 for(var count=0; count < howmanynumbers; count++){
+	      var netnum=count+1  
+		  querystring+="network"+netnum+"="+numArray[count];
+		  if(howmanynumbers-count!=1)
+		       querystring+="&"
+	 }
+	 var goPage="calculate.htm"+querystring;  //attaches the query string to the calculate.htm variable and stores this entire string in it's own variable.
+	 location.href=goPage;  //opens the calculate.htm in the current window with all the needed information passed to it in the query string.
+}
+//function clearNetworks clears the networks that have already been entered when the user clicks the "Clear Networks" button, but asks if your sure first.
+function clearNetworks(){
+var sureClear=confirm("Are you sure you want to clear all of your entered networks?");
+if(sureClear==true){
+     document.netform.networks.value="";
+	 comma=0;
+	 }
+else
+     return false
+}
+function loadPage(){
+     if(location.search==""){
+          document.netform.reset();
+          document.netform.cidr.focus();
+     }
+}
+</script>
+
+</head>
+
+<body bgcolor="#FFFFFF" onLoad="loadPage();" leftmargin="0" topmargin="0">
+<div align="center">
+  <h1><img src="header.jpg" alt="Quick-VLSM Calculator" width="780" height="180"></h1>
+
+  <form action="" method="post" name="netform" id="netform" onSubmit="return addNet();">
+    <p><font color="#0000FF" size="2" face="Verdana, Arial, Helvetica, sans-serif"><strong><font color="#FF0000">Step 1: </font>Enter your Address Block Address and mask: (example: 205.68.24.0/20)</strong>
+        
+		<!--address block/MASK TEXT BOX-->
+		<input name="cidr" type="text" id="cidr3" size="19">
+    
+	</font> </p>
+    <p><font size="2" face="Verdana, Arial, Helvetica, sans-serif"><strong><font color="#FF0000">Step 2:</font><font color="#0000FF"> Add Networks:</font></strong> Enter the number of addresses you will need in each network, after applying the scalability percentage.
+      After entering the number for each network, click add or press Enter to add another network.<br>
+      (example: You need 1 network with 50 addresses, 1 network with 217 addresses and 1 point-to-point<br>
+    link. Simply type 50 [Enter] 217 [Enter] 2 [Enter])</font></p>
+    <p>
+      
+	  <!--ENTER NETWORK TEXT BOX-->
+	  <input name="hostnum" type="text" id="hostnum" size="3">
+       
+	   <!--"ADD" BUTTON WHICH CALLS THE addNet() FUNCTION WHEN CLICKED USING THE onSubmit ACTION OF THE FORM-->
+	   &nbsp;<input name="addbutton" type="submit" id="addbutton" value="Add">
+
+</p>
+    <p><font size="2" face="Verdana, Arial, Helvetica, sans-serif">Networks Added: 
+      </font><br>
+      
+	  <!--INVISIBLE, READ-ONLY TEXT BOX WHERE THE CURRENT ENTERED NETWORKS ARE STORED-->
+	  <input type="text" name="networks" size="55" id="networks" style="font-weight:bold;color:#0099FF;font-family:Verdana, Arial, Helvetica, sans-serif;background-color:transparent;border:0" readonly>
+     
+    </p>
+    <p>
+      
+	  <!--"CLEAR NETWORKS" BUTTON. CALLS THE clearNetworks() FUNCTION WHEN CLICKED-->
+	  <input name="sortnum" type="button" id="sortnum" value="Clear Networks" onClick="clearNetworks();">
+
+</p>
+    <p>
+      
+	  <!--"CALCULATE!" BUTTON. CALLS THE sendInfo() FUNCTION WHEN CLICKED-->
+	  <input type="button" name="Button" value="Calculate!" onClick="sendInfo();">
+    
+	</p>
+  </form>
+  <script language="javascript1.2">
+  //this section adds the network address/mask into the text box if the "New Calculation with same address/mask" link is clicked on the calculate.htm page.
+  if(location.search!=""){
+       var addnetwork=location.search;
+	   addnetwork=addnetwork.substring(1,addnetwork.length);
+	   addnetworkArray=addnetwork.split("=");
+	   if(addnetworkArray[0]=="net"){
+	        addnetwork=addnetworkArray[1];
+			document.netform.cidr.value=addnetwork;
+			document.netform.hostnum.focus();
+	   }
+  }
+  </script>
+  <p>
+  <!--Donate Button-->
+  <form action="https://www.paypal.com/cgi-bin/webscr" method="post">
+<font color="#009900" size="4"><strong>Did you find this tool useful? Please Donate!</strong></font><br>
+<input type="hidden" name="cmd" value="_xclick">
+<input type="hidden" name="business" value="lchanady@gmail.com">
+<input type="hidden" name="item_name" value="Quick-VLSM Developer Donation">
+<input type="hidden" name="no_note" value="1">
+<input type="hidden" name="currency_code" value="USD">
+<input type="hidden" name="tax" value="0">
+<input type="hidden" name="bn" value="PP-DonationsBF">
+<input type="image" src="https://www.paypal.com/en_US/i/btn/x-click-but04.gif" border="0" name="submit" alt="Make payments with PayPal - it's fast, free and secure!">
+<img alt="" border="0" src="https://www.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1">
+</form>
+  <!--End Donate Button-->
+  </p>
+  <font size="1" face="Verdana, Arial, Helvetica, sans-serif">Quick-VLSM Calculator Version 1.5<br>
+  Created By Louis Chanady, 2006<br>
+  <a href="mailto:lchanady@gmail.com">lchanady@gmail.com</a></font></div>
+</body>
+</html>

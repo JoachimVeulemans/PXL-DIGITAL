@@ -1,0 +1,1081 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Quick-VLSM: A Variable Length Subnet Masking Calculator: Results</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+
+<!--
+                         *** VLSM CALCULATOR v1.4 ***
+						 
+This is the first version of the Variable Length Subnet Mask Calculator.
+Note that it has not been thoroughly tested yet and I am not responsible
+for any problems in your network if you use this calculator. The test problems
+that I have run through the calculator have been calculated correctly
+but I have not tested the calculator with every possible combination of
+masks and network sizes. You may use and distribute this calculator freely,
+however, please do not advertise it as anyone else's work but my own, Louis Chanady.
+If you are a javascript programmer and you think you can make the calculator
+better or add more functionality to the calculator, feel free to change the code
+and e-mail me your finished product and I will give you credit on all of the pages
+in the next release. If you have any questions or comments or you find a bug in
+the program, please e-mail me at lchanady@gmail.com with the subject "VLSM Calculator".
+
+If you are trying to interpret the code, I suggest you look at it in a program that
+will provide javascript code coloring such as Macromedia Dreamweaver. It will
+make it a lot easier to read. I have tried to comment the code as best as I can.
+
+Also keep in mind that this calculator uses a query string to pass the information, so
+theoretically, the only limit to the amount of networks that can be calculated at the
+same time is limited only by the maximum URL size of the browser, and/or the memory of
+your computer. It has been tested with Internet Explorer 6.0 and Netscape 7.0. Therfore,
+those are the only 2 browsers that I can guarantee it will work on for now.
+						 
+-->
+
+<!--
+               *** CALCULATION PAGE ***
+			   
+This is the page that does all of the VLSM calculations.
+The reason I put the calculations on a seperate page than
+the data entry is because JavaScript cannot write tables
+to an already loaded page and I wanted a nice clean looking
+results table. Rather than just refreshing the data input
+page with a query string attached to the URL to create the
+table on the same page, I decided to just create a completely
+different page for the calculations that will do the calculations
+and then write the table before the page loads to keep the
+2 separated which makes things easier to read and understand.
+The information is passed to this page via a query string 
+attached to the URL.
+
+You'll notice that there are no functions in the JavaScript code
+on this page. That is because, since every piece of code
+needs to be executed before the page loads, there is no
+need for function calling or any interaction by the user.
+			   
+-->
+
+</head>
+<body bgcolor="#FFFFFF">
+<center><font color="#0000FF" face="Verdana, Arial, Helvetica, sans-serif">
+<h1>Quick-VLSM Calculator Results</h1>
+</font></center>
+<center>
+<script language="javascript1.2">
+if(location.search==""){  //checks to make sure there is a query string. If not, that means the page was opened directly and not by index.htm. It will display an error message on the page.
+     document.writeln("<center><b><font color='red' size='4'>ERROR: </font>This Page is not meant to be opened directly. You must first fill out the");
+     document.writeln("required information in the index.htm page to calculate your VLSM addressing.</b></center>");
+}
+//else statement calculates the VLSM if there is a query string.
+else{
+if(location.search!=""){
+var query,queryArray,cidradd,cidrmask;  //create needed variables.
+query=location.search;  //puts the contents of the query string into a variable called query. location.search just simply returns anything that is appended to the URL.
+query=query.substring(1,query.length);  //takes the question mark (?) off of the beginning of the query string.
+queryArray=query.split("&");  //splits the query string into an array of label=value strings and removes all of the ampersands (&).
+querynum=queryArray.length;   //figures out how many label=value strings there are. The more networks that were entered, the more label=value strings there will be.
+cidradd=queryArray[0].substring(8,queryArray[0].length);  //takes the "address=" off of the address block string and stores only the address block itself in a variable.
+cidrmask=queryArray[1].substring(5,queryArray[1].length);  //takes the "mask=" off of the CIDR mask string and stores only the CIDR mask itself in a variable.
+var iparray=cidradd.split(".");  //splits the address block into an array of the 4 decimal numbers of the address.
+
+if(cidrmask<5){  //I have made this calculator only compatible with Address Block masks that are 5 bits or longer due to the fact that anybody with a mask shorter than this is a very large company and therefore will probably not be using my little calculator.
+     alert("This form does not currently support subnet masks that are less that 5 bits. Sorry."); 
+	 history.back();  //takes the user back to the index.htm page.
+}
+
+//TURN SUBNET MASK INTO BINARY------------------------------------------------------
+    var mask1;
+	var mask2;
+	var mask3;
+	var mask4;
+    var s1=new Array();  //array for the 8 binary digits of the first octet of the mask.
+	var s2=new Array();  //array for the 8 binary digits of the second octet of the mask.
+	var s3=new Array();  //array for the 8 binary digits of the third octet of the mask.
+	var s4=new Array();  //array for the 8 binary digits of the fourth octet of the mask.
+	
+	var bitvalue=cidrmask;  //adds the mask value to a variable called bitvalue.
+		 bitvalue=-bitvalue;  //these two lines make sure the mask is seen as a number and not a string value.
+		 bitvalue=-bitvalue; 		
+		      if(bitvalue>4&&bitvalue<9){  //determines if the mask ends in the first octet and assigns mask variables accordingly.
+			  mask2=0;
+			  mask3=0;
+			  mask4=0;
+		      s2[0]=0;
+			  s2[1]=0;
+			  s2[2]=0;
+			  s2[3]=0;
+			  s2[4]=0;
+			  s2[5]=0;
+			  s2[6]=0;
+			  s2[7]=0;
+			  s3[0]=0;
+			  s3[1]=0;
+			  s3[2]=0;
+			  s3[3]=0;
+			  s3[4]=0;
+			  s3[5]=0;
+			  s3[6]=0;
+			  s3[7]=0;
+			  s4[0]=0;
+			  s4[1]=0;
+			  s4[2]=0;
+			  s4[3]=0;
+			  s4[4]=0;
+			  s4[5]=0;
+			  s4[6]=0;
+			  s4[7]=0;
+	          
+			  if(bitvalue==5){
+			       mask1=248;
+				   s1[0]=1;
+				   s1[1]=1;
+				   s1[2]=1;
+				   s1[3]=1;
+				   s1[4]=1;
+				   s1[5]=0;
+				   s1[6]=0;
+				   s1[7]=0;
+			  }
+			   if(bitvalue==6){
+			       mask1=252;
+				   s1[0]=1;
+				   s1[1]=1;
+				   s1[2]=1;
+				   s1[3]=1;
+				   s1[4]=1;
+				   s1[5]=1;
+				   s1[6]=0;
+				   s1[7]=0;
+			  }
+			  if(bitvalue==7){
+			       mask1=254;
+				   s1[0]=1;
+				   s1[1]=1;
+				   s1[2]=1;
+				   s1[3]=1;
+				   s1[4]=1;
+				   s1[5]=1;
+				   s1[6]=1;
+				   s1[7]=0;
+			  }
+			  if(bitvalue==8){
+			       mask1=255;
+				   s1[0]=1;
+				   s1[1]=1;
+				   s1[2]=1;
+				   s1[3]=1;
+				   s1[4]=1;
+				   s1[5]=1;
+				   s1[6]=1;
+				   s1[7]=1;
+			  }	              
+			  }
+			  if(bitvalue>8&&bitvalue<17){  //determines if the mask ends in the second octet and assigns mask variables accordingly.
+			  mask1=255;
+			  mask3=0;
+			  mask4=0;
+			  s1[0]=1;
+			  s1[1]=1;
+			  s1[2]=1;
+			  s1[3]=1;
+			  s1[4]=1;
+			  s1[5]=1;
+			  s1[6]=1;
+			  s1[7]=1;
+			  s3[0]=0;
+			  s3[1]=0;
+			  s3[2]=0;
+			  s3[3]=0;
+			  s3[4]=0;
+			  s3[5]=0;
+			  s3[6]=0;
+			  s3[7]=0;
+			  s4[0]=0;
+			  s4[1]=0;
+			  s4[2]=0;
+			  s4[3]=0;
+			  s4[4]=0;
+			  s4[5]=0;
+			  s4[6]=0;
+			  s4[7]=0;
+			  if(bitvalue==9){
+			       mask2=128;
+				   s2[0]=1;
+				   s2[1]=1;
+				   s2[2]=0;
+				   s2[3]=0;
+				   s2[4]=0;
+				   s2[5]=0;
+				   s2[6]=0;
+				   s2[7]=0;
+			  }
+			  if(bitvalue==10){
+			       mask2=192;
+				   s2[0]=1;
+				   s2[1]=1;
+				   s2[2]=0;
+				   s2[3]=0;
+				   s2[4]=0;
+				   s2[5]=0;
+				   s2[6]=0;
+				   s2[7]=0;
+			  }
+			  if(bitvalue==11){
+			       mask2=224;
+				   s2[0]=1;
+				   s2[1]=1;
+				   s2[2]=1;
+				   s2[3]=0;
+				   s2[4]=0;
+				   s2[5]=0;
+				   s2[6]=0;
+				   s2[7]=0;
+			  }
+			  if(bitvalue==12){
+			       mask2=240;
+				   s2[0]=1;
+				   s2[1]=1;
+				   s2[2]=1;
+				   s2[3]=1;
+				   s2[4]=0;
+				   s2[5]=0;
+				   s2[6]=0;
+				   s2[7]=0;
+			  }
+			  if(bitvalue==13){
+			       mask2=248;
+				   s2[0]=1;
+				   s2[1]=1;
+				   s2[2]=1;
+				   s2[3]=1;
+				   s2[4]=1;
+				   s2[5]=0;
+				   s2[6]=0;
+				   s2[7]=0;
+			  }
+			   if(bitvalue==14){
+			       mask2=252;
+				   s2[0]=1;
+				   s2[1]=1;
+				   s2[2]=1;
+				   s2[3]=1;
+				   s2[4]=1;
+				   s2[5]=1;
+				   s2[6]=0;
+				   s2[7]=0;
+			  }
+			  if(bitvalue==15){
+			       mask2=254;
+				   s2[0]=1;
+				   s2[1]=1;
+				   s2[2]=1;
+				   s2[3]=1;
+				   s2[4]=1;
+				   s2[5]=1;
+				   s2[6]=1;
+				   s2[7]=0;
+			  }
+			  if(bitvalue==16){
+			       mask2=255;
+				   s2[0]=1;
+				   s2[1]=1;
+				   s2[2]=1;
+				   s2[3]=1;
+				   s2[4]=1;
+				   s2[5]=1;
+				   s2[6]=1;
+				   s2[7]=1;
+			  }	              
+		 }
+		 if(bitvalue>16&&bitvalue<25){    //determines if the mask ends in the third octet and assigns mask variables accordingly.
+		 mask1=255
+		 mask2=255
+		 mask4=0
+		 s1[0]=1;
+		 s1[1]=1;
+		 s1[2]=1;
+		 s1[3]=1;
+		 s1[4]=1;
+		 s1[5]=1;
+		 s1[6]=1;
+		 s1[7]=1;
+		 s2[0]=1;
+		 s2[1]=1;
+		 s2[2]=1;
+		 s2[3]=1;
+		 s2[4]=1;
+		 s2[5]=1;
+		 s2[6]=1;
+		 s2[7]=1;
+		 s4[0]=0;
+		 s4[1]=0;
+		 s4[2]=0;
+		 s4[3]=0;
+		 s4[4]=0;
+		 s4[5]=0;
+		 s4[6]=0;
+		 s4[7]=0;
+		 
+		 if(bitvalue==17){
+			       mask3=128;
+				   s3[0]=1;
+				   s3[1]=0;
+				   s3[2]=0;
+				   s3[3]=0;
+				   s3[4]=0;
+				   s3[5]=0;
+				   s3[6]=0;
+				   s3[7]=0;
+			  }
+		 if(bitvalue==18){
+			       mask3=192;
+				   s3[0]=1;
+				   s3[1]=1;
+				   s3[2]=0;
+				   s3[3]=0;
+				   s3[4]=0;
+				   s3[5]=0;
+				   s3[6]=0;
+				   s3[7]=0;
+			  }
+			  if(bitvalue==19){
+			       mask3=224;
+				   s3[0]=1;
+				   s3[1]=1;
+				   s3[2]=1;
+				   s3[3]=0;
+				   s3[4]=0;
+				   s3[5]=0;
+				   s3[6]=0;
+				   s3[7]=0;
+			  }
+			  if(bitvalue==20){
+			       mask3=240;
+				   s3[0]=1;
+				   s3[1]=1;
+				   s3[2]=1;
+				   s3[3]=1;
+				   s3[4]=0;
+				   s3[5]=0;
+				   s3[6]=0;
+				   s3[7]=0;
+			  }
+			  if(bitvalue==21){
+			       mask3=248;
+				   s3[0]=1;
+				   s3[1]=1;
+				   s3[2]=1;
+				   s3[3]=1;
+				   s3[4]=1;
+				   s3[5]=0;
+				   s3[6]=0;
+				   s3[7]=0;
+			  }
+			   if(bitvalue==22){
+			       mask3=252;
+				   s3[0]=1;
+				   s3[1]=1;
+				   s3[2]=1;
+				   s3[3]=1;
+				   s3[4]=1;
+				   s3[5]=1;
+				   s3[6]=0;
+				   s3[7]=0;
+			  }
+			  if(bitvalue==23){
+			       mask3=254;
+				   s3[0]=1;
+				   s3[1]=1;
+				   s3[2]=1;
+				   s3[3]=1;
+				   s3[4]=1;
+				   s3[5]=1;
+				   s3[6]=1;
+				   s3[7]=0;
+			  }
+			  if(bitvalue==24){
+			       mask3=255;
+				   s3[0]=1;
+				   s3[1]=1;
+				   s3[2]=1;
+				   s3[3]=1;
+				   s3[4]=1;
+				   s3[5]=1;
+				   s3[6]=1;
+				   s3[7]=1;
+			  }
+		      }
+	     if(bitvalue>24&&bitvalue<33){    //determines if the mask ends in the fourth octet and assigns mask variables accordingly.
+		      mask1=255
+			  mask2=255
+		      mask3=255
+		      s1[0]=1;
+		      s1[1]=1;
+		      s1[2]=1;
+		      s1[3]=1;
+		      s1[4]=1;
+		      s1[5]=1;
+		      s1[6]=1;
+		      s1[7]=1;
+		      s2[0]=1;
+		      s2[1]=1;
+		      s2[2]=1;
+		      s2[3]=1;
+		      s2[4]=1;
+		      s2[5]=1;
+		      s2[6]=1;
+		      s2[7]=1;
+		      s3[0]=1;
+		      s3[1]=1;
+		      s3[2]=1;
+		      s3[3]=1;
+		      s3[4]=1;
+		      s3[5]=1;
+		      s3[6]=1;
+		      s3[7]=1;
+		 
+		 if(bitvalue==25){
+			       mask4=128;
+				   s4[0]=1;
+				   s4[1]=0;
+				   s4[2]=0;
+				   s4[3]=0;
+				   s4[4]=0;
+				   s4[5]=0;
+				   s4[6]=0;
+				   s4[7]=0;
+			  }
+		 if(bitvalue==26){
+			       mask4=192;
+				   s4[0]=1;
+				   s4[1]=1;
+				   s4[2]=0;
+				   s4[3]=0;
+				   s4[4]=0;
+				   s4[5]=0;
+				   s4[6]=0;
+				   s4[7]=0;
+			  }
+			  if(bitvalue==27){
+			       mask4=224;
+				   s4[0]=1;
+				   s4[1]=1;
+				   s4[2]=1;
+				   s4[3]=0;
+				   s4[4]=0;
+				   s4[5]=0;
+				   s4[6]=0;
+				   s4[7]=0;
+			  }
+			  if(bitvalue==28){
+			       mask4=240;
+				   s4[0]=1;
+				   s4[1]=1;
+				   s4[2]=1;
+				   s4[3]=1;
+				   s4[4]=0;
+				   s4[5]=0;
+				   s4[6]=0;
+				   s4[7]=0;
+			  }
+			  if(bitvalue==29){
+			       mask4=248;
+				   s4[0]=1;
+				   s4[1]=1;
+				   s4[2]=1;
+				   s4[3]=1;
+				   s4[4]=1;
+				   s4[5]=0;
+				   s4[6]=0;
+				   s4[7]=0;
+			  }
+			   if(bitvalue==30){
+			       mask4=252;
+				   s4[0]=1;
+				   s4[1]=1;
+				   s4[2]=1;
+				   s4[3]=1;
+				   s4[4]=1;
+				   s4[5]=1;
+				   s4[6]=0;
+				   s4[7]=0;
+			  }
+			  
+		      
+		           
+			  
+			  
+		      
+		 }
+		 }
+		 
+		      mask1=-mask1  //these 8 lines make sure that the four octets of the mask are number values and not strings.
+			  mask1=-mask1
+			  mask2=-mask2
+			  mask2=-mask2
+			  mask3=-mask3
+			  mask3=-mask3
+			  mask4=-mask4
+			  mask4=-mask4
+			  //checks for valid subnet mask
+			
+			//uncomment the next line to test to make sure the mask is correctly being converted to dotted decimal form.
+			//alert("The Subnet Mask is "+mask1+"."+mask2+"."+mask3+"."+mask4);  
+	
+	//The next 3 sections will convert the ip address and mask into binary so that they can be ANDed to find the network address to make sure that the Address Block is big enough to handle the desired sized networks.
+	
+	//the next section will convert the mask to binary using for loops. I will only comment one of the loops.
+	
+	//start first octet of Mask address
+	
+	var binary;  //the binary variable will be a string that, if printed or alerted will display the 8 digit binary number of the mask octet.
+	var value=128;  //this variable will be used to determine where there will be ones and where there will be zeros by comparing it to the decimal number being coverted. For example, if the decimal number is 130, it will be compared to 128. Since it is larger, the first binary digit will be a 1.
+	var control=0;  //this control variable makes it possible to perform a different action during the first time through the loop only. After which it is changed to a 1 and a different action will take place during the next iterations of the loop.
+	for(var count=0; count < 8; count++){
+	     if(control==0){  //the next 5 lines are only executed during the first time through loop. The main reason for this is to get the string in the binary variable to look right when the loop is finished.
+		      if(mask1-value>=0)  //compares the decimal number to the value variable.
+		           s1[count]=1;   //if it is larger or equal to, the first binary digit will be 1.
+		      else
+		           s1[count]=0;  //if it is smaller, the first binary digit will be a 0.
+		      binary=s1[count];  //adds the binary digit to the binary string variable.
+		 }
+	     else{  //else statement is called when the control variable does not equal 0. Everything in this statement is skipped the first time through the loop.
+		      if(s1[count-1]==1){  //if the previous binary digit was a 1, then the next 3 lines will be executed.
+			       mask1=mask1-value;  //takes the current decimal number being converted and subtracts the value of the value variable from it.
+			       if(mask1-(value/2)>=0)  //it then compares it to the value variable (divided by 2 for the next binary digit).
+				        s1[count]=1;  //if it is larger or equal to, the next binary digit will be 1.
+				   else
+				        s1[count]=0;  //if it is smaller, the next binary digit will be a 0.
+			  }
+			  else{  //this else statement will be called if the previous binary digit was a 0.
+	               if(mask1-(value/2)>=0)  //it then compares it to the value variable (divided by 2 for the next binary digit).
+		                s1[count]=1;  //if it is larger or equal to, the next binary digit will be 1.
+		           else
+		                s1[count]=0;  //if it is smaller, the next binary digit will be a 0.
+		      }
+		      binary+=""+s1[count]  //adds the newly created binary digit to the binary variable.
+			  value=value/2;  //divides the value variable by 2 to get it ready for the next time through the loop.
+		 }
+		 control=1;  //sets the control variable to 1 for the remaining trips through the loop.
+	}
+	//end first octet of Mask address
+	//start second octet of Mask address
+	
+	
+	value=128;
+	control=0;
+	for(var count=0; count < 8; count++){
+	     if(control==0){
+		      if(mask2-value>=0)
+		           s2[count]=1;
+		      else
+		           s2[count]=0;
+		      binary=s2[count];
+		 }
+	     else{
+		      if(s2[count-1]==1){
+			       mask2=mask2-value;
+			       if(mask2-(value/2)>=0)
+				        s2[count]=1;
+				   else
+				        s2[count]=0;
+			  }
+			  else{
+	               if(mask2-(value/2)>=0)
+		                s2[count]=1;
+		           else
+		                s2[count]=0;
+		      }
+		      binary+=""+s2[count]
+			  value=value/2;
+		 }
+		 control=1;
+	}
+	//end second octet of Mask address
+	//start third octet of Mask address		
+	
+	value=128;
+	control=0;
+	for(var count=0; count < 8; count++){
+	     if(control==0){
+		      if(mask3-value>=0)
+		           s3[count]=1;
+		      else
+		           s3[count]=0;
+		      binary=s3[count];
+		 }
+	     else{
+		      if(s3[count-1]==1){
+			       mask3=mask3-value;
+			       if(mask3-(value/2)>=0)
+				        s3[count]=1;
+				   else
+				        s3[count]=0;
+			  }
+			  else{
+	               if(mask3-(value/2)>=0)
+		                s3[count]=1;
+		           else
+		                s3[count]=0;
+		      }
+		      binary+=""+s3[count]
+			  value=value/2;
+		 }
+		 control=1;
+	}
+	//end third octet of Mask address
+	//start fourth octet of Mask address
+	
+	value=128;
+	control=0;
+	for(var count=0; count < 8; count++){
+	     if(control==0){
+		      if(mask4-value>=0)
+		           s4[count]=1;
+		      else
+		           s4[count]=0;
+		      binary=s4[count];
+		 }
+	     else{
+		      if(s4[count-1]==1){
+			       mask4=mask4-value;
+			       if(mask4-(value/2)>=0)
+				        s4[count]=1;
+				   else
+				        s4[count]=0;
+			  }
+			  else{
+	               if(mask4-(value/2)>=0)
+		                s4[count]=1;
+		           else
+		                s4[count]=0;
+		      }
+		      binary+=""+s4[count]
+			  value=value/2;
+		 }
+		 control=1;
+	}
+	//end fourth octet of Mask address		
+
+//END->TURN SUBNET MASK INTO BINARY------------------------------------------------------
+
+
+//uncomment the following line to test to see if the mask is correctly being converted to binary.
+//alert("Binary Subnet Mask:\n\n"+s1[0]+""+s1[1]+""+s1[2]+""+s1[3]+""+s1[4]+""+s1[5]+""+s1[6]+""+s1[7]+"."+s2[0]+""+s2[1]+""+s2[2]+""+s2[3]+""+s2[4]+""+s2[5]+""+s2[6]+""+s2[7]+"."+s3[0]+""+s3[1]+""+s3[2]+""+s3[3]+""+s3[4]+""+s3[5]+""+s3[6]+""+s3[7]+"."+s4[0]+""+s4[1]+""+s4[2]+""+s4[3]+""+s4[4]+""+s4[5]+""+s4[6]+""+s4[7]);
+
+//TURN IP ADDRESS INTO BINARY------------------------------------------------------
+
+    var num1=iparray[0];  //these 4 lines put the 4 octets of the address block into variables.
+	var num2=iparray[1];
+	var num3=iparray[2];
+	var num4=iparray[3];
+
+//convert ip address to binary
+	num1=-num1   //converts literal string into integer
+	num1=-num1
+	num2=-num2   //converts literal string into integer
+	num2=-num2
+	num3=-num3   //converts literal string into integer
+	num3=-num3
+	num4=-num4   //converts literal string into integer
+	num4=-num4
+	//converts IP address to binary
+	//start first octet of IP address
+	
+	//the following loops work the same way as the mask conversion loops above. See the first mask conversion loop for comments.
+	
+	var d1=new Array();
+	value=128;
+	control=0;
+	for(var count=0; count < 8; count++){
+	     if(control==0){
+		      if(num1-value>=0)
+		           d1[count]=1;
+		      else
+		           d1[count]=0;
+		      binary=d1[count];
+		 }
+	     else{
+		      if(d1[count-1]==1){
+			       num1=num1-value;
+			       if(num1-(value/2)>=0)
+				        d1[count]=1;
+				   else
+				        d1[count]=0;
+			  }
+			  else{
+	               if(num1-(value/2)>=0)
+		                d1[count]=1;
+		           else
+		                d1[count]=0;
+		      }
+		      binary+=""+d1[count]
+			  value=value/2;
+		 }
+		 control=1;
+	}
+	//end first octet of IP address
+	//start second octet of IP address
+    var d2=new Array();
+	value=128;
+	control=0;
+	for(var count=0; count < 8; count++){
+	     if(control==0){
+		      if(num2-value>=0)
+		           d2[count]=1;
+		      else
+		           d2[count]=0;
+		      binary=d2[count];
+		 }
+	     else{
+		      if(d2[count-1]==1){
+			       num2=num2-value;
+			       if(num2-(value/2)>=0)
+				        d2[count]=1;
+				   else
+				        d2[count]=0;
+			  }
+			  else{
+	               if(num2-(value/2)>=0)
+		                d2[count]=1;
+		           else
+		                d2[count]=0;
+		      }
+		      binary+=""+d2[count]
+			  value=value/2;
+		 }
+		 control=1;
+	}
+	//end second octet of IP address
+	//start third octet of IP address		
+	var d3=new Array();
+	value=128;
+	control=0;
+	for(var count=0; count < 8; count++){
+	     if(control==0){
+		      if(num3-value>=0)
+		           d3[count]=1;
+		      else
+		           d3[count]=0;
+		      binary=d3[count];
+		 }
+	     else{
+		      if(d3[count-1]==1){
+			       num3=num3-value;
+			       if(num3-(value/2)>=0)
+				        d3[count]=1;
+				   else
+				        d3[count]=0;
+			  }
+			  else{
+	               if(num3-(value/2)>=0)
+		                d3[count]=1;
+		           else
+		                d3[count]=0;
+		      }
+		      binary+=""+d3[count]
+			  value=value/2;
+		 }
+		 control=1;
+	}
+	//end third octet of IP address
+	//start fourth octet of IP address
+	var d4=new Array();
+	value=128;
+	control=0;
+	for(var count=0; count < 8; count++){
+	     if(control==0){
+		      if(num4-value>=0)
+		           d4[count]=1;
+		      else
+		           d4[count]=0;
+		      binary=d4[count];
+		 }
+	     else{
+		      if(d4[count-1]==1){
+			       num4=num4-value;
+			       if(num4-(value/2)>=0)
+				        d4[count]=1;
+				   else
+				        d4[count]=0;
+			  }
+			  else{
+	               if(num4-(value/2)>=0)
+		                d4[count]=1;
+		           else
+		                d4[count]=0;
+		      }
+		      binary+=""+d4[count]
+			  value=value/2;
+		 }
+		 control=1;
+	}
+	//end fourth octet of IP address
+	
+	//uncomment the next line to test if the address block is correctly being converted to binary.
+	//alert("IP Binary Equivalent: "+d1[0]+""+d1[1]+""+d1[2]+""+d1[3]+""+d1[4]+""+d1[5]+""+d1[6]+""+d1[7]+"."+d2[0]+""+d2[1]+""+d2[2]+""+d2[3]+""+d2[4]+""+d2[5]+""+d2[6]+""+d2[7]+"."+d3[0]+""+d3[1]+""+d3[2]+""+d3[3]+""+d3[4]+""+d3[5]+""+d3[6]+""+d3[7]+"."+d4[0]+""+d4[1]+""+d4[2]+""+d4[3]+""+d4[4]+""+d4[5]+""+d4[6]+""+d4[7]);
+
+//END->TURN IP ADDRESS INTO BINARY------------------------------------------------------
+
+
+//DETERMINE NETWORK ADDRESS------------------------------------------------------
+
+//find out the network address of the IP address
+		 //"n" stands for network
+		 var n1=new Array();  //these 4 lines create the arrays for the binary network address.
+		 var n2=new Array();
+		 var n3=new Array();
+		 var n4=new Array();
+
+          //the next four loops perform the logical ANDing process on the binary mask and IP address to determine the true network address.
+
+         //figure the first octet of the network address
+		 for(var count=0; count < 8; count++){
+		      if(d1[count]*s1[count]==1)  //ANDs the two corresponding digits of the mask and IP.
+			       n1[count]=1;  //if they are both 1's then the corresponding network address digit is a 1.
+			  else
+			       n1[count]=0;  //if they are both 0's or a 1 and a 0, then the corresponding network address digit is a 0.
+		 }
+		 //figure the second octet of the network address
+		 for(var count=0; count < 8; count++){
+		      if(d2[count]*s2[count]==1)
+			       n2[count]=1;
+			  else
+			       n2[count]=0;
+		 }
+		 //figure the third octet of the network address
+		 for(var count=0; count < 8; count++){
+		      if(d3[count]*s3[count]==1)
+			       n3[count]=1;
+			  else
+			       n3[count]=0;
+		 }
+		 //figure the fourth octet of the network address
+		 for(var count=0; count < 8; count++){
+		      if(d4[count]*s4[count]==1)
+			       n4[count]=1;
+			  else
+			       n4[count]=0;
+		 }
+		 //end fourth octet of network address
+		 
+		 //the next 4 lines convert the binary network address to decimal.
+		 var net1=((128*n1[0])+(64*n1[1])+(32*n1[2])+(16*n1[3])+(8*n1[4])+(4*n1[5])+(2*n1[6])+(1*n1[7]));
+		 var net2=((128*n2[0])+(64*n2[1])+(32*n2[2])+(16*n2[3])+(8*n2[4])+(4*n2[5])+(2*n2[6])+(1*n2[7]));
+		 var net3=((128*n3[0])+(64*n3[1])+(32*n3[2])+(16*n3[3])+(8*n3[4])+(4*n3[5])+(2*n3[6])+(1*n3[7]));
+		 var net4=((128*n4[0])+(64*n4[1])+(32*n4[2])+(16*n4[3])+(8*n4[4])+(4*n4[5])+(2*n4[6])+(1*n4[7]));
+		 
+		 //uncomment the next line to test if the network address was correctly determined and changed to decimal.
+		 //alert("Network Address: "+net1+"."+net2+"."+net3+"."+net4);
+
+//DETERMINE NETWORK ADDRESS------------------------------------------------------
+
+
+
+var num1=iparray[0];  //these 4 lines reassign the four octets of the address block to variables since these variables were changed during the binary conversion process.
+var num2=iparray[1];
+var num3=iparray[2];
+var num4=iparray[3];
+	num1=-num1   //converts literal string into integer
+	num1=-num1
+	num2=-num2   //converts literal string into integer
+	num2=-num2
+	num3=-num3   //converts literal string into integer
+	num3=-num3
+	num4=-num4   //converts literal string into integer
+	num4=-num4
+
+
+
+
+//now finally starts the calculation of the VLSM addresses. The logic to perform this calculation is actually simpler than you may think. Many books and tutorials make VLSM complicated, but as you can see by this code, it is fairly simple to calculate for a new network design or a complete network address redesign. Working it into existing addressing is a little tougher, but it can be done.
+
+var addNets=0;  //this creates a variable that will add up the total number of hosts needed by all of the entered networks to test to see if the entered Address Block is large enough to handle it.
+for(var count2=2; count2 < querynum; count2++){  //this for loop will extract the hosts needed by each network out of the query string and then add them up. A loop is needed here, because the amount of networks entered is variable.
+    var tempArray2=queryArray[count2].split("=");  //splits the number off of the label=value pair of each network. For example, it changes "network3=84" to an array containg 2 values, "network3" & "84" (the equals sign is removed), which gets it ready to be added to the other networks.
+	tempArray2[1]=-tempArray2[1];  //these 2 lines make sure that the number is treated like a number and not a text string.
+	tempArray2[1]=-tempArray2[1];
+	addNets=addNets+tempArray2[1];   //this adds the current extracted number to the previous extracted numbers and saves it in the addNets variable.
+	 }
+var cidrNum=cidrmask;  //creates a variable with the same value as the CIDR mask.
+cidrNum=32-cidrNum;  //subtracts the decimal mask # from 32 to find out how many bits are in the host portion of the Address Block.
+cidrNum=Math.pow(2,cidrNum);  //takes the 2 to the power of the result of the above calculation to find out the absolute maximum number of host addresses the Address Block can support.
+cidrNum=cidrNum-2;
+
+var stopexec=0;  //creates a variable that will tell select future statements not to execute.
+if(addNets>=cidrNum){  //if the required # of hosts is larger than the maximum hosts available, it displays an error message and sends them back to the index.htm page.
+    alert("Your Address Block is not large enough to handle this many host addresses.\n\nYour network requires "+addNets+" addresses, but your Address Block only has "+cidrNum+" usable addresses");
+	stopexec=1;
+	location.href="index.htm";
+}
+
+var gosamenetadd=cidradd;
+var gosamenetmask=cidrmask;
+
+var percentUsed=eval(addNets/cidrNum);
+percentUsed=percentUsed*100;
+percentUsed=Math.round(percentUsed);
+
+//the next line prints the address block/mask that was entered on the previous page and prints other info.
+document.write("<font color='red' face='Verdana, Helvetica, sans-serif' size='3'><b>Address Block Used: </b></font><font color='green' face='Verdana, Helvetica, sans-serif' size='3'><b>"+cidradd+"/"+cidrmask+"</b></font>");
+document.write("<br>");
+document.write("<font color='red' face='Verdana, Helvetica, sans-serif' size='1'>Number of IP addresses needed: </font><font color='green' face='Verdana, Helvetica, sans-serif' size='1'><b>"+addNets+"</b></font>");
+document.write("<br>");
+document.write("<font color='red' face='Verdana, Helvetica, sans-serif' size='1'>Available IP addresses in block: </font><font color='green' face='Verdana, Helvetica, sans-serif' size='1'><b>"+cidrNum+"</b></font>");
+document.write("<br>");
+document.write("<font color='red' face='Verdana, Helvetica, sans-serif' size='1'>IP addresses left in block: </font><font color='green' face='Verdana, Helvetica, sans-serif' size='1'><b>"+eval(cidrNum-addNets)+"</b></font>");
+document.write("<br>");
+document.write("<font color='red' face='Verdana, Helvetica, sans-serif' size='1'>You are using about </font><font color='green' face='Verdana, Helvetica, sans-serif' size='1'><b>"+percentUsed+"%</b></font><font color='red' face='Verdana, Helvetica, sans-serif' size='1'> of your available addresses.</font>");
+document.write("<br><br>");  //creates 2 line breaks
+
+//the next line starts the creation of the results table.
+document.write("<table style='border-collapse=collapse;border:1px solid #33CCFF' width='100%' cellpadding='2' cellspacing='0'><tr>" + 
+			"<td align='center' style='border-collapse=collapse;border:1px solid #33CCFF;color:#000066'><b>Hosts</b></td>" + 
+			"<td align='center' style='border-collapse=collapse;border:1px solid #33CCFF;color:#000066'><b>Allocated</b></td>" + 
+			"<td align='center' style='border-collapse=collapse;border:1px solid #33CCFF;color:#000066'><b>Network Address</b></td>" + 
+			"<td align='center' style='border-collapse=collapse;border:1px solid #33CCFF;color:#000066'><b>Mask</b></td>" + 
+			"<td align='center' style='border-collapse=collapse;border:1px solid #33CCFF;color:#000066'><b>Network Mask</b></td>" + 
+			"<td align='center' style='border-collapse=collapse;border:1px solid #33CCFF;color:#000066'><b>Range</b></td>" + 
+			"<td align='center' style='border-collapse=collapse;border:1px solid #33CCFF;color:#000066'><b>Broadcast</b></td></tr>");
+
+if(stopexec!=1){  //stops the execution if your networking topology requires too many addresses for your entered block.
+
+//next is the loop that actually calculates the addresses and creates the table rows.
+for(var count=2; count < querynum; count++){
+     
+	 //the next 3 if statements make sure that the Address Block is large enough for the required networks, but in a different way than above. It in effect makes sure that after you take all the addresses wasted with network and broadcast addresses and after the left over addresses not used in some of the networks, that there are still enough addresses left to accomodate all of the networks.
+	 //even if there are enough addresses before you begin doesn't mean that there will be enough addresses after some are wasted in the addressing process. The next three statements effectively test for that. Note that this check takes place on each iteration of the loop, not just the first time. In this way, it continually monitors the addresses to make sure that they haven't used up more than the available addresses.
+	 var compare1,compare2,compare3;
+		  compare1=net4+(Math.pow(2,(32-cidrmask))-1);
+		  compare2=net3+(Math.pow(2,(24-cidrmask))-1);
+		  compare3=net2+(Math.pow(2,(16-cidrmask))-1);
+	 var stopcheck=0;  //performs a similar function as the stopexec variable.
+	 if(stopcheck==0){
+	 if(cidrmask>24){
+	      if(num4>compare1){
+		      stopcheck=1;
+			  alert("Your Address Block is not large enough to handle this many host addresses.");
+			  location.href="index.htm";
+			  break;
+		  }
+	 }
+	 } //end stopcheck if statement.
+	 
+	 if(stopcheck==0){
+	 if(cidrmask>16&&cidrmask<25){
+	      if(num3>compare2){
+		      stopcheck=1;
+			  alert("Your Address Block is not large enough to handle this many host addresses.");
+			  location.href="index.htm";
+			  break;
+		  }
+	 }
+	 } //end stopcheck if statement.
+	 	 
+	 if(stopcheck==0){
+	 if(cidrmask>8&&cidrmask<17){
+	      if(num2>compare3){
+		      stopcheck=1;
+			  alert("Your Address Block is not large enough to handle this many host addresses.");
+			  location.href="index.htm";
+			  break;
+		  }
+	 }
+	 } //end stopcheck if statement.
+	 var addnum,n,mask,netadd;  //creates needed variables.
+	 var tempArray=queryArray[count].split("=");  //splits the "networkx=value" statements from the query string to just get the number of hosts needed and removes the "networkx=" portion
+	 n=tempArray[1];  //assigns the above extracted value to the n variable.
+	 
+	 //the next for loop figures out what the mask should be based on the number of addresses needed and figures out what the next address to use should be.
+	 var maskVar=30;  //sets a variable to be used as the mask value.
+	 for(var count3=1; count3 < 28; count3++){
+	      if(n>Math.pow(2,count3)-2){  //checks to see if the current mask value is sufficient to meet the current network's requirements.
+		       mask=maskVar;  
+			   addnum=Math.pow(2,(count3+1));  //figures out how much to add to the address to get the next network address.
+		  }
+	      maskVar=maskVar-1;  //drops the mask value by one for the next time through the loop.
+	 }
+	 var masks = [20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30];
+	 var subnetMasks = ["225.255.240.0", "225.255.248.0", "225.255.252.0", "225.255.254.0", "225.255.255.0", "225.255.255.128", "225.255.255.192", "225.255.255.224", "225.255.255.240", "225.255.255.248", "225.255.255.252"];
+	 
+	 var subnetMask = "Not found";
+	 for (var i = 0; i < masks.length; i++) {
+		 if (mask == masks[i]) {
+			 subnetMask = subnetMasks[i];
+		 }
+	 }
+
+	 var sizes = [2, 6, 14, 30, 62, 126, 254, 510, 1022, 2046, 4094];
+
+	 var neededSize = 0;
+	 for (var i = 0; i < sizes.length; i++) {
+		 if (n >= sizes[i]) {
+			 neededSize = sizes[i];
+			 if (neededSize != 2) {
+				neededSize = sizes[i + 1];
+			 }
+		 }
+	 }
+
+document.write("<tr><td align='center' style='border-collapse=collapse;border:1px solid #33CCFF;color:green'>"+n+"</td>" + 
+			"<td align='center' style='border-collapse=collapse;border:1px solid #33CCFF;color:blue'>"+neededSize+"</td>" +
+			"<td align='center' style='border-collapse=collapse;border:1px solid #33CCFF;color:blue'>"+cidradd+"</td>" + 
+			"<td align='center' style='border-collapse=collapse;border:1px solid #33CCFF;color:blue'>"+mask+"</td>" + 
+			"<td align='center' style='border-collapse=collapse;border:1px solid #33CCFF;color:blue'>" + subnetMask + "</td>" + 
+			"<td align='center' style='border-collapse=collapse;border:1px solid #33CCFF;color:blue'>" + cidradd.split(".")[0]+ "." + cidradd.split(".")[1]+ "." + cidradd.split(".")[2]+ "." + (parseInt(cidradd.split(".")[3]) + 1) + " - " + cidradd.split(".")[0]+ "." + cidradd.split(".")[1]+ "." + cidradd.split(".")[2]+ "." + (parseInt(cidradd.split(".")[3]) + neededSize) + "</td>" + 
+			"<td align='center' style='border-collapse=collapse;border:1px solid #33CCFF;color:blue'>" + cidradd.split(".")[0]+ "." + cidradd.split(".")[1]+ "." + cidradd.split(".")[2]+ "." + (parseInt(cidradd.split(".")[3]) + neededSize + 1) + "</td>" + 
+			"</tr>");  //this line writes the row to the table with the correct values.
+     num4=num4+addnum;  //adds the value of the addnum variable to the fourth (decimal) octet of the IP address.
+
+//these next 3 while loops will "carry the 1" so to speak if an octet grows larger than 255.
+	 while(num4>255){
+	 num3=num3+1;
+	 num4=num4-256;
+	 }
+	 while(num3>255){
+	 num2=num2+1;
+	 num3=num3-256;
+	 }
+	 while(num2>255){
+	 num1=num1+1;
+	 num2=num2-256;
+	 }
+	 
+	 //this next if statment just provides protection against the first octet of the IP address going over 255. This situation is very unlikely to ever happen, but I put the statement in just in case.
+	 if(num1>255){
+	      alert("Fatal Error: IP address is too large.\n\nIt may be because your Address Block is too small to handle the number of addresses required.");
+		  history.back();
+	 }
+	 cidradd=num1+"."+num2+"."+num3+"."+num4;  //puts the IP address into the cidradd variable.
+}  //end of the calculation loop
+}  //end of the stopexec if statement.
+}
+document.write("</table>");  //writes the closing table tag
+//}
+//end of the if statement.
+var goSameNet="index.htm?net="+gosamenetadd+"/"+gosamenetmask;
+</script>
+<p><font size="2" face="Verdana, Arial, Helvetica, sans-serif"> <a href="javascript:location.href=goSameNet">New Calculation with the Same Address Block/Mask</a><strong> :: </strong><a href="index.htm">Start New Blank Calculation</a></font></p>
+<p>
+<!--Donate Button-->
+  <form action="https://www.paypal.com/cgi-bin/webscr" method="post">
+<font color="#009900" size="4"><strong>Joachim heeft dit aangepast! Gebruiken op eigen risico!!</strong></font><br>
+<input type="hidden" name="cmd" value="_xclick">
+<input type="hidden" name="business" value="lchanady@gmail.com">
+<input type="hidden" name="item_name" value="Quick-VLSM Developer Donation">
+<input type="hidden" name="no_note" value="1">
+<input type="hidden" name="currency_code" value="USD">
+<input type="hidden" name="tax" value="0">
+<input type="hidden" name="bn" value="PP-DonationsBF">
+<input type="image" src="https://www.paypal.com/en_US/i/btn/x-click-but04.gif" border="0" name="submit" alt="Make payments with PayPal - it's fast, free and secure!">
+<img alt="" border="0" src="https://www.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1">
+</form>
+  <!--End Donate Button-->
+</p>
+<font size="1" face="Verdana, Arial, Helvetica, sans-serif">Quick-VLSM Calculator Version 1.5<br>
+  Created By Louis Chanady, 2006<br>
+  <a href="mailto:lchanady@gmail.com">lchanady@gmail.com</a></font>
+</center>
+</body>
+</html>

@@ -1,0 +1,340 @@
+var gdpr_apps_config ='{"CONSENT_DURATION_MONTHS":"24","CONSENT_DURATION_DAYS":"0","BACKGROUND_COLOR":"#0b5da5","BUTTON_COLOR":"#2675b8","GDPR_TITLE":"Website Cookies Consent","GDPR_CONTENT":"We & our partners will collect data and use cookies for analyse traffic, ad personalisation &amp; measurement.", "PRIVACY_URL":"https://ncalculators.com/privacy-policy.html","PRIVACY_TEXT":"Learn how ncalculators.com & our partner services collect and use data.","ACCEPT":"ACCEPT","WITHDRAW":"WITHDRAW","ANALYTICS_TITLE":"Google Analytics Cookies","ANALYTICS_TEXT":"We use third party service Google Analytics to measure the users to improve our service. Turn ON or Turn OFF Google Analytics cookies.","ADSENSE_TITLE":"Google Adsense Cookies","ADSENSE_TEXT":"We use third party service Google Adsense to serve personalised or non-personalised ads. Turn ON for personalised ads or Turn OFF for non-personalised ads.","NECESSARY_COOKIES":[{"TITLE":"Necessary Cookies","TEXT":"Necessary cookies are the cookies which are directly served from ncalculators.com to upkeep the proper function of this website."}]}';
+
+function gdpr_apps_getTime(d){
+  var months = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+  var seconds = d.getSeconds(), minutes = d.getMinutes(), hours = d.getHours(), date = d.getDate();
+  if(seconds<=9){seconds = '0'+seconds;}if(date<=9){date = '0'+date;}
+  if(minutes<=9){minutes = '0'+minutes;}if(hours<=9){hours = '0'+hours;}
+  var txt = date+" "+months[d.getMonth()]+" "+d.getFullYear();
+  return txt;
+}
+function gdpr_apps_updateConsentDate(){
+  var cTime = gdpr_apps_getTime(new Date());
+  gdpr_apps_removeCookie('consent-date');
+  gdpr_apps_setCookie('consent-date',cTime);
+}
+function gdpr_apps_setCookie(key, value){
+  if(gdpr_apps_getCookie(key) != value){
+    var days = parseInt(jsonObj.CONSENT_DURATION_DAYS);
+    var months = parseInt(jsonObj.CONSENT_DURATION_MONTHS);
+    var d = new Date();
+    d.setMonth(d.getMonth()+months);
+    d.setDate(d.getDate()+days);
+    var expires = "expires="+ d.toUTCString();
+    document.cookie =  key+"="+value+";" + expires + "; Domain="+stringConv(gdpr_apps_1)+"; path=/";
+  }
+}
+function gdpr_apps_getCookie(cname, defaultVal = '') {
+  var name = cname + "=";
+  var decodedCookie = decodeURIComponent(document.cookie);
+  var ca = decodedCookie.split(';');
+  for(var i = 0; i <ca.length; i++) {
+      var c = ca[i];
+      while (c.charAt(0) == ' ') {
+          c = c.substring(1);
+      }
+      if (c.indexOf(name) == 0) {
+          return c.substring(name.length, c.length);
+      }
+  }
+  return defaultVal;
+}
+function gdpr_apps_removeCookie(key){
+  document.cookie =  key+"=; path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;";
+  document.cookie = key + "=; expires=Thu, 01-Jan-1970 00:00:01 GMT; path=/; domain=."+stringConv(gdpr_apps_1)+";";
+}
+function gdpr_apps_deleteAnalyticsCookies(){
+  var cont = stringConv(gdpr_apps_1);
+  var analyticsCookies = ['_ga','_gat_gtag_'+stringConv(gdpr_apps_2).replace(/-/g, '_'),'_gid', '_gat','__utma','__utmt','__utmb','__utmc','__utmz','__utmv','__utmx','__utmxx','_gaexp','__unam'];
+  for(var i=0; i<analyticsCookies.length;i++){
+    gdpr_apps_removeCookie(analyticsCookies[i]);
+  }
+  gdpr_apps_removeCookie('analytics-status');
+}
+function gdpr_apps_enableAnalytics(){
+  var cont = stringConv(gdpr_apps_2);
+  scri = document.createElement('script'),
+  scriptList = document.getElementsByTagName('script')[0];
+  scri.async = 1;
+  scri.src = 'https://www.googletagmanager.com/gtag/js?id='+cont;
+  scriptList.parentNode.insertBefore(scri, scriptList);
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', cont, { 'anonymize_ip': true });
+  gdpr_apps_setCookie('analytics-status',1);
+  gdpr_apps_updateConsentDate();
+}
+function gdpr_apps_setPersonalizedAd(val){
+  try{
+    (adsbygoogle=window.adsbygoogle||[]).requestNonPersonalizedAds = val;
+  }catch(e){
+    try{googletag.pubads().setRequestNonPersonalizedAds(val);}catch(e){}
+  }
+}
+function gdpr_apps_adSettings(val){
+  if(val){
+    gdpr_apps_updateConsentDate();
+    gdpr_apps_setCookie('adnetwork-status',1);
+    gdpr_apps_setPersonalizedAd(0);
+  }else{//Non-Personalized Ads
+    gdpr_apps_removeCookie('adnetwork-status');
+    gdpr_apps_setPersonalizedAd(1);
+  }
+}
+function arrayContainStr(arr, str){
+  var isExist = false;
+  for(var i=0; i< arr.length; i++){
+    if(arr[i] == str){
+      isExist = true;break;
+    }
+  }
+  return isExist;
+}
+var gdpr_apps_1 = '8dG9ycy5jb21uY2FsY3VsYQ==';
+var gdpr_apps_2 = '7MjYzOS0xVUEtODc2MQ==';
+var gdpr_apps_services = ['analytics','adsense'];
+var jsonObj = JSON.parse(gdpr_apps_config);
+var div1 = document.createElement('div');
+div1.innerHTML ="<div id='gdpr-consent-bottom' class='ncalc-consent-bottom' style='background-color:"+jsonObj.BACKGROUND_COLOR+";'><div class='ncalc-consent-bottom-content'><p>"+jsonObj.GDPR_CONTENT+"<br /><a href='"+jsonObj.PRIVACY_URL+"'>"+jsonObj.PRIVACY_TEXT+"</a></p></div><div class='ncalc-consent-bottom-action'><button id='ncalc-consent-accept'>Accept</button>&nbsp;<button id='ncalc-consent-open'>Open Cookie Consent</button></div></div></div><div id=\"cookie-notification\"><span class=\"ncalc-settings-icon\"></span><div class=\"cookie-notification-btn\"></div><span class=\"cookie-notification-span\"></span><span class=\"cookie-text\">COOKIES</span></div>";
+document.body.appendChild(div1);
+var div2 = document.createElement('div');
+var necessaryCookieText = '';
+for(var i=0; i<jsonObj.NECESSARY_COOKIES.length;i++){
+  necessaryCookieText+='<span class="cookie-title">'+jsonObj.NECESSARY_COOKIES[i]['TITLE']+'</span><br /><br /><p>'+jsonObj.NECESSARY_COOKIES[i]['TEXT']+'</p><br />';
+}
+div2.innerHTML = '<div class="cookie-dialog" id="cookie-dialog"><div class="pull-right" id="close-cookie">×</div><span id="gdpr_apps_cookie-title" class="cookie-title"></span><br /><br /><span id="gdpr_apps_title_content"></span><span id="cookie-accept-button"></span><p id="cookie-accept-text"></p><br /><div id="gdpr_apps_analytics"><span  class="cookie-title">'+jsonObj.ANALYTICS_TITLE+'</span><div class="pull-right"><div class="onoffswitch"><input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="gdpr_apps_analytics-onoff"><label class="onoffswitch-label" for="gdpr_apps_analytics-onoff"><span class="onoffswitch-inner"></span><span class="onoffswitch-switch"></span></label></div></div><br /><br /><p id="analytics-content">'+jsonObj.ANALYTICS_TEXT+'</p><br /></div><div id="gdpr_apps_adsense"><span class="cookie-title">'+jsonObj.ADSENSE_TITLE
++'</span><div class="pull-right"><div class="onoffswitch"><input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="gdpr_apps_adnetwork-onoff"><label class="onoffswitch-label" for="gdpr_apps_adnetwork-onoff"><span class="onoffswitch-inner"></span><span class="onoffswitch-switch"></span></label></div></div><br /><br /><p id="adsense-content">'+jsonObj.ADSENSE_TEXT+'</p><br /></div>'+necessaryCookieText+'<div id="delete-cookie-area"><span id="delete-all-button">Remove All Cookies</span><br />'+stringConv(gdpr_apps_1)+'<br /><br /></div></div>';
+document.body.appendChild(div2);
+var analyticsCheckBox = document.getElementById('gdpr_apps_analytics-onoff');
+var adsenseCheckBox = document.getElementById('gdpr_apps_adnetwork-onoff');
+var closeCookie = document.getElementById('close-cookie');
+var cookieNotificationIcon = document.getElementById('cookie-notification');
+var cookieAcceptButton = document.getElementById('cookie-accept-button');
+var cookieAcceptText = document.getElementById('cookie-accept-text');
+var titleObj = document.getElementById('gdpr_apps_cookie-title');
+var consentActionAccept = document.getElementById('ncalc-consent-accept');
+var consentActionOpen = document.getElementById('ncalc-consent-open');
+gdpr_apps_preload();
+gdpr_apps_init();
+function gdpr_apps_preload(){
+  document.getElementsByClassName("cookie-dialog")[0].style.backgroundColor=jsonObj.BACKGROUND_COLOR;
+  document.getElementsByClassName("cookie-notification-btn")[0].style.borderLeftColor=jsonObj.BUTTON_COLOR;
+  document.getElementsByClassName("cookie-notification-btn")[0].style.borderTopColor=jsonObj.BUTTON_COLOR;
+  document.getElementById('gdpr_apps_title_content').innerHTML='<p>'+jsonObj.GDPR_CONTENT+'<a href="'+jsonObj.PRIVACY_URL+'" target="_BLANK">'+jsonObj.PRIVACY_TEXT+'</a></p><br />';
+  titleObj.innerHTML = jsonObj.GDPR_TITLE;
+  if(arrayContainStr(gdpr_apps_services,'analytics')){
+    document.getElementById("analytics-content").innerHTML = jsonObj.ANALYTICS_TEXT;
+  }else{
+    document.getElementById("gdpr_apps_analytics").style.display='none';
+  }
+  if(arrayContainStr(gdpr_apps_services,'adsense')){
+    document.getElementById("adsense-content").innerHTML = jsonObj.ADSENSE_TEXT;
+    document.getElementById("gdpr_apps_adsense").style.display='block';
+  }else{
+    document.getElementById("gdpr_apps_adsense").style.display='none';
+  }
+  var consentDate = gdpr_apps_getCookie('consent-status');
+  if(consentDate == '1'){
+    document.getElementById("gdpr-consent-bottom").style.display='none';
+  }
+  if(gdpr_apps_getCookie('DO_CONSENT') != 'Y'){
+    gdpr_apps_adSettings(true);
+    gdpr_apps_enableAnalytics();
+    consentActionAccept.innerHTML="OK";
+    consentActionOpen.style.display="none";
+    cookieNotificationIcon.style.display="none";
+  }else{
+    if(gdpr_apps_getCookie('analytics-status') == 1){
+      gdpr_apps_enableAnalytics();
+    }
+    if(gdpr_apps_getCookie('adnetwork-status') == 1){
+      gdpr_apps_adSettings(true);
+    }else{
+      gdpr_apps_adSettings(false);
+    }
+  }
+}
+function gdpr_apps_init(){
+  var initFlag = true;
+  var serviceFlag = [];
+  if(arrayContainStr(gdpr_apps_services,'analytics') && gdpr_apps_getCookie('analytics-status') == 1){
+      document.getElementById('gdpr_apps_analytics-onoff').checked = true;
+      initFlag = false;
+      serviceFlag['analytics'] = true;
+  }
+  if(arrayContainStr(gdpr_apps_services,'adsense') && gdpr_apps_getCookie('adnetwork-status') == 1){
+    adsenseCheckBox.checked = true;
+    serviceFlag['adsense'] = true;
+    initFlag = false;
+  }
+  if(initFlag){
+    gdpr_apps_removeCookie('consent-date');
+    gdpr_apps_removeCookie('consent-status');
+  }
+  var consentDate = gdpr_apps_getCookie('consent-date');
+  if(consentDate != ''){
+    cookieAcceptButton.innerHTML = jsonObj.WITHDRAW;
+    cookieAcceptText.innerHTML = 'You accepted cookies consent on <span style="color:#fff">'+consentDate+'</span>';
+    if(serviceFlag['adsense'] && !serviceFlag['analytics']){
+      cookieAcceptText.innerHTML = 'You accepted Google Adsense cookies on <span style="color:#fff">'+consentDate+'</span>';
+    }
+    if(serviceFlag['analytics'] && !serviceFlag['adsense']){
+      cookieAcceptText.innerHTML = 'You accepted Google Analytics cookies on <span style="color:#fff">'+consentDate+'</span>';
+    }
+  }else{
+    cookieAcceptButton.innerHTML = jsonObj.ACCEPT;
+    cookieAcceptText.innerHTML = 'You can withdraw this cookies consent at anytime';
+  }
+}
+if(arrayContainStr(gdpr_apps_services,'analytics')){
+  analyticsCheckBox.addEventListener('change', (event) => {
+    if (event.target.checked) {
+      gdpr_apps_enableAnalytics();
+      gdpr_apps_setCookie('consent-status', '1');
+    }else{
+      gdpr_apps_deleteAnalyticsCookies();
+    }
+  });
+}
+if(arrayContainStr(gdpr_apps_services,'adsense')){
+  adsenseCheckBox.addEventListener('change', (event) => {
+    try{
+      gdpr_apps_adSettings(event.target.checked);
+    }catch(exception){}
+    gdpr_apps_setCookie('consent-status', '1');
+  });
+}
+closeCookie.addEventListener('click', (event) => {
+  openConsent();
+});
+cookieNotificationIcon.addEventListener('click', (event) => {
+  openConsent();
+});
+consentActionOpen.addEventListener('click', (event) => {
+  openConsent();
+});
+cookieAcceptButton.addEventListener('click', (event) => {
+  acceptConsent();
+});
+document.getElementById("delete-cookie-area").addEventListener('click', (event) => {
+  deleteAllCookies();
+});
+consentActionAccept.addEventListener('click', (event) => {
+  if(cookieAcceptButton.innerHTML == jsonObj.ACCEPT){
+    analyticsCheckBox.checked = true;
+    adsenseCheckBox.checked = true;
+    gdpr_apps_enableAnalytics();
+    document.getElementById("gdpr-consent-bottom").style.display='none';
+    try{
+      gdpr_apps_adSettings(true);
+    }catch(e){}
+    gdpr_apps_setCookie('consent-status', '1');
+  }else if(consentActionAccept.innerHTML == 'OK'){
+    gdpr_apps_setCookie('consent-status', '1');
+    document.getElementById("gdpr-consent-bottom").style.display='none';
+  }else{
+    analyticsCheckBox.checked = false;
+    adsenseCheckBox.checked = false;
+    gdpr_apps_deleteAnalyticsCookies();
+    try{
+      gdpr_apps_adSettings(false);
+    }catch(e){}
+  }
+});
+
+function openConsent(){
+    document.getElementById("gdpr-consent-bottom").style.display='none';
+    gdpr_apps_init();
+    var ele = document.getElementById('cookie-dialog');
+    if(ele.style.display == 'block'){
+      ele.className = "cookie-dialog cookiehide";
+      setTimeout(hideCookieConsent, 1000);
+      cookieNotificationIcon.style.display="block";
+    }else{
+      ele.className = "cookie-dialog cookieshow";
+      ele.style.display='block';
+      cookieNotificationIcon.style.display="none";
+    }
+}
+function hideCookieConsent(){
+  document.getElementById('cookie-dialog').style.display='none';
+}
+function acceptConsent(){
+  if(cookieAcceptButton.innerHTML == jsonObj.ACCEPT){
+    analyticsCheckBox.checked = true;
+    adsenseCheckBox.checked = true;
+    gdpr_apps_enableAnalytics();
+    document.getElementById("gdpr-consent-bottom").style.display='none';
+    try{
+      gdpr_apps_adSettings(true);
+    }catch(e){}
+  }else{
+    analyticsCheckBox.checked = false;
+    adsenseCheckBox.checked = false;
+    gdpr_apps_deleteAnalyticsCookies();
+    try{
+      gdpr_apps_adSettings(false);
+    }catch(e){}
+    gdpr_apps_removeCookie('consent-status');
+  }
+  gdpr_apps_init();
+  openConsent();
+}
+function deleteAllCookies(){
+  var cookiesList = document.cookie.split(";");
+  for (var i=0; i<cookiesList.length; i++){
+    var cookieSplit = cookiesList[i].split("=");
+    gdpr_apps_removeCookie((cookieSplit[0]+'').trim());
+  }
+  analyticsCheckBox.checked = false;
+  adsenseCheckBox.checked = false;
+  gdpr_apps_init();
+  openConsent();
+}
+function stringConv(str){
+  var arr = str.split('');
+  shiftCnt = arr[0];
+  var resVal = '';
+  for(var i=1; i<arr.length; i++){
+    resVal+=arr[i];
+  }
+  var key={_keyStr:"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=",format:function(e){var t="";var n,r,i;var s,o,u,a;var f=0;e=e.replace(/[^A-Za-z0-9+/=]/g,"");while(f<e.length){s=this._keyStr.indexOf(e.charAt(f++));o=this._keyStr.indexOf(e.charAt(f++));u=this._keyStr.indexOf(e.charAt(f++));a=this._keyStr.indexOf(e.charAt(f++));n=s<<2|o>>4;r=(o&15)<<4|u>>2;i=(u&3)<<6|a;t=t+String.fromCharCode(n);if(u!=64){t=t+String.fromCharCode(r)}if(a!=64){t=t+String.fromCharCode(i)}}t=key._utf8_decode(t);return t},_utf8_encode:function(e){e=e.replace(/rn/g,"n");var t="";for(var n=0;n<e.length;n++){var r=e.charCodeAt(n);if(r<128){t+=String.fromCharCode(r)}else if(r>127&&r<2048){t+=String.fromCharCode(r>>6|192);t+=String.fromCharCode(r&63|128)}else{t+=String.fromCharCode(r>>12|224);t+=String.fromCharCode(r>>6&63|128);t+=String.fromCharCode(r&63|128)}}return t},_utf8_decode:function(e){var t="";var n=0;var r=c1=c2=0;while(n<e.length){r=e.charCodeAt(n);if(r<128){t+=String.fromCharCode(r);n++}else if(r>191&&r<224){c2=e.charCodeAt(n+1);t+=String.fromCharCode((r&31)<<6|c2&63);n+=2}else{c2=e.charCodeAt(n+1);c3=e.charCodeAt(n+2);t+=String.fromCharCode((r&15)<<12|(c2&63)<<6|c3&63);n+=3}}return t}}
+  var formated = key.format(resVal);
+  arr = formated.split('');
+  var shiftedVal = '';
+  if(shiftCnt > arr.length){
+    shiftCnt = arr.length%shiftCnt;
+  }
+  for(var i=(arr.length-shiftCnt);i<arr.length;i++){
+    shiftedVal+=arr[i];
+  }
+  for(var i=0;i<(arr.length-shiftCnt);i++){
+    shiftedVal+=arr[i];
+  }
+  return shiftedVal;
+}
+function fadein(element) {
+    var op = 1;
+    var timer = setInterval(function () {
+        if (op <= 0.1){
+            clearInterval(timer);
+            element.style.display = 'none';
+        }
+        element.style.opacity = op;
+        element.style.filter = 'alpha(opacity=' + op * 100 + ")";
+        op -= op * 0.1;
+    }, 50);
+}
+function fadeout(element) {
+    var op = 0.1;
+    element.style.display = 'block';
+    var timer = setInterval(function () {
+        if (op >= 1){
+            clearInterval(timer);
+        }
+        element.style.opacity = op;
+        element.style.filter = 'alpha(opacity=' + op * 100 + ")";
+        op += op * 0.1;
+    }, 10);
+}
