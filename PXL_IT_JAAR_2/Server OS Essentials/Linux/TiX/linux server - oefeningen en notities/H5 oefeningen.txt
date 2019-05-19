@@ -1,0 +1,76 @@
+1) nieuwe schijven toevoegen
+	100mb = .100
+	20gb = 20
+	
+2)lsblk
+	sdb = 20gb disk
+	sdc = 102mb disk
+	
+3)sudo fdisk /dev/sdb
+p -> partitie tabel opvragen
+n -> nieuwe partitie
+enter
+enter
+enter 
+w -> op te slaan
+sudo mkdir /mnt/smallHD
+sudo mkfs.ext4 /dev/sdb1
+sudo mount -t ext4 /dev/sdb1 /mnt/smallHD
+lsblk
+cd /mnt/smallHD
+sudo chown student /mnt/smallHD
+
+4)mkdir test1
+	touch file1.txt
+mkdir test2
+	touch file2.txt
+	
+5)cd
+touch backupSDB
+sudo dd if=/dev/sdb of=/home/student/backupSDB
+
+6)sudo badblocks -ws /dev/sdb
+
+7) df of df -a
+
+8)sudo dd if=/home/student/backupSDB of=/devf/sdb
+
+9)lsblk
+
+10)sudo mount -t ext4 /dev/sdb1 /mnt/smallHD
+lsblk
+ll
+- de files staan er bij mij niet meer op (ik weet niet of dit goed is)
+
+11)sudo nano /etc/fstab
+/dev/sdb1	/mnt/smallHD	ext4	defaults	0	0
+lsblk
+
+12)sudo reboot
+lsblk
+
+13)sudo fdisk /dev/sdc
+p ->primaire ->sdc1
+n
+enter
+enter
++10G
+w
+sudo fdisk /dev/sdc
+e -> logische ->sdc2
+enter
+enter
++5G
+p
+w
+sudo mkdir /var/www
+sudo mkdir /var/ftp
+sudo mkfs.ext4 /dev/sdc1
+sudo mkfs.ext4 /dev/sdc2
+sudo mount -t ext4 /dev/sdc1 /var/www
+sudo mount -t ext4 /dev/sdc2 /var/ftp 		-> lukt niet
+lsblk
+sudo nano /etc/fstab
+/dev/sdc1	/var/www	ext4	defaults	0	0
+/dev/sdc2	/var/ftp	ext4	defaults	0	0		-> lukt niet
+lsblk

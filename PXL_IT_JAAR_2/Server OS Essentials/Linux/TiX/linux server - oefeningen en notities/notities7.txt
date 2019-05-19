@@ -1,0 +1,6 @@
+tijdens instalatie een raid maken:
+RAID1 spiegeling
+2 disken aanduiden
+cp -r -p
+-r = die map en alles wat zich eronder bevindt
+-p = alle rechten behouden

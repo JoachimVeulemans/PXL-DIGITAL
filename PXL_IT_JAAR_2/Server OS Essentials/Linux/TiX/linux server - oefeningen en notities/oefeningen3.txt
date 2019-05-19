@@ -1,0 +1,60 @@
+1 + 2)
+ip adres desktop: 192.168.163.132
+ip adres server: 192.168.163.128
+ping -c 4 192.168.163.132
+ping -c 4 192.168.163.128
+
+3)
+
+
+4)
+sudo dhclient -r ens33 = ip releasen
+sudo dhclient ens33 = nieuwe ip-adres
+
+5)
+sudo ifdown ens33
+sudo ifup ens33
+
+apparaat inderdaad niet ping baar na down maar wel na up
+
+6)
+mac adres server: 00:0c:29:9c:1f:33
+mac adres desktop: 00:0c:29:92:2b:27
+mac adres router: 
+commando => ifconfig of 
+
+7)
+gateway ip: 192.168.163.2
+dns ip: 192.168.163.2
+dhcp ip: 192.168.163.254
+
+cat /var/lib/dhcp/dhclient.leases | grep lease -A15
+
+8)
+oude naam is ubuntu
+verander hostname:
+sudo hostnamectl set-hostname superroot
+
+9)
+commando: 
+nee wordt verandert na opstarten omdat deze tijdelijk is
+
+10)
+commando: 
+
+11)
+
+
+12)
+
+
+13)
+
+
+14)
+
+
+15)
+
+
+16)

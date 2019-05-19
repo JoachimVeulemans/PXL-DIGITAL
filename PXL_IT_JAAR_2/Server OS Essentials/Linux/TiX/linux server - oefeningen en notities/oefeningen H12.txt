@@ -1,0 +1,69 @@
+** Allemaal in desktop 1 gedaan **
+## Weten of linux is x64 of x32 ##
+# -> uname -m
+-----------------------------------
+1)
+cat /etc/apt/sources.list
+1st in browser alles instellen -> dan dit commando uitvoeren:
+curl https://repogen.simplylinux.ch/txt/xenial/sources_eenpaarnummers.txt | sudo tee /etc/apt/sources.list
+dit gaat de huidige apt overschrijven en kan zo dropbox en chrome installeren
+
+dropbox file opzoeken : tar.gz file
+installeren: sudo dpkg -i dropbox_2015.10.28.d64.deb -> dit installeert het pakket
+
+2)
+http://www.eclipse.org/downloads/ -> eclipse pakket voor linux downloaden
+java.com/download en java voor linux x64 downloaden en op zelfde manier uitpakken zoals hieronder, enkel
+nog de jre map in de map plaatsen van eclipse
+cd Downloads/
+ls -> kijken naar juiste pakket
+sudo tar -xzf pakketnaam.tar.gz -C /usr/local/bin/
+ls /usr/local/bin/
+eclipse starten = ./eclipse.inst
+
+(eclipse gaat zoeken in eigen map naar jre/bin/java
+hernoemen van map jre.serienummer naar gewoon jre -> mv /home/student/jre.serienummer /home/student/jre)
+
+of
+
+sudo vim /usr/share/applications/eclipse.desktop -> krijg je een desktop app
+
+***** via gui eclipse installeren *****
+
+3)
+sudo apt-get update
+********************************************
+sudo apt-get install gnome-session-fallback
+Indien dit niet werkt:
+sudo apt-get install gnome-session-flashback installeren want dit is hetzelfde
+********************************************
+uitloggen
+bij inloggen op ubuntu icon clicken (rechtsboven username)
+kies hier -> GNOME Flashback (Metacity)
+login
+-> je ziet terug de oude versie van ubuntu
+om terug te keren:
+	uitloggen en dan op ubuntu icon clicken en Ubuntu (Default) nemen => alles weer normaal
+4)
+** HIER HEB IK DE DESKTOP GESLOTEN EN IS KAPOT GEGAAN DUS VANAF HIER VERDER MET DESKTOP 2 **
+sudo add-apt-repository ppa:moorkai/cinnamon
+sudo apt-get update 
+sudo apt-get install cinnamon
+opnieuw opstarten en klik op ubuntu logo en kies cinnamon
+
+** Om te verwijderen **
+sudo ppa-purge ppa:moorkai/cinnamon
+
+5)
+sudo apt-get install update-manager-core
+sudo do-release-upgrade
+
+als dit niet gaat is
+of nieuwste versie
+of geblokeerd!
+	deblokkeren:
+		sudo nano /etc/update-manager/release-upgrades
+		verander prompt=lts naar prompt=normal
+** Dan moet dit werken! **
+**************************************
+https://db.tt/xQbyCeFL -> dropbox link

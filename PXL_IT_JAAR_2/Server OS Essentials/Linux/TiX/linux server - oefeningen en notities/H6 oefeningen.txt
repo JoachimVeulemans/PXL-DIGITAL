@@ -1,0 +1,96 @@
+sudo mount /dev/sr0 /media/cdrom -> mounten
+
+sudo umount /dev/sr0 -> unmounten
+
+iso-file maken -> met dd
+
+om te zien wat er op de cd zit:
+mkdir viewToIso
+sudo mount mijncd.iso viewtoiso/
+ls viewtoiso/
+
+reset = als pc hangt
+
+sudo bash -c  = forceren
+
+which mkisofs
+ll /usr/bin/mkisofs
+man genisoimage
+-----------------------------------------------------------------------------------
+1, 2, 3)
+op cd icoon clicken en dan settings en iso toevoegen van slitaz en connected aanvinken
+lsblk
+sudo mount /dev/sr0 /media/cdrom 
+lsblk
+cd /media/cdrom
+ll -> gelijk een ls -l
+
+4)
+touch Slitaz_Live.iso
+sudo dd if=/dev/sr0 of=/home/student/Slitaz_Live.iso
+ls -lh /Slitaz_Live.iso of cat /dev/sr0 > Slitaz_Live.iso -> gaat ook 
+
+5)ll /media/cdrom
+sudo umount /dev/sr0
+ll /media/cdrom -> nu is het leeg
+
+6)mkdir Slitaz_CD
+ll
+sudo mount Slitaz_Live.iso Slitaz_CD/
+ls Slitaz_CD -> geeft de inhoud van de cd weer
+
+7)1. mkisofs installeren
+cd /
+sudo touch homeIso.iso
+sudo mkisofs -o /homeIso.iso /home/student
+
+8)mkdir /tmp/isomounter
+sudo mount /homeIso.iso /tmp/isomounter
+lsblk
+
+9)sudo apt install iotop
+sudo iotop
+sudo iotop -u student -> u = user
+
+10)
+*voorlopig dit als antwoord (is niet juist)*
+sudo iotop > file.txt
+
+11)1st data kopiëren naar /tmp/var
+zodat de files toch gekopiëerd kunnen worden naar de andere disk
+daarna kan je het juiste pad opgeven
+
+lsof /var/log -> syslog stoppen zodat deze niet meer schrijft
+*cp -p = rechten behouden* -> copy maken en -p is rechten behouden
+-------------------------------------------------------------------
+voeg nieuwe schijf toe - 10GB
+- partitie van 5 GB met tool -> parted
+- log files in de toekomst op nieuwe filesysteem komen
+sudo fdisk /dev/sdd
+p
+n
+enter
+enter
+enter 
++5GB
+w
+
+sudo fdisk -l /dev/sdd1 -> laat info over de schijf zien
+sudo apt install tree -> tree view zien van de mappen structuren
+
+In deze map moeten de huidige en toekomstige logfiles komen
+(deze mappen zal ik mounten op de nieuwe sdd1 schijf)
+
+lsblk
+sudo mount -t ext4 /dev/sdd1 /var/log -> voorlopige oplossing, maar is niet de meest juiste oplossing
+lsblk
+
+12)
+sudo nano /etc/fstab
+/dev/sdd1	/var/log	ext4	defaults	0	0
+sudo reboot-> veranderingen activeren
+
+13)
+
+
+14)

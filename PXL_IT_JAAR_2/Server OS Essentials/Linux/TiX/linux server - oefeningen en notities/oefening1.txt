@@ -1,0 +1,121 @@
+1/
+/etc/group
+
+root: 0
+daemon: 1
+bin: 2
+mail: 8
+users: 100
+
+2/
+veld1: username
+veld2: x = geëncrypteerd wachtwoord in /etc/shadow
+veld3: user id
+veld4: primary group id
+veld5: description
+veld6: home directory
+veld7: login shell
+
+3/
+/etc/shadow
+
+4/ "testgroep" id=200
+sudo addgroup testgroep
+sudo groupmod testgroep -g 200
+sudo groupmod -n pcaktief testgroep
+sudo groupdel pcaktief
+
+5/
+sudo useradd -u 201 -g 100 -c "Testuser Jan" -d /home/jan -s /bin/bash jan
+sudo passwd jan
+	januari
+	
+6/
+1) uid=201(jan) gid=100(users) groups=100(users)
+2) login: jan	name: Testuser Jan
+   Directory: /home/jan   shell: /bin/bash
+   on since ...
+   no mail.
+   no plan.
+   
+7/
+1) permission denied
+2) sudo su root
+3) usermod -a -G root jan
+4) jan is toegevoegd aan root
+5) nee
+
+8/
+1) jan is uit de groep van root gehaald
+2) nee
+
+9/
+1)*alle commando's voor alles in orde te krijgen*
+sudo su -
+adduser --home /home/peter --shell /bin/bash peter
+passwd peter *zomer1* -> dit voor alle andere gebruikers 		doen met hun eigen passwd
+adduser --home /home/patrick --shell /bin/bash patrick
+groupadd ingenieur
+groupadd ontwerpen
+mkdir /home/shared
+ls -ld /home/shared
+chown root /home/shared
+usermod -a -G ingenieur peter
+usermod -a -G ingenieur patrick
+mkdir /home/shared/ontwerpen
+usermod -a -G ontwerpen peter
+usermod -a -G ontwerpen patrick
+adduser --home  /home/techniekers --shell /bin/bash wim
+adduser --home  /home/techniekers --shell /bin/bash ward
+groupadd techniek
+usermod -a -G techniek wim
+usermod -a -G techniek ward
+groupadd verkoop
+groupadd info
+adduser --home /home/bert --shell /bin/bash bert
+adduser --home /home/ilse --shell /bin/bash ilse
+mkdir /home/shared/info
+usermod -a -G verkoop bert
+usermod -a -G verkoop ilse
+usermod -a -G info bert
+usermod -a -G info ilse
+setfacl -m g:ontwerpen:7 ontwerpen/
+getfacl ontwerpen/ -> testen of alles in orde is
+setfacl -m g:info:7 info/
+setfacl -m g:ingenieur:7 info/
+getfacl info/ -> checken of beide groepen zijn toegevoegd 	en of ze allebei volledige toegang hebben
+#setfacl -x group:verkoop * -> in het geval er een group 	verwijderd dient te worden (als deze perongeluk 			aangemaakt was)
+ls -ld (van iedere map) -> checken of alles in orde is 
+
+*Met adduser wordt de home dir automatisch aangemaakt*
+
+10/
+
+
+11/
+
+12/
+
+13/
+
+14/
+
+15/
+
+16/
+1)cp /etc/hosts /home/student
+2)chmod u-x, u-w, u-r, g=wr, o=xr hosts
+3)je mag enkel het bestand bekijken als je root bent of met een sudo
+4)Hij mag nog altijd permissiesinstellen
+5) ja, hosts mag verwijdert worden
+
+17/
+
+18/
+
+19/
+sudo find -user student -perm -u+s
+ofwel
+sudo find -perm -u+s
+
+20/

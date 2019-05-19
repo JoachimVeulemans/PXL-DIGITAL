@@ -1,0 +1,16 @@
+Met Remmina
+-----------
+op Ubuntu-desktop2 	vino instellen en openssh-server installeren
+op Ubuntu-desktop1 	Remmina opstarten
+                                en VNC-connectie naar <ipvanUbuntuDesktop2>
+ 				en SSH-tab  	=> Enable SSH tunnel
+ 						=> Same server at port 22
+ 						=> User name: student
+ 						=> Password 
+
+Met SSH en Remmina
+------------------
+op Ubuntu-desktop2 	vino instellen en openssh-server installeren
+op Ubuntu-desktop1 	ssh -L 6666:localhost:5900 student@<ipvanUbuntudesktop2>  
+ 			  en inloggen
+ 			Remmina opstarten en VNC-connectie naar localhost:6666

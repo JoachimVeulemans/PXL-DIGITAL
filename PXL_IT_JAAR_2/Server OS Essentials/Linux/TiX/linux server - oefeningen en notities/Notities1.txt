@@ -1,0 +1,19 @@
+* Sticky bit: 
+voorkomen dat users files wissen waarvan ze geen user owner zijn
+ ->maak sticky bit: chmod +t mydir/   -> gaat ook: chmod 1700 mydir/ 
+ (1 toevoegen voor het getal om "extra" bit toe te voegen als sticky BIT)
+ 
+ +t = wel x (execute)
+ +T = geen x (execute)
+ 
+* setgid bit op een directory: 
+verzekeren dat alle files in deze directory dezelfde group owner hebben
+-> maak setgid bit: chmod 2775 mydir/    -> chmod +s mydir/
+(2 toevoegen voor het getal om "extra" bit toe te voegen als setgid BIT)
+
++s = wel x (execute)
++S = geen x (execute)
+
+* Als er een + staat achter de rwx permissions:
+dat de file met een acl (access control list) aparte rechten op staan voor user/groups
+*

@@ -1,0 +1,73 @@
+1)
+sudo apt install openssh-server -> op server installeren
+sudo apt install opeenssh-client -> op desktop installeren
+ssh student@192.168.118.128 -> server ip
+=> connectie via ssh
+
+2)
+ssh-keygen -t rsa -> staat nu in ~/.ssh => private = id_rsa en public = id_rsa.pub
+ssh-copy-id -i ~/.ssh/id_rsa.pub student@192.168.118.128
+(zit in /home/student/.ssh)
+*Kan nu inloggen zonder code*
+
+3)
+PasswordAuthentication no
+sudo service ssh reload
+4)
+op Ubuntu-desktop1 	vino instellen en openssh-server installeren
+op Ubuntu-desktop2 	Remmina opstarten
+                                en VNC-connectie naar <ipvanUbuntuDesktop1	>
+ 				en SSH-tab  	=> Enable SSH tunnel
+ 						=> Same server at port 22
+ 						=> User name: student
+ 						=> Password 
+
+5)
+sudo apt install openssh-server
+(1st sh connectie en dan vnc connectie)
+
+Vino op desktop zoeken -> allow en allow -> close
+Remmina opstarten -> new -> Server ip ingeven -> ssh -> enable ssh tunnel -> same server at port 22 ->
+zelfde username en public key (automatic)
+
+server -> start ssh connectie op pc -> ssh -L 6666:localhost:5900 student@serverip
+(5900 = poort van vino)
+
+Desktop -> Basic -> server => localhost:6666
+(kleuren eventueel aanpassen)
+
+**zie meer info op Tunnel VNC through SSH.txt**
+op Ubuntu-desktop1 	vino instellen en openssh-server installeren
+op Ubuntu-desktop2 	ssh -L 6666:localhost:5900 student@<ipvanUbuntudesktop1>  
+ 			  en inloggen
+ 			Remmina opstarten en VNC-connectie naar localhost:6666
+
+6)
+nee kan niet inloggen
+
+7)
+
+
+8)
+
+
+9)
+op Ubuntudesktop:
+Indien nodig => vino instellen en opensshserverinstalleren
+
+op Windowsmachine:
+In Putty Session => IPadres invullen en poort 22
+SSH/X11 		 => Enable X11 Forwarding
+SSH/Tunnels 	 => Source Port: 6666
+				    Destination: <ipvanserver>:5900
+In RealVNC connecteren naar localhost:6666
+
+10)
+
+
+11)
+
+
+12)
+
+

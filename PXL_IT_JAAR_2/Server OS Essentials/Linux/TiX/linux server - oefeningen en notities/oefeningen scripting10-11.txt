@@ -1,0 +1,177 @@
+1) 
+nano oef1.sh
+chmod u+x oef1.sh -> dit wordt voor alle uitvoerbare files gedaan
+****************************
+#!/bin/bash
+echo Dit is mijn 1ste script
+echo Vandaag: $(date +%D)
+echo User: $USER
+echo User: `whoami`
+****************************
+*cat !$ -> van vorige commando het laatste stukje*
+./oef1.sh -> uitvoeren van programma
+
+2)
+*env en set -> lijsten van alle variabelen*
+*set | less*
+echo mijn home folder is $HOME
+echo Ik heb $(( $(ls -lA | wc -l) -1 ))   *-A -> laat de . en de .. niet zien maar de rest wel*
+
+*ORIGIFS = de verschillende sheidingstekens (ja kan deze veranderen)*
+
+3)
+oef3.sh
+#!/bin/bash
+echo I
+sleep 1
+echo am
+sleep 1
+echo ALIVE ...
+sleep1
+
+
+4)
+oef3b.sh
+#!/bin/bash
+fakeprompt=$(echo "${USER}@${HOSTNAME}:${PWD}$ ")
+echo ${fakeprompt}I
+sleep 1
+echo ${fakeprompt}am
+sleep1
+echo ${fakeprompt}ALIVE ...
+sleep1
+
+5)
+oef4.sh
+#!/bin/bash
+curUser=$(tail -1 /etc/passwd | cut -d ':' -f1)
+echo -n "Ik ben $USER en ik ben "
+if [ $USER != $curUser ]
+ then
+	echo "niet de laatst toegevoegde user."
+	echo "De laatst toegevoegde user is $(curUser)."
+ else
+	echo "de laatst toegevoegde user."
+fi
+
+6)
+oef5.sh
+#!/bin/bash
+teller=10
+for teller in {10..1}
+ do
+	echo $teller
+	sleep 1
+	teller=$(($teller -1))
+done
+echo -e "\033[1;31;5;7mKAPOW\033[0m"
+
+
+7)
+oef6.sh
+#!/bin/bash
+ORIGFS=$IFS
+IFS=:
+echo Overzicht directories in PATH
+for vDIR in $PATH
+ do
+	echo $vDir
+done
+IFS=$ORIGFS
+
+8)
+-d/ -> delimiter is /
+rev -> reverse
+wc -l = wordcount line
+
+oef7.sh
+#!/bin/bash
+ORIGFS=$IFS
+IFS=:
+echo Overzicht directories in PATH
+for vDIR in $PATH
+ do
+	echo Directory: $vDir
+	ls $vDir | tail -5
+	echo -e "\n\n"
+done
+IFS=$ORIGFS
+
+9)
+oef8.sh
+#!/bin/bash
+tmp=/tmp/conffiles
+allconfs=~/allconfsfrometc
+find /etc -name *.conf -printf "%f\n" 2>/dev/null >$tmp
+echo Aantal .conf files in /etc: $(cat $tmp | wc -l)
+
+cat $tmp | sort | uniq >$allconfs
+echo Aantal .conf files in /etc met unieke naam: $(cat $allconfs | wc -l)
+rm $tmp
+
+10)
+overzicht_homefolder.sh:
+#!/bin/bash
+
+
+
+11)
+
+
+
+
+12)
+
+
+
+
+13)
+
+
+
+
+14)
+
+
+
+
+______________________________________________________________________________
+demo.sh:
+******************************************************************************
+#!/bin/bash
+echo Dit is mijn 1ste script
+sleep 1 #dit zijn seconden
+echo Vandaag: $(date +%D)
+echo User: $USER
+echo User: `whoami`
+
+echo Mijn home folder is $HOME
+echo Ik heb $(( $(ls -Al |wc -l)+1 )) entries in $HOME
+#echo $(ls -A | wc -l) -> werkt ook
+
+fakeprompt=$(echo "$USER@$PWD ")
+#$PWD werkt ook
+echo ${fakeprompt}echo Hello World
+echo Hello World
+echo ${fakeprompt}
+
+ORIGIFS=$IFS
+IFS=:
+teller=1
+echo Overzicht directories van PATH
+for vDir in $PATH
+do
+	echo map $teller: $vDir
+	teller=$(($teller + 1))
+done
+IFS=$ORIFIFS
+
+tmp=/tmp/conffiles
+allconfs=~/allconfsfrometc
+find /etc -name *.conf -printf "%f\n" 2>/dev/null >$tmp
+echo Aantal .conf files in /etc: $(cat $tmp | wc -l)
+
+cat $tmp | sort | uniq >$allconfs
+echo Aantal .conf files in /etc met unieke naam: $(cat $allconfs | wc -l)
+rm $tmp
+******************************************************************************

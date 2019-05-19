@@ -1,0 +1,99 @@
+1)
+2 schijven aanmaken
+-probleem met mijn schijven-
+sdd en sdf gebruiken voor raid
+
+sudo apt install mdadm
+sudo mdadm --examine /dev/sdd /dev/sdf -> info van schijven
+sudo mdadm --examine /dev/sdd1 /dev/sdf1 -> checken of schijven al een superblock hebben
+sudo mdadm --create /dev/md127 --level=mirror --raid-devices=2 /dev/sdd1 /dev/sdf1
+sudo mdadm --examine /dev/sdd1 /dev/sdf1
+cat /proc/mdstat
+sudo mdadm --detail /dev/md127
+sudo mkfs.ext4 /dev/md127
+sudo mkdir tijdelijkeHome -> op root
+cd
+cp -r -p /home /tijdelijkeHome
+sudo mount /dev/md127 /home
+cp -r -p /tijdelijkeHome /home
+ll -> rechten bekijken van student als ze nog altijd voor student zijn (is ook zo)
+sudo rm -rf /tijdelijkeHome
+sudo nano /etc/fstab
+/dev/md127		/home		etx4		defaults		0		0
+sudo su
+mdadm --detail --scan | tail -1 >> /dev/mdadm/mdadm.conf -> 
+	als dit niet werkt (proberen zonder de | tail -1) -> bij mijn servers is het '/etc/mdadm/mdadm.conf'
+**naam officieel op md127 vast zetten**
+
+2)
+Gebeurt allemaal op de nieuwe vm 'Linux Server 16.04.1 Raid1 On installation Demo'
+
+2 Raid1 van 20 Gig aanmaken bij installeren:
+- besturingssysteem later installeren
+- nog een harde schijf van 20 Gig toevoegen (zodat er 2 van 20 gig zijn -> omdat deze gemirrored gaan worden)
+- Normale configuratie doen
+- hostname = ubuntu
+- username = student
+- Wachtwoord = pxl
+	- partition disk -> Manual
+		- 10% physical volume for RAID
+		- resterende -> physical volume for RAID --> Boot = on
+		- 10% physical volume for RAID
+		- resterende -> physical volume for RAID -- > Boot = on
+		- configure software raid (main screen -> vanboven)
+		- yes
+		- create md device
+		- Raid1 (sda1 en sdb1)
+		- active devices = Hier is 2 goed
+		- spare devices = Standaard is goed
+		- Raid1 (sda2 en sdb2)
+		- active devices = Hier is 2 goed
+		- spare devices = Standaard is goed
+		- selecteer #1 van RAID1 #0
+			- Kies: use as swap area
+		-  selecteer #1 van RAID1 #1
+			- Kies: use as Ext4 journaling file system
+			- Selecteer dan als mountpoint: /
+		- Finish
+- Finish partition and write changes to disk
+- De installatie afmaken/vervolledigen
+- http proxy ... = gewoon enter
+- /dev/sda = bootloader voor GRUB
+
+3)
+Gebeurt allemaal op de nieuwe vm 'Linux Server 16.04.1 Raid1 On installation Demo'
+
+RAID5 van 3 harde schijven en 1 spare
+Alle schijven van 10 GB groot en alle data van ftp-service (/var/www/)
+	-> in de toekomst op deze RAID5
+- sudo fdisk /dev/sdc
+- n
+- enter
+- enter
+- enter
+- t
+- enter
+- fd -> dit allemaal 3 keer doen voor de 3 schijven van 10 GB
+- w
+- lsblk
+
+sudo mdadm --create /dev/md127 --level=5 --raid-devices=3 /dev/sdc1 /dev/sdd1 /dev/sde1 -> RAID5 partities maken
+sudo mdadm --examine /dev/sdc1 /dev/sdd1 /dev/sde1
+sudo mdadm --detail /dev/md127
+
+- nieuwe spare partitioneren zoals eerder boven vermeld
+md2 moet nog filesystem krijgen:
+- sudo mkfs.ext4 /dev/md127
+- sudo mkfs.ext4 /dev/sdf1
+sudo mdadm --manage /dev/md127 --add /dev/sdf1
+sudo mdadm --detail /dev/md127
+
+RAID 5 mounten op /var/www -> ik heb dit niet maar /srv/http is de equivalent
+(ik heb geen map http) -> hier kan ik kiezen en ik kies om toch te mounten op /var/www
+
+sudo mkdir /var/www
+sudo mount /dev/md127 /var/www
+
+4)
+sudo mdadm --grow --raid-devices=4 /dev/md127
+sudo mdadm --detail /dev/md127

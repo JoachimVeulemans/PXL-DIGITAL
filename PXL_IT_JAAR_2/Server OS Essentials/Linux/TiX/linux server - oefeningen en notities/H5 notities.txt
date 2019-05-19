@@ -1,0 +1,100 @@
+1st kijken welke devices er zijn:
+* lsblk
+extends partition = partition om meerdere partities te maken
+	- Maximum 4 primaire partities waarvan er
+	ééntje een extended kan zijn met oneindig veel logische partities (startend vanaf sdx5)
+Major number = welke driver van uit lezen
+
+Mountpoint:
+[SWAP] = als geheugen vol is wordt deze weggeschreven, als er dan weer plaats is
+wordt deze dan weer geswapped
+
+fdisk -l = geeft lijst van alle Hard Drives en hun partities (moet met sudo)
+	-> betere commando: sudo fdisk -l /dev/sd[a-z]
+	
+dmesg = geeft lijst van alle kernel boot messages
+	ook detecties van Hard Drives tijdens het bootproces
+	
+lshw (list hardware) = geeft een lijst van alle hardware
+
+lsscsi = geeft een lijst va, scsi-devices (moet 1st worden geïnstalleerd)
+
+/proc/scsi/scsi = In /proc staat info van de kernel in files en folders
+	* In /proc/scsi staat een lijst van alle SCSI-devices die gekend zijn door de kernel
+	
+hard disk leeg maken = badblocks vb: sudo badblocks -ws /dev/sdb
+	(-w = effectief wegschrijven naar de disk
+	 -s = hoever zit het in het process)
+	 
+dd = blok per blok een copy maken en vraagt een input file en een output file
+vb: sudo dd if=/dev/zero of=/dev/sdb
+
+fdisk -l /dev/sd[a-z] = geeft een lijst van alle harde schijven en hun partities
+
+/proc/partitions = In /proc staat info van de kernel in files en folders
+vb: cat /proc/partitions
+
+fdisk = standaard-tool in de shell
+
+parted = interface in de shell
+
+gparted = (grafische tegenhanger van partition magic) GUI interface
+
+
+	p = print -> partitie tabel laten zien
+	n = nieuwe partitie maken
+		-> bij sector enter duwen is volledige partitie grootte ander +size en dan mb of gb /vb: +10gb 
+	w = opslaan van de nieuwe partitielabel
+	
+MBR-Master Boot Record = 
+- Bevat de partition-table informatie
+- Kan geback-upt worden met sfdisk
+	- sfdisk -d /dev/sdx > partitietabel.sdx.sfdisk
+- Kan gerestored worden met sfdisk
+	- sfdisk /dev/sdx < partitietabel.sdx.sfdisk
+- Nadien partprobe uitvoeren om de kernel te forceren om opnieuw de partitietabel uit te lezen
+
+cat /proc/filesystems
+	nodev = niet toepasbaar op een device
+	
+mkfs = file system maken
+vb:	sudo mkfs.ext4 /dev/sdb1
+
+tune2fs = parameters van ext2, ext3 en ext4 te zien en aan te passen
+
+df -h = zien hoeveel geheugen nog vrij
+
+fsck = file system check
+	file system checken op fouten nadat we het hebben ge-unmount
+	
+mount = 
+- Wordt gebruikt om een filesysteem beschikbaar te
+  maken via een directory
+- Deze directory noemen we dan het mountpoint
+- Een mountpoint is dus een directory ergens onder
+  de root van de boomstructuur (/.../.../.../directory)
+- Via het mountpoint werken we dus met het filesysteem
+- Er zijn dus geen schijfletters in Linux
+
+Umount = unmounten van file systems
+
+mount intikken = alles zien wat gemount is
+
+df -a = zien welke mounts en hoe vol de schijf is
+
+mounten is tot aan reboot, daarna is dat undone
+	-> permanent mounten moet in /etc/fstab worden geplaatst
+
+sudo mount -a = alle devices mounten met 'defaults' als waarde
+
+ro = mounten als read only
+
+noexec = geen enkele binary of script kan uitgevoerd worden
+
+nosuid = er wordt geen rekening gehouden met setuid-bits (geen stickybit,...)
+
+noacl = er kunnen geen acl-rechten gelegd worden
+
+
+grootte disk op vmware zetten = voor 100mb => .100
+								voor 20gb  => 20

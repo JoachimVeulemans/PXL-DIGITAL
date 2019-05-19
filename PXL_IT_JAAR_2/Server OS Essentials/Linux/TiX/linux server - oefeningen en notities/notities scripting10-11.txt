@@ -1,0 +1,20 @@
+cd 
+mkdir bin
+cd bin
+vi <scriptnaam> -> 1st uitvoerbaar maken
+script best .sh geven als extensie
+
+de #!/bin/bash is zeer belangrijk om te laten zien welke soort file/scriptingtaal het is
+
+commentaar achter => #
+
+uitvoerbaar maken -> u+x <scriptnaam>
+
+variabele uitlezen is altijd met $
+	vb $myVar
+
+$(((RANDOM % 10)+1)) -> geeft random getal van 1 tem 10
+
+-o = or
+-a = and
+

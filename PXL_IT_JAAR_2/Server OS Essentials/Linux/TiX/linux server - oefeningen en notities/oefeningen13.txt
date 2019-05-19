@@ -1,0 +1,31 @@
+*****TESTEN******************************************************
+ftp 10.49.12.10
+examen
+examen
+passive
+ls
+cd opgave
+ls
+type binary
+get cowsay.deb
+bye
+sudo dpkg -i cowsay.deb
+----------------------------
+Appendix A:
+mount server iso file op vm niveau
+lsblk
+sudo mount /dev/sr0 /media/cdrom
+sudo mv /etc/apt/sources.list /etc/apt/sources.list.backup
+sudo apt-cdrom add --no-mount
+sudo apt-get update
+cd /media/cdrom
+sudo apt install isc-dhcp-server
+sudo apt remove isc-dhcp-server
+lsblk
+sudo umount /media/cdrom
+lsblk
+sudo apt-get -f install => indien niet werkt
+*******************************************************************
+1)
+crontab -e
+30 15 * * 1-5 rm home/student/tmp/*

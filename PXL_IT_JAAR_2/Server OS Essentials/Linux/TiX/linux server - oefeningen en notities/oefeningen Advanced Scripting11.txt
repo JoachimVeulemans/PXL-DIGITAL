@@ -1,0 +1,93 @@
+1+2)
+PS1=">"
+source ~/.bashrc -> terug krijgen
+of
+. ./.bashrc
+of
+. ${HOME}/.bashrc
+of
+. ${HOME}\/\.bashrc
+
+3)
+nano oef03.sh
+#!/bin/bash
+#auteur: Davide Pavone
+#...
+vScriptName=$0
+vFirstParam=$1
+echo De naam van het script: $(echo $0 | rev | cut -d/ -f1 | rev)
+echo De eerste parameter: $vFirstParam
+
+4)
+oef04.sh
+#!/bin/bash
+#auteur: Davide Pavone
+#script: geeft het grootste getal
+vGrootsteGetal=$1
+while (( $# )) #zolang er nog parameters zijn
+do
+	shift #schuif naar links
+	if [[ $vGrootsteGetal -lt $1 ]]
+	then
+		vGrootsteGetal=$1
+	fi
+done
+echo Het grootste getal is: $vGrootsteGetal
+
+7)
+oef07.sh
+#!/bin/bash
+#auteur: Davide Pavone
+#script: werken met functies
+
+function vermenigvuldig
+{
+	let uitkomst=$1*$2
+}
+
+vermenigvuldig $1 $2
+
+echo Het product van $1 en $2 is: $uitkomst
+
+10)
+oef010.sh
+#!/bin/bash
+#auteur: Davide Pavone
+#script: getops voor de opties a,l,h en d met argument-dir
+function showsyntax
+{
+	! [ -z $1 ] && echo "U gaf een verkeerde optie -$OPTARG"
+	echo gebruik: $0 [opties]
+	echo opties:
+	echo -e "\t-h\ttoont deze help"
+	echo -e "\t-a\ttoont ook verborgen bestanden"
+	echo -e "\t-l\ttoont een lange lijst"
+	echo -e "\t-d <DIR> geeft aan welke directory opgelijst moet worden"
+	exit 1
+}
+
+while getops ":ald:h" option
+do
+	case $option in
+		a|d|l)
+			echo parameter $option opgevangen
+			if[ $option = "d" ]
+			then
+				echo argument $OPTARG opgevangen
+				vDIR=$OPTARG
+			else
+				vOPTIES=$vOPTIES$option
+			fi;;
+		h)
+			showsyntax;;
+		\?)
+			showsyntax witherror;;
+		:)
+			echo U gaf geen argument voor de optie -$OPTARG
+			showsyntax;;
+		*)
+			echo Er is een fout opgetreden!
+			showsyntax;;
+	esac
+done
+[ -z $vOPTIES ] && ls $vDIR || ls -$vOPTIES $vDIR

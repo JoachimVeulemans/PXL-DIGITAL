@@ -1,0 +1,97 @@
+process = applicatie die draait
+ctrl alt f1 = terminal scherm open
+kill -15 = vriendelijk vragen of deze wilt stoppen -> standaard stop
+kill -9 = onmiddelijk en sowieso stoppen -> door de kernel
+kill -19 = proces pauzeren
+kill -18 = proces hervatten
+killall naamVanProcess -> vb: killall sleep  ->   killall xclock
+
+
+Meer nice = minder cpu vragen
+*nice kan een waarde krijgen van 0 tot 20
+maar root kan negatieve waardes aan toegeven zodat deze NOG MEER cpu tijd krijgen*
+
+script uitvoeren = 
+1. chmod u+x naam.sh
+./naam.sh
+__________________________________________________________________________________
+1)
+man bash en ctrl+z
+
+2)
+xclock &
+
+3)
+top of htop
+
+4)
+kill -18 PID -> kill -15 PID
+fg man bash -> q
+
+5)
+kill -18 PID -> killall xclock //niet echt juist
+
+6)
+xclock
+ctrl+z
+kill -18 PID -> reviven
+kill -9 PID -> compleet killen
+
+PID op vragen met pidof xclock
+
+7)
+top of htop
+
+8)
+top -p PID, PID,...
+of
+htop -p PID, PID,...
+
+9)
+xclock & -> draaien op achtergrond
+htop -p PIDvanXclock
+F9
+Enter
+
+10)
+chmod u+x forever.sh -> uitvoerbaar maken van script
+
+sh forever.sh -> script uitvoeren
+
+	a)
+	prioriteitslevel = 20
+	sh forever.sh &
+	pidof forever.sh
+	top -p PID
+
+	b)
+	renice +15 PID
+	
+	c)
+	cp forever.sh forever_lagere_prior.sh
+	forever_lagere_prior.sh &
+	pidof forever_lagere_prior.sh
+	
+	renice +5 PID
+	top
+	renice +15 = naar positief 15 zetten en niet som 15
+	d)
+	sudo su root
+	renice -2 PID
+	top
+	
+11)
+
+
+12)
+nano input.sh -> ingeven van de code
+chmod u+x input.sh -> execute rechten geven aan de user
+./input.sh -> van huidige map input.sh uitvoeren
+
+//Niet compleet
+13)
+
+
+15)
+
+killall xclock

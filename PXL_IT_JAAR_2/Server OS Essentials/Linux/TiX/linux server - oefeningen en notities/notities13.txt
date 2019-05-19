@@ -1,0 +1,8 @@
+at is NIET standaard geïnstalleerd
+ctrl-d om de commando's af te sluiten
+atq = zien wat er gepland staat
+atrm_jobNummer = verwijderen van planning met bepaalde nummer
+Standaard mag iedereen at uitvoeren tenzij je werkt met /etc/at.allow of /etc/at.deny
+cron is meer voor servers en anacron voor desktops
+
+man 5 = voor de opmaak

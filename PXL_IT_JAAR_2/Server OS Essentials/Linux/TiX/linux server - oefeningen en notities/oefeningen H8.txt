@@ -1,0 +1,55 @@
+1/2/3)
+Nieuwe installatie doen -> LVM noemen => 2 schijven plaatsen
+partition disk -> manual
+1st + 2nd disk = make partition
+1st = voll size
+	use as = raid
+2nd = voll size
+	use as = raid
+
+configure software raid
+create raid device = raid 1
+de 2 disken aanvinken
+
+configure the lvm
+	create volume group
+	name = VG(maakt nie uit = beter)
+	welke disk = de raid device
+create logical volumes
+	kies VG
+	naam = LV_swap (ene voor swap) -> 1g
+create logical volume
+	LV_root (voor de root)
+	4G
+Finish
+1g swap = use as -> swap area => geen mount point
+4G = use as -> ext4 => mount op /
+Done
+Finish
+(bij http -> gewoon continue zonder iets in te vullen)
+LAMP = linux apache -> aanvinken
+mysql server wachtwoord (niet noodzakelijk -> wel altijd veiliger)
+INSTALL THE GRUB BOOTLOADER = meestal de 1ste disk (waar de root zich bevindt)
+	yes
+lsblk -> kijken als alles in orde is
+sudo pvs -> fisieke schijven bekijken
+sudo vgs -> volumegroup bekijken
+sudo lvs -> logische volumes bekijken
+------------------------------------------
+OPTIONEEL:
+sudo lv extend -l +100%FREE -r /dev/VG/LV_root -> resize met de volledige vrije schijfruimte en onmiddellijk toepassen
+lsblk -> veranderingen zien
+sudo lvmdiskscan
+
+4)
+
+
+
+5)
+
+
+
+6)
+
+
+

@@ -1,0 +1,15 @@
+df -h = vrije schijfruimte zien
+
+Nieuwe linux installeren -> altijd best lvm mee installeren
+physical volume = pv
+volume group = vg
+logical volumes = lv
+
+De rest van alle schijfruimte gebruiken -l 100% freespace
+(enige moment wanneer de kleine l wordt gebruikt)
+
+Volume eigen naam geven is: -n blabla
+
+lvextend -L +100m = met 100 mb vergroten
+als het zonder plus is, is het die grootte
+

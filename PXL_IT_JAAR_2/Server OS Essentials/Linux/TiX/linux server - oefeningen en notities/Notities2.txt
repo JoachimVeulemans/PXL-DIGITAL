@@ -1,0 +1,25 @@
+inode=
+met metadata + verwijzing op hard disk waar het bestand staat
+
+sockets = 
+connectie tussen processen -> propere communicatie
+
+hard link = 
+ln
+een bestaande bestand gaan linken via een andere naam
+(link hoeft niet indezelfde map te staan)
+de link heeft dezelfde node als het bestand
+(alle wijzingen worden op beide 'bestanden' toegepast)
+-> kan enkel in dezelfde partitie gebeuren
+-> een hardlink vinden: find partitie -inum nodenummer 2> /dev/null
+   -> vb: 
+
+soft link / symbolic link = 
+ln -s
+- altijd een rwxrwxrwx
+- link naar een ander bestand
+- niet dezelfde inode
+- in het rood = gebroken link (onbruikbaar)
+
+. = huidige map
+.. = bovenliggende map

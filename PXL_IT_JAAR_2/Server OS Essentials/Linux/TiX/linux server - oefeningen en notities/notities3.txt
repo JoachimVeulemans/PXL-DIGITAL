@@ -1,0 +1,24 @@
+eth0 => vroeger
+meestal nieuwere => ens33
+
+en = ethernet
+sl = serial line ip (slip)
+wl = wlan
+ww = wwan
+
+dmesg = wat heeft de kernel allemaal gedaan tijdens opstarten
+
+ifdown -a = alle interfaces down brengen
+ifup -a = alle interfaces die op auto staan gaan up worden
+
+ifdown eth0 && ifup eth0 = indien 1ste gelukt is ook 2de doen anders geen van beiden doen
+
+ifconfig -a
+ifconfig eth0 of ifconfig ens33
+/sbin/ifconfig ens33
+
+ping -c 4 127.0.0.1 -> gaat 4 keer 
+ping 127.0.0.1 -> gaat oneindig pingen
+
+sudo apt-get install iproute2
+sudo apt-get install net-tools

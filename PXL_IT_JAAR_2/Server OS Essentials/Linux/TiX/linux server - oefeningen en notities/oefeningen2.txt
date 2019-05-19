@@ -1,0 +1,34 @@
+1+2)
+y (dir)
+|_a (dir)
+| |_b (dir)
+|_q (dir)
+| |_m (dir)
+| |_d = hardlink naar inode 2102933 (file)
+|_z (dir)
+|  |_n = hardlink naar inode 2102933 (file)
+|  |_v (dir)
+|_w = hardlink naar inode 2102933 (file)  
+
+3)
+mappen maken link en orig
+in link: 
+ln -s ../orig/file1 file1 -> soft link
+ln -s ../orig/dir1 dir1 -> soft link
+ln ../orig/file2 file2 -> hard link
+
+->indien via andere map maken = -rs ->r = relative path
+
+4)
+ln -sb ../orig/file1 file1
+-b zorgt voor een backup -> zet een ~ achter een file die backupt is
+
+5)
+ln -fs ../orig/file1 file1
+-f -> is force en gaat deze overschrijven
+
+6)
+Deze links zullen gebroken zijn en dus dan naar niet meer verwijzen naar de niet meer bestaande file
+
+7)
+de hard link blijft bestaan

@@ -1,0 +1,12 @@
+ssh-server op machine die verbonden moet worden (naar toe connecteren)
+ftp-server = op sommige users en/of groups deny
+ssh = poort 22
+netstat -ant = nummerisch alle poorten laten zien
+sudo service ssh reload -> beter anders worden alle open connecties gekilled (als ge via ssh bezig zijt)
+free -h => vrije geheugen zien
+
+ls = files van server laten zien
+lls = files van de pc laten zien
+
+vraag 5:
+ssh tunneling => zoals vpn (met eigen server)
