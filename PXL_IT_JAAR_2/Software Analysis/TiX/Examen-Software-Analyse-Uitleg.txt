@@ -1,0 +1,40 @@
+2 delen -> 	Theorie (65) 
+		Praktijk(90)(= enkel schema's tekenen)
+
+Volledig openboek examen, zowel theorie als praktijk
+Rechte lijnen met meetlat
+Opletten op syntaxen 
+
+*** Theorie (Niets van buiten kennen)(GEEN GISCORRECTIE) ***
+- Voornamelijk -> juist en niet-juist vragen
+- Meerkeuze vragen (meerdere correcte antwoorden mogelijk, staat erbij in de opgave)
+
+- Geen openvragen!
+
+
+*** Praktijk (Tekenen van schema's) ***
+- Verhaal --> schema's tekenen
+- Templates aanvullen (BUC, SUC ...)
+
+
+*** Belangrijke Documenten op BlackBoard ***
+Bestand downloaden en anders benoemen a.d.v de functie
+
+- WK01 - 01 (Levels & Types, Role of the Analyst)
+- WK01 - 02 
+- WK02 - 03 (Niet functioneel, functioneel, quality ...)
+- WK02 - 04
+- WK02 - 05 (Weten wat analyst)
+- WK02 - 06 
+- Ontwikkelingscyclus niet kennen (RUP, Waterfall ...)
+- Sytem Context niet kennen
+- Stakeholders Analyse & Stakeholders kennen (IEEE830 niet kennen)(Quizvragen kunnen)
+- Context Diagram niet
+- WK04 - 08 - 01 Introduction -> Belangrijk (BUC & SUC herkennen | verschillen BUC & SUC kennen | Betekenis Template kennen | oefeningen kunnen)
+- WK06 - 12 - 01 Introduction -> Syntax kennen | associaties maken (Vooral Theorie)
+- WK07 - 13 -> technieken kennen | wat is elicitatie  | oefeningen
+- WK09 - 14 using NL -> doorlezen (Dealing with transformations schema) | Volere gebruiken (gegeven requirement -> zelf kaart invullen (Originator & Fit Criterion belangrijk)
+- WK09 & 10 -> Modellen kennen (5) Oefeningen maken!!
+
+
+
