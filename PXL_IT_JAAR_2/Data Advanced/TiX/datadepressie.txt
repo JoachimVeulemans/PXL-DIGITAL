@@ -1,0 +1,16 @@
+4 vragen combinatieleer en kansrekenen -- 4ptn
+vraag 1 combinatieleer (oefening kon evegoed uit cursus komen)
+vraag 2 combinatieleer (a vraag is ook zoals cursus, b en c vragen iets meer denkwerk)
+vraag 3 en 4 gelijkaardig als 1 en 2 maar dan met kansrekenen
+
+vraag 5, 6 en 7 zijn over da nieuw deel -- 4,5 ptn
+5 en 6 zijn basic oefeningen, zoals in de cursus, vraag 7 is moeilijker
+
+MACHINE LEARNING, 2 vragen. --4,5 ptn ML
+vraag 8 is ne notebook
+vraag 9, ze beschrijft 2 machine learning processen en ge moet ze ne naam geve
+een half per fout, 0 wanneer niets invullen, -1 bij foute gok.
+
+da zijn 13 ptn, die andere 2 zijn op het laatste deel of worden procentueel verdeeld.
+andere 5 ptn zijn PE eh 
+

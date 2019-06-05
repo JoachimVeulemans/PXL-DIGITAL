@@ -1,0 +1,448 @@
+---------------------------------------------------------------------------------------------
+Masterinfo by bruinbeer007:
+
+P(Z<=Waarde)=...	Pnorm(waarde,0,1)
+P(Z<=-Waarde)=...	Pnorm(-waarde,0,1)
+P(Waarde1<Z<Waard2)=...	Pnorm(waarde2,0,1) - Pnorm(waarde1,0,1)
+P(Z>Waarde)=...		1-Pnorm(waarde,0,1)
+-----
+P(Z<=a)=waarde		qnorm(waarde,0,1)
+P(Z=>a)=waarde		qnorm(1-waarde,0,1)
+-----
+Bij steekproef	/	proportie (waarde,gem,*) 
+*=  sqrt(o²/n)		sqrt( (pie(1-pie) ) /2))
+
+---------------------------------------------------------------------------
+Hypothesetoetsen
+						     AG		VG
+Rechtseenzijdigetoets:		qnorm(1-a,0,1)   <--------->a<--->
+H0 µ = ...
+H1 µ > µ 
+						VG	AG
+linkseenzijdigetoets:		qnorm(a,0,1)   <--->a<----------->
+H0 µ = ...
+H1 µ < µ
+						VG	AG	   VG
+tweezijdigetoets:		qnorm(a/2,0,1)	<--->a<----------->a<--->
+H0 µ = ...
+H1 µ != µ
+
+Steekproef:			Populatie:
+	X-µ			P-pie
+	-----------		-----------
+	sqrt(o²/n)		sqrt((pie(1-pie))/n)
+
+-----------------------------------------------------------------------------
+Verklarende statistiek  
+
+P-waarde ----> als ge da bovenste niet moet tekenen
+--------
+a=alfa ding 
+
+P<a=verwerpen
+P>a=niet verwerpen 
+
+u=uitkomst van die vies lange formule 
+
+*rechtseenzijdigetoets: 1-Pnorm(u,0,1)
+
+*linkseenzijdigetoets: Pnorm(u,0,1)
+
+*tweezijdigetoets: 2*Pnorm(u,0,1)
+
+
+
+----------------------------------------------------------------------------------------------
+Deel 4:
+
+x<-c(1,2,3,...)
+y<-c(1,2,3,...)
+lsfit(x,y)
+
+a=		b=
+0.14956595	0.21456565
+
+
+grote oef voorbeeld:
+
+y= -0.5x + 9.5
+
+a= ( 2100-50 . 400/50 . 275/50) / (3400-50 . (400/50)^2)
+
+
+b= 275/50 + 0.5 . (400/50) = 9.5
+
+
+
+
+
+-----------------------------------------------------------------------------------------------
+
+> setwd("/Users/christopher/Desktop/data.test")
+
+> slaagcijfers<-read.csv2("slaagcijfers 20162017_verkort.csv",header=TRUE)
+
+> absfre<-table(slaagcijfers$score.OLOD1)
+
+> absfre #frequentietabel
+
+ 2  5  7  9 10 11 14 15 16 17 
+ 2  5  4  1  1  1  1  2  2  1 
+
+> prop.table(absfre) #relatievefrequentietabel
+
+   2    5    7    9   10   11   14   15   16   17 
+0.10 0.25 0.20 0.05 0.05 0.05 0.05 0.10 0.10 0.05 
+
+> cumsum(absfre)  #comulatievefrequentietabel
+ 2  5  7  9 10 11 14 15 16 17 
+ 2  7 11 12 13 14 15 17 19 20 
+
+> cumsum(prop.table(absfre)) #cumulatieverelatievefrequentietabel
+   2    5    7    9   10   11   14   15   16   17 
+0.10 0.35 0.55 0.60 0.65 0.70 0.75 0.85 0.95 1.00 
+
+> mean(slaagcijfers$score.OLOD1)
+[1] 9
+
+> median(slaagcijfers$score.OLOD1,na.rm = FALSE)
+[1] 7
+
+> quantile(slaagcijfers$score.OLOD1)
+   0%   25%   50%   75%  100% 
+ 2.00  5.00  7.00 14.25 17.00 
+
+> IQR(slaagcijfers$score.OLOD1)
+
+
+> var(slaagcijfers$score.OLOD1)
+[1] 24.10526
+
+> sd(slaagcijfers$score.OLOD1)
+[1] 4.909711
+
+
+
+-----------Grafische comm----------------------
+
+#Staafdiagram
+barplot(table(slaagcijfers$'Vooropl Alg'),
+        col=c("purple","green","blue"), 
+        horiz = TRUE)
+
+#2Staafdiagram
+> barplot(table(slaagcijfers$vooropleiding), main="Titel", xlab="X-as", ylab="Y-as",names.arg=c("balken ","namen","geven"))
+> 
+
+
+#Histogram
+x <- runif(30,0,100)
+hist(x, main="Regenval Hasselt", 
+     xlab = "dagen", 
+     ylab = "Aantal regenbuien", 
+     col = c('blue'), 
+     border = c('black'), 
+     breaks = c(0,10,20,30,40,50,60,70,80,90,100))
+
+
+#Lijndiagram
+x <- c(1:10); y <- c(8,5,7,8,3,9,4,5,5,10);
+plot(x, y, type = 'p', col = c("red")) 
+lines(x, y, type='l', col = c("blue"))
+
+
+#Lijndiagram met meerdere lijnen
+x <- c(1:10); y <- c(8,5,7,8,3,9,4,5,5,10); z <- c(0,2,6,4,8,3,9,6,3,10);
+plot(x,z, type='l' ,col = c("blue"), xlab="de T van tijd", ylab="hoogewaarde in 1000Ä"
+     ,main="De hypercomplexe koers van de cryptocurrencies")
+lines(x,y, type='l',col = c("red"))
+#lines(x,y, type='l',col = c("blue"))
+legend(1, 10, legend=c("Bitcoins","Ethereum"), 
+       col=c("blue", "red"), lty=1, cex = 0.8,title="Crypto's")`
+
+
+---------------------------------------------------------------------------------------
+
+-------------------------------------------------------------
+|	Commands												|
+-------------------------------------------------------------
+
+WORTEL
+--------------------------------
+sqrt(x)						-> wortel van getal
+
+REKENKUNDIG GEMIDDELDE
+--------------------------------
+x <- c(1,2,3,4,5,6,7,8,9,10)
+mean(x)						-> het gemiddelde
+
+TRIMMED GEMIDDELDE (ZONDER UITSCHIETERS)
+--------------------------------
+x <- c(1,2,3,4,5,6,7,8,9,10)
+mean(x, trim = 0.5)			-> het gemiddelde met trim
+
+GEWOGEN REKENKUNDIG GEMIDDELDE
+--------------------------------
+wt <- c(1,2,3,4,5)
+x <- c(1.5,2.5,3.5,4.5,5.5)
+weighted.mean(x, wt)		-> het gewogen gemiddelde
+
+MEDIAAN
+--------------------------------
+x <- c(1,2,3,4,5,6,7,8,9,10)	
+median(x)					-> de mediaan
+
+KWARTIELEN
+--------------------------------
+quantile(data)				-> de kwartielen
+IQR(data)					-> interkwartielafstand
+
+MODUS
+--------------------------------
+getmode()					-> de modus
+getmode <- function(x) {
+	ux 	<- unique(x)
+	tab <- tabulate(match(x, ux)); ux[tab == max(tab)]
+}
+
+SPREIDINGSBREEDTE
+--------------------------------
+max(dataset$kolomnaam)		-> max waarde
+min(dataset$kolomnaam)		-> min waarde
+spreidingsbreedte			-> max(dataset$kolom) - min(dataset$kolom)
+
+VARIANTIE
+--------------------------------
+var(dataset$kolomnaam)		-> de variantie/afwijking van het gemiddelde
+
+STANDAARDAFWIJKING
+--------------------------------
+sd(c(dataset$kolomnaam))	-> de standaardafwijking
+-------------------------------------------------------------
+
+
+
+-------------------------------------------------------------
+|	Boxplots												|
+-------------------------------------------------------------
+setwd(pad)							-> pad naar Workspace vb: C:\\...
+variable <- read.csv2(document)		-> documentnaam + extensie vb: bestandsnaam.xls
+boxplot(variable$kolomnaam)			-> boxplot tekenen
+
+boxplot(variable$kolomnaam, main="titel", ylab="labels op y-as") 
+		-> voeg 'range=100' toe voor geen uitschieters
+-----------------------------------------------------------
+
+
+
+-------------------------------------------------------------
+|	Frequentietabellen - Kwalitatieve gegevens				|
+-------------------------------------------------------------
+
+NOMINAAL	-> NIET GEORDEND
+ORDINAAL	-> GEORDEND
+
+ABSOLUTE FREQUENTIE
+--------------------------------
+library(dplyr)						-> laad package in
+dataset <- bestandsnaam.extensie	-> sla data op in dataset
+
+dataset %>%							-> %>% = pipe
+	group_by(kolomnaam) %>%			-> group_by = sorteren op kolomnaam	
+	summarise(count = n())			-> summarise = veel gebruikt bij group_by
+									-> n() = optellen van reeksen
+
+RELATIEVE FREQUENTIE
+--------------------------------
+dataset %>%							-> mutate = maakt een nieuwe kolom met de
+	group_by(kolomnaam) %>%			   gegevens van een oude kolom. Count in dit geval.
+	summarise(count = n()) %>%
+	mutate(rfreq = count / sum(count))
+-------------------------------------------------------------
+
+
+
+-------------------------------------------------------------
+|	Frequentietabellen - Kwantitatieve gegevens				|
+-------------------------------------------------------------
+
+DISCREET	-> MEESTAL GEHELE GETALLEN + NIET WILLEKEURIG 
+CONTINUE	-> IN EEN BEPAALD BEREIK + WILLEKEURIG + ELKE NUMERIEKE WAARDE 
+
+CUMULATIEVE ABOSULUTE/RELATIEVE FREQUENTIE
+--------------------------------
+dataset %>%							
+	group_by(kolomnaam) %>%			   
+	summarise(count = n()) %>%
+	mutate(percent = count/sum(count),
+			'Cumulatieve frequentie' = cumsum(count),
+			'Cumulatieve percentage' = 'Cumulatieve frequentie'/sum(count))
+-------------------------------------------------------------
+
+
+
+-------------------------------------------------------------
+|	Grafische datasets										|
+-------------------------------------------------------------
+library(readxl)					-> package laden
+dataset <- read_excel(pad)		-> sla data op in dataset
+attach(dataset)
+dim(dataset)
+names(dataset)					-> alle tabellen
+countVariable <- table(kolomnaam)
+percentVariable <- table(kolomnaam)
+
+CIRKELDIAGRAM
+--------------------------------
+pie(countVariable)
+
+STAAFDIAGRAM
+--------------------------------
+barplot(percentVariable, xlab="labels op x-as", ylab="labels op y-as", names.arg=c("label voor staaf 1","label voor staaf 2"))
+
+HISTOGRAM
+--------------------------------
+hist(dataset)
+dataset							-> tabel in bestand
+-------------------------------------------------------------
+
+
+
+-------------------------------------------------------------
+|	Verklarende statistiek									|
+-------------------------------------------------------------
+norm.inv = qnorm(a, gemiddelde, standaardafwijking, 1)
+norm.dist = pnorm(a, gemiddelde, standaardafwijking, 1)
+
+VOORBEELDEN
+--------------------------------
+
+*** Veronderstel dat Z standaard normaal verdeeld is. Bepaal volgende kansen:
+
+P(Z > -3,01) 
+            1 - pnorm(-3.01, 0, 1, 1) = 0,99869376
+
+P(1,33 < Z < 2,87)
+			pnorm(2.87, 0, 1, 1)- pnorm(1.33, 0, 1, 1) = 0,08970678
+
+*** Veronderstel dat X normaal verdeeld is met gemiddelde 200 en standaardafwijking 40. Bereken:
+
+P(180 = X = 220)
+
+pnorm(220,200,40,1) - pnorm(180,200,40,1) = 0,38292492
+
+
+*** Veronderstel dat Z standaard normaal verdeeld is. Bereken a zodat volgende voorwaarden voldaan zijn.
+
+P(Z = -a) = 0,21
+			qnorm(0.21, 0, 1) = -0,80642 = 0,80642
+
+P(Z > -a) = 0,43
+			qnorm(0.57, 0, 1) = 0,1764 = -0,1764
+
+*** Van een bepaald type oplaadbare batterijen is de gemiddelde levensduur 800 uur, met een standaardafwijking van 38 uur. Er wordt een steekproef van 80 batterijen genomen. Wat is de kans dat de batterijen in deze steekproef gemiddeld meer dan 815 uur meegaan?
+
+u = 800
+o = 38
+n = 80
+X ~ N(800, 38^2/80)
+
+P(?X?? > 815)
+			1 - pnorm(815, 800, sqrt(38^2/80),1)
+-------------------------------------------------------------
+
+
+
+-------------------------------------------------------------
+|	Populatie - Steekproef									|
+-------------------------------------------------------------
+
+GEMIDDELDE
+--------------------------------
+Gemiddelde(X) = u (populatiegemiddelde)
+Variantie(X) = o^2 / n
+
+PROPORTIE
+--------------------------------
+Gemiddelde(P) = pi
+VariantieP)= pi(1 - pi) / n
+
+Voorbeeld:
+*** Veronderstel dat het gewicht van de verpakkingen met onderdelen die bij een firma geleverd
+worden, normaal verdeeld zijn met een gemiddelde van 150 kg en een ongekende
+standaardafwijking.
+Wat is de kans dat bij 40 verpakkingen die binnenkomen en in een lift worden geladen bij
+deze de veiligheidsgrens van 6120 kg overschrijden? We weten op basis van een steekproef
+dat s=30 kg.
+
+P (40 * X > 6120 ) 
+= P (X > 6120 / 40) 
+= 1 – P (X < 153) 
+= 1 – pnorm (153, 150 , 30) 
+= 0.4601722
+-------------------------------------------------------------
+
+
+
+-------------------------------------------------------------
+|	Hypothesetoetsen										|
+-------------------------------------------------------------
+
+H0			-> Nulhypothese = geeft waarde aan waarmee je wilt vergelijken
+H1			-> Alternatieve hypothese = verschillend van de Nulhypothese
+
+Verwerpen 	-> afwijking tussen steekproefgrootte X en populatiegrootte u is BEDUIDEND
+Aanvaarden	-> afwijking tussen steekproefgrotte X en populatiegrootte u berust op TOEVAL
+
+
+FOUTEN VAN EERSTE EN TWEEDE SOORT
+--------------------------------
+
+UITSPRAAK	WERKELIJKHEID -->		H0 is waarde 		H0 is niet waar
+	|
+	v
+----------------------------------------------------------------------------
+Verwerp H0							TYPE 1 FOUT				JUISTE CONCLUSIE
+----------------------------------------------------------------------------
+Aanvaard H0							JUISTE CONCLUSIE		TYPE 2 FOUT
+----------------------------------------------------------------------------
+
+DEFINITIE
+--------------------------------
+Het significantieniveau a (alpha) van een toets is de maximale kans op een TYPE 1 FOUT.
+
+Nulhypothese verwerpen OF niet verwerpen doen we op significantieniveau a (alpha).
+
+RECHTS EENZIJDIGE TOETSEN >
+--------------------------------
+
+a (alpha) moet positief zijn *qnorm(1-a,0,1)*
+
+Voorbeeld:
+			H0: u = 75
+			H1: u > 75
+
+
+LINKS EENZIJDIGE TOETSEN <
+--------------------------------
+
+a (alpha) moet negatief zijn *qnorm(a,0,1)*
+
+Voorbeeld:
+			H0: u = 1.5
+			H1: u < 1.5
+
+TWEEZIJDIGE TOETSEN !=
+--------------------------------
+
+a (alpha) delen door 2 -> waarde aan beide kanten **qnorm((a/2),0,1)*
+
+Voorbeeld:
+			H0: u = 2
+			H1: u != 2
+
+--------------------------------
+concrete berekening: 3 stappen formularium, a berekenen met qnorm ,formule invullen gelijkstellen aan a, a aanduiden op graf, staat het er in?
+Ja aanvaarden anders verwerpen
+
+

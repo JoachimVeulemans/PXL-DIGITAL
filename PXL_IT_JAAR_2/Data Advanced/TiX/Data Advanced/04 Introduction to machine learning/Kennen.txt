@@ -1,0 +1,5 @@
+Classificatie of Regresie ( excel bestand en juypter notebook)
+Zelf dataset importeren
+data en target splitsen
+
+Selecting features niet kennen

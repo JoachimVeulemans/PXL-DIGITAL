@@ -1,0 +1,7 @@
+Comibnatieleer en kansrekenen 5 punten
+	-> 4 vragen over die 2 delen
+Dichtheidsfuncit normaal verdeling steekproef
+	5 punten 
+Machine learning
+	5 punten --> juypter notebook
+		--> andere vraag is uitleggen met wat je het probleem oplost bvb classificatie,regressie,...
