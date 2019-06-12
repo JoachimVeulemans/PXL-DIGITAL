@@ -1,0 +1,18 @@
+Alle dependencies installeren:
+$ npm install 
+
+Het script build uitvoeren (webpack).
+Het script build is gedefinieerd in package.json.
+$ npm run build
+
+Het script test runnen (jest).
+Het script test is gedefinieerd in package.json.
+$ npm run test
+
+Het script start:server runnen (webpack-dev-server).
+Het script start:server is gedefinieerd in package.json.
+$ npm run start:server
+In de browser kan je nu localhost:8080 ingeven.
+
+
+

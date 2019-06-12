@@ -1,0 +1,15 @@
+{
+    "require": {
+         "altorouter/altorouter":"^1.2"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^7"
+    },
+    "autoload": {
+        "psr-4": {
+            "controller\\": "src/controller/",
+            "model\\": "src/model/",
+            "view\\": "src/view/"
+        }
+    }
+}

@@ -1,0 +1,34 @@
+#container {
+    width: 1000px;
+    margin: 0 auto;
+}
+
+#head {
+    background-color: black;
+    color: white;
+}
+
+.link {
+    width: 48%;
+    float: left;
+    margin: 5px;
+    height: 5em;
+    border: 1px solid black;
+}
+
+.link a {
+    display: block;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 2em;
+    text-decoration: none;
+    text-align: center;
+    color: black;
+    line-height: 5em;
+}
+
+.link:hover {
+    background-color: #F0F8FF;
+}
+
