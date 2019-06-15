@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+    
+<!-- Mirrored from subnettingpractice.com/howtoipv6.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 22 Jan 2016 18:12:39 GMT -->
+<head>
+        <meta charset="utf-8">
+        <title>How To Subnet IPv6</title>
+	<meta name="description" content="An easy to understand  guide on how to subnet IPv6. Learn the differences and similarities between IPv6 and IPv4 in simple to understand terms."/>
+	<meta name="keywords" content="IPv6, subnetting, subnet, slash, how to, explained" />
+	<meta name=viewport content="width=device-width, initial-scale=1">
+	<link rel='stylesheet' type='text/css' href='header_footer.css'>
+    </head>
+    <body>
+<span id=titlename><a href="index.html">SubnettingPractice.com</a></span> The most extensive subnetting practice site on the web!
+                <ul id='nav'>
+                        <li><a href='index.html'>Practice Questions</a></li>
+                        <li><a href='ipv6.html'>IPv6 Subnetting</a></li>
+                        <li><a href='subnets.html'>Basic Subnetting</a></li>
+                        <li><a href='ipv6_subnetting.html'>IPv6 Calculator</a></li>
+                        <li><a href='binary.html'>Binary Practice</a></li>
+                        <li><a href='calc.html'>Subnetting Calculator</a></li>
+                        <li><a href='vlsm.html'>VLSM Calculator</a></li>
+                </ul>
+<p>
+<script async src="../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- link large minimal -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:15px"
+     data-ad-client="ca-pub-5214460626967121"
+     data-ad-slot="8042184099"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</p>
+
+<h1>How To Subnet IPv6</h1>
+<p>IPv6 is going to replace <a href="howto.html">IPv4</a>. The simple reason is that IPv4 address space is running out. The world has reached the point where there are not enough 32 bit addresses to link every device which wants to connect to the Internet. IPv6 uses 128 bits. Much larger. Much much larger. IPv6 allows almost 8*10<sup>28</sup> times as many addresses as IPv4. Basically, a number too large for the human mind to grasp.</p>
+<div style="float:left;padding-right:5px;">
+<script async src="../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- med rect dark blue -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:300px;height:250px"
+     data-ad-client="ca-pub-5214460626967121"
+     data-ad-slot="1572651691"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+<p>Because of the <a href='ipv6_is_huge.html'>enormity</a> of IPv6 address space, subnetting will change. Currently we use CIDR and VLSM and NAT and other tools to conserve as much IPv4 space as possible. With IPv6 this is no longer a concern. The smallest subnet that is recommended for use in IPv6 is a /64! This means that even if you have 200 devices on a single /64, you still have 2<sup>64</sup>-200 of unused space.</p>
+<p>Because of the scale of IPv6, one no longer really worries about how many hosts are on a subnet. Rather the concern is how many subnets fit within a certain network. If you have a /48, how many /64s can you place inside this /48? These are the questions that IPv6 subnetting asks. Try <a href="ipv6.html">IPv6 Subnetting</a>.</p>
+<p>IPv6 is written in hexadecimal which uses the digits 0-9 and a-f. A hexadecimal digit represents 4 bits, or 16 decimal units. Each IPv6 address is represented by eight groups of four hexadecimal digits. These groups are separated by colons. An example may be: 2001:0db8:2231:aaec:0000:0000:4a4a:2100. Try practicing <a href="binary.html">binary</a>.</p>
+<p>Even though these addresses are written in hexadecimal units, they are still large and cumbersome. There are a couple of ways to shorten them. One or more leading zeros from each group can be dropped. A consecutive set of groups with only zeros can be replaced with ::. The above address can be written as: 2001:db8:2231:aaec::4a4a:2100.</p>
+<p>Note that the :: should only be used on more than one section of zeros, and can only be used once per address. 2001::ab32:: is not a valid address because we do not know how many sets of zeros are in each :: group. The address could be 2001:0000:0000:ab32:0000:0000:0000:0000 or it could be 2001:0000:0000:0000:0000:ab32:0000:0000.</p>
+<p>Though the representation of the numbers is different, the computer still uses binary to do the actual subnetting. The binary math is the same, it is just using larger numbers. There is still a network portion and a host portion of every address.</p>
+<p>IPv6 does not use network addresses or broadcast addresses. An address where the host bits are all 0s or all 1s is still valid!</p>
+<p>We also do not use subnet masks for IPv6. Everything is written in slash notation. In IPv6 the first 48 bits are used for networking and routing. The next 16 and used to define subnets. The last 64 and used to identify a host.</p>
+<p>With IPv6 is that every device can create a unique link local address based on the MAC address of the device. What one does is inset 0xFFEE into the middle of the MAC address. This changes the MAC address to 64-bits from 48-bits. The other thing that needs to happen is to flip the 7th bit. A link local unicast address is fe80::/10</p>
+<script async src="../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- horizontal minimal black text -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-5214460626967121"
+     data-ad-slot="5365442490"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<h2>The Quick and Easy</h2>
+<p>The number of subnetting bits is the new prefix length minus the original prefix length. So there are 4 subnetting bits when a /48 is broken into /52s (52-48=4).</p>
+<p>The number of subnets possible with x subnetting bits is 2<sup>x</sup>. So if we have 4 subnetting bits, then we can create 2<sup>4</sup>=16 new subnets.</p>
+::1/128 is the loopback address. 
+<br>::FFFF:0:0/96 are the IPv4-mapped addresses. 
+<br>fe80::/10 are the link-local unicast.<br>
+2001:db8::/32 are the documentation addresses.
+<br>
+ff00::/8 are multicast addresses
+<p>Our <a href="cheatsheet.html">subnetting cheatsheet</a> includes IPv6.</p>
+<h2>Correct IPv6 Notation</h2>
+<p>IPv6 addresses should be written a certain way. This will make interpreting the addresses faster and easier, both for humans and for computer programs.</p><p>
+Leading zeros must be removed. 2001:0db8::0001 must be written as  2001:db8::1.<br>
+"::" must be used to represent the largest number of 16-bit sets of zero as possible.<br>
+If there are multiple places where "::" can be used, and the numbers of zeros are the same, use "::" on the leftmost set of zeros<br>
+"::" cannot be used to shorten a single 16-bit set of zeros.<br>
+Letters in an IPv6 address should be written in lowercase.<br>
+To represent port numbers, wrap an IPv6 address in square brackets then followed by a colon and the port number as [2001:db8::1]:80<br>
+For more information see <a href='http://tools.ietf.org/html/rfc5952'>RFC5952</a>.
+</p>
+<p>
+<script async src="../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- horizontal link blend -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-5214460626967121"
+     data-ad-slot="9450355295"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</p>
+<ul id='foot'>
+                        <li><a href='howto.html'>How to Subnet</a></li>
+                        <li><a href='howtoipv6.html'>How to Subnet IPv6</a></li>
+                        <li><a href='cheatsheet.html'>Subnetting Cheatsheet</a></li>
+                        <li><a href='binary_calc.html'>Binary/Hex Calculator</a></li>
+                        <li><a href='ethernet_wiring.html'>Ethernet Wiring Practice</a></li>
+                        <li><a href='ipv6_is_huge.html'>Incredible Size of IPv6</a></li>
+                        <li><a href='twos.html'>Exponent Practice</a></li>
+                        <li><a href='sixteens.html'>Multiples of Sixteen </a></li>
+                        <li><a href='osi_layer.html'>OSI Layer Practice</a></li>
+                        <li><a href='headers.html'>IP Header Practice</a></li>
+                        <li><a href='ip_allocation.html'>IPv4 v IPv6 Allocation</a></li>
+                        <li><a href='ccna_commands.html'>Top CCNA Commands</a></li>
+                        <li><a href='certs.html'>Networking Certificates</a></li>
+                        <li><a href='ccna_salary.html'>CCNA Salary Report</a></li>
+                        <li><a href='ccna_resources.html'>CCNA Resource List</a></li>
+                        <li><a href='jncia_ccna.html'>JNCIA v CCNA</a></li>
+                        <li><a href='contact.html'>Privacy Policy</a></li>
+			<li><a href="http://www.facebook.com/sharer.php?u=http://subnettingpractice.com" target="_blank" class="share"><img src="images/facebook.png" alt="Facebook" /></a>
+<a href="http://www.linkedin.com/shareArticle?mini=true&amp;url=http://subnettingpractice.com" target="_blank" class="share"><img src="images/linkedin.png" alt="LinkedIn" /></a>
+<a href="http://twitter.com/share?url=http://subnettingpractice.com&amp;text=Learning%20to%20subnet!" target="_blank" class="share"><img src="images/twitter.png" alt="Twitter" /></a>
+</li>
+                </ul>
+
+<small>Copyright 2014 SubnettingPractice.com. All rights reserved</small>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','../www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-50427363-2', 'subnettingpractice.com');
+  ga('require', 'displayfeatures');
+  ga('send', 'pageview');
+
+</script>
+</body>
+
+<!-- Mirrored from subnettingpractice.com/howtoipv6.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 22 Jan 2016 18:12:39 GMT -->
+</html>

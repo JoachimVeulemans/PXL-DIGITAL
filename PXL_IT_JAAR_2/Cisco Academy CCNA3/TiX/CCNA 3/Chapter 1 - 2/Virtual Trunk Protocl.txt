@@ -1,0 +1,210 @@
+2 VLANS
+
+vlan 10 desktops
+192.168.1.0/25
+vlan 20 laptop 
+192.168.1.128/26
+vlan 99 management
+192.168.1.129/28
+
+
+
+switch2:
+
+> enable
+> show vtp status
+> conf t
+> vtp domain pxl.com
+> vtp password cisco
+### vlans aanmaken
+> vlan 10
+> name Desktop
+> vlan 20
+> name laptop
+> vlan 99
+> name management
+> show vlan
+
+
+switch1:
+
+>enable
+>show vlan			(hier staat nog niks)
+>show vtp status		(staat toch op server, dat is omdat ze toch delen met elkaar) 
+
+switch 2: 
+> show vtp status 		(revision staat op 6, omdat ge 6 commands hebt ingegeven vlan10, name,...) 
+
+De meest gemaakte fout in VTP is dat er een switch uit de kast wordt gehaald. Onwetende dat die server ook VLANs kende ooit en zijn revisie getal groter is dan de andere switchen in het netwerk. Moment dat ge die dan aansluit, dan zijt ge gefucked want dan gaat de oude switch die ge uit de kast hebt gehaald zijn VLANS verspreiden,... Dus altijd zorgen dat ge uw revisie getal nakijkt,...
+
+Waarom werkt het VTP nog niet? 
+-> Omdat er nog geen fucking trunk poorten zijn,... Motherfucker, ge moet altijd uw trunk poorten checken bij troubleshooting van VTP,... 
+
+switch 0:
+> en
+> conf t 
+> int g0/1
+> switchport mode trunk 
+> sw trunk allowed vlan 10,20,99
+
+> en
+> conf t
+> int g0/2
+> switchport mode trunk 
+> sw trunk allowed vlan 10, 20, 99
+
+switch1:
+> en
+> conf t
+> int g0/1
+> switchport mode trunk 
+> sw trunk allowed vlan 10,20,99
+
+switch 2:
+> en
+> conf t
+> int g0/1
+> switchport mode trunk 
+> sw trunk allowed vlan 10, 20, 99
+
+switch1: 
+> vtp mode client
+> vlan 40 --> krijgt ge geen toegang meer om een VLAN te maken omdat ge dat hoort te doen op switch in server mode 
+
+(extra switch in het verhaal brengen) 
+
+switch 3
+> en
+> conf t
+> int g0/1 
+> sw mode trunk
+> vtp domain pxl.com
+
+(gaat ge uw switch 3 client maken)
+> vtp mode client
+> do show vlan 
+
+> vtp password cisco 
+
+
+Als switch 2 in client modus is dan geeft die niks door aan switch 3. 
+oplossing: maak switch 2 server!! Dan geeft die alles door. TRANSPARANT MAKEN IS GEEN OPLOSSING! 
+best practice: met meerdere servers werken als ge met VTP werkt, hier moet ge over nadenken en gwn checken in uw hierarchie. 
+
+switch5:
+> int g0/1
+> sw mode trunk 
+
+-> als ge nu beetje fast forward en gaat naar switch 4: 
+switch4:
+> show interface g0/1 switchport
+dan ziet ge dat die automatisch een trunk poort ervan gemaakt heeft. 
+dat komt omdat die op dynamic auto opstaat. Die gaat checken welke poort die nodig heeft.
+
+
+(router toegevoegd)
+
+switch0:
+en
+conf t
+int f0/1
+sw mode trunk
+sw trunk allowed vlan 10,20,99
+ 
+
+router0:
+en
+conf t
+int g0/0.10
+en dot1q 10
+ip addr 192.168.1.1 255.255.255.128
+int g0/0.20
+en dot1q 20
+ip addr 192.168.1.129 255.255.255.192
+int g0/0.99
+en dot1q 99
+ip addr 192.168.1.193 255.255.255.240
+
+ZORG DAT UW DEFAULT ROUTE WERKT = 0.0.0.0
+
+router0:
+ip route 0.0.0.0 0.0.0.0 200.200.200.1
+int g0/1
+ip addr 200.200.200.2 255.255.255.252
+no shut 
+
+router 1
+en 
+conf t
+int g0/1
+ip addr 200.200.200.1 255.255.255.252
+no shut 
+
+
+pc links
+192.168.1.2
+255.255.255.128
+
+laptop links
+192.168.1.30
+255.255.255.192
+
+het werkt niet:
+acces poorten moeten nog ingesteld worden
+
+switch1:
+en
+conf t
+int range fa0/1-9
+sw mode acc
+sw acc vlan 10
+int range f0/10-20
+sw mode acc 
+sw acc vlan 20
+
+
+
+multilayer switch ipv switch vanboven 
+multilayer siwtch:
+en
+conf t
+vtp domain pxl.com
+vtp password cisco
+int range g0/1-2
+sw mode trunk 
+
+vlan 10
+name desktop
+vlan 20
+name laptop
+vlan 99
+name management 
+exit
+
+int vlan10
+ip addr 192.168.1.1 255.255.255.128
+no shut
+int vlan20
+ip addr 192.168.1.129 255.255.255.192
+no shut
+int vlan 99
+ip addr 192.168.1.193 255.255.255.240
+no shut
+
+ip routing
+
+int fa0/1
+no switchport
+ip addr 200.200.200.2 255.255.255.252
+no sh
+exit
+ip route 0.0.0.0 0.0.0.0 200.200.200.1
+
+--- werkt nog niet ---
+ISP router
+-> ip route 192.168.1.0 255.255.255.0 200.200.200.2
+
+
+
+
+

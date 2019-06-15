@@ -1,0 +1,29 @@
+MLS
+
+enable
+config t
+ip routing
+interface GigabitEthernet0/1
+ switchport trunk encapsulation dot1q
+ switchport mode trunk
+interface GigabitEthernet0/2
+ no switchport
+ ip address 209.165.200.225 255.255.255.252
+vlan 10
+ name Staff
+vlan 20
+ name Student
+vlan 30
+ name Faculty
+interface Vlan10
+ ip address 192.168.10.254 255.255.255.0
+ no shutdown
+interface Vlan20
+ ip address 192.168.20.254 255.255.255.0
+ no shutdown
+interface Vlan30
+ ip address 192.168.30.254 255.255.255.0
+ no shutdown
+interface Vlan99
+ ip address 192.168.99.254 255.255.255.0
+ no shutdown

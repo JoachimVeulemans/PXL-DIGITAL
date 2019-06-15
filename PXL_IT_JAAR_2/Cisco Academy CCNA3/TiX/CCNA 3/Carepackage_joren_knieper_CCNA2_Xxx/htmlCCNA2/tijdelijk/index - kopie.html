@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>slideToggle demo</title>
+<script type="text/javascript" src="scripts/shCore.js"></script>
+<script type="text/javascript" src="scripts/shBrushJava.js"></script>
+<link type="text/css" rel="stylesheet" href="scripts/shCoreDefault.css"/>
+	<script type="text/javascript">SyntaxHighlighter.all();</script>
+<script src="jquery.min.js"></script>
+</head>
+<body>
+
+<div class="first">Oef Een</div>
+<pre class="first-p" class="brush: java;"><code>
+package test;
+
+import java.util.Scanner;
+
+public class topslagnamenentel2 {
+	public static void main(String[] args) {
+		Scanner invoer = new Scanner(System.in);
+		String[] namen = new String[10];
+		int[] aantal = new int[10];
+		String naam = invoer.next();
+		boolean stop = true;
+		boolean controle = true;
+
+		while (!naam.equals("stop")) {
+			
+			for (int i = 0; namen.length > i && stop; i++) {
+				if (namen[i] == null) {
+					// is de plaats leeg moet die niet verder gaan kijken
+					// vooral nodig bij de eerste null
+					stop = false;
+
+					// zit de naam er tussen
+					// bij de eerste naam die die tegenkomt dat match stop die
+					// en mag de naam niet meer bijgezet worden in de lijst
+					
+				} else if (namen[i].contains(naam)) {
+					stop = false;
+					controle = false;
+					// de naam komt voor dus moet bijgeteld worden
+					aantal[i]++;
+				}
+				// stop moet terug true zijn voor de lus te laten lopen
+				stop = true;
+			}
+			// als de naam niet voorkomt wordt die opgeslagen
+			if (controle) {
+				// deze word opgeslagen in de eerste vrije positie
+				for (int i = 0; namen.length > i && stop; i++) {
+					// is de pos leeg
+					if (namen[i] == null) {
+						// dan moet de naam opgeslagen worden op de pos
+						namen[i] = naam;
+						// en mag de lus stoppen
+						stop = false;
+					}
+				}
+			}
+			controle = true;
+			stop = true;
+			naam = invoer.next();
+		}
+
+		for (int i = 0; namen.length > i; i++) {
+			if (namen[i] != null) {
+				System.out.println(namen[i] + "    " + (aantal[i] + 1));
+			}
+		}
+		invoer.close();
+	}
+}
+
+</code></pre>
+<div class="first">Toggle second</div>
+<pre class="first-p"><code>
+package test;
+
+import java.util.Scanner;
+
+public class topslagnamenentel2 {
+	public static void main(String[] args) {
+		Scanner invoer = new Scanner(System.in);
+		String[] namen = new String[10];
+		int[] aantal = new int[10];
+		String naam = invoer.next();
+		boolean stop = true;
+		boolean controle = true;
+
+		while (!naam.equals("stop")) {
+			
+			for (int i = 0; namen.length > i && stop; i++) {
+				if (namen[i] == null) {
+					// is de plaats leeg moet die niet verder gaan kijken
+					// vooral nodig bij de eerste null
+					stop = false;
+
+					// zit de naam er tussen
+					// bij de eerste naam die die tegenkomt dat match stop die
+					// en mag de naam niet meer bijgezet worden in de lijst
+					
+				} else if (namen[i].contains(naam)) {
+					stop = false;
+					controle = false;
+					// de naam komt voor dus moet bijgeteld worden
+					aantal[i]++;
+				}
+				// stop moet terug true zijn voor de lus te laten lopen
+				stop = true;
+			}
+			// als de naam niet voorkomt wordt die opgeslagen
+			if (controle) {
+				// deze word opgeslagen in de eerste vrije positie
+				for (int i = 0; namen.length > i && stop; i++) {
+					// is de pos leeg
+					if (namen[i] == null) {
+						// dan moet de naam opgeslagen worden op de pos
+						namen[i] = naam;
+						// en mag de lus stoppen
+						stop = false;
+					}
+				}
+			}
+			controle = true;
+			stop = true;
+			naam = invoer.next();
+		}
+
+		for (int i = 0; namen.length > i; i++) {
+			if (namen[i] != null) {
+				System.out.println(namen[i] + "    " + (aantal[i] + 1));
+			}
+		}
+		invoer.close();
+	}
+}
+
+	</code></pre>
+	
+	
+	
+	
+	
+<script>
+$('.first-p').hide();   
+$( "div.first" ).click(function() {
+    $(this).next().slideToggle(0);
+});
+</script>
+
+</body>
+</html>

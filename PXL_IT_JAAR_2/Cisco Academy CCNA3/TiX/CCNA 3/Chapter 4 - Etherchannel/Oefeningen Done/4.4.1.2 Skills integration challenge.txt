@@ -1,0 +1,221 @@
+R1 
+--
+enable
+configure t
+interface GigabitEthernet0/0
+no shut
+interface GigabitEthernet0/0.1
+encapsulation dot1Q 99 native
+ip address 192.168.99.1 255.255.255.0
+interface GigabitEthernet0/0.10
+encapsulation dot1Q 10
+ip address 192.168.10.1 255.255.255.0
+interface GigabitEthernet0/0.20
+encapsulation dot1Q 20
+ip address 192.168.20.1 255.255.255.0
+router rip
+version 2
+network 192.168.1.0
+network 192.168.10.0
+network 192.168.20.0
+network 192.168.99.0
+passive-interface GigabitEthernet0/0.1
+passive-interface GigabitEthernet0/0.10
+passive-interface GigabitEthernet0/0.20
+no auto-summary
+end
+copy run start
+
+
+R2
+---
+enable
+configure t
+
+interface GigabitEthernet0/0
+no shut
+
+interface GigabitEthernet0/0.1
+encapsulation dot1Q 99 native
+ip address 192.168.99.2 255.255.255.0
+
+interface GigabitEthernet0/0.10
+encapsulation dot1Q 10
+ip address 192.168.10.2 255.255.255.0
+
+interface GigabitEthernet0/0.20
+encapsulation dot1Q 20
+ip address 192.168.20.2 255.255.255.0
+
+router rip
+version 2
+network 192.168.1.0
+network 192.168.10.0
+network 192.168.20.0
+network 192.168.99.0
+passive-interface GigabitEthernet0/0.1
+passive-interface GigabitEthernet0/0.10
+passive-interface GigabitEthernet0/0.20
+no auto-summary
+end
+copy run start
+
+
+S1
+---
+enable
+configure t
+vtp mode server
+vtp domain CCNA
+vtp password cisco123
+vlan 10
+vlan 20
+vlan 99
+exit
+interface range f0/1 - 9
+switchport mode access
+switchport access vlan 10
+inte range f0/10 - 19
+switchport mode access
+switchport access vlan 20
+interface range f0/20 - 24, g0/1-2
+switchport mode trunk
+switchport trunk native vlan 99
+interface range g0/1 - 2
+channel-group 1 mode active
+interface range f0/21 - 22
+channel-group 5 mode active
+interface range f0/23 - 24
+channel-group 3 mode active
+interface po 1
+switchport mode trunk
+switchport trunk native vlan 99
+interface po 3
+switchport mode trunk
+switchport trunk native vlan 99
+interface po 5
+switchport mode trunk
+switchport trunk native vlan 99
+spanning-tree mode rapid-pvst
+spanning-tree vlan 10 priority 4096
+spanning-tree vlan 20 priority 8192
+end
+copy run start
+
+S2
+---
+
+enable
+configure t
+vtp mode client
+vtp domain CCNA
+vtp password cisco123
+interface range f0/1 - 9
+switchport mode access
+switchport access vlan 10
+inte range f0/10 - 19
+switchport mode access
+switchport access vlan 20
+inte range f0/20 - 24, g0/1-2
+switchport mode trunk
+switchport trunk native vlan 99
+interface range g0/1 - 2
+channel-group 2 mode active
+interface range f0/21 - 22
+channel-group 6 mode active
+interface range f0/23 - 24
+channel-group 3 mode active
+interface po 2
+switchport mode trunk
+switchport trunk native vlan 99
+interface po 3
+switchport mode trunk
+switchport trunk native vlan 99
+interface po 6
+switchport mode trunk
+switchport trunk native vlan 99
+spanning-tree mode rapid-pvst
+spanning-tree vlan 10 priority 8192
+spanning-tree vlan 20 priority 4096
+end
+copy run start
+
+S3
+---
+
+enable
+configure t
+vtp mode client
+vtp domain CCNA
+vtp password cisco123
+interface range f0/1 - 9
+switchport mode access
+switchport access vlan 10
+inte range f0/10 - 20
+switchport mode access
+switchport access vlan 20
+inte range f0/21 - 24, g0/1-2
+switchport mode trunk
+switchport trunk native vlan 99
+interface range g0/1 - 2
+channel-group 1 mode active
+interface range f0/21 - 22
+channel-group 6 mode active
+interface range f0/23 - 24
+channel-group 4 mode active
+interface po 1
+switchport mode trunk
+switchport trunk native vlan 99
+interface po 4
+switchport mode trunk
+switchport trunk native vlan 99
+interface po 6
+switchport mode trunk
+switchport trunk native vlan 99
+spanning-tree mode rapid-pvst
+spanning-tree vlan 10 priority 32768
+spanning-tree vlan 20 priority 32768
+end
+copy run start
+
+
+S4
+---
+
+
+enable
+configure t
+vtp mode client
+vtp domain CCNA
+vtp password cisco123
+interface range f0/1 - 9
+switchport mode access
+switchport access vlan 10
+inte range f0/10 - 20
+switchport mode access
+switchport access vlan 20
+inte range f0/21 - 24, g0/1-2
+switchport mode trunk
+switchport trunk native vlan 99
+interface range g0/1 - 2
+channel-group 2 mode active
+interface range f0/21 - 22
+channel-group 5 mode active
+interface range f0/23 - 24
+channel-group 4 mode active
+interface po 2
+switchport mode trunk
+switchport trunk native vlan 99
+interface po 4
+switchport mode trunk
+switchport trunk native vlan 99
+interface po 5
+switchport mode trunk
+switchport trunk native vlan 99
+spanning-tree mode rapid-pvst
+spanning-tree vlan 10 priority 32768
+spanning-tree vlan 20 priority 32768
+end
+copy run start
+
+

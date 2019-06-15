@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Static Routing@Danillo</title>
+<script type="text/javascript" src="../scripts/shCore.js"></script>
+<script type="text/javascript" src="../scripts/shBrushJava.js"></script>
+<link type="text/css" rel="stylesheet" href="../styles/shCoreRDark.css"/>
+<link type="text/css" rel="stylesheet" href="../styles/basic.css"/>
+<script type="text/javascript">SyntaxHighlighter.all();</script>
+<script src="../jquery.min.js"></script>
+</head>
+<body>
+
+  <ul>
+    <li><a href="../index.html">Home</a></li>
+    <li><a href="../html/sw.html">TOOLS</a></li>
+    <li><a class="active" href="../html/static.html">Static Routing</a></li>
+    <li><a href="../html/dynamic.html">Dynamic Routing</a></li>
+    <li><a href="../html/switch.html">Switch Configuration</a></li>
+    <li><a href="../html/vlan.html">Vlans</a></li>
+    <li><a href="../html/acl.html">Acces control list (ACL)</a></li>
+    <li><a href="../html/dhcp.html">DHCP</a></li>
+    <li><a href="../html/nat.html">Network Address translation (NAT)</a></li>
+    <li><a href="../html/dmm.html">Device Discovery, Managements, Maintenance</a></li>
+    <li><a href="../html/trouble.html"> >>TROUBEL SHOOTING<< </a></li>
+  </ul>
+
+<div id="home" style="margin-left:20%;padding:1px 16px;">
+  <h2>Static Routing</h2>
+
+<p class="first"><a href="#">Configureren van IPv4 statische routes</a></p>
+<pre class="first-p">
+    Router(config)#ip route network-address subnet-mask {ip-address | exit-intf}          aanmaken
+    Router(config)# no ip route network-address subnet-mask {ip-address | exit-intf}      verwijderen
+    Router(config)# ip route 0.0.0.0 0.0.0.0 { ip-address | exit-intf }                   default gateway
+
+--IP next hop address--
+    RouterB(config)#ip route 172.16.1.0 255.255.255.0 172.16.2.2
+
+--Exit interface--
+    RouterB(config)#ip route 172.16.1.0 255.255.255.0 Serial 0/0
+
+--Nexthop en exit interface--
+    RouterB(config)#ip route 172.16.1.0 255.255.255.0 G0/0 172.16.2.2
+
+--Default Gateway  - QUAD ZERO ROUTE--
+    RouterB(config)#ip route 0.0.0.0 0.0.0.0 172.16.2.2                                  172.16.2.2 naar buiten
+
+--Floating statische routes--
+    RouterB(config)# ip route 172.16.1.0 255.255.255.0 10.10.10.2 5                      default is 1
+    RouterB(config)# ip route 0.0.0.0 0.0.0.0 10.10.10.2 5                               5 = als altenative route
+
+--TroubelShoot--
+    RouterB(config)#traceroute 172.16.1.1
+    routerB#show ip interface brief                                                       status interface
+    routerB#show controllers Serial 0/0                                                   dce en clockrate
+    routerB#show running-config
+
+    --Extended ping--
+    RouterB(config)#ping 192.168.2.1 source 192.168.1.1
+    RouterB(config)#ping 192.168.2.1 source g0/0
+</pre>
+<p class="first"><a href="#">Voorbeeld</a></p>
+<pre class="first-p">
+
+---Alle ip instellen op de poorten--
+  routerB#configure terminal
+  routerB(config)#interface Serial 0/0
+  routerB(config-if)#ip address 192.168.10.1 255.255.255.0
+  routerB(config-if)#clock rate 128000                                              dce kant -> show controllers Serial 0/0
+  routerB(config-if)#no shutdown
+  routerB(config-if)#exit
+  routerB(config)#interface Serial 0/1
+  routerB(config-if)#ip address 192.168.12.2 255.255.255.0
+  routerB(config-if)#no shutdown
+  routerB(config-if)#exit
+  routerB(config)#interface FastEthernet 0/0
+  routerB(config-if)#ip address 192.168.1.1 255.255.255.0
+  routerB(config-if)#no shutdown
+  routerB(config-if)#exit
+
+--Alle verbinden maken--
+  RouterB(config)#ip route 192.168.2.0 255.255.255.0 192.168.12.1
+  RouterB(config)#ip route 192.168.11.0 255.255.255.0 192.168.12.1
+  RouterB(config)#ip route 0.0.0.0 0.0.0.0 192.168.10.2
+
+  RouterA(config)#ip route 192.168.1.0 255.255.255.0 Serial 0/1
+  RouterA(config)#ip route 192.168.2.0 255.255.255.0 Serial 0/0
+  RouterA(config)#ip route 192.168.12.0 255.255.255.0 Serial 0/0
+  RouterA(config)#ip route 0.0.0.0 0.0.0.0 Serial 0/2
+
+  RouterC(config)#ip route 192.168.1.0 255.255.255.0 Serial 0/0
+  RouterC(config)#ip route 192.168.10.0 255.255.255.0 Serial 0/0
+  RouterC(config)#ip route 0.0.0.0 0.0.0.0 Serial 0/1
+
+--controleren--
+  Router#show ip route
+</pre>
+</body>
+<script>
+$('.first-p').hide();
+$( "p.first" ).click(function() {
+    $(this).next().slideToggle(0);
+});
+</script>
+</html>

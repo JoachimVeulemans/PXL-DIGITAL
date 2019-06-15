@@ -1,0 +1,220 @@
+Hoofdstuk 2 oef 3
+-----------------
+
+VLSM:
+192.168.1.0 /24 heeft 124 hosts nodig
+
+vlan 10: students
+192.168.1.1 /25 
+255.255.255.128
+192.168.1.2 - 192.168.1.126 usable
+
+vlan 20: teachers
+192.168.1.129 /27
+255.255.255.224
+192.168.1.130 - 192.168.1.158 usable
+
+vlan 30: management
+192.168.1.161 /29
+255.255.255.248
+192.168.1.162-192.168.1.166 usable
+--------------------------------------------
+
+ip adressen voor de devices:
+---------------------------
+PC_management_v1
+192.168.1.162
+225.255.255.248
+
+PC_student_v1
+192.168.1.2
+225.255.255.128
+
+PC_teacher_v1
+192.168.1.130
+255.255.255.244
+
+PC_student_V2
+192.168.1.3
+255.255.255.128
+
+PC_teacher_v2
+192.168.1.131
+255.255.255.244
+
+# Geef elk apparaat het juiste IP adres. De default-gateway gaan we straks configureren als we aan het router gedeelte komen. 
+
+switch_centrale
+
+en
+show vtp status
+conf t
+vtp domain pxl
+vtp password cisco
+vlan 10
+name students
+vlan 20
+name teachers
+vlan 30
+name management
+do show vlan
+
+# kijk als bij het commando "do show vlan" de nieuwe vlans er in staan. Nu we de vlans geconfigureerd hebben gaan we de andere switchen op clients zetten zodat we de vlans binnen krijgen maar eerst moeten we de poorten die gebruikt worden om de switchen in verbinding te zetten met elkaar op trunc zetten. We doen dit ook al voor de poort die de router gebruikt. 
+
+en
+conf t
+int g0/1
+sw mode trunk
+sw trunk allowed vlan 10,20,30
+
+int g0/2
+sw mode trunk
+sw trunk allowed vlan 10,20,30
+
+int fa0/1
+sw mode trunk
+sw trunk allowed vlan 10,20,30
+
+# nu kunnen we de poorten op de andere switchen op trunk zetten en de switch op client modus zetten zodat hij via VTP de vlans gaat binnenkrijgen #minderwerk :) 
+
+switch_verdieping_1
+en
+conf t
+vtp mode client
+vtp domain pxl
+vtp password cisco
+
+int g0/1
+sw mode trunk
+sw trunk allowed vlan 10,20,30
+
+int g0/2
+sw mode trunk
+sw trunk allowed vlan 10,20,30
+
+do show vlan brief
+
+# als nu na de "do show vlan brief" de vlans die we geconfigureerd hebben in de centrale switch in de switch_verdieping_1 steken dan bolt het anders moet ge efkes do show run doen en kijken waar ge uw shit fout geconfigureerd hebt. 
+#dit proces gaan we nu opnieuw doen voor switch_Verdieping_2
+
+switch_verdieping_2
+en
+conf t
+vtp mode client
+vtp domain pxl
+vtp password cisco
+
+int g0/1
+sw mode trunk
+sw trunk allowed vlan 10,20,30
+
+int g0/2
+sw mode trunk
+sw trunk allowed vlan 10,20,30
+
+do show vlan brief
+
+# nu gaan we poorten stickerkes geven en dan kunnen we ping testen, ik ga gewoon rap rap want het draait om de configuratie de poorten die we gebruiken stikkerkes geven
+
+switch_verdieping_1
+en
+conf t
+int f0/1
+sw mode acc
+sw acc vlan 30
+
+int f0/2
+sw mode acc
+sw acc vlan 10
+
+int f0/3
+sw mode acc
+sw acc vlan 20
+
+
+switch_Verdieping_2
+en 
+conf t
+int fa0/1
+sw mode acc
+sw acc vlan 10
+
+int fa0/2 
+sw mode acc
+sw acc vlan 20
+
+router 0
+en
+conf t
+
+int g0/0.10
+en dot1q 10
+ip addr 192.168.1.1 255.255.255.128
+no shut
+int g0/0.20
+en dot1q 20
+no shut
+ip addr 192.168.1.129 255.255.255.224
+int g0/0.30 
+en dot1q 30
+no shut
+ip addr 192.168.1.161 255.255.255.248
+
+ip route 0.0.0.0 0.0.0.0 100.100.100.1
+
+int g0/1
+ip addr 100.100.100.1 255.255.255.252
+no shut
+
+
+router 1:
+en
+conf t
+int g0/0
+ip addr 100.100.100.2 255.255.255.252
+no shut
+exit
+ip route 0.0.0.0 0.0.0.0 101.101.101.1
+
+int g0/1
+ip addr 101.101.101.1 255.255.255.252
+no shut 
+exit
+
+switch_controle
+en
+conf t
+int g0/1
+sw trunk native vlan 30
+exit
+
+int g0/2
+sw trunk native vlan 30
+exit
+
+switch_verdieping_1
+en
+conf t
+int g0/1
+sw trunk native vlan 30
+exit
+
+int g0/2
+sw trunk native vlan 30
+exit
+
+switch_Verdieping_2
+en
+conf t
+int g0/1
+sw trunk native vlan 30
+exit
+
+int g0/2
+sw trunk native vlan 30
+exit
+
+router 0
+ip route 0.0.0.0 0.0.0.0 100.100.100.1
+
+ 

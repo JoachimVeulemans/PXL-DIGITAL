@@ -1,0 +1,11 @@
+R2
+--
+
+en
+conf t
+
+ip route 0.0.0.0 0.0.0.0 Serial0/1/0
+
+router ospf 1
+
+default-information originate

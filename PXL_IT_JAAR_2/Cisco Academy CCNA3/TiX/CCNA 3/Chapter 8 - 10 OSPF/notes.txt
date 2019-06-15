@@ -1,0 +1,81 @@
+
+
+OSPF
+
+een proces id meegeven:
+Router (config) # router ospf 1 
+router-id 1.1.1.1 // router een id geven 
+network 192.168.1.0 0.0.0.255 area 0 // area maken en toevoegen aan area
+network 192.168.5.0 0.0.0.3 area 0
+network 192.168.5.12 0.0.0.3 area 0 
+passive-interface g0/0 
+
+show ip ospf ? // geeft de opties voor info over OSPF
+
+show ip ospf database // laat zien wat allemaal uitgewisseld wordt
+
+show ip ospf neighbours // laat de buren zien 
+
+++ bandbreedte consistent maken ++
+auto-cost reference-bandwidth 10000 // zorgt ervoor dat alle bandbreedte consistent is, dit moet dan wel op elke router ingesteld worden best als ge dit al doet op een router 
+
+int s0/0/0 
+bandwidth 64
+exit
+
+als ge veranderingen doet, uw OSPF proces restarten! 
+
+
+
+CONFIG LAB:
+-------------
+
+Configuring Basic Single-Area OSPFv2
+
+R1
+---
+
+en
+conf t
+
+int g0/0
+ip addr 192.168.1.1 255.255.255.0
+no shut
+
+do show ip interface brief 
+
+int s0/1/0
+clock rate 9600
+ip addr 192.168.12.1 255.255.255.252
+no shut
+exit
+
+int s0/1/1
+clock rate 9600
+ip addr 192.168.13.1 255.255.255.252
+no shut 
+exit
+
+
+R2
+---
+router-id 1.1.1.2
+
+
+
+
+R3
+--
+
+en conf t
+
+g is geconfigureerd
+
+s'en zijn geconfigureerd
+
+
+
+
+
+
+

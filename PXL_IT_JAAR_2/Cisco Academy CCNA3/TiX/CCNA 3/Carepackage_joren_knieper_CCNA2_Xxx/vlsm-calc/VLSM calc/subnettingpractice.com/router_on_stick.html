@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+    
+<!-- Mirrored from subnettingpractice.com/router_on_stick.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 22 Jan 2016 18:13:32 GMT -->
+<head>
+        <meta charset="utf-8">
+	<title>Router on a Stick/One-armed router</title>
+	<meta name="description" content="What exactly is a router on a stick/one-armed router? How does it work and why is it needed to make VLANs communicate with one another?" />
+	<meta name="keywords" content="Router on a Stick, router, stick, VLAN, VLans, CCNA, explained" />
+	<meta name=viewport content="width=device-width, initial-scale=1">
+	<link rel="canonical" href="router_on_stick.html" />
+	<link rel='stylesheet' type='text/css' href='header_footer.css'>
+    </head>
+    <body>
+<span id=titlename><a href="index.html">SubnettingPractice.com</a></span> The most extensive subnetting practice site on the web!
+                <ul id='nav'>
+                        <li><a href='index.html'>Practice Questions</a></li>
+                        <li><a href='ipv6.html'>IPv6 Subnetting</a></li>
+                        <li><a href='subnets.html'>Basic Subnetting</a></li>
+                        <li><a href='ipv6_subnetting.html'>IPv6 Calculator</a></li>
+                        <li><a href='binary.html'>Binary Practice</a></li>
+                        <li><a href='calc.html'>Subnetting Calculator</a></li>
+                        <li><a href='vlsm.html'>VLSM Calculator</a></li>
+                </ul>
+
+
+<p>
+<script async src="../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- Horizontal -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-5214460626967121"
+     data-ad-slot="4052100093"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</p>
+<h1>Router on a Stick</h1>
+<p>A router on a stick, also known as an 'one-armed router' is used to connect different VLANs to one another. Because different VLANs have different IP subnets they cannot use a layer-2 switch to talk to one another. Switches do not route IP traffic (which is layer-3), so a layer-3 device is needed for separate VLANs to communicate with one another. A simple example looks like this: </p>
+<p><img src="images/router_on_stick.png" alt="Router on a Stick" /></p>
+<p>VLAN A and VLAN B want to talk to one another, but they cannot do so directly through just the switch. If a host on VLAN A wants to send something to VLAN B it will see that the destination IP address is not on the local network and will send the packet to the default gateway. When the packet reaches the switch, the switch will attempt to forward this on to the default gateway's MAC address. If a router is present, then the router can serve as the default gateway and send the packet on to VLAN B. If there were no layer-3 device, then the switch wouldn't know where to send the data. Different IP subnets cannot communicate without a layer-3 device (a router) present.</p>
+<p>If the above is setup correctly, then a packet from VLAN A will go to the switch, the switch will send it on to the default gateway, which is the mac address of the router (remember, the switch is using layer-2 addressing to forward things). The router then looks in its layer-3 routing table to find the destination, which is in VLAN B. The router sees that to reach VLAN B it has to send the data back to the switch, which then forwards the data on to VLAN B. The router has the IP information of all the VLANs in the network.</p>
+<p>To correctly configure a router on a stick, be sure that the interface which goes from the switch to the router is a trunk interface, and that the router has sub-interfaces on its port. One sub-interface per VLAN. </p>
+<p>A router on a stick is a nice way to allow communication between multiple VLANs on a single LAN </p>
+
+<ul id='foot'>
+                        <li><a href='howto.html'>How to Subnet</a></li>
+                        <li><a href='howtoipv6.html'>How to Subnet IPv6</a></li>
+                        <li><a href='cheatsheet.html'>Subnetting Cheatsheet</a></li>
+                        <li><a href='binary_calc.html'>Binary/Hex Calculator</a></li>
+                        <li><a href='ethernet_wiring.html'>Ethernet Wiring Practice</a></li>
+                        <li><a href='ipv6_is_huge.html'>Incredible Size of IPv6</a></li>
+                        <li><a href='twos.html'>Exponent Practice</a></li>
+                        <li><a href='sixteens.html'>Multiples of Sixteen </a></li>
+                        <li><a href='osi_layer.html'>OSI Layer Practice</a></li>
+                        <li><a href='headers.html'>IP Header Practice</a></li>
+                        <li><a href='ip_allocation.html'>IPv4 v IPv6 Allocation</a></li>
+                        <li><a href='ccna_commands.html'>Top CCNA Commands</a></li>
+                        <li><a href='certs.html'>Networking Certificates</a></li>
+                        <li><a href='ccna_salary.html'>CCNA Salary Report</a></li>
+                       <li><a href='ccna_resources.html'>CCNA Resource List</a></li>
+                        <li><a href='jncia_ccna.html'>JNCIA v CCNA</a></li>
+                        <li><a href='contact.html'>Privacy Policy</a></li>
+			<li><a href="http://www.facebook.com/sharer.php?u=http://subnettingpractice.com" target="_blank" class="share"><img src="images/facebook.png" alt="Facebook" /></a>
+<a href="http://reddit.com/submit?url=http://subnettingpractice.com&amp;title=Subnetting%20Practice" target="_blank" class="share"><img src="images/reddit.png" alt="Reddit" /></a>
+<a href="http://www.linkedin.com/shareArticle?mini=true&amp;url=http://subnettingpractice.com" target="_blank" class="share"><img src="images/linkedin.png" alt="LinkedIn" /></a>
+<a href="http://twitter.com/share?url=http://subnettingpractice.com&amp;text=Learning%20to%20subnet!" target="_blank" class="share"><img src="images/twitter.png" alt="Twitter" /></a>
+</li>
+                </ul>
+
+<small>Copyright 2014 SubnettingPractice.com. All rights reserved</small>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','../www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-50427363-2', 'subnettingpractice.com');
+  ga('require', 'displayfeatures');
+  ga('send', 'pageview');
+
+</script>
+</body>
+
+<!-- Mirrored from subnettingpractice.com/router_on_stick.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 22 Jan 2016 18:13:32 GMT -->
+</html>
+

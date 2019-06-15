@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>ACL@Danillo</title>
+<script type="text/javascript" src="../scripts/shCore.js"></script>
+<script type="text/javascript" src="../scripts/shBrushJava.js"></script>
+<link type="text/css" rel="stylesheet" href="../styles/shCoreRDark.css"/>
+<link type="text/css" rel="stylesheet" href="../styles/basic.css"/>
+<script type="text/javascript">SyntaxHighlighter.all();</script>
+<script src="../jquery.min.js"></script>
+</head>
+<body>
+
+  <ul>
+    <li><a href="../index.html">Home</a></li>
+    <li><a href="../html/sw.html">TOOLS</a></li>
+    <li><a href="../html/static.html">Static Routing</a></li>
+    <li><a href="../html/dynamic.html">Dynamic Routing</a></li>
+    <li><a href="../html/switch.html">Switch Configuration</a></li>
+    <li><a href="../html/vlan.html">Vlans</a></li>
+    <li><a class="active" href="../html/acl.html">Acces control list (ACL)</a></li>
+    <li><a href="../html/dhcp.html">DHCP</a></li>
+    <li><a href="../html/nat.html">Network Address translation (NAT)</a></li>
+    <li><a href="../html/dmm.html">Device Discovery, Managements, Maintenance</a></li>
+    <li><a href="../html/trouble.html"> >>TROUBEL SHOOTING<< </a></li>
+  </ul>
+
+<div id="home" style="margin-left:20%;padding:1px 16px;">
+<h2>Acces control list</h2>
+<p class="first"><a href="#">Standaard ACL’s</a></p>
+<pre class="first-p">
+--ACL altijd zo dicht mogelijk bij de bestemming    (Tools->ip calculator voor wildcards)
+--Lijst wordt altijd SEQUENTIEEL afgaan van boven naar onder !!!Volgorde is belangrijk!!! Onderaan staat altijd ‘deny any’
+  Router(config)# access-list access-list-number {deny|permit|remark} source [source-wildcard][log]
+
+--Genummerde standaard ACL(1 tot 99 en 1300 tot 1999)
+  Router(config)# access-list 10 permit 192.168.30.0 0.0.0.255                        alles van netwerk doorlaten
+  Router(config)# access-list 1 permit ip 192.168.10.0 0.0.0.255
+
+  Router(config)# access-list 10 permit 192.168.30.1 0.0.0.255                        alleen 192.168.30.1 doorlaten
+  ---
+  Router(config)# access-list 10 permit 192.168.30.1 0.0.0.0                          met wildcards
+  Router(config)# access-list 10 permit host 192.168.30.1                             met host
+  ---
+  Router(config)# access-list 10 permit 0.0.0.0 255.255.255.255                       alles doorlaten
+  Router(config)# access-list 10 permit any                                           alles doorlaten
+  ---
+  Router(config)# access-list 2 deny any                                              niets doorlaten
+
+  --Volgorde IMPORTANT eerste krijgt meeste priority
+    Router(config)# access-list 3 permit host 192.168.10.10                           eerst doorlaten
+    Router(config)# access-list 3 deny 192.168.10.0 0.0.0.255                         dan alles blokeren
+
+  --bestaande ACL te verwijderen en opnieuw in te voeren
+    Router(config)# no access-list 3
+    Router(config)# access-list 3 deny host 192.168.10.2
+    Router(config)# access-list 3 permit 192.168.10.0 0.0.0.255
+
+--Koppelen van de ACL aan de interface !!!-ALTIJD-!!! 'out' of 'in' meegeven
+  Router(config)# interface Gi0/0
+  Router(config-if)# ip access-group 3 out                                            INKOMENDE OF UITGAANDE TRAFIEK
+
+--Standaard ACL’s met naam ipv nummers
+  Router(config)# ip access-list standard NO_ACCESS
+  Router(config-std-nacl)# deny host 192.168.10.10
+  Router(config-std-nacl)# permit any
+  Router(config-std-nacl)# exit
+  Router(config)# interface g0/0
+  Router(config-if)# ip access-group NO_ACCESS out
+
+--Beveiliging van de vty-lijnen door den ACL
+  Router(config)# line vty 0 4
+  Router(config-line)# login local
+  Router(config-line)# transport input ssh
+  Router(config-line)# access-class 21 in
+  Router(config-line)# exit
+  Router(config)# access-list 21 permit 192.168.10.0 0.0.0.255
+  Router(config)# access-list 21 deny any
+
+--Editen van een ACL -> ACL verwijderen en opnieuw invoeren is makkelijker
+  Router#configure terminal
+  Router(config)#ip access-list standard 3
+  Router(config-std-nacl)#no 10
+  Router(config-std-nacl)#10 deny host 192.168.10.3
+  Router(config-std-nacl)#end
+  Router#show access-lists
+      Standard IP access list 3
+      10 deny host 192.168.10.3
+      20 permit 192.168.10.0 0.0.0.255
+  Router#
+
+--Troubleshooting
+  Router# show access-lists                                                           Controle van de configuratie
+  Router# clear access-lists counters
+  Router# show ip interface Gi0/0                                                     poort controleer de instelling bij Outgoing en Inbound
+
+
+</pre>
+</div>
+
+</body>
+<script>
+$('.first-p').hide();
+$( "p.first" ).click(function() {
+    $(this).next().slideToggle(0);
+});
+</script>
+</html>

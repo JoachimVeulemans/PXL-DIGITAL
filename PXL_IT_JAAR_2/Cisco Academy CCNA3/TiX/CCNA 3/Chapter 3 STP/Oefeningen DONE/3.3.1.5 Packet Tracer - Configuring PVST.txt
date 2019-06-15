@@ -1,0 +1,97 @@
+S1
+---
+en
+conf t
+int fa0/6
+sw mode access
+sw acces vlan 30 
+no shutdown 
+
+vlan 10
+vlan 20
+vlan 30
+vlan 40
+vlan 50
+vlan 60
+vlan 70
+vlan 80
+vlan 99
+
+int range fa0/1-4
+sw mode trunk 
+sw trunk native vlan 99
+exit
+int vlan 99
+ip addr 172.31.99.1 255.255.255.0
+exit
+
+spanning-tree mode pvst
+spanning-tree vlan 10,30,50,70 root primary
+
+int fa0/6
+spanning-tree portfast
+exit
+
+int fa0/6
+spanning-tree bpduguard enable
+
+
+s2
+--
+en 
+conf t
+int fa0/18
+sw mode acces
+sw acces vlan 20 
+no shut
+
+int range fa0/1-4
+sw mode trunk
+exit
+
+int vlan 99
+ip addr 192.31.99.2 255.255.255.0
+exit
+
+spanning-tree mode pvst
+spanning-tree vlan 1,10,20,30,40,50,60,70,80,99 root secondary
+
+int fa0/18
+spanning-tree portfast
+exit
+
+int fa0/18
+spanning-tree bpduguard enable
+
+
+
+s3  
+---
+
+en
+conf t
+int fa0/11
+sw mode acces
+sw acces vlan 10 
+no shut
+
+int range fa0/1-4
+sw mode trunk 
+exit
+
+int vlan 99
+ip addr 172.31.99.3 255.255.255.0
+exit
+
+spanning-tree mode pvst
+spanning-tree vlan 20,40,60,80 root primary
+
+
+int fa0/11
+spanning-tree portfast
+exit
+
+int fa0/11
+spanning-tree bpduguard enable
+
+

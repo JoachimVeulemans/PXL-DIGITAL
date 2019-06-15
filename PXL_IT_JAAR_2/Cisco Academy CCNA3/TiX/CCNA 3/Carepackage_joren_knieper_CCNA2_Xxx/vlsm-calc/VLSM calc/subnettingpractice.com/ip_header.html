@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+    
+<!-- Mirrored from subnettingpractice.com/ip_header.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 22 Jan 2016 18:13:23 GMT -->
+<head>
+        <title>IP Header Guide</title>
+	<meta name="description" content="IPv4 and IPv6 data header information and practice. Gain an understanding of header fields."/>
+	<meta name="keywords" content="subnetting,IP headers,IPv6 header,CCNA,exam,network+,ICND1,subnet,networking" />
+	<meta name=viewport content="width=device-width, initial-scale=1">
+	<link rel='stylesheet' type='text/css' href='header_footer.css'>
+	<link rel="canonical" href="index-2.html" />
+    </head>
+    <body>
+<span id=titlename><a href="index.html">SubnettingPractice.com</a></span> The most extensive subnetting practice site on the web!
+		<ul id='nav'>
+			<li><a href='index.html'>Practice Questions</a></li>
+			<li><a href='ipv6.html'>IPv6 Subnetting</a></li>
+			<li><a href='subnets.html'>Basic Subnetting</a></li>
+			<li><a href='ipv6_subnetting.html'>IPv6 Calculator</a></li>
+			<li><a href='binary.html'>Binary Practice</a></li>
+			<li><a href='calc.html'>Subnetting Calculator</a></li>
+			<li><a href='vlsm.html'>VLSM Calculator</a></li>
+		</ul>
+		<h1>IP Header Format</h1>
+
+<p>An IP datagram is a packet of data made up of two parts; the header and the payload. The payload is the data being sent, and usually used by a higher level application. The header is the IP information used by the IP. You can think of IP similar to a letter. A letter comes with two parts, the actual letter meant to be read by the recipient, and the envelope, which directs the post office on where to send the letter. The header is like the envelope.</p>
+<div style="float: left; passing-right:5px;">
+<script async src="../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- Sidebar -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:300px;height:600px"
+     data-ad-client="ca-pub-5214460626967121"
+     data-ad-slot="2575366892"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+<p>Like a letter, the post office uses the information on the envelope to see where a letter is coming from and where it is going. You can also judge to see if the letter has been torn or damaged by looking at the envelope. If there are water stains and damage to the envelope, then the letter is probably damaged, and might need to even be re-written. The envelope will also give you hints as to what kind of letter you are getting. Is it a formal looking envelope from a business or a hand written letter from a friend?</p>
+<p>An IP header contains similar information. It includes the source and destination addresses, error checking along with other information which helps deliver data across a network.</p>
+<h2>IPv4 Header Information</h2>
+<p>An IPv4 header has a larger number of fields than the more modern IPv6 headers. It begins with a <strong>version</strong> number. For an IPv4 packet, this will be the number 4. This field tells the IP protocol what version of the IP protocol is being used on this particular piece of data. 
+<br>Next comes the <strong>Internet Header Length (IHL)</strong>, which is 4 bits long and specifies the header length. The header length can range from 160 to 480 bits and is always a multiple of 32 bits. IPv4 needs to specify the header length due to the different options which can be added to the header. 
+<br>Next comes the <strong>Type of Service</strong> or Differentiated Services Code Point (DSCP) field. This field is largely used for quality of service features such as determining the priority of a packet. For example, a voice over IP packet may be given higher priority over an HTTP packet.
+<br><strong>Total Length</strong> is a 16-bit field used to define the length of the whole packet, including the header and the payload. This can range from 20 bytes of 65,535 bytes.
+<br><strong>Identification</strong> contains a 16-bit value common to all fragments of a message. This is used to reassemble fragmented messages.
+<br><strong>Flags</strong> specify whether a packet has been or is allowed to be fragmented.
+<br><strong>Fragment Offset</strong> specifies where in a fragmented message this particular fragment occurred.
+<br><strong>Time To Live</strong> specifies how many hops the packet can cross before being dropped. This prevents a packet from being sent back and forth forever.
+<br><strong>Protocol</strong> identifies which higher-layer protocol is being carried in the data. Possibilities include TCP, UDP and ICMP.
+<br>The <strong>Header Checksum</strong> is a basic method of error detection. It is used to see if the header data was corrupted during transmission of the packet.
+<br>The <strong>Source Address</strong> and the <strong>Destination Address</strong> specify the originating and destination IP addresses for the packet.
+<br><strong>Options</strong> is a rarely used field of several types of additional options.
+<br><strong>Padding</strong> is used to make sure that the total header size is a multiple of 32 bits. Following all this comes the actual data inside the packet. </p>
+<h2>IPv6 Header Information</h2>
+<p>Like IPv4, IPv6 headers start with the <strong>Version</strong> number. The value 6 identifies the packet as an IPv6 packet. 
+<br>This is followed by the <strong>Traffic Class</strong>. The Traffic Class specifies the priority of the packet by assigning a certain class to that packet. For example, a voice packet is probably going to have a higher priority than a data packet due to lag on voice communication being more noticeable. 
+<br>This is followed by a <strong>Flow Label</strong>. Packets which belong to the same Flow Label should be routed through the same path. Packets with different Flow Labels can be routed to the same destination using different paths.
+<br>The <strong>Payload Length</strong> specifies the size of the post-header data.
+<br>The <strong>Next Header</strong> identifies the type of header immediately following the IPv6 header, for example a TCP or UDP header.
+<br><strong>Hop Limit</strong> replaces the IPv4 Time to Live data. This specifies how many hops the packet can take before being dropped. 
+<br><strong>Source Address</strong> and <strong>Destination Address</strong> specify what IP address the packet originated from and what IP address it is being sent to.
+</p>
+<p>Test your knowledge of IP header fields and the <a href='headers.html'>header order</a>.</p>
+<ul id='foot'>
+                        <li><a href='howto.html'>How to Subnet</a></li>
+                        <li><a href='howtoipv6.html'>How to Subnet IPv6</a></li>
+                        <li><a href='cheatsheet.html'>Subnetting Cheatsheet</a></li>
+                        <li><a href='binary_calc.html'>Binary/Hex Calculator</a></li>
+                        <li><a href='ethernet_wiring.html'>Ethernet Wiring Practice</a></li>
+                        <li><a href='ipv6_is_huge.html'>Incredible Size of IPv6</a></li>
+                        <li><a href='twos.html'>Exponent Practice</a></li>
+                        <li><a href='sixteens.html'>Multiples of Sixteen </a></li>
+                        <li><a href='osi_layer.html'>OSI Layer Practice</a></li>
+                        <li><a href='headers.html'>IP Header Practice</a></li>
+                        <li><a href='ip_allocation.html'>IPv4 v IPv6 Allocation</a></li>
+                        <li><a href='ccna_commands.html'>Top CCNA Commands</a></li>
+                        <li><a href='certs.html'>Networking Certificates</a></li>
+                        <li><a href='ccna_salary.html'>CCNA Salary Report</a></li>
+                        <li><a href='ccna_resources.html'>CCNA Resource List</a></li>
+                        <li><a href='jncia_ccna.html'>JNCIA v CCNA</a></li>
+                        <li><a href='contact.html'>Privacy Policy</a></li>
+<li><a href="http://www.facebook.com/sharer.php?u=http://subnettingpractice.com/headers.html" target="_blank" class="share"><img src="images/facebook.png" alt="Facebook" /></a>
+<a href="http://www.linkedin.com/shareArticle?mini=true&amp;url=http://subnettingpractice.com/headers.html" target="_blank" class="share"><img src="images/linkedin.png" alt="LinkedIn" /></a>
+<a href="http://twitter.com/share?url=http://subnettingpractice.com/headers.html&amp;text=Learning%20to%20subnet!" target="_blank" class="share"><img src="images/twitter.png" alt="Twitter" /></a>
+</li>
+                </ul>
+
+<small>Copyright 2014 SubnettingPractice.com. All rights reserved. <a href='contact.html'>Contact</a></small>
+<script type="text/javascript" src="headers.js"></script>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','../www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-50427363-2', 'subnettingpractice.com');
+  ga('require', 'displayfeatures');
+  ga('send', 'pageview');
+
+</script>
+    </body>
+
+<!-- Mirrored from subnettingpractice.com/ip_header.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 22 Jan 2016 18:13:23 GMT -->
+</html>
+
+

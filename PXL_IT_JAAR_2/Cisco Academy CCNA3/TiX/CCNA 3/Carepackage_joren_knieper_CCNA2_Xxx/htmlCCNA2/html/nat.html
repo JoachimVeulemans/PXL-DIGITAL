@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>NAT@Danillo</title>
+<script type="text/javascript" src="../scripts/shCore.js"></script>
+<script type="text/javascript" src="../scripts/shBrushJava.js"></script>
+<link type="text/css" rel="stylesheet" href="../styles/shCoreRDark.css"/>
+<link type="text/css" rel="stylesheet" href="../styles/basic.css"/>
+<script type="text/javascript">SyntaxHighlighter.all();</script>
+<script src="../jquery.min.js"></script>
+</head>
+<body>
+
+  <ul>
+    <li><a href="../index.html">Home</a></li>
+    <li><a href="../html/sw.html">TOOLS</a></li>
+    <li><a href="../html/static.html">Static Routing</a></li>
+    <li><a href="../html/dynamic.html">Dynamic Routing</a></li>
+    <li><a href="../html/switch.html">Switch Configuration</a></li>
+    <li><a href="../html/vlan.html">Vlans</a></li>
+    <li><a href="../html/acl.html">Acces control list (ACL)</a></li>
+    <li><a href="../html/dhcp.html">DHCP</a></li>
+    <li><a class="active" href="../html/nat.html">Network Address translation (NAT)</a></li>
+    <li><a href="../html/dmm.html">Device Discovery, Managements, Maintenance</a></li>
+    <li><a href="../html/trouble.html"> >>TROUBEL SHOOTING<< </a></li>
+  </ul>
+
+<div id="home" style="margin-left:20%;padding:1px 16px;">
+<h2>Network Address translation</h2>
+<p class="first"><a href="#">Configuring Static Translation of Inside Source Addresses(EEN OP EEN)</a></p>
+<pre class="first-p">
+  Nuttig als een host aan de binnenkant dient bereikt te worden door een vast adres aan de buitenkant
+--Te volgen stappen
+      1. enable
+      2. configure terminal
+      3. ip nat inside source static local-ip global-ip
+      4. interface type number
+      5. ip address ip-address mask [secondary]
+      6. ip nat inside
+      7. exit
+      8. interface type number
+      9. ip address ip-address mask
+      10. ip nat outside
+      11. end
+
+
+      1:Router> enable
+      2:Router# configure terminal
+      3:Router(config)# ip nat inside source static 192.168.10.1 201.201.201.1          local-ip global-ip
+
+      4:Router(config)# interface fastethernet 0/0
+      5:Router(config-if)# ip address 192.168.20.1 255.255.255.0                        ip intern aan de poort
+      6:Router(config-if)# ip nat inside
+      7:Router(config-if)# exit
+
+      8:Router(config)# interface fastethernet 0/1
+      9:Router(config-if)# ip address 200.200.200.1 255.255.255.240                     ip outside poort
+      10:Router(config-if)# ip nat outside
+      11:Router(config-if)# end
+
+</pre>
+<p class="first"><a href="#">Configuring Dynamic Translation of Inside Source Addresses(EEN POOL OP *(Out))</a></p>
+<pre class="first-p">
+  Dynamische translatie is nuttig als meerdere gebruikers van een privaat network toegang tot het internet nodig hebben
+--Te volgen stappen
+      1. enable
+      2. configure terminal
+      3. ip nat pool name start-ip end-ip {netmask netmask | prefix-length prefix-length}
+      4. access-list access-list-number permit source [source-wildcard]
+      5. ip nat inside source list access-list -number pool name
+      6. interface type number
+      7. ip address ip-address mask
+      8. ip nat inside
+      9. exit
+      10. interface type number
+      11. ip address ip-address mask
+      12. ip nat outside
+      13. end
+
+      Router> enable
+      Router# configure terminal
+      Router(config)# ip nat pool net-208 172.16.233.208 172.16.233.223 prefix-length 28    POOL
+
+      Router(config)# access-list 1 permit 192.168.34.0 0.0.0.255
+
+      Router(config)# ip nat inside source list 1 pool net-208
+      Router(config)# interface ethernet 1
+      Router(config-if)# ip address 10.114.11.39 255.255.255.0
+      Router(config-if)# ip nat inside
+      Router(config-if)# exit
+
+      Router(config)# interface ethernet 0
+      Router(config-if)# ip address 172.16.232.182 255.255.255.240
+      Router(config-if)# ip nat outside
+      Router(config-if)# end
+
+</pre>
+<p class="first"><a href="#">Using NAT to Allow Internal Users Access to the Internet over one global address (* in -> out )</a></p>
+<pre class="first-p">
+  Dit is de geëigende method om alle gebruikers toegang te geven tot het internet en toch maar een
+  beperkt aantal inside globale addressen te gebruiken door overloading te gebruiken
+--Te volgen stappen
+      1. enable
+      2. configure terminal
+      3. ip nat pool name start-ip end-ip {netmask netmask | prefix-length prefix-length}
+      4. access-list access-list-number permit source [source-wildcard]
+      5. ip nat inside source list access-list-number pool name overload
+      6. interface type number
+      7. ip address ip-address mask
+      8. ip nat inside
+      9. exit
+      10. interface type number
+      11. ip address ip-address mask
+      12. ip nat outside
+      13. end
+
+      Router> enable
+      Router# configure terminal
+      Router(config)# ip nat pool net-208 192.168.202.129 192.168.202.158 netmask
+      255.255.255.224
+
+      Router(config)# access-list 1 permit 192.168.201.30 0.0.0.255
+      Router(config)# ip nat inside source list 1 pool net-208 overload
+
+      Router(config)# interface ethernet 1
+      Router(config-if)# ip address 192.168.201.1 255.255.255.240
+      Router(config-if)# ip nat inside
+      Router(config-if)# exit
+
+      Router(config)# interface ethernet 0
+      Router(config-if)# ip address 192.168.201.29 255.255.255.240
+      Router(config-if)# ip nat outside
+      Router(config-if)# end
+</pre>
+
+<p class="first"><a href="#">Using NAT to Allow Internal Users Access to the Internet over one global address (=PAT)(meerdere verbndingen op één poort)</a></p>
+<pre class="first-p">
+  Deze methode geeft alle gebruikers toegang tot het internet met slechts één inside globaal adres, maar met overloading
+--Te volgen stappen
+      1. enable
+      2. configure terminal
+      3. access-list access-list-number permit source [source-wildcard]
+      4. ip nat inside source list access-list-number interface interface-name overload
+      5. interface type number
+      6. ip address ip-address mask
+      7. ip nat inside
+      8. exit
+      9. interface type number
+      10. ip address ip-address mask
+      11. ip nat outside
+      12. end
+
+      Router> enable
+      Router# configure terminal
+      Router(config)# access-list 1 permit 192.168.1.0 0.0.0.255
+      Router(config)# ip nat inside source list 1 interface g0/0 overload
+
+      Router(config)# interface g 0/0
+      Router(config-if)# ip address 192.168.1.1 255.255.255.0
+      Router(config-if)# ip nat inside
+      Router(config-if)# exit
+
+      Router(config)# interface S0/0/0
+      Router(config-if)# ip address 20.0.0.2 255.255.255.252
+      Router(config-if)# ip nat outside
+      Router(config-if)# end
+</pre>
+<p class="first"><a href="#">TroubleShooting</a></p>
+<pre class="first-p">
+  Router# show ip nat translations
+  Router# show ip nat statistics
+  Router# clear ip nat statistics
+  Router# debug ip nat
+</pre>
+<p class="first"><a href="#">Voorbeeld</a></p>
+<pre class="first-p">
+  ---------------------------------------------------
+  Commando's
+
+  Met POOL
+  #POOL_1 150.150.150.3 150.150.150.10
+  #access-list 1 permit 192.168.1.0 0.0.0.255
+  #ip nat inside source list 1 pool POOL_1
+
+  Zonder POOL
+  #ip nat inside source list 1 interface s0/0/0 overload
+  #access-list 1 permit 192.168.1.0 0.0.0.255
+
+
+
+  ------------
+  #access-list 1 permit 192.168.1.0 0.0.0.255
+  #access-list 1 permit 192.168.2.0 0.0.0.255
+  #ip nat inside source list 1 interface s0/0/0
+
+  #int ser 0/0/0                                    buiten poort naar ISP
+  #ip nat outside
+
+  #int g0/0.10
+  #ip nat inside                                    binnenpoort vlan 10
+
+  #int g0/0.20                                      binnenpoort vlan 20
+  #ip nat inside
+
+  #exit
+
+  Overzicht:
+  #ip nat translation
+</pre>
+<pre>
+  Public
+  --------------
+  A. 10.*.*.*
+  B. 172.16.*.*
+     172.31.*.*
+  C. 192.168.*.*
+  -----------------
+  50.50.50.50:80 -> ip + port = socket
+</pre>
+</div>
+</body>
+<script>
+$('.first-p').hide();
+$( "p.first" ).click(function() {
+    $(this).next().slideToggle(0);
+});
+</script>
+</html>

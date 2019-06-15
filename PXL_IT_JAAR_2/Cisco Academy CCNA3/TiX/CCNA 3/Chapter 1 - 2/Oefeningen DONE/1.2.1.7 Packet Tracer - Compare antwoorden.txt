@@ -1,0 +1,34 @@
+A:
+1) 26
+2) 24 Fast ethernet en 2 gigabit ethernet interfaces
+3) The fast ethernet interfaces supporten snelheden van 10/100 mb/s en de gigabit ethernet interfaces supporten snelheden tot 1000mb/s
+4) nee
+
+B:
+1)A Layer 2 switch makes forwarding decisions based on L2 (MAC) addresses. Interfaces on Layer 3 switches can be configured with IP addresses. The switches can also be configured with routing protocols just like a router.
+
+2)A switch’s physical interface is used to physically connect end devices to the network. A switched virtual interface (SVI or VLAN) is used to configure the switch with an IP address so that it can be managed remotely.
+
+3)The 2960 operates on Layer 2, and the 3560 operates on Layers 2 and 3.
+
+4)Yes, D1’s G0/1 and the G0/2 interfaces are configured with the no switchport command and show an IP address and mask configured on both Gigabit Ethernet interfaces. D1 has IP routing enabled.
+
+5)It works on D1 because it functions on Layers 2 and 3, which allows it to function as a Layer 2 switch but at the same time, allows it to route packets and make forwarding decisions based on Layer 3 information (IP addresses) that conventional switches cannot.
+
+PART 2 
+A) 
+1)They both have a console port and both two Gigabit Ethernet interfaces. R1 is modular and can add various interfaces while D1 has only fixed interfaces. R1 has Serial and Asynchronous interfaces while D1 only has Ethernet interfaces. D1 can only use copper cables while R1 can use various connection types.
+
+2)R1 and D1 have the same IP addresses configured on them but on different interfaces. In order for the switch port to be assigned an IP address, technicians will have to issue the no switchport command.
+
+3)The no switchport command.
+
+4)The codes are the same except the router has an L code for local. This is a link that is configured on the physical interface of R1, while the switch does not have it. Both devices display the same networks in their routing tables.
+
+5)They both have EIGRP configured and both are learning networks from one another.
+
+B:
+1) Router or multilayer switch.
+
+2)A multilayer switch can route between networks as long as it is configured with an IP address and has IP routing enabled. IP routing must also be enabled if you plan to run routing protocols such as EIGRP on the switch. The no switchport command must be enabled on the interface in order to assign an IP address and subnet mask on the switch’s physical interface.
+

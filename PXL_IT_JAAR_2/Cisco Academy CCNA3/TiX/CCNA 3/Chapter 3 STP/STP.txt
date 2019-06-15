@@ -1,0 +1,70 @@
+Gaat bepalen dat er een uniek pad is tussen switchen. 
+
+			switch
+	
+	switch				switch
+
+BPDU
+-> id = 16bits lang
+
+--------------------------------
+|priority	| VLAN-ID	|
+---------------------------------
+
+standaard staat priority 1000
+
+als we die switch allemaal opzetten, dan hebben die allemaal dezelfde ID, dezelfde priority 
+
+dus zorg ervoor dat uw centrale ROOT priority heeft. Daardoor gaat STP zeggen welke poorten root poorten zijn voor de unieke poorten.
+Designated port = een poort waar doorheen geforward wordt en waar stp packages door kunnen komen. Dus als ge een designated port hebt en een root port hebt dan blijft het bollen. Maar als ge een designated port hebt en nog een designated port hebt dan gaat de switch zelf bepalen aan de hand van wie de hoogste root priority heeft (1 is hoger dan 2, 2 is hoger dan 3). Wie de hoogste priority heeft wordt de designated port, de lagere krijgt dan een non designated port. 
+
+
+PVSTP
+
+De onderhandeling gaat hetzelfde werken maar dan per VLAN. 
+
+
+configuratie van de oefenning
+
+#kabels ingestoken en dan de dhcp server opgezet.
+
+switch1
+show sp
+show spanning-tree
+
+
+als uw bolleke oranje dan is uw poort blocked
+
+switch2:
+spanning-tree portfast defualt 
+
+#alle poorten op trunk zetten van de switch
+
+switch0:
+en
+conf t
+vlan 10 
+name students
+end
+show spanning-tree
+
+switch2:
+en
+conf t
+vlan 10 
+name students
+end
+show spanning-tree
+
+switch0:
+spanning-tree mode ?
+span mode rapid-pvstp
+
+switch 1
+spanning-tree mode ?
+span mode rapid-pvstp
+
+switch 2 
+spanning-tree mode ?
+span mode rapid-pvstp
+

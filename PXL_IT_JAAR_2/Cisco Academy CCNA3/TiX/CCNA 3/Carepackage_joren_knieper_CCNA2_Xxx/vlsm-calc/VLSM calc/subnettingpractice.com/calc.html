@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+    
+<!-- Mirrored from subnettingpractice.com/calc.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 22 Jan 2016 18:12:38 GMT -->
+<head>
+        <meta charset="utf-8">
+        <title>Subnet Calculator</title>
+	<meta name="description" content="Free and easy subnet IP calculator. Network mask, CIDR, Broadcast, and Usable Hosts all calculated. Save time by using this great tool" />
+	<meta name="keywords" content="IP, calculator, subnetting, broadcast, hosts, netmask, slash, usable" />
+	<meta name=viewport content="width=device-width, initial-scale=1">
+<link rel="canonical" href="calc.html" />
+	<style type="text/css">
+label {
+    display: inline-block;
+    width:200px;
+    text-align: left;
+}
+input {
+    display: inline-block;
+    width:120px;
+    text-align: right;
+}
+    </style>
+	<link rel='stylesheet' type='text/css' href='header_footer.css'>
+    </head>
+    <body>
+<span id=titlename><a href="index.html">SubnettingPractice.com</a></span> The most extensive subnetting practice site on the web!
+                <ul id='nav'>
+                        <li><a href='index.html'>Practice Questions</a></li>
+                        <li><a href='ipv6.html'>IPv6 Subnetting</a></li>
+                        <li><a href='subnets.html'>Basic Subnetting</a></li>
+                        <li><a href='ipv6_subnetting.html'>IPv6 Calculator</a></li>
+                        <li><a href='binary.html'>Binary Practice</a></li>
+                        <li><a href='calc.html'>Subnetting Calculator</a></li>
+                        <li><a href='vlsm.html'>VLSM Calculator</a></li>
+                </ul>
+<h1>Subnetting Calculator</h1>
+<p>
+<script async src="../pagead2.googlesyndication.com/pagead/js/f.txt"></script> 
+<!-- mobile banner --> 
+<ins class="adsbygoogle" 
+     style="display:inline-block;width:320px;height:100px" 
+     data-ad-client="ca-pub-5214460626967121" 
+     data-ad-slot="2689458095"></ins> 
+<script> 
+(adsbygoogle = window.adsbygoogle || []).push({}); 
+</script> 
+</p> 
+
+<p id='question'></p>
+<form onsubmit="return false;">
+	<label>IP address:</label>
+	<input type='text'  id='ip' value='192.168.1.0'/> <br>
+	<label>Netmask or slash notation:</label>
+	<input type='text'  id='mask' value='/30'/> <br>
+	<button onClick="calculate();">Submit</button>
+</form>
+<table  bgcolor="#EEEEEE" cellpadding="2" cellspacing="1">
+	<tr><td>Address:</td><td id='address'></td></tr>
+	<tr><td>Network Address:</td><td id='netadd'></td></tr>
+	<tr><td>Broadcast:</td><td id='broad'></td></tr>
+	<tr><td>Netmask:</td><td id='netmask'></td></tr>
+	<tr><td>Slash:</td><td id='slash'></td></tr>
+	<tr><td>First Usable Host:</td><td id='first'></td></tr>
+	<tr><td>Last Usable Host:</td><td id='last'></td></tr>
+	<tr><td>Usable Hosts:</td><td id='hosts'></td></tr>
+	<tr><td>Wildcard:</td><td id='wild'></td></tr>
+</table>
+
+<p>Calculate all the subnet information you may need. It's fast, it's easy, it allows you to cut and paste and it accepts both CIDR (/24) and netmask notation (255.255.255.0).
+You may also want to learn <a href="howto.html">how to subnet</a> or check out the more <a href="vlsm.html">advanced</a>  calculator which will allow you to plan a whole network out.</p>
+<p>
+<script async src="../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- mobile banner black -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:320px;height:100px"
+     data-ad-client="ca-pub-5214460626967121"
+     data-ad-slot="9310754492"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</p>
+<ul id='foot'>
+                        <li><a href='howto.html'>How to Subnet</a></li>
+                        <li><a href='howtoipv6.html'>How to Subnet IPv6</a></li>
+                        <li><a href='cheatsheet.html'>Subnetting Cheatsheet</a></li>
+                        <li><a href='binary_calc.html'>Binary/Hex Calculator</a></li>
+                        <li><a href='ethernet_wiring.html'>Ethernet Wiring Practice</a></li>
+                        <li><a href='ipv6_is_huge.html'>Incredible Size of IPv6</a></li>
+                        <li><a href='twos.html'>Exponent Practice</a></li>
+                        <li><a href='sixteens.html'>Multiples of Sixteen </a></li>
+                        <li><a href='osi_layer.html'>OSI Layer Practice</a></li>
+                        <li><a href='headers.html'>IP Header Practice</a></li>
+                        <li><a href='ip_allocation.html'>IPv4 v IPv6 Allocation</a></li>
+                        <li><a href='ccna_commands.html'>Top CCNA Commands</a></li>
+                        <li><a href='certs.html'>Networking Certificates</a></li>
+                        <li><a href='ccna_salary.html'>CCNA Salary Report</a></li>
+                        <li><a href='ccna_resources.html'>CCNA Resource List</a></li>
+                        <li><a href='jncia_ccna.html'>JNCIA v CCNA</a></li>
+                        <li><a href='contact.html'>Privacy Policy</a></li>
+			<li><a href="http://www.facebook.com/sharer.php?u=http://subnettingpractice.com/calc.html" target="_blank" class="share"><img src="images/facebook.png" alt="Facebook" /></a>
+<a href="http://www.linkedin.com/shareArticle?mini=true&amp;url=http://subnettingpractice.com/calc.html" target="_blank" class="share"><img src="images/linkedin.png" alt="LinkedIn" /></a>
+<a href="http://twitter.com/share?url=http://subnettingpractice.com/calc.html&amp;text=A%20useful%20subnet%20calculator" target="_blank" class="share"><img src="images/twitter.png" alt="Twitter" /></a>
+</li>
+                </ul>
+
+<small>Copyright 2014 SubnettingPractice.com. All rights reserved</small>
+<script type='text/javascript' src="calc.js"></script>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','../www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-50427363-2', 'subnettingpractice.com');
+  ga('require', 'displayfeatures');
+  ga('send', 'pageview');
+
+</script>
+</body>
+
+<!-- Mirrored from subnettingpractice.com/calc.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 22 Jan 2016 18:12:39 GMT -->
+</html>
+

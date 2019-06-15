@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>DHCP@Danillo</title>
+<script type="text/javascript" src="../scripts/shCore.js"></script>
+<script type="text/javascript" src="../scripts/shBrushJava.js"></script>
+<link type="text/css" rel="stylesheet" href="../styles/shCoreRDark.css"/>
+<link type="text/css" rel="stylesheet" href="../styles/basic.css"/>
+<script type="text/javascript">SyntaxHighlighter.all();</script>
+<script src="../jquery.min.js"></script>
+</head>
+<body>
+
+  <ul>
+    <li><a href="../index.html">Home</a></li>
+    <li><a href="../html/sw.html">TOOLS</a></li>
+    <li><a href="../html/static.html">Static Routing</a></li>
+    <li><a href="../html/dynamic.html">Dynamic Routing</a></li>
+    <li><a href="../html/switch.html">Switch Configuration</a></li>
+    <li><a href="../html/vlan.html">Vlans</a></li>
+    <li><a href="../html/acl.html">Acces control list (ACL)</a></li>
+    <li><a class="active" href="../html/dhcp.html">DHCP</a></li>
+    <li><a href="../html/nat.html">Network Address translation (NAT)</a></li>
+    <li><a href="../html/dmm.html">Device Discovery, Managements, Maintenance</a></li>
+    <li><a href="../html/trouble.html"> >>TROUBEL SHOOTING<< </a></li>
+  </ul>
+
+<div id="home" style="margin-left:20%;padding:1px 16px;">
+<h2>Dynamic Host Configuration Protocol</h2>
+<p class="first"><a href="#">Configuratie van DHCPv4</a></p>
+<pre class="first-p">
+--Router - Deze adressen mogen niet langer uitgedeeld--
+  Router(config)# ip dhcp excluded-address 172.16.1.1                   enkel
+  Router(config)# ip dhcp excluded-address 172.16.1.254
+  Router(config)# ip dhcp excluded-address 172.16.1.1 172.16.1.9        range
+
+  --DHCP pool
+  Router(config)# ip dhcp pool LAN-POOL-1
+  Router(dhcp-config)#network 172.16.1.0 255.255.255.0
+  Router(dhcp-config)#default-router 172.16.1.1
+  Router(dhcp-config)#dns-server 172.16.1.254
+  Router(dhcp-config)#domain-name pxl.be
+
+  --DHCP relay -> om de broadcast over de router heen te kunnen sturen
+  Router(config)# interface g0/0
+  Router(config-if)#ip helper-address 172.16.1.1                         ip poort
+
+  --Router als DHCP-client
+  Router(config)# interface g0/0
+  Router(config-if)#ip address dhcp                                     dynamisch
+
+--TroubleShooting
+--Default Gateway, statische IP address en Broadcast en Netwerk address -> excluded-address
+Router# show running-config | include no service dhcp
+Router# debug ip dhcp server events                                     debug
+</pre>
+<p class="first"><a href="#">Info 4 stappen</a></p>
+<pre class="first-p">
+  4 Stappen
+  ---------------------
+  1. Broadcast client
+  2. “Ik ben een DHCP server, hier hebt ge u lease”
+  3. Client: “Ik wil de lease van de bepaalde DHCP-server (want er zijn meerdere DHCP servers)”
+  4. “Accepted”
+</pre>
+</div>
+
+</body>
+<script>
+$('.first-p').hide();
+$( "p.first" ).click(function() {
+    $(this).next().slideToggle(0);
+});
+</script>
+</html>

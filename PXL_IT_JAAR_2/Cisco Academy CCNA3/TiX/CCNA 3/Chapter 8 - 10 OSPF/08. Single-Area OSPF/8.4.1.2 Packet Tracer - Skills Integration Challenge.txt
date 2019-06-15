@@ -1,0 +1,82 @@
+RA
+----
+en
+conf t
+router ospf 1
+router-id 1.1.1.1
+int g0/0
+ip add 172.31.0.1 255.255.254.0
+no sh
+int s0/0/0
+ip add 172.31.4.1 255.255.255.252
+no sh
+router ospf 1
+passive-interface g0/0
+network 172.31.0.0 255.255.254.0 area 0
+network 172.31.4.0 255.255.255.252 area 0 
+
+
+
+RB
+----
+en
+conf t
+router ospf 1 
+router-id 2.2.2.2
+int g0/0
+ip add 172.31.2.1 255.255.254.0
+ipv6 address 2001:DB8:1::1/64
+no sh
+
+int s0/0/0
+ip addr 172.31.4.2 255.255.255.252
+no sh
+
+int s0/0/1 
+ipv6 add 2001:DB8:2::1/64
+no sh
+
+router ospf 1 
+passive-interface g0/0
+network 172.31.2.0 255.255.254.0 area 0
+network 172.31.4.0 255.255.255.252 area 0 
+int s0/0/1
+ipv6 ospf 1 area 0 
+ex 
+ipv6 router ospf 1
+router-id 2.2.2.2
+int g0/0
+ipv6 ospf 1 area 0 
+ipv6 address fe80::1 link-local
+int s0/0/1
+no sh
+
+
+RC
+----
+en
+conf t
+int g0/0
+ipv6 address fe80::3 link-local
+ex
+
+ipv6 unicast-routing
+ipv6 router ospf 1 
+router-id 3.3.3.3
+int g0/0
+ipv6 ospf 1 area 0 
+int s0/0/0
+ipv6 add 2001:DB8:2::2/64
+ipv6 ospf 1 area 0 
+no sh
+ipv6 ospf 1 area 0 
+int g0/0
+ipv6 address 2001:DB8:3::1/64
+no sh
+ex
+ipv6 router ospf 1
+passive-interface g0/0
+
+
+FE80::3
+

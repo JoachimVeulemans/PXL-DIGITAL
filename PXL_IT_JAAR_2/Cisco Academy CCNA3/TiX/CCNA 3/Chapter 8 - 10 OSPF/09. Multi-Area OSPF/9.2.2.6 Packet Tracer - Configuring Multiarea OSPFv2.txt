@@ -1,0 +1,31 @@
+R1 
+---
+en
+conf t
+router ospf 1 
+router-id 1.1.1.1 
+network 10.1.1.0 0.0.0.255 area 1
+network 10.1.2.0 0.0.0.255 area 1
+network 192.168.10.0 0.0.0.3 area 0
+
+R2
+---
+en
+conf t
+router ospf 1 
+router-id 2.2.2.2
+network 10.2.1.0 0.0.0.255 area 0 
+network 10.2.1.0 0.0.0.255 area 0
+network 192.168.10.0 0.0.0.3 area 0 
+network 192.168.10.4 0.0.0.3 area 0 
+
+R3
+---
+
+en
+conf t
+router ospf 1 
+router-id 3.3.3.3
+network 192.168.2.0 0.0.0.255 area 2
+network 192.168.1.0 0.0.0.255 area 2
+network 192.168.10.4 0.0.0.3 area 0

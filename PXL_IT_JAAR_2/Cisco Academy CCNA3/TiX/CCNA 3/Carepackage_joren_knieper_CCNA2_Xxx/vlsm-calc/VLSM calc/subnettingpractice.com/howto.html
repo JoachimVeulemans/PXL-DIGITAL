@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+    
+<!-- Mirrored from subnettingpractice.com/howto.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 22 Jan 2016 18:12:39 GMT -->
+<head>
+        <meta charset="utf-8">
+        <title>How To Subnet</title>
+	<meta name="description" content="A guide on how to subnet. The ideas behind subnetting explained in simple and easy to understand terms. Things are made easy."/>
+	<meta name="keywords" content="subnet, slash, how to, explained" />
+	<meta name=viewport content="width=device-width, initial-scale=1">
+<link rel="canonical" href="howto.html" />
+	<link rel='stylesheet' type='text/css' href='header_footer.css'>
+    </head>
+    <body>
+<span id=titlename><a href="index.html">SubnettingPractice.com</a></span> The most extensive subnetting practice site on the web!
+                <ul id='nav'>
+                        <li><a href='index.html'>Practice Questions</a></li>
+                        <li><a href='ipv6.html'>IPv6 Subnetting</a></li>
+                        <li><a href='subnets.html'>Basic Subnetting</a></li>
+                        <li><a href='ipv6_subnetting.html'>IPv6 Calculator</a></li>
+                        <li><a href='binary.html'>Binary Practice</a></li>
+                        <li><a href='calc.html'>Subnetting Calculator</a></li>
+                        <li><a href='vlsm.html'>VLSM Calculator</a></li>
+                </ul>
+<p>
+<script async src="../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- horizontal link blend -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-5214460626967121"
+     data-ad-slot="9450355295"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</p>
+<h1>How To Subnet</h1>
+<h2>The Quick and Easy</h2>
+<p>
+There are 2<sup>x</sup> subnets in a network, where x is the number of borrowed subnet bits. 
+</p>
+<p>
+There are 2<sup>h</sup>-2 usable hosts in a network, where h is the number of host bits. 
+</p>
+<p>
+The block size for a subnet is 256-subnet mask value. Start at zero and count in block sizes. Every block size will be a new network address. 
+</p>
+<p>
+The broadcast address is one less than the next network address. Count in block sizes.
+</p>
+<p>
+The usable hosts are between the network address and the broadcast. So the usable hosts the block size plus one through the next block size minus two.  
+</p>
+<p>Confused? The best way to learn subnetting is to practice! Start with the <a href="subnets.html">basics</a> and go from there.</p>
+<h2>A Bit More Depth</h2>
+<p>Learning how to subnet accurately and quickly are keys to success in the IT field and also to passing IT certifications, such as the CCNA. We subnet to avoid having one large network. A single giant network would be an unmanageable mess.</P
+<p>  All subnetting is done in binary, however, because we humans are used to a base-ten system, we translate things into decimal numbers. This makes life a lot easier. It is important to understand the binary behind the decimal. Without understanding the binary, it is difficult to understand why we calculate network masks, broadcast addresses, etc. the way we do. </p>
+
+<p>
+A binary digit is called a <b>bit</b>. It represents a 1 or a 0. An IPv4 address has 32 bits, and an IPv6 address has 128 bits, but let's stick with IPv4 for now. Each IPv4 address is split up into four <b>octets</b> separated by periods. Each bit represents a power of 2. An octet is a group of 8 bits and can have a value ranging from 0 to 255. If you do not know how to count in binary, or convert binary into decimals, and vice versa you should check out the <a href="binary.html">Binary Practice</a> page. 
+</p>
+
+<div style="float: left; padding-right: 10px;">
+<script async src="../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- Sidebar -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:300px;height:600px"
+     data-ad-client="ca-pub-5214460626967121"
+     data-ad-slot="2575366892"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+<p>
+OK, so an IP address is 32 bits. This address is then divided into two parts, the subnet bits and the host bits. The subnet bits show what network a device is on, and the host bits define the individual device. Think of a telephone number, you have an area code and then the number. The area code can be thought of as the subnet bits. Many people who live near one another share an area code, but they all have an individual phone number. The same is of devices on a subnet. They all share the same subnet bits, but then each one has an individual combination of host bits.
+</p>
+<p>
+The way we know which part of the IP address is the subnet bit part and which part is the host bit part is using a <b>subnet mask</b>. A subnet mask (or net-mask) is made up of 32-bits, like a regular IP address, but is used only to divide the subnet bits from the host bits. The subnet bits are all 1s and the host bits are all 0s. So a subnet mask might be 11111111.11111111.1111111.00000000, which in decimal should be 255.255.255.0. This would specify that any IP address with that subnet mask will have the first three octets be used as subnet bits, and the last octet will be used for host bits.
+</p>
+<p>
+You can have subnets inside of subnets. That's essentially what subnetting is; dividing blocks of IPs into smaller blocks. To do this you 'borrow' bits from the host range and add them to the subnetting bits. For example, you can split the above 255.255.255.0 into 4 subnets with the subnet mask of 255.255.255.192. "Wait, what??" Well, lets look back at the binary subnet mask for 255.255.255.0: 11111111.11111111.11111111.00000000. We can 'borrow' two bits from the host bits and create a net subnet mask of 11111111.11111111.11111111.<b>11</b>000000. Changing those two bits from 0s to 1s makes the last octet equal to 192. (Don't get it?  <a href="binary.html">Practice your Binary</a>.) By 'borrowing' those bits you can now create four new subnets within your original subnet. Why four? Because those two bits have four different possible combinations. You can have 00, 01, 10, 11. This number will always be 2<sup>x</sup> where x is the number of 'borrowed' subnet bits. 
+</p>
+<p>
+Now we know how many subnets we can create, but how many IPs does each subnet have? That is calculated the same way, only using the host bits. We have 6 host bits left (all the zeros) so we just find 2<sup>y</sup> where y is the number of host bits. 2<sup>6</sup>=64. But <b>wait</b>! That is how many IPs a subnet has, not how many usable hosts a subnet has. Every subnet must have a network address and a broadcast address, and neither of those can ever be used by a host. So the usable hosts is actually <b>2<sup>y</sup>-2</b> where y is the amount of host bits. In this case there are 62 usable bits per subnet. As you can see, learning your <a href="twos.html">powers of two</a> is key to subnetting quickly.
+</p>
+<p>
+The network address is used to identify the network that you are working on and the broadcast IP is used to send messages to every device on that subnet. The network address is always the very first IP address of a subnet, and the broadcast is always the very last IP address of a subnet. In other words, for a network address is the IP address where all the host bits are set to 0 and the broadcast address is the IP address where all the host bits are set to 1.
+</p>
+<h2>IP address classes</h2>
+<p>
+Though the class system of IP ranges has been replaced by CIDR, many people still talk about the five classes of IP address range. Only three are really important. 
+<br>Class A addresses use the first octet for networking and the last three octets as host bits. The first octet range is 1-126 (or any ip address where the first bit is a 0). 
+<br>Class B addresses use the first two octets for networking and the last two for host bits. The first octet range is from 128-192 (the first two bits are 10). 
+<br>Class C addresses use the first three octets for networking and the last octet for host bits. The range of the first octet is 192-223 (the first three bits are 110 in binary).
+<br>There are also Class D and E addresses which go from 224-239 and 240-255 and are used for multicast and experimental uses, respectively. 
+</p>
+<p>
+Private IP ranges are:<br>
+<table  bgcolor="#EEEEEE" border="1" cellpadding="2" cellspacing="1">
+<tr>
+<td>Class</td>
+<td>Size</td>
+<td>Subnet Mask</td>
+<td>Range of IPs</td>
+</tr>
+<tr>
+<td>Class A</td>
+<td>10.0.0.0/8</td>
+<td>255.0.0.0</td>
+<td>10.0.0.0 - 10.255.255.255</td>
+</tr>
+<tr>
+<td>Class B</td>
+<td>172.16.0.0/12</td>
+<td>255.240.0.0</td>
+<td>172.16.0.0 - 172.31.255.255</td>
+</tr>
+<tr>
+<td>Class C</td>
+<td>192.168.0.0/16</td>
+<td>255.255.0.0</td>
+<td>192.168.0.0 - 192.168.255.255</td>
+</tr>
+</table>
+Though classful IP addresses are largely a thing of the past, these private ranges are still in existence and must be known by an IT professional. They are used for internal network only not routable through the Internet.
+</p>
+<p>You may also want to read up on <a href="howtoipv6.html">IPv6</a>.</p>
+<p>
+<script async src="../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- link large minimal -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:15px"
+     data-ad-client="ca-pub-5214460626967121"
+     data-ad-slot="8042184099"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</p>
+<ul id='foot'>
+                        <li><a href='howto.html'>How to Subnet</a></li>
+                        <li><a href='howtoipv6.html'>How to Subnet IPv6</a></li>
+                        <li><a href='cheatsheet.html'>Subnetting Cheatsheet</a></li>
+                        <li><a href='binary_calc.html'>Binary/Hex Calculator</a></li>
+                        <li><a href='ethernet_wiring.html'>Ethernet Wiring Practice</a></li>
+                        <li><a href='ipv6_is_huge.html'>Incredible Size of IPv6</a></li>
+                        <li><a href='twos.html'>Exponent Practice</a></li>
+                        <li><a href='sixteens.html'>Multiples of Sixteen </a></li>
+                        <li><a href='osi_layer.html'>OSI Layer Practice</a></li>
+                        <li><a href='headers.html'>IP Header Practice</a></li>
+                        <li><a href='ip_allocation.html'>IPv4 v IPv6 Allocation</a></li>
+                        <li><a href='ccna_commands.html'>Top CCNA Commands</a></li>
+                        <li><a href='certs.html'>Networking Certificates</a></li>
+                        <li><a href='ccna_salary.html'>CCNA Salary Report</a></li>
+                        <li><a href='ccna_resources.html'>CCNA Resource List</a></li>
+                        <li><a href='jncia_ccna.html'>JNCIA v CCNA</a></li>
+                        <li><a href='contact.html'>Privacy Policy</a></li>
+			<li><a href="http://www.facebook.com/sharer.php?u=http://subnettingpractice.com" target="_blank" class="share"><img src="images/facebook.png" alt="Facebook" /></a>
+<a href="http://reddit.com/submit?url=http://subnettingpractice.com&amp;title=Subnetting%20Practice" target="_blank" class="share"><img src="images/reddit.png" alt="Reddit" /></a>
+<a href="http://www.linkedin.com/shareArticle?mini=true&amp;url=http://subnettingpractice.com" target="_blank" class="share"><img src="images/linkedin.png" alt="LinkedIn" /></a>
+<a href="http://twitter.com/share?url=http://subnettingpractice.com&amp;text=Learning%20to%20subnet!" target="_blank" class="share"><img src="images/twitter.png" alt="Twitter" /></a>
+</li>
+                </ul>
+
+<small>Copyright 2014 SubnettingPractice.com. All rights reserved</small>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','../www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-50427363-2', 'subnettingpractice.com');
+  ga('require', 'displayfeatures');
+  ga('send', 'pageview');
+
+</script>
+</body>
+
+<!-- Mirrored from subnettingpractice.com/howto.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 22 Jan 2016 18:12:39 GMT -->
+</html>

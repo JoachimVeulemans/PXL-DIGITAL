@@ -1,0 +1,61 @@
+
+VLANS 
+VLAN 10	
+VLAN 20
+VLAN 30
+
+S1
+en
+conf t
+int range fa0/1-4
+sw mode trunk
+sw trunk allowed vlan 10,20,30,40,50,60,70,80,99
+no shut 
+exit 
+int fa0/6
+no shut
+sw mode acc
+sw acc allowed vlan 30
+
+
+
+S2
+int range fa0/1-4
+sw mode acc
+no shut
+exit
+vtp mode server
+vtp password cisco
+
+
+S3
+en
+conf t
+int range f0/1-4
+sw mode acc
+no shut 
+exit
+
+
+S2 ga ik als server gebruiken
+en
+conf t
+vlan 10
+name vlan10
+vlan 20
+name vlan20
+vlan 30
+name vlan30
+vlan 40
+name vlan40
+vlan 50
+name vlan50
+vlan 60
+name vlan60
+vlan 70
+name vlan70
+vlan 80
+name vlan80
+vlan 99
+name vlan99
+do show vlan

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+    
+<!-- Mirrored from subnettingpractice.com/binary.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 22 Jan 2016 18:12:38 GMT -->
+<head>
+        <meta charset="utf-8">
+        <title>Binary Practice Questions</title>
+<meta name="description" content="Free practice questions for mastering binary and decimal conversions. Learn how computers really think." />
+	<meta name="keywords" content="binary, decimal, base, hexadecimal, hex, convert, practice, questions" />
+	<meta name=viewport content="width=device-width, initial-scale=1">
+	<link rel="canonical" href="binary.html" />
+	<link rel='stylesheet' type='text/css' href='header_footer.css'>
+    </head>
+    <body>
+<span id=titlename><a href="index.html">SubnettingPractice.com</a></span> The most extensive subnetting practice site on the web!
+                <ul id='nav'>
+                        <li><a href='index.html'>Practice Questions</a></li>
+                        <li><a href='ipv6.html'>IPv6 Subnetting</a></li>
+                        <li><a href='subnets.html'>Basic Subnetting</a></li>
+                        <li><a href='ipv6_subnetting.html'>IPv6 Calculator</a></li>
+                        <li><a href='binary.html'>Binary Practice</a></li>
+                        <li><a href='calc.html'>Subnetting Calculator</a></li>
+                        <li><a href='vlsm.html'>VLSM Calculator</a></li>
+                </ul>
+<div style="float: left; padding-right: 10px;">
+<script async src="../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- Sidebar -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:300px;height:600px"
+     data-ad-client="ca-pub-5214460626967121"
+     data-ad-slot="2575366892"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+<h1>Learn Binary</h1>
+	<p id='question'></p>
+<form onsubmit="return false;">
+	<input type='text' id='input' placeholder='Answer here'>
+	<button onClick="check_answer();">Submit</button>
+</form>
+<p><button onclick ="show_answer();">Show Answer</button>  <button onclick ="next_question();">Next</button></p>
+<p id='answeris' style='display:none'>The correct answer is:</p>
+<p id='answer' style='display:none'></p>
+<p id='solution' style='display:none'></p>
+<p>Binary is the key to subnetting. All computers process data in binary. A circuit is either on or off. Learning to count in binary, and also to translate binary into decimal will help not only with subnetting but with understanding computers in general.</p>
+<p>Binary uses only two digits, a 0 and a 1. Decimal uses ten digits, 0-9. Because decimal has ten different digits, you can use a single digit to count to three in decimal. 0,1,2,3. Binary cannot do this in a single space. Here is counting to three in decimal:
+<br>0
+<br>1
+<br>10
+<br>11
+<br>What do you think four is in binary? Well, we already used up all combinations of two digits to get to the value of three. We used 00, 01, 10, 11. So we need to move to the next digit. The decimal value of four is written 100 in binary.</p>
+<p>In subnetting we sometimes have to deal with large numbers. Numbers such as 234 or 192. Luckily we do not have to count one by one to find these numbers in binary. The real trick with binary is to remember that every digit represents an exponent of two. If there is a 1 value in the right-hand most digit, then you always add 2<sup>0</sup> to that number. If there is a 1 value in the second to right digit then you always add 2<sup>1</sup> to the value.</p>
+<p><table  bgcolor='#EEEEEE' border='1' cellpadding='2' cellspacing='1'><tr><td>Bit</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td></tr><td>Bit Value</td><td>128</td><td>64</td><td>32</td><td>16</td><td>8</td><td>4</td><td>2</td><td>1</td></tr>
+<td>Power of two</td><td>2<sup>7</sup></td><td>2<sup>6</sup></td><td>2<sup>5</sup></td><td>2<sup>4</sup></td><td>2<sup>3</sup></td><td>2<sup>2</sup></td><td>2<sup>1</sup></td><td>2<sup>0</sup></td></tr></table>
+<p>Lets take an example. What is bin 100101? Look at the digits that have a 1 value. We have 2<sup>5</sup>=32,2<sup>2</sup>=4, 2<sup>0</sup>=1. We add these together, 32+4+1=37. That is the decimal value of 100101! You may want to master your <a href="twos.html">powers of two</a>.</p>
+<p>There is also hexadecimal values. This is the same idea as binary, but in base 16, so a single digit goes from having a value of zero to fifteen.</p>
+<p><table  bgcolor='#EEEEEE' border='1' cellpadding='2' cellspacing='1'><tr><td>Hexadecimal digit</td><td>0</td><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td><td>8</td><td>9</td><td>A</td><td>B</td><td>C</td><td>D</td></td><td>E</td><td>F</td></tr><td>Decimal Value</td><td>0</td><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td><td>8</td><td>9</td><td>10</td><td>11</td><td>12</td><td>13</td><td>14</td><td>15</td></tr></table></p>
+<p>Because IPv6 is displayed using hexadecimal digits, converting between hex and binary is what network engineers will need to know for the future. The computer will still be using binary, but things will be displayed in hex.</p>
+<p>A <a href="binary_calc.html">Binary Decimal Hexadecimal Calculator</a> can also come in handy.<p>
+<ul id='foot'>
+                        <li><a href='howto.html'>How to Subnet</a></li>
+                        <li><a href='howtoipv6.html'>How to Subnet IPv6</a></li>
+                        <li><a href='cheatsheet.html'>Subnetting Cheatsheet</a></li>
+                        <li><a href='binary_calc.html'>Binary/Hex Calculator</a></li>
+                        <li><a href='ethernet_wiring.html'>Ethernet Wiring Practice</a></li>
+                        <li><a href='ipv6_is_huge.html'>Incredible Size of IPv6</a></li>
+                        <li><a href='twos.html'>Exponent Practice</a></li>
+                        <li><a href='sixteens.html'>Multiples of Sixteen </a></li>
+                        <li><a href='osi_layer.html'>OSI Layer Practice</a></li>
+                        <li><a href='headers.html'>IP Header Practice</a></li>
+                        <li><a href='ip_allocation.html'>IPv4 v IPv6 Allocation</a></li>
+                        <li><a href='ccna_commands.html'>Top CCNA Commands</a></li>
+                        <li><a href='certs.html'>Networking Certificates</a></li>
+                        <li><a href='ccna_salary.html'>CCNA Salary Report</a></li>
+                        <li><a href='ccna_resources.html'>CCNA Resource List</a></li>
+                        <li><a href='jncia_ccna.html'>JNCIA v CCNA</a></li>
+                        <li><a href='contact.html'>Privacy Policy</a></li>
+			<li><a href="http://www.facebook.com/sharer.php?u=http://subnettingpractice.com" target="_blank" class="share"><img src="images/facebook.png" alt="Facebook" /></a>
+<a href="http://www.linkedin.com/shareArticle?mini=true&amp;url=http://subnettingpractice.com" target="_blank" class="share"><img src="images/linkedin.png" alt="LinkedIn" /></a>
+<a href="http://twitter.com/share?url=http://subnettingpractice.com&amp;text=Learning%20to%20subnet!" target="_blank" class="share"><img src="images/twitter.png" alt="Twitter" /></a>
+</li>
+                </ul>
+
+<small>Copyright 2014 SubnettingPractice.com. All rights reserved</small>
+        <script type="text/javascript" src="binary.js"></script>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','../www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-50427363-2', 'subnettingpractice.com');
+  ga('require', 'displayfeatures');
+  ga('send', 'pageview');
+
+</script>
+    </body>
+
+<!-- Mirrored from subnettingpractice.com/binary.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 22 Jan 2016 18:12:38 GMT -->
+</html>
+

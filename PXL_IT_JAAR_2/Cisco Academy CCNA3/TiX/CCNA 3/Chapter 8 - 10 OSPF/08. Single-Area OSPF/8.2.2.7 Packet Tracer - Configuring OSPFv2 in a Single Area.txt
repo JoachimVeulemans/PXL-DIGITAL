@@ -1,0 +1,39 @@
+8.2.2.7 commands van de oefening
+
+R1
+--------
+en
+conf t
+router ospf 10
+router-id 1.1.1.1
+network 172.16.1.0 0.0.0.255 area 0
+network 192.168.10.4 0.0.0.3 area 0
+network 172.16.3.0 0.0.0.3 area 0
+passive-int g0/0
+exit
+
+
+R2
+--------
+en
+conf t
+router ospf 10
+router-id 2.2.2.2
+network 172.16.2.0 0.0.0.255 area 0
+network 172.16.3.0 0.0.0.3 area 0
+network 192.168.10.8 0.0.0.3 area 0 
+passive-int g0/0
+exit
+
+R3
+-------
+en
+conf t
+router ospf 10
+router-id 3.3.3.3
+network 192.168.10.4 0.0.0.3 area 0
+network 192.168.1.0 0.0.0.3 area 0
+network 192.168.10.8 0.0.0.3 area 0
+passive-int g0/0
+exit
+

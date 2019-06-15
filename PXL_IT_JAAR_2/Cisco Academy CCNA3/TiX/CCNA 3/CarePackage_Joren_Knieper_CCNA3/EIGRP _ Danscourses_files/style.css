@@ -1,0 +1,146 @@
+/*
+Theme Name: Twenty Sixteen Child Theme
+Description: Dans Custom twentysixteen
+Author: Danscourses
+Author URI: http://danscourses.com
+Template: twentysixteen
+Version: 0.1.0
+*/
+@import url("../twentysixteen/style.css");
+
+/**
+ * 11.1 - Header
+ */
+
+.site-header {
+/*	padding: 2.625em 7.6923%;*/
+        padding: .625em 7.6923%;
+}
+
+body,
+button,
+input,
+select,
+textarea {
+	color: #333;
+	font-family: Sans ,Helvetica,sans-serif;
+	line-height: 1.5;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	font-weight: normal;
+        font-size: 12px;
+}
+
+p {
+	margin: 0 0 1.5em;
+}
+
+code,
+kbd,
+tt,
+var,
+samp,
+pre {
+	font-family: courier,monospace;
+}
+
+pre {
+	border: 1px solid #d1d1d1;
+	background-color: #d1d1d1;
+	font-size: 16px;
+	font-size: 1rem;
+	line-height: 1.3125;
+	margin: 0 0 .5em;
+	max-width: 100%;
+	overflow: auto;
+	padding: .25em;
+	white-space: pre;
+	white-space: pre-wrap;
+	word-wrap: break-word;
+}
+
+
+mark,
+ins {
+	background: #FFFFFF;
+	color: #fff;
+	padding: 0.125em 0.25em;
+	text-decoration: none;
+}
+
+.entry-title {
+    font-family: "Open Sans Condensed", "Helvetica Neue", sans-serif;
+    font-size: 28px;
+    font-size: 1.75rem;
+    font-weight: 700;
+    line-height: 1.25;
+    margin-bottom: 1em;
+}
+
+.entry-content h2,
+.entry-summary h2,
+.comment-content h2,
+.textwidget h2 {
+	font-size: 23px;
+	font-size: 1.4375rem;
+	line-height: 1.2173913043;
+	margin-top: 2.4347826087em;
+	margin-bottom: 1.2173913043em;
+}
+
+.entry-content h1,
+.entry-content h2,
+.entry-content h3,
+.entry-content h4,
+.entry-content h5,
+.entry-content h6,
+.entry-summary h1,
+.entry-summary h2,
+.entry-summary h3,
+.entry-summary h4,
+.entry-summary h5,
+.entry-summary h6,
+.comment-content h1,
+.comment-content h2,
+.comment-content h3,
+.comment-content h4,
+.comment-content h5,
+.comment-content h6,
+.textwidget h1,
+.textwidget h2,
+.textwidget h3,
+.textwidget h4,
+.textwidget h5,
+.textwidget h6 {
+	font-weight: 700;
+}
+
+@media screen and (min-width: 61.5625em) {
+        .site-main {
+		margin-bottom: 7.0em;
+	}
+
+	.site-header {
+		padding: .25em 4.5455%;
+	}
+
+	.site-branding,
+	.site-header-menu,
+	.header-image {
+/*		margin-top: 1.75em;*/
+/*		margin-bottom: 1.75em;*/
+		margin-top: .75em;
+		margin-bottom: 1em;
+	}
+
+
+	.widget {
+		margin-bottom: 2em;
+	}
+}

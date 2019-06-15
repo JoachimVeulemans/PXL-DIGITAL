@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Dynamic Routing@Danillo</title>
+<script type="text/javascript" src="../scripts/shCore.js"></script>
+<script type="text/javascript" src="../scripts/shBrushJava.js"></script>
+<link type="text/css" rel="stylesheet" href="../styles/shCoreRDark.css"/>
+<link type="text/css" rel="stylesheet" href="../styles/basic.css"/>
+<script type="text/javascript">SyntaxHighlighter.all();</script>
+<script src="../jquery.min.js"></script>
+</head>
+<body>
+
+  <ul>
+    <li><a href="../index.html">Home</a></li>
+    <li><a href="../html/sw.html">TOOLS</a></li>
+    <li><a href="../html/static.html">Static Routing</a></li>
+    <li><a class="active" href="../html/dynamic.html">Dynamic Routing</a></li>
+    <li><a href="../html/switch.html">Switch Configuration</a></li>
+    <li><a href="../html/vlan.html">Vlans</a></li>
+    <li><a href="../html/acl.html">Acces control list (ACL)</a></li>
+    <li><a href="../html/dhcp.html">DHCP</a></li>
+    <li><a href="../html/nat.html">Network Address translation (NAT)</a></li>
+    <li><a href="../html/dmm.html">Device Discovery, Managements, Maintenance</a></li>
+    <li><a href="../html/trouble.html"> >>TROUBEL SHOOTING<< </a></li>
+  </ul>
+
+<div id="home" style="margin-left:20%;padding:1px 16px;">
+  <h2>Dynamic Routing</h2>
+  <p class="first"><a href="#">Configureren van IPv4 dynamic routes</a></p>
+  <pre class="first-p">
+      Router(config)# router rip                                                            aanzetten
+      Router(config-router)# Version 2
+      Router(config-router)# no auto-summary                                                automatische sommatie van route
+      statische routes
+
+  --Netwerken via RIP verstuurd worden--
+      RouterB(config-router)# network 192.168.1.0                                           zonder subnet
+      RouterB(config-router)# network 192.168.2.0
+
+  --QUAD ZERO ROUTE--
+      RouterA(config)# ip route 0.0.0.0 0.0.0.0 Serial 0/0                                  Naar buiten via serial kan ook ip zijn
+      RouterA(config)# router rip
+      RouterA(config-router)# default-information originate
+
+  --Statische <<-->> routes uitwisselen in rip--
+      Router(config)# ip route 192.0.2.0 255.255.255.0 Serial 0/1
+      Router(config)# router rip
+      Router(config-router)# redistribute static
+
+  --Interfaces opgeven die alleen luisteren naar de de routers die aan hun hangen--
+      R1(config)# router rip
+      R1(config-router)# passive-interface Fastethernet 0/0
+
+  --TroubelShoot--
+      RouterB#show ip route                                                                 ! Router table eerst
+      RouterB#show ip rip database                                                          ! Dan dit
+
+      routerB#show ip interface brief                                                       status interface
+      routerB#show controllers Serial 0/0                                                   dce en clockrate
+
+      RouterB(config)#traceroute 172.16.1.1
+
+      --ip classless nakijken--
+      Router# show running-config
+      Router(config)#ip classless                                                           no ip classless moet ip classless
+
+
+      --Extended ping--
+      RouterB(config)#ping 192.168.2.1 source 192.168.1.1
+      RouterB(config)#ping 192.168.2.1 source g0/0
+
+      --debug ip rip--
+      RouterB#debug ip rip                                                                  aanzetten
+      no debug all                                                                          uitzetten
+  </pre>
+  <p class="first"><a href="#">Voorbeeld rip2</a></p>
+  <pre class="first-p">
+    routerB#configure terminal
+routerB(config)#interface Serial 0/0
+routerB(config-if)#ip address 192.168.1.193 255.255.255.252
+routerB(config-if)#clock rate 128000
+routerB(config-if)#no shutdown
+routerB(config-if)#exit
+routerB(config)#interface Serial 0/1
+routerB(config-if)#ip address 192.168.1.202 255.255.255.252
+routerB(config-if)#no shutdown
+routerB(config-if)#exit
+routerB(config)#interface GigaEthernet 0/0
+routerB(config-if)#ip address 192.168.1.1 255.255.255.128
+routerB(config-if)#no shutdown
+routerB(config-if)#exit
+
+--X3 op ieder netwerk
+Router(config)#router RIP
+Router(config-router)#version 2
+Router(config-router)#no auto-summary
+Router(config-router)#network 192.168.1.0                                       netwerk ip
+Router(config-router)#passive-interface g0/0
+
+-------------------------
+RouterB#debug ip rip
+RIP protocol debugging is on
+      RouterB#RIP: received v2 update from 192.168.1.201 on Serial0/1
+      192.168.1.128/26 via 0.0.0.0 in 1 hops
+      192.168.1.196/30 via 0.0.0.0 in 1 hops
+      RIP: received v2 update from 192.168.1.194 on Serial0/0
+      192.168.1.128/26 via 0.0.0.0 in 2 hops
+      192.168.1.196/30 via 0.0.0.0 in 1 hops
+      RIP: sending v2 update to 224.0.0.9 via Serial0/0 (192.168.1.193)
+      RIP: build update entries
+      192.168.1.0/25 via 0.0.0.0, metric 1, tag 0
+      192.168.1.128/26 via 0.0.0.0, metric 2, tag 0
+      192.168.1.200/30 via 0.0.0.0, metric 1, tag 0
+      RIP: sending v2 update to 224.0.0.9 via Serial0/1 (192.168.1.202)
+      RIP: build update entries
+      192.168.1.0/25 via 0.0.0.0, metric 1, tag 0
+      192.168.1.192/30 via 0.0.0.0, metric 1, tag 0
+no debug ip rip
+RIP protocol debugging is off
+  </pre>
+</div>
+
+</body>
+<script>
+$('.first-p').hide();
+$( "p.first" ).click(function() {
+    $(this).next().slideToggle(0);
+});
+</script>
+</html>

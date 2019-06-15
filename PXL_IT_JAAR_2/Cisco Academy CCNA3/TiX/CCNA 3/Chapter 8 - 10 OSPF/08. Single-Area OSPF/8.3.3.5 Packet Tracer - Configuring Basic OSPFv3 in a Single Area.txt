@@ -1,0 +1,45 @@
+Configuration 8.3.3.5 IPv6
+
+R1
+-------
+en
+conf t
+ipv6 unicast-routing
+ipv6 router ospf 10
+router-id 1.1.1.1 
+int g0/0
+ipv6 ospf 10 area 0 
+int s0/0/0
+ipv6 ospf 10 area 0 
+int s0/0/1
+ipv6 ospf 10 area 0
+
+R2
+-------
+en
+conf t
+ipv6 unicast-routing
+ipv6 router ospf 10
+router-id 2.2.2.2
+int g0/0
+ipv6 ospf 10 area 0
+int s0/0/0
+ipv6 ospf 10 area 0 
+int s0/0/1
+ipv6 ospf 10 area 0
+
+
+R3
+-------
+en
+conf t
+ipv6 unicast-routing
+ipv6 router ospf 10
+router-id 3.3.3.3
+int g0/0
+ipv6 ospf 10 area 0 
+int s0/0/0
+ipv6 ospf 10 area 0
+int s0/0/1
+ipv6 ospf 10 area 0
+

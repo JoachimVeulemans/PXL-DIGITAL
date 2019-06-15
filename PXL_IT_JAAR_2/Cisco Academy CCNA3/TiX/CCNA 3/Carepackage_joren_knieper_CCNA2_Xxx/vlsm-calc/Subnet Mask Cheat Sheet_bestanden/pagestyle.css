@@ -1,0 +1,41 @@
+
+body		
+{
+	font-weight: normal;
+	font-family: Palatino,Times,"Times New Roman",serif;
+	background: #ffffff;
+	color: #000000;
+	max-width: 640px;
+	margin: 20px;
+}
+
+
+h1, h2, h3, h4, h5, h6		
+{
+	font-weight: bolder;
+	font-family: Helvetica, Geneva, Arial, Verdana, sans-serif;
+	padding: 0px;
+	margin: 0px 0px 1ex 0px;
+}
+
+img { border: none; }
+
+pre		
+{
+	padding: 0 0 0 25px;
+	font-size: 9pt;
+}
+
+.float-right
+{
+	border: none;
+	float: right;
+	padding: 0 0 25px 25px;
+}
+
+#valid-xhtml
+{
+	border: none;
+	float: right;
+	padding: 0 0 25px 25px;
+}

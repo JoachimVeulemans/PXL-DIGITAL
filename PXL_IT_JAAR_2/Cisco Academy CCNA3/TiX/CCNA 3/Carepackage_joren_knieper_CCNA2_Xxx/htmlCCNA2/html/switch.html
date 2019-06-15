@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Switch@Danillo</title>
+<script type="text/javascript" src="../scripts/shCore.js"></script>
+<script type="text/javascript" src="../scripts/shBrushJava.js"></script>
+<link type="text/css" rel="stylesheet" href="../styles/shCoreRDark.css"/>
+<link type="text/css" rel="stylesheet" href="../styles/basic.css"/>
+<script type="text/javascript">SyntaxHighlighter.all();</script>
+<script src="../jquery.min.js"></script>
+</head>
+<body>
+
+  <ul>
+    <li><a href="../index.html">Home</a></li>
+    <li><a href="../html/sw.html">TOOLS</a></li>
+    <li><a href="../html/static.html">Static Routing</a></li>
+    <li><a href="../html/dynamic.html">Dynamic Routing</a></li>
+    <li><a class="active" href="../html/switch.html">Switch Configuration</a></li>
+    <li><a href="../html/vlan.html">Vlans</a></li>
+    <li><a href="../html/acl.html">Acces control list (ACL)</a></li>
+    <li><a href="../html/dhcp.html">DHCP</a></li>
+    <li><a href="../html/nat.html">Network Address translation (NAT)</a></li>
+    <li><a href="../html/dmm.html">Device Discovery, Managements, Maintenance</a></li>
+    <li><a href="../html/trouble.html"> >>TROUBEL SHOOTING<< </a></li>
+  </ul>
+
+<div id="home" style="margin-left:20%;padding:1px 16px;">
+  <h2>Switch Configuration</h2>
+<p class="first"><a href="#">Basic Configuration</a></p>
+<pre class="first-p">
+  Switch# configure terminal
+  Switch(config)# hostname Switch1
+  Switch1(config)# banner motd #Blijf weg#
+  Switch1(config)# enable password pxl                                  -> niet meer gebruikt slaat passwoord gewoon blank op
+  Switch1(config)# enable secret pxl                                    paswoord zetten op mode
+
+  Switch1(config)# service password-encryption                          paswoord op console
+  Switch1(config)# line console 0
+  Switch1(config-line)# password pxl
+  Switch1(config-line)# login
+  Switch1(config-line)# logging synchronous
+
+  Switch1(config)# line vty 0 15                                        paswoord voor telnet
+  Switch1(config-line)# password pxl
+  Switch1(config-line)# login
+  Switch1(config-line)# logging synchronous
+
+  Switch1(config)# no ip domain-lookups                                 beveiligen voor DNS lookup
+
+--Instellen standaard route
+  Switch# configure terminal
+  Switch(config)# ip default-gateway 172.17.99.1
+
+--TroubelShoot--
+  Switch#show ip interface brief                                       ip-interfaces
+  Switch# show vlan                                                    vlan controleren
+  Switch# show mac-address-table                                       mac-address-table opvragen
+  Switch# show mac-address-table dynamic                               dynamisch geleerde MAC adres tabel
+  Switch# clear mac-address-table dynamic
+
+--Opslaan
+  Switch# copy running-config start-up config                          opslaan
+
+</pre>
+<p class="first"><a href="#">Configuratie van switchpoorten</a></p>
+<pre class="first-p">
+--Instellen van snelheid en verbinding van de poort
+  Switch# configure terminal
+  Switch(config)# interface fastethernet 0/1
+  Switch(config-if)# duplex auto                                       verbinding: full, half of auto
+  Switch(config-if)# speed auto                                        snelheid: 10 , 100 of auto
+  Switch(config-if)# mdix auto                                         auto-mdix: medium, dependent, interface, crossover
+  Switch(config-if)# end                                               controle -> Switch# show controllers ethernet-controller fa 0/1 phy | include Auto-MDIX
+
+--verifieren
+  Switch# show interfaces
+  Switch# show startup-config
+  Switch# show running-config
+  Switch# show flash
+  Switch# show version
+  Switch# show history
+  Switch# show ip
+  Switch# show mac-address-table
+</pre>
+<p class="first"><a href="#">Switch port security</a></p>
+<pre class="first-p">
+--Poort re-anable
+  S1(config)#interface FastEthernet 0/1
+  S1(config)#shutdown
+  S1(config)#no shutdown
+
+--Ongebruikte switchpoorten af zetten--
+  S1(config)#interface range fastethernet 0/3–24
+  S1(config-if-range)#shutdown
+
+--sticky mac-adressen instellen
+  S1(config)#interface fastethernet 0/1
+  S1(config-if)#switchport mode access
+  S1(config-if)#switchport port-security
+  S1(config-if)#switchport port-security maximum 50
+  S1(config-if)#switchport port-security mac-address sticky
+
+--DHCP snooping voorkomen -> DHCP server op trusted poort rest untrusted
+  S1(config)# ip dhcp snooping
+  S1(config)# ip dhcp snooping vlan 10,20
+  S1(config)# interface fastetehernet 0/1
+  S1(config-if)# ip dhcp snooping trust
+  S1(config)# interface fastethernet 0/2
+  S1(config-if-# ip dhcp snooping limit rate 5
+
+--TroubelShoot--
+  S1#show port-security interface fa 0/1                            poortbeveiliging
+  S1#show port-security address                                     poortbeveiligingsgroep
+</pre>
+<p class="first"><a href="#">Beveiligde toegang via SSH</a></p>
+<pre class="first-p">
+  Switch# configure terminal
+  Switch(config)# Hostname S1                                         moet uniek zijn voor SSH
+  S1(config)# name student
+  S1(config)#ip domain-name cisco.com
+  S1(config)#crypto key generate rsa
+
+  S1(config)#username admin password pxl
+  *mrt 1 0:1:6.676: %SSH-5-ENABLED: SSH 1.99 has been enabled
+
+  S1(config)#line vty 0 15
+  S1(config-line)#transport input ssh
+  S1(config-line)#login local
+  S1(config-line)#end
+
+  S1(config)# ip ssh version 2                                       ssh 2.0
+
+</pre>
+<p class="first"><a href="#">Instellen van management-VLAN(99)</a></p>
+<pre class="first-p">
+--Aanmaak vlan99
+  Switch# configure terminal
+  Switch(config)# vlan 99
+  Switch(config-vlan)# name management
+  Switch(config-vlan)# exit
+  Switch(config)# interface vlan 99
+  Switch(config-if)# ip address 172.17.99.2 255.255.0.0
+  Switch(config-if)# no shutdown
+  Switch(config-if)# end
+
+--Poort toekennen voor vlan99 (managementcomputer)
+  Switch#configure terminal
+  Switch(config)#interface fastethernet 0/1                             interface range fastethernet 0/2-9	-> range int range fa0/2-9
+  Switch(config-if)#switchport mode access
+  Switch(config-if)#switchport access vlan 99
+  Switch(config-if)#
+
+--Instellen standaard route
+  Switch# configure terminal
+  Switch(config)# ip default-gateway 172.17.99.1
+
+
+</pre>
+<p class="first"><a href="#">Het bootproces</a></p>
+<pre class="first-p">
+  Switch#dir flash:
+  Switch# configure terminal
+  Switch(config)# boot system flash:/c2960-lanbase-mz.122-25.FX.bi
+  Switch#show boot
+</pre>
+</div>
+
+</body>
+<script>
+$('.first-p').hide();
+$( "p.first" ).click(function() {
+    $(this).next().slideToggle(0);
+});
+</script>
+</html>

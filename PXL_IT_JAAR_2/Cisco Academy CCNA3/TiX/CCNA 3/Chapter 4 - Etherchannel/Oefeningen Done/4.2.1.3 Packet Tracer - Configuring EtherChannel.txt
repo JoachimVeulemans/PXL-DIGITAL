@@ -1,0 +1,88 @@
+S1 (bovenste switch) 
+---
+en
+conf t
+hostname S1
+
+
+interface range g0/1-2
+sw mode trunk 
+interface range f0/21 - 22
+sw mode trunk
+
+interface range f0/21 – 22
+shutdown
+channel-group 1 mode desirable
+no shutdown
+
+interface port-channel 1
+switchport mode trunk
+
+interface range g0/1 - 2 
+shutdown 
+channel-group 2 mode active 
+no shutdown 
+interface port-channel 2
+switchport mode trunk 
+
+
+spanning-tree vlan 1 root primary
+spanning-tree vlan 1 priority 24576
+
+
+
+S2 (linkse switch)
+---
+en
+conf t
+hostname S2
+
+interface range g0/1-2
+sw mode trunk
+interface range f0/23 - 24
+sw mode trunk 
+
+interface range g0/1-2
+shutdown 
+channel-group 2 mode active
+no shutdown 
+interface port-channel 2 
+switchport mode trunk 
+
+interface range f0/23 - 24 
+shutdown 
+channel-group 3 mode passive
+no shutdown 
+interface port-channel 3 
+switchport mode trunk 
+
+
+
+
+
+S3 (rechtse switch) 
+---
+en
+conf t
+hostname S3
+
+interface range f0/21-24
+sw mode trunk
+
+
+interface range f0/21 - 22
+shutdown
+channel-group 1 mode desirable
+no shutdown
+
+interface port-channel 1
+switchport mode trunk
+
+interface range f0/23 - 24 
+shutdown 
+channel-group 3 mode passive
+no shutdown 
+interface port-channel 3 
+switchport mode trunk 
+
+

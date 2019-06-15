@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Vlans@Danillo</title>
+<script type="text/javascript" src="../scripts/shCore.js"></script>
+<script type="text/javascript" src="../scripts/shBrushJava.js"></script>
+<link type="text/css" rel="stylesheet" href="../styles/shCoreRDark.css"/>
+<link type="text/css" rel="stylesheet" href="../styles/basic.css"/>
+<script type="text/javascript">SyntaxHighlighter.all();</script>
+<script src="../jquery.min.js"></script>
+</head>
+<body>
+
+<ul>
+  <li><a href="../index.html">Home</a></li>
+  <li><a href="../html/sw.html">TOOLS</a></li>
+  <li><a href="../html/static.html">Static Routing</a></li>
+  <li><a href="../html/dynamic.html">Dynamic Routing</a></li>
+  <li><a href="../html/switch.html">Switch Configuration</a></li>
+  <li><a class="active" href="../html/vlan.html">Vlans</a></li>
+  <li><a href="../html/acl.html">Acces control list (ACL)</a></li>
+  <li><a href="../html/dhcp.html">DHCP</a></li>
+  <li><a href="../html/nat.html">Network Address translation (NAT)</a></li>
+  <li><a href="../html/dmm.html">Device Discovery, Managements, Maintenance</a></li>
+  <li><a href="../html/trouble.html"> >>TROUBEL SHOOTING<< </a></li>
+</ul>
+
+<div id="home" style="margin-left:20%;padding:1px 16px;">
+  <h2>Vlans</h2>
+  <p class="first"><a href="#">Aanmaken en configuratie van een VLAN</a></p>
+  <pre class="first-p">
+--Aanmaak
+  Switch# configure terminal
+  Switch(config)# vlan 10
+  Switch(config-vlan)# name lector
+  Switch(config-vlan)# exit
+
+--verwijderen ! vlan1 is default kan niet gewist worden
+  Switch(config)# no vlan 10
+
+  --Alles wissen
+    Switch# erase flash:vlan.dat
+    Switch# erase startup-config
+    Switch# reload
+    ------------
+    Switch> enable
+    Switch# show flash
+    Switch# delete vlan.dat
+    Switch# erase startup-config
+    Switch# reload
+
+--Poorten toekennen aan een VLAN
+  Switch# configure terminal
+  Switch(config)# interface fastethernet 0/1
+  Switch(config-if)# switchport mode access
+  Switch(config-if)# switchport access vlan 10
+  Switch(config-if)# end
+
+--Poorten verwijderen van VLAN
+  Switch#configure terminal
+  Switch(config)#interface fa0/1
+  Switch(config-if)#no switchport access vlan 10
+  Switch(config-if)#end
+
+--TroubleShoot
+Switch# show vlan brief                                           vlans opvragen
+Switch# show vlan name student                                    enkele vplan opvragen
+Switch# show interfaces fa 0/1 switchport                         info per poort
+
+  </pre>
+  <p class="first"><a href="#">Dynamic Trunk protocol(VLAN trunks)</a></p>
+  <pre class="first-p">
+--Aanmaak
+Switch(config)# interface G0/0
+Switch(config-if)# switchport mode trunk                          Poorten die meerdere VLAN’s moeten doorlaten!!!(TRUNK)
+
+--Pakketten op uit te sturen die niet tot een VLAN behoren
+  Switch(config)# interface g0/1
+  Switch(config-if)# switchport trunk native vlan 99
+
+--Beperking van de VLAN’s--
+  Switch(config)# interface g0/1
+  Switch(config-if)# switchport trunk allowed vlan 10,20            10,20
+  Switch(config-if)# switchport trunk allowed vlan add 99           add 99
+
+--verwijderen ! vlan1 is default kan niet gewist worden
+
+
+--TroubleShoot -> volgorde om te controleren
+  Switch# show vlan
+  Switch# show mac-address table
+  Switch# show interfaces switchport
+  Switch# show interface fa0/1 switchport
+  Switch# show interfaces trunk
+
+  Switch# show mac-address-table
+  Switch# show mac-address-table dynamic
+  Switch# clear mac-address-table dynamic
+
+  Switch# show vlan brief                                           vlans opvragen
+  Switch# show vlan name student                                    enkele vplan opvragen
+  Switch# show interfaces fa 0/1 switchport                         info per poort
+
+  </pre>
+  <p class="first"><a href="#">Inter-VLAN Routing(Router-on-a-stick)</a></p>
+  <pre class="first-p">
+--Router-on-a-stick (toekennen VLAN’saan één enkele routerpoort)
+
+  routerB#configure terminal
+
+  routerB(config)#interface g0/0.10
+  routerB(config-if)#encapsulation dot1q 10
+  routerB(config-if)#ip address 192.168.10.1 255.255.255.0
+
+  routerB(config)#interface g0/0.20
+  routerB(config-if)#encapsulation dot1q 20
+  routerB(config-if)#ip address 192.168.20.1 255.255.255.0
+
+  routerB(config)#interface g0/0.99
+  routerB(config-if)#encapsulation dot1q 99
+  routerB(config-if)#ip address 192.168.99.1 255.255.255.0
+
+  routerB(config-if)#interface g0/0
+  routerB(config-if)#no shutdown
+  routerB(config-if)#exit
+  routerB(config)#
+
+  </pre>
+  <p class="first"><a href="#">Dynamic Trunk Protocol</a></p>
+  <pre class="first-p">
+    Switch(config-if)# switchport mode access                             Access mode staat vast in accessmodus
+    Switch(config-if)# switchport mode trunk                              Trunk mode staat vast in trunkmodus
+    Switch(config-if)# switchport mode dynamic auto                       Dynamic auto zal wijzigen naar trunk als de andere zijde trunk of dynamic desirable is
+    Switch(config-if)# switchport mode dynamic desirable                  Dynamic desirable zal altijd wijzigen naar trunk, behalve als de andere zijde access is
+  </pre>
+</div>
+
+</body>
+<script>
+$('.first-p').hide();
+$( "p.first" ).click(function() {
+    $(this).next().slideToggle(0);
+});
+</script>
+</html>

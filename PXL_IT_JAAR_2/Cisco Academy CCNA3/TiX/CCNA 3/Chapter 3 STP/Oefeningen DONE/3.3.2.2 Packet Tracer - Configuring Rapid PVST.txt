@@ -1,0 +1,102 @@
+S1
+---
+en
+conf t
+
+
+vlan 10 
+vlan 20 
+vlan 30 
+vlan 40
+vlan 50
+vlan 60
+vlan 70
+vlan 80
+vlan 99
+
+interface range f0/1-4
+switchport mode trunk
+switchport trunk native vlan 99
+
+interface vlan99
+ip address 172.17.99.11 255.255.255.0
+
+
+spanning-tree mode rapid-pvst
+
+spanning-tree vlan 1,10,30,50,70 root primary
+
+S2
+---
+
+en
+conf t
+
+interface range f0/6,f0/11,f0/18
+switchport mode access
+no shutdown
+exit 
+
+vlan 10 
+vlan 20 
+vlan 30 
+vlan 40
+vlan 50
+vlan 60
+vlan 70
+vlan 80
+vlan 99
+
+int f0/6
+sw access vlan 30
+int f0/11
+sw access vlan 10
+int f0/18
+sw acces vlan 20
+ 
+interface range f0/1-4
+switchport mode trunk
+switchport trunk native vlan 99
+
+interface vlan99
+ip address 172.17.99.12 255.255.255.0
+
+
+spanning-tree mode rapid-pvst
+
+spanning-tree vlan 1,10,20,30,40,50,60,70,80,99 root secondary
+
+interface range f0/6 , f0/11 , f0/18
+spanning-tree portfast
+spanning-tree bpduguard enable
+
+
+
+
+S3
+--
+
+en
+conf t
+vlan 10 
+vlan 20 
+vlan 30 
+vlan 40
+vlan 50
+vlan 60
+vlan 70
+vlan 80
+vlan 99
+
+
+interface range f0/1-4
+switchport mode trunk
+switchport trunk native vlan 99
+
+
+interface vlan99
+ip address 172.17.99.13 255.255.255.0
+
+spanning-tree mode rapid-pvst
+
+spanning-tree vlan 20,40,60,80,99 root primary

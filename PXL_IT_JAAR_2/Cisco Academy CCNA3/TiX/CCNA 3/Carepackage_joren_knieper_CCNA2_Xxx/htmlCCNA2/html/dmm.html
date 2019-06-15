@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Device Discovery, Managements, Maintenance@Danillo</title>
+<script type="text/javascript" src="../scripts/shCore.js"></script>
+<script type="text/javascript" src="../scripts/shBrushJava.js"></script>
+<link type="text/css" rel="stylesheet" href="../styles/shCoreRDark.css"/>
+<link type="text/css" rel="stylesheet" href="../styles/basic.css"/>
+<script type="text/javascript">SyntaxHighlighter.all();</script>
+<script src="../jquery.min.js"></script>
+</head>
+<body>
+
+  <ul>
+    <li><a href="../index.html">Home</a></li>
+    <li><a href="../html/sw.html">TOOLS</a></li>
+    <li><a href="../html/static.html">Static Routing</a></li>
+    <li><a href="../html/dynamic.html">Dynamic Routing</a></li>
+    <li><a href="../html/switch.html">Switch Configuration</a></li>
+    <li><a href="../html/vlan.html">Vlans</a></li>
+    <li><a href="../html/acl.html">Acces control list (ACL)</a></li>
+    <li><a href="../html/dhcp.html">DHCP</a></li>
+    <li><a href="../html/nat.html">Network Address translation (NAT)</a></li>
+    <li><a class="active" href="../html/dmm.html">Device Discovery, Managements, Maintenance</a></li>
+    <li><a href="../html/trouble.html"> >>TROUBEL SHOOTING<< </a></li>
+  </ul>
+
+<div id="home" style="margin-left:20%;padding:1px 16px;">
+  <h2>Device Discovery, Managements, Maintenance</h2>
+
+<pre>
+  Cisco Device Protocol (CDP)
+  ----------------------------------
+  Het Cisco Discovery Protocol is een krachtig hulpmiddel tijdens de configuratie en het foutzoeken.
+  Het tonen van alle naburige Cisco-apparaten.
+        Router# show cdp neighbors
+
+  Gedetailleerde informatie van de buurapparaten.
+        Router# show cdp neighbors detail
+
+  Aangezien CDP voor een veiligheidslek kan zorgen is het ook mogelijk om het protocol voor het hele
+  apparaat af te zetten.
+        Router(config)# no cdp run (voor heel apparaat)
+
+  Het afzetten kan ook per interface.
+        Router(config-if)# no cdp enable (voor bepaalde interface)
+
+  Link Layer Device Protocol (LLDP)
+  ----------------------------------
+  LLDP aanzetten.
+        Switch# configure terminal
+        Switch(config)# lldp run
+        Switch(config)# interface gigabitethernet 0/1
+        Switch(config-if)# lldp transmit
+        Switch(config-if)# lldp receive
+        Switch(config-if)# end
+        Switch# show lldp
+
+  Gedetailleerde informatie van de buurapparaten.
+        Switch# show lldp neighbors
+        Switch# show lldp neighbors detail
+
+
+  Network Time Protocol (NTP)
+  Het zetten van de juiste tijd.
+        Router# clock set 17:17:17 jul 17 2017
+
+  Controle van de tijd.
+        Router# show clock detail
+
+  CCNA2: R&S Essentials Device Discovery, Management, and Maintenance 51
+  Instellen van NTP-server.
+        Router# configure terminal
+        Router(config)# ntp server 209.165.200.225
+
+  Controle van NTP-server.
+        Router# show ntp associations
+        Router# show ntp status
+
+  Syslog
+  ------
+
+  Het zetten van een tijdstempel.
+        Router(config)# service timestamps log datetime
+
+  Het tonen van de log.
+        Router# show logging
+
+  Instellen van de syslog.
+        Router(config)# logging 192.168.1.3
+        Router(config)# logging trap 4
+        Router(config)# logging source-interface g0/0
+
+  File Systems
+  ------------
+  Het tonen van het file system.
+        Router# show file systems
+        Router# dir
+
+  Het tonen van het nvram: file system.
+        Router# cd nvram:
+        Router# pwd
+        Router# dir
+
+  Het kopiëren van de running-config naar een tftp-server.
+        Router# copy running-config tftp
+
+  Voor routers met een USB-poort kan je ook daarvan de directory opvragen.
+        Router# dir usbflash:
+
+  Paswoord recovery
+  -----------------
+  Paswoord recovery via opstarten in de ROMMON mode en de 0x2142 code om de configuratiefile te negeren.
+        Rommon 1> confreg 0x2142
+        Rommon 2> reset
+
+  Daarna kan je het paswoord opnieuw instellen met de code 0x2102 de normale werking activeren.
+        Router# copy startup-config running-config
+        Router# configure terminal
+        Router(config)# enable secret cisco
+        Router(config)# config-register 0x2102
+        Router(config)# end
+        Router# copy running-config startup-config
+        Router# reload
+
+  Cisco IOS image
+  ----------------
+  De informatie van de actuele IOS image opvragen.
+        Router# show flash0:
+
+  De image kopiëren naar een tftp-server.
+        Router# copy flash0: tftp:
+
+  Andere image van de tftp-server halen en kopiëren naar het flashgeheugen.
+        Router# copy tftp: flash0:
+
+  Bepalen welke image geladen wordt bij het opstarten doe je met boot system .
+        Switch# configure terminal
+        Switch(config)# boot system flash:/c2960-lanbase-mz.122-25.FX.bin
+
+  Licentiebeheer
+  ----------------
+  Opvragen van de licentie:
+        Router# show license udi
+
+  Installatie van de licentie.
+        Router# license install flash0:…
+        Router# show license
+
+  Verdere afwerking van de licentie.
+        Router(config)# license accept end user agreement
+        Router(config)# license boot module c1900 technology-package datak9
+
+  Opslaan van de licentie.
+        Router# license save flash0:all_licenses.lic
+        Router# show flash0:
+
+  Installatie van de licentie ongedaan maken.
+        Router(config)# license boot module c1900 technology-package seck9 disable
+        Router(config)# exit
+        Router# reload
+        Router# license clear seck9
+        Router# configure terminal
+        Router(config)# no license boot module c1900 technology-package seck9 disable
+</pre>
+
+</div>
+
+</body>
+<script>
+$('.first-p').hide();
+$( "p.first" ).click(function() {
+    $(this).next().slideToggle(0);
+});
+</script>
+</html>

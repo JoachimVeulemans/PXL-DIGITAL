@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Tools@Danillo</title>
+<script type="text/javascript" src="../scripts/shCore.js"></script>
+<script type="text/javascript" src="../scripts/shBrushJava.js"></script>
+<link type="text/css" rel="stylesheet" href="../styles/shCoreRDark.css"/>
+<link type="text/css" rel="stylesheet" href="../styles/basic.css"/>
+<script type="text/javascript">SyntaxHighlighter.all();</script>
+<script src="../jquery.min.js"></script>
+</head>
+<body>
+
+  <ul>
+    <li><a href="../index.html">Home</a></li>
+    <li><a class="active" href="../html/sw.html">TOOLS</a></li>
+    <li><a href="../html/static.html">Static Routing</a></li>
+    <li><a href="../html/dynamic.html">Dynamic Routing</a></li>
+    <li><a href="../html/switch.html">Switch Configuration</a></li>
+    <li><a href="../html/vlan.html">Vlans</a></li>
+    <li><a href="../html/acl.html">Acces control list (ACL)</a></li>
+    <li><a href="../html/dhcp.html">DHCP</a></li>
+    <li><a href="../html/nat.html">Network Address translation (NAT)</a></li>
+    <li><a href="../html/dmm.html">Device Discovery, Managements, Maintenance</a></li>
+    <li><a href="../html/trouble.html"> >>TROUBEL SHOOTING<< </a></li>
+  </ul>
+
+<div id="home" style="margin-left:20%;padding:1px 16px;">
+  <h2>TOOLS</h2>
+
+    <p class="first"><a href="#">VLSM/CIDR Calculator</a></p>
+<div class="first-p">
+  <form onsubmit="return false;">
+  	How many subnets do you need to create?<br>
+  	<input type='number' id='input_num_of_subnets' min='2' max='999' maxlength="3" placeholder='Subnets'>
+  	<button onClick="change_subnet_number();">Change</button><span id='nets' style="display:none;">4</span>
+  </form>
+  <form onsubmit="return false;">
+  	<p>What is the network IP prefix in slash notation (i.e. 192.168.1.0/24)?<br>
+  	<input type='text' id='input_network' value='192.168.1.0/24'><span id='not_valid_ip' style="background-color: yellow;"></span></p>
+
+  	<p id='subnet_pargraph'>
+  	<span class='column'>Subnet Names:</span> <span class='column'>Number of hosts:</span><br>
+  	<input type='text' id='name1' value='Host1'>
+  	<input type='text' id='hosts1' placeholder='Hosts' tabindex='1'><br>
+  	<input type='text' id='name2' value='Host2'>
+  	<input type='text' id='hosts2' placeholder='Hosts' tabindex='2'><br>
+  	<input type='text' id='name3' value='Host3'>
+  	<input type='text' id='hosts3' placeholder='Hosts' tabindex='3'><br>
+  	<input type='text' id='name4' value='Host4'>
+  	<input type='text' id='hosts4' placeholder='Hosts' tabindex='4'><br>
+  	</p>
+
+  	<button onClick="vlsm();">Submit</button>
+  	<button onClick="clear_form();">Clear</button>
+    <p id='ans'></p>
+  </form>
+<br>
+</div>
+<p class="first"><a href="#">Ip Calculator</a></p>
+<div class="first-p">
+  <p id="question"></p>
+  <form onsubmit="return false;">
+  	<label>IP address:</label>
+  	<input id="ip" value="192.168.1.0" type="text"> <br>
+  	<label>Netmask or slash notation:</label>
+  	<input id="mask" value="/24" type="text"> <br>
+  	<button onclick="calculate();">Submit</button>
+    <br>
+  </form>
+  <table cellspacing="1" cellpadding="2">
+  	<tbody><tr><td>Address:</td><td id="address"></td></tr>
+  	<tr><td>Network Address:</td><td id="netadd"></td></tr>
+  	<tr><td>Broadcast:</td><td id="broad"></td></tr>
+  	<tr><td>Netmask:</td><td id="netmask"></td></tr>
+  	<tr><td>Slash:</td><td id="slash"></td></tr>
+  	<tr><td>First Usable Host:</td><td id="first"></td></tr>
+  	<tr><td>Last Usable Host:</td><td id="last"></td></tr>
+  	<tr><td>Usable Hosts:</td><td id="hosts"></td></tr>
+  	<tr><td>Wildcard:</td><td id="wild"></td></tr>
+  </tbody></table>
+</div>
+
+
+</div>
+<script type="text/javascript" src="vlsm.js"></script>
+<script type="text/javascript" src="calc.js"></script>
+</body>
+<script>
+$('.first-p').hide();
+$( "p.first" ).click(function() {
+    $(this).next().slideToggle(0);
+});
+</script>
+</html>

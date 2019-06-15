@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Trouble@Danillo</title>
+<script type="text/javascript" src="../scripts/shCore.js"></script>
+<script type="text/javascript" src="../scripts/shBrushJava.js"></script>
+<link type="text/css" rel="stylesheet" href="../styles/shCoreRDark.css"/>
+<link type="text/css" rel="stylesheet" href="../styles/basic.css"/>
+<script type="text/javascript">SyntaxHighlighter.all();</script>
+<script src="../jquery.min.js"></script>
+</head>
+<body>
+
+  <ul>
+    <li><a href="../index.html">Home</a></li>
+    <li><a href="../html/sw.html">TOOLS</a></li>
+    <li><a href="../html/static.html">Static Routing</a></li>
+    <li><a href="../html/dynamic.html">Dynamic Routing</a></li>
+    <li><a href="../html/switch.html">Switch Configuration</a></li>
+    <li><a href="../html/vlan.html">Vlans</a></li>
+    <li><a href="../html/acl.html">Acces control list (ACL)</a></li>
+    <li><a href="../html/dhcp.html">DHCP</a></li>
+    <li><a href="../html/nat.html">Network Address translation (NAT)</a></li>
+    <li><a href="../html/dmm.html">Device Discovery, Managements, Maintenance</a></li>
+    <li><a class="active" href="../html/trouble.html"> >>TROUBEL SHOOTING<< </a></li>
+  </ul>
+
+<div id="home" style="margin-left:20%;padding:1px 16px;">
+<h2>>>TROUBEL SHOOTING<<</h2>
+<p class="first"><a href="#">!!!!_____________STAPPEN PLAN_____________!!!!</a></p>
+<pre class="first-p">
+  VLANs
+  -----
+        • Juiste kabels?
+              o Router -> Router Crossover
+              o PC -> PC Crossover
+              o Switch -> Switch Crossover
+              o PC -> Router Crossover
+              o PC -> Switch Straight
+              o Router -> Switch Straight
+              o PC -> Hub Straight
+        • Is elke kabel op de juiste interface aangesloten?
+              o LET OP DE POORTNUMMERING VAN DE LABELS!
+              o Soms veranderen ze deze om u op het verkeerde been te zetten!
+        • Zijn de juiste VLANs aan de interfaces toegewezen?
+              o Mouseover op het apparaat, kijk in de lijst welke VLAN-nummer er bij elke interface staat
+        • Staan de interfaces op de juiste switchport mode?
+              o show run
+              o TRUNK -> switchport mode trunk
+              o ACCESS -> switchport mode access
+        • Zijn alle VLANs effectief aangemaakt op de Switches?
+              o show vlan brief
+        • Hebben de clients de juiste IP-adressen en subnetmaskers?
+
+  Inter-VLAN Routing
+  -------------------
+  ROAS
+        • Zijn de juiste subinterfaces aangemaakt op de Router?
+        • Hebben alle subinterfaces het juiste VLAN nummer?
+              o encapsulation dot1q 10 voor fa0/1.10 bv.
+        • Hebben alle subinterfaces het juiste IP-adres/subnetmasker voor die VLAN range?
+        • Staat de interface op de Switch (die naar de Router vertrekt) op de juiste switchport mode?
+              o switchport mode trunk
+        • Staan de interfaces tussen alle switches ook op trunk?
+        • Staat de switchport mode tussen de switch en de clients op Access? Static Routes
+        • Kijk op elke router de routing table na via show ip route
+        • Verwijzen de routes naar de juiste interface?
+        • Verwijzen de routes naar het juiste next-hop IP-adres?
+  ACLs
+        • Zijn de ACLs aan de juiste interface gekoppeld?
+        • Staat de inbound/outbound setting van elke ACL op elke interface juist?
+        • Klopt de inhoud van elke ACL?
+              o Volgorde van de ACL entries
+              o ACL entry vergeten in te geven
+              o etc…
+  NAT
+        • Is de outside interface ook effectief ingesteld als outside?
+        • Is de inside interface ook effectief ingesteld als inside?
+        • Klopt de inhoud van de NAT Pool zelf?
+              o Juiste public IP-adressen?
+        • Is de ACL die gebruikt is voor NAT juist?
+              o Volgorde
+              o ACL entries correct
+              o etc…
+        • Kloppen de statische NAT translatie regels?
+              o show nat translations
+  DHCP
+        • Is de range in de DHCP Pool correct?
+        • Zijn de juiste statische IP-adressen excluded?
+              o Servers
+              o Switches
+              o Routers
+              o etc
+        • Moet er geen DHCP helper ingesteld?
+              o Als de DHCP server bv achter een Router staat.
+        • Staan de clients effectief op DHCP mode ingesteld?
+</pre>
+<p class="first"><a href="#">Connection Testen</a></p>
+<pre class="first-p">
+R1#ping 172.16.2.2
+RouterB(config)#traceroute 172.16.1.1
+
+--Extended ping--
+RouterB(config)#ping 192.168.2.1 source 192.168.1.1
+RouterB(config)#ping 192.168.2.1 source g0/0
+</pre>
+<p class="first"><a href="#">default gateway (QUAD ZERO ROUTE)</a></p>
+<pre class="first-p">
+  R1(config)#ip route 0.0.0.0 0.0.0.0 192.168.0.1
+  R1(config)#ip route 0.0.0.0 0.0.0.0 serial 0/0/0
+</pre>
+<p class="first"><a href="#">RouteTabellen</a></p>
+<pre class="first-p">
+  R1#show ip route
+
+  Codes: L - local, C - connected, S - static, R - RIP, M - mobile, B - BGP
+  D - EIGRP, EX - EIGRP external, O - OSPF, IA - OSPF inter area
+  N1 - OSPF NSSA external type 1, N2 - OSPF NSSA external type 2
+  E1 - OSPF external type 1, E2 - OSPF external type 2, E - EGP
+  i - IS-IS, L1 - IS-IS level-1, L2 - IS-IS level-2, ia - IS-IS inter area
+  * - candidate default, U - per-user static route, o - ODR
+  P - periodic downloaded static route
+
+                      Gateway of last resort is not set
+                      172.0.0.0/16 is variably subnetted, 2 subnets, 2 masks
+                      C 172.0.0.0/24 is directly connected, Loopback0
+                      L 172.0.0.1/32 is directly connected, Loopback0
+                      192.168.1.0/24 is variably subnetted, 2 subnets, 2 masks
+                      C 192.168.1.0/24 is directly connected, GigabitEthernet0/0
+                      L 192.168.1.1/32 is directly connected, GigabitEthernet0/0
+                      192.168.2.0/24 is variably subnetted, 2 subnets, 2 masks
+                      C 192.168.2.0/24 is directly connected, GigabitEthernet0/1
+                      L 192.168.2.1/32 is directly connected, GigabitEthernet0/1
+                      200.200.200.0/24 is variably subnetted, 2 subnets, 2 masks
+                      C 200.200.200.0/30 is directly connected, Serial0/0/0
+                      L 200.200.200.2/32 is directly connected, Serial0/0/0
+</pre>
+<p class="first"><a href="#">Controle van Seriële poorten</a></p>
+<pre class="first-p">
+  R1#show controllers Serial 0/0/0
+
+  Interface Serial0/0/0
+  Hardware is PowerQUICC MPC860
+  DCE V.35, clock rate 128000                                     DCE=(Klok) DTE
+</pre>
+<p class="first"><a href="#">Controle van ingestelde ip</a></p>
+<pre class="first-p">
+R1#show ip interface brief                                        status interface
+R1#show ip route
+R1#show running-config
+R1#show running-config | begin Serial0/0/0                        Filter
+</pre>
+<p class="first"><a href="#">Switch</a></p>
+<pre class="first-p">
+Switch# show mac-address-table
+Switch# show mac-address-table dynamic
+Switch# clear mac-address-table dynamic
+
+Switch# show controllers ethernet-controller fa 0/1 phy
+Switch# show controllers ethernet-controller fa 0/1 phy | include Auto-MDIX
+
+Switch# show vlan brief                                           vlan opvragen
+Switch# show vlan name student                                    enkele vplan opvragen
+
+Switch# show interfaces fa 0/1 switchport                         info per poort
+Switch# show interfaces trunk
+
+S1#show port-security interface fa 0/1                            poortbeveiliging
+S1#show port-security address                                     poortbeveiligingsgroep
+
+</pre>
+<p class="first"><a href="#">ACL</a></p>
+<pre class="first-p">
+  KIJK VOLGORDE NA
+  IN EN OUT
+  IS ELKE ACL GEKOPPELD AAN EEN INTEFACE
+  -----------------
+  Router# show access-lists                                      Controle van de configuratie
+  Router# clear access-lists counters
+  Router# show ip interface Gi0/0                                poort controleer de instelling bij Outgoing en Inbound
+</pre>
+<p class="first"><a href="#">DHCP</a></p>
+<pre class="first-p">
+  --Default Gateway, statische IP address en Broadcast en Netwerk address -> excluded-address
+  Router# show running-config | include no service dhcp
+  Router# debug ip dhcp server events                             debug
+</pre>
+
+<p class="first"><a href="#">NAT</a></p>
+<pre class="first-p">
+  Router# show ip nat translations
+  Router# show ip nat statistics
+  Router# clear ip nat statistics
+  Router# debug ip nat
+</pre>
+<p class="first"><a href="#">Commando Geschiedenis</a></p>
+<pre class="first-p">
+  R1#show history
+
+            show ip interface brief
+            show running-config | begin Serial0/0/0
+            terminal history size 200
+            show history
+</pre>
+</div>
+
+</body>
+<script>
+$('.first-p').hide();
+$( "p.first" ).click(function() {
+    $(this).next().slideToggle(0);
+});
+</script>
+</html>

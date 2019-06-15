@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+    
+<!-- Mirrored from subnettingpractice.com/ipv6_subnetting.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 22 Jan 2016 18:12:37 GMT -->
+<head>
+        <meta charset="utf-8">
+        <title>IPv6 Subnet Calculator</title>
+	<meta name="description" content="Free and easy IPv6 subnetting calculator. Everything you need to plan your network calculated for you. Step into the future with this tool" />
+	<meta name="keywords" content="IP, calculator, subnetting, broadcast, hosts, netmask, slash, usable, IPv6" />
+	<meta name=viewport content="width=device-width, initial-scale=1">
+<link rel="canonical" href="ipv6_subnetting.html" />
+	<style type="text/css">
+label {
+    display: inline-block;
+    width:200px;
+    text-align: left;
+}
+input {
+    display: inline-block;
+    text-align: right;
+}
+    </style>
+	<link rel='stylesheet' type='text/css' href='header_footer.css'>
+    </head>
+    <body>
+<span id=titlename><a href="index.html">SubnettingPractice.com</a></span> The most extensive subnetting practice site on the web!
+                <ul id='nav'>
+                        <li><a href='index.html'>Practice Questions</a></li>
+                        <li><a href='ipv6.html'>IPv6 Subnetting</a></li>
+                        <li><a href='subnets.html'>Basic Subnetting</a></li>
+                        <li><a href='ipv6_subnetting.html'>IPv6 Calculator</a></li>
+                        <li><a href='binary.html'>Binary Practice</a></li>
+                        <li><a href='calc.html'>Subnetting Calculator</a></li>
+                        <li><a href='vlsm.html'>VLSM Calculator</a></li>
+                </ul>
+<p>
+<script async src="../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- horizontal black -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-5214460626967121"
+     data-ad-slot="7119657690"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</p>
+<h1>IPv6 Subnetting Calculator</h1>
+<p>Input an IPv6 address and the subnet size in slash notation: </p>
+<form onsubmit="return false;">
+	<label>IPv6 address:</label>
+	<input type='text'  id='ip' value='2001:db8::/32' style="width:300px;"/> 
+	<button onClick="calculate();">Calculate</button>
+</form>
+<table  bgcolor="#EEEEEE" cellpadding="2" cellspacing="1">
+	<tr><td>Compressed Address:</td><td id='address'></td></tr>
+	<tr><td>Expanded Address:</td><td id='expanded'></td></tr>
+	<tr><td>Prefix:</td><td id='prefix'></td></tr>
+	<tr><td>Range:</td><td id='first'></td></tr>
+	<tr><td></td><td id='last'></td></tr>
+	<tr><td>Number of /64s:</td><td id='64s'></td></tr>
+</table>
+<p>Select a number of subnets or a subnet size to divide the above into:
+</p>
+<input type='text'  id='subnets' value='4' style="width:60px"/> 
+<button onClick="subnet_subnet();">Calculate</button>
+subnets or 
+<select id ='slashes'>
+</select>
+<button onClick="subnet_slashes();">Calculate</button>
+<p id='facts'>
+This calculator can be used for IPv6 in the same way VLSM is used to plan an IPv4 network.<br>
+Remember, the <a href='ipv6_is_huge.html'>size</a> of IPv6 can be huge. This calculator can crash your browser if you attempt to have it calculate billions of subnets!<br>
+Because of this, only the first 999 subnets are displayed.
+</p>
+<p id='subnetted'> </p>
+<p>Use the above calculator to plan your IPv6 networks. Because of the huge size of IPv6, we do not care about the number of hosts in a network. Remember, that the smallest recommended subnet is a /64.</p>
+<p>
+<script async src="../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- link large minimal -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:15px"
+     data-ad-client="ca-pub-5214460626967121"
+     data-ad-slot="8042184099"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</p>
+<ul id='foot'>
+                        <li><a href='howto.html'>How to Subnet</a></li>
+                        <li><a href='howtoipv6.html'>How to Subnet IPv6</a></li>
+                        <li><a href='cheatsheet.html'>Subnetting Cheatsheet</a></li>
+                        <li><a href='binary_calc.html'>Binary/Hex Calculator</a></li>
+                        <li><a href='ethernet_wiring.html'>Ethernet Wiring Practice</a></li>
+                        <li><a href='ipv6_is_huge.html'>Incredible Size of IPv6</a></li>
+                        <li><a href='twos.html'>Exponent Practice</a></li>
+                        <li><a href='sixteens.html'>Multiples of Sixteen </a></li>
+                        <li><a href='osi_layer.html'>OSI Layer Practice</a></li>
+                        <li><a href='headers.html'>IP Header Practice</a></li>
+                        <li><a href='ip_allocation.html'>IPv4 v IPv6 Allocation</a></li>
+                        <li><a href='ccna_commands.html'>Top CCNA Commands</a></li>
+                        <li><a href='certs.html'>Networking Certificates</a></li>
+                        <li><a href='ccna_salary.html'>CCNA Salary Report</a></li>
+                        <li><a href='ccna_resources.html'>CCNA Resource List</a></li>
+                        <li><a href='jncia_ccna.html'>JNCIA v CCNA</a></li>
+                        <li><a href='contact.html'>Privacy Policy</a></li>
+<li><a href="http://www.facebook.com/sharer.php?u=http://subnettingpractice.com/ipv6_subnetting.html" target="_blank" class="share"><img src="images/facebook.png" alt="Facebook" /></a>
+<a href="http://reddit.com/submit?url=http://subnettingpractice.com/ipv6_subnetting.html&amp;title=IPv6%20Subnetting%20Practice" target="_blank" class="share"><img src="images/reddit.png" alt="Reddit" /></a>
+<a href="http://www.linkedin.com/shareArticle?mini=true&amp;url=http://subnettingpractice.com/ipv6_subnetting.html" target="_blank" class="share"><img src="images/linkedin.png" alt="LinkedIn" /></a>
+<a href="http://twitter.com/share?url=http://subnettingpractice.com/ipv6_subnetting.html&amp;text=Learning%20to%20subnet!" target="_blank" class="share"><img src="images/twitter.png" alt="Twitter" /></a>
+</li>
+                </ul>
+
+<small>Copyright 2014 SubnettingPractice.com. All rights reserved</small>
+<script type='text/javascript' src="jsbn.js"></script>
+<script type='text/javascript' src="jsbn2.js"></script>
+<script type='text/javascript' src="ipv6_subnetting.js"></script>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','../www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-50427363-2', 'subnettingpractice.com');
+  ga('require', 'displayfeatures');
+  ga('send', 'pageview');
+
+</script>
+</body>
+
+<!-- Mirrored from subnettingpractice.com/ipv6_subnetting.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 22 Jan 2016 18:12:38 GMT -->
+</html>
+

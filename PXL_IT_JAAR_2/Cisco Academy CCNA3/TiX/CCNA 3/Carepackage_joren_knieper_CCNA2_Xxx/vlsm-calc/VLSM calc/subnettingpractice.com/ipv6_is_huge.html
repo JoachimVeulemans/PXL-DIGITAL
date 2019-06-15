@@ -1,0 +1,88 @@
+<!DOCTYPE HTML>	<html> 
+
+<!-- Mirrored from subnettingpractice.com/ipv6_is_huge.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 22 Jan 2016 18:12:41 GMT -->
+<head><meta charset="UTF-8">
+	<title>Look at how big IPv6 Is!</title>
+	<meta name="description" content="An interactive graphic showing just how large IPv6 address space is. The size of IPv6 is amazing. Grasp just how huge IPv6 address space really is!"/>
+	<meta name="keywords" content="IPv6, graph, space, running out, IPv4" />
+	<meta name=viewport content="width=device-width, initial-scale=1">
+	<link rel='stylesheet' type='text/css' href='header_footer.css'>
+	<link rel="canonical" href="ipv6_is_huge.html" />
+	<script type='text/javascript' src=huge.js></script>
+    </head>
+    <body>
+<span id=titlename><a href="index.html">SubnettingPractice.com</a></span> The most extensive subnetting practice site on the web!
+		<ul id='nav'>
+			<li><a href='index.html'>Practice Questions</a></li>
+			<li><a href='ipv6.html'>IPv6 Subnetting</a></li>
+			<li><a href='subnets.html'>Basic Subnetting</a></li>
+			<li><a href='ipv6_subnetting.html'>IPv6 Calculator</a></li>
+			<li><a href='binary.html'>Binary Practice</a></li>
+			<li><a href='calc.html'>Subnetting Calculator</a></li>
+			<li><a href='vlsm.html'>VLSM Calculator</a></li>
+		</ul>
+<h1>IPv6 Size</h1>
+<p>An IP address is like an identification number for devices (like computers) on networks (like the Internet). IPv4 addresses are running out and we are moving towards IPv6. Sometimes people express concern about how freely IPv6 addresses are assigned. Because it is nearly impossible for the human mind to grasp the huge numbers that we are talking about when talking about IPv6, the following interactive graphic helps visualize the true size of IPv6. Each circle shows how many IP addresses fit inside a certain slash. Click on the yellow and green to zoom out and in.</p>
+
+<canvas id='huge' width = '800' height='600' style = "border:7px solid black; ">
+<b>It looks like HTML5 canvas does not work in your browser.</b> You will need to use a canvas enabled browser to view the graphic. Basically, IPv6 has 340,282,366,920,938,463,463,374,607,431,768,211,456 possible IP addresses. The size of IPv6 is astounding!
+</canvas>
+
+<p>IPv6 address space is big. Really really big. A /64 is generally the smallest subnet in use. A single /64 has way way more IP addresses than all the IPv4 addresses put together. That is why you wont really ever have to worry about host numbers in IPv6 subnetting.</P>
+<div style="float:left">
+<script async src="../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- large rect -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:336px;height:280px"
+     data-ad-client="ca-pub-5214460626967121"
+     data-ad-slot="8794867296"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+<p>This means that the smallest allocation for a subnet is a /64. That seems really wasteful. Why allocate 2<sup>64</sup> IPs to every single subnet? Currently, if you get an IPv4 to IPv6 tunnel, the tunnel provider will give you a /64, and if you request it, will usually give you a /48. To someone coming from the IPv4 world, this seems extremely wasteful.</p>
+<p>However, a single /32 holds as many /64s as all the IPv4 IP address space. And there are over 4 billion /32s! One way of looking at things is that we would need to use 4 billion times the amount of IPv4 space to use up all of IPv6. That is far from something we should worry about.</p>
+<p>These numbers aren't entirely true, as you have certain IPv6 blocks that are not going to be assignable. For example, FF00::/8 is reserved for multicast. Even so, the amount of address space to work with is truly massive.</p>
+<p>Due to the current IETF designation we are only going to be using 1/8th of all IPv6 space. So if we ever do come to a point where we need to worry about running out of space, we can always add another 1/8th to use, and maybe even start being more conservative about address space, in the same way IPv4 went from classful subnetting to CIDR subnetting. Until that unlikely event occurs, we really do not need to be concerned with conserving IPv6 address space the same way we conserver IPv4 address space. IP <a href='ip_allocation.html'>allocation</a> is one less thing the world needs to worry about.</p>
+
+<ul id='foot'>
+                        <li><a href='howto.html'>How to Subnet</a></li>
+                        <li><a href='howtoipv6.html'>How to Subnet IPv6</a></li>
+                        <li><a href='cheatsheet.html'>Subnetting Cheatsheet</a></li>
+                        <li><a href='binary_calc.html'>Binary/Hex Calculator</a></li>
+                        <li><a href='ethernet_wiring.html'>Ethernet Wiring Practice</a></li>
+                        <li><a href='ipv6_is_huge.html'>Incredible Size of IPv6</a></li>
+                        <li><a href='twos.html'>Exponent Practice</a></li>
+                        <li><a href='sixteens.html'>Multiples of Sixteen </a></li>
+                        <li><a href='osi_layer.html'>OSI Layer Practice</a></li>
+                        <li><a href='headers.html'>IP Header Practice</a></li>
+                        <li><a href='ip_allocation.html'>IPv4 v IPv6 Allocation</a></li>
+                        <li><a href='ccna_commands.html'>Top CCNA Commands</a></li>
+                        <li><a href='certs.html'>Networking Certificates</a></li>
+                        <li><a href='ccna_salary.html'>CCNA Salary Report</a></li>
+                        <li><a href='ccna_resources.html'>CCNA Resource List</a></li>
+                        <li><a href='jncia_ccna.html'>JNCIA v CCNA</a></li>
+                        <li><a href='contact.html'>Privacy Policy</a></li>
+			<li><a href="http://www.facebook.com/sharer.php?u=http://subnettingpractice.com/ipv6_is_huge.html" target="_blank" class="share"><img src="images/facebook.png" alt="Facebook" /></a>
+<a href="http://www.linkedin.com/shareArticle?mini=true&amp;url=http://subnettingpractice.com/ipv6_is_huge.html" target="_blank" class="share"><img src="images/linkedin.png" alt="LinkedIn" /></a>
+<a href="http://twitter.com/share?url=http://subnettingpractice.com/ipv6_is_huge.html&amp;text=IPv6%20is%20huge!" target="_blank" class="share"><img src="images/twitter.png" alt="Twitter" /></a>
+</li>
+                </ul>
+
+<small>Copyright 2014 SubnettingPractice.com. All rights reserved</small>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','../www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-50427363-2', 'subnettingpractice.com');
+  ga('require', 'displayfeatures');
+  ga('send', 'pageview');
+
+</script>
+    </body>
+
+<!-- Mirrored from subnettingpractice.com/ipv6_is_huge.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 22 Jan 2016 18:12:42 GMT -->
+</html>
+

@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+    
+<!-- Mirrored from subnettingpractice.com/ccna_commands.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 22 Jan 2016 18:13:06 GMT -->
+<head>
+        <meta charset="utf-8">
+        <title>Top Cisco CCNA Commands</title>
+	<meta name="description" content="A list of the top Cisco CCNA commands you must know for the exam and your career"/>
+	<meta name="keywords" content="Cisco, exam, commands, subnet, CCNA" />
+	<meta name=viewport content="width=device-width, initial-scale=1">
+<link rel="canonical" href="ccna_commands.html" />
+	<link rel='stylesheet' type='text/css' href='header_footer.css'>
+    </head>
+    <body>
+<span id=titlename><a href="index.html">SubnettingPractice.com</a></span> The most extensive subnetting site on the web!
+                <ul id='nav'>
+                        <li><a href='index.html'>Practice Questions</a></li>
+                        <li><a href='ipv6.html'>IPv6 Subnetting</a></li>
+                        <li><a href='subnets.html'>Basic Subnetting</a></li>
+                        <li><a href='ipv6_subnetting.html'>IPv6 Calculator</a></li>
+                        <li><a href='binary.html'>Binary Practice</a></li>
+                        <li><a href='calc.html'>Subnetting Calculator</a></li>
+                        <li><a href='vlsm.html'>VLSM Calculator</a></li>
+                </ul>
+<h1>The Top Cisco CCNA Commands</h1>
+<p>
+The top commands to know for the CCNA are variations of the 'show' command. Common simulator questions present you with a set of configured devices and ask you to find information about these devices. You must know how to search through a router or switch and find the relevant information. Knowing these commands will not only help you succeed at the CCNA but will be immensely helpful when working with a router whose configuration you do not have documented or memorized. Without further ado, the most useful Cisco commands are:
+</p>
+<div style="float:left; padding-right:5px;">
+<script async src="../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- Sidebar -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:300px;height:600px"
+     data-ad-client="ca-pub-5214460626967121"
+     data-ad-slot="2575366892"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+<h2>show running-configuration</h2>
+<p>The 'show run' command is by far the most useful 'show' command you will come across. It gives you a page by page report on how the current device is setup. This include interface information such as the IP address, if the interface is shutdown, etc. You can also see the device-wide information such as which passwords are set, if SSH or telnet is setup and ready for login, etc. You can see when the configuration was last updated and saved along with VLAN information. Basically, if there is a piece of information you do not know, and are unsure how to find that information, start with the 'show running-configuration' command. There is a good chance it will have what you are looking for.
+</p>
+<h2>show interfaces</h2>
+<p>This command will show you detailed information about the interfaces on the device. The command as simply 'show int' alone will display information about each configured on the device, one after the other. If you are looking for information on a specific interface you can input the type and number of the interface to get information about only that one interface, for example 'show int fa 0/1' will only show information about FastEthernet 0/1. 
+<br>
+The output of this command includes the MTU size, the bandwidth label, the mac-address, the IP address, the subnet mask, and the errors on the interface. The detailed error report from 'show interfaces' makes this the go-to command when you are having routing issues. You will see not only the number of errors, but the specific type of error, such as giants or collisions or runts, and this will allow you to have an idea of where the problem may be coming from. If you are seeing connection issues, try the 'show int' command. 
+<p>
+<h2>show ip route</h2>
+<p>'Show ip route' will display the routing table which is used to find where to send data. This is what you would use to see the next hop for every packet. This is a layer-3 command. It shows which interface will send out a packet destined for a certain IP address. This command will also tell you how the device learned of that route. You can find out if the route is directly connect, static, or learned through a routing protocol such as OSPF of RIP. You can be most specific with this command by including the protocol you are interested in, for example 'show ip route ospf' will display OSPF routes. If you ever need to know which interface is responsible for reaching a certain network, use this command. 
+</p>
+<h2>show ip interface</h2>
+<p>The 'show ip int' command will give a detailed layer-3 report of an interface. Like the 'show interfaces' command, you can specify a specific interface to look at such as 'show ip int g 0/2'. This command will show information such as the incoming and outgoing access list, the IP address and the network mast. The command 'show ip interface brief' is also extremely useful for quickly seeing which interfaces are up and what IP address is assigned to each interface. This is a quick and concise way to see what the basic interface status looks like. 
+</p>
+<h2>show access-list</h2>
+<p>This command will display the access-lists on the device. This includes every line of the access-list, but does not display which interface that access-list is applied to. To see where an access-list is applied, you will want to run the 'show ip interface' or 'show run' commands. Note that the 'show access-list' command shows access lists for all protocols, whereas 'show ip access-list' only shows IPv4 access-lists and may exclude other existing access-lists, such as IPv6 access-lists. Remember that each access list has a unstated last command of 'deny any'. Use the 'show access-list' command to see exactly what an access-list is doing. 
+</p>
+<h2>show cdp neighbor detail</h2>
+<p>'Show cdp neighbor detail' will display information about Cisco devices connected to the device you are on. It is a layer-2 command, so this includes information about switches and even phones. CDP is a Cisco proprietary protocol, so the command will only show information about Cisco devices. The information includes the remote device type, the remote IP address, the remote  interface connected to the device you are on, and the remove device ID. This is a great command for when you need to figure out what other types of devices you are connected to. Say you find a switch in a closet somewhere and have no idea where all the cables from that switch go. You can type 'show cdp neighbor detail' and see what type of device each interface is connected to. No need to go tracing wires throughout the building. The 'show cdp neighbor' command will show much (but not all) of the same information in a more concise format.
+</p>
+<h2>show vlan</h2>
+<p>The display from this command will show you the information and status of VLANs on the device. This includes the VLAN names, numbers, and the interfaces on which each VLAN can be found. If a certain interface is not listed in this command, that interface is a trunk. Use this command to see which VLANs are active and on which ports. 
+</p>
+<h2>show interface trunk</h2>
+<p>Use the 'show interface trunk' command to view all the trunk ports on the device. The display will include information on which VLANs are allowed on which trunk, what the native VLAN is. Use this command to see which ports are used for trunking and which VLANs are allowed to pass through those trunks.
+</p>
+<h2>show ip protocols</h2>
+<p>
+This command displays information about Layer 3 protocols on the Cisco device. These include RIP, OSPF and EIGRP. While these protocols have their own specific show commands, the 'show ip protocols' gives a large amount of detail on all running protocols at once. It includes routing information and is often the first Cisco command to run when troubleshooting routing problems due to Network Layer protocols misconfiguration. For IPv6 use 'show ipv6 protocols'
+</p>
+<p>
+The above Cisco commands should be enough to find most details on what a networking device is doing and how it is setup. These are obviously not the only commands you should know and the <a href='ccna_salary.html'>CCNA</a> is not limited to only 'show' commands. The above are a great start to any kind of troubleshooting you may need and are often going to be some of the first commands you will run. 
+</p>
+<p>
+<script async src="../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- horizontal black -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-5214460626967121"
+     data-ad-slot="7119657690"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</p>
+
+<ul id='foot'>
+                        <li><a href='howto.html'>How to Subnet</a></li>
+                        <li><a href='howtoipv6.html'>How to Subnet IPv6</a></li>
+                        <li><a href='cheatsheet.html'>Subnetting Cheatsheet</a></li>
+                        <li><a href='binary_calc.html'>Binary/Hex Calculator</a></li>
+                        <li><a href='ethernet_wiring.html'>Ethernet Wiring Practice</a></li>
+                        <li><a href='ipv6_is_huge.html'>Incredible Size of IPv6</a></li>
+                        <li><a href='twos.html'>Exponent Practice</a></li>
+                        <li><a href='sixteens.html'>Multiples of Sixteen </a></li>
+                        <li><a href='osi_layer.html'>OSI Layer Practice</a></li>
+                        <li><a href='headers.html'>IP Header Practice</a></li>
+                        <li><a href='ip_allocation.html'>IPv4 v IPv6 Allocation</a></li>
+                        <li><a href='ccna_commands.html'>Top CCNA Commands</a></li>
+                        <li><a href='certs.html'>Networking Certificates</a></li>
+                        <li><a href='ccna_salary.html'>CCNA Salary Report</a></li>
+                        <li><a href='ccna_resources.html'>CCNA Resource List</a></li>
+                        <li><a href='jncia_ccna.html'>JNCIA v CCNA</a></li>
+                        <li><a href='contact.html'>Privacy Policy</a></li>
+<li><a href="http://www.facebook.com/sharer.php?u=http://subnettingpractice.com/ccna_commands.html" target="_blank" class="share"><img src="images/facebook.png" alt="Facebook" /></a>
+<a href="http://www.linkedin.com/shareArticle?mini=true&amp;url=http://subnettingpractice.com/ccna_commands.html" target="_blank" class="share"><img src="images/linkedin.png" alt="LinkedIn" /></a>
+<a href="http://twitter.com/share?url=http://subnettingpractice.com/ccna_commands.html&amp;text=The%20Top%20Cisco%20CCNA%20commands!" target="_blank" class="share"><img src="images/twitter.png" alt="Twitter" /></a>
+</li>
+                </ul>
+
+<small>Copyright 2014 SubnettingPractice.com. All rights reserved</small>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','../www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-50427363-2', 'subnettingpractice.com');
+  ga('require', 'displayfeatures');
+  ga('send', 'pageview');
+
+</script>
+</body>
+
+<!-- Mirrored from subnettingpractice.com/ccna_commands.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 22 Jan 2016 18:13:06 GMT -->
+</html>

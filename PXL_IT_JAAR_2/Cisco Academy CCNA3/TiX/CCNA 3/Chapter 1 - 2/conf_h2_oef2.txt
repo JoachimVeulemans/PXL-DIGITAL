@@ -1,0 +1,230 @@
+Hoofdstuk 2 oef 2 VTP 
+------------------------
+
+# lijnen die nu zijn geschreven zijn bedoeld als commentaar zoals bij linux 
+
+switch0
+enable
+show vtp status
+conf t
+vtp domain pxl
+vtp password cisco
+vlan 10 
+name verkoop
+vlan 20
+name administratie
+vlan 30 
+name directie
+vlan 99
+name beheer
+do show vlan
+
+normaal staat er als ge "do show vlan" doet alle vlan's in de lijst. 
+
+switch_verdieping_2 
+
+# Nu gaan we effe kijken als de switch op verdieping 2 ook de vlans binnenkrijgt. Dit gaat alleen zijn als de switch poorten juist zijn ingsteld. 
+
+enable
+show vlan 
+
+# Als hier nog niets staat van de vlans die op de eerste switch staan is er waarschijlijk iets mis met de trunk poorten. Dus we gaan terug naar de switch op de eerste verdieping en we gaan even op alle switchen de trunk poorten instellen. 
+
+switch_verdieping_1
+en
+conf t
+int g0/1
+sw mode trunk
+sw trunk allowed vlan 10,20,30,99
+
+switch0 (middenste switch) 
+en
+conf t
+int g0/1
+sw mode trunk
+sw trunk allowed vlan 10,20,30,99
+exit 
+
+int g0/2
+sw mode trunk
+sw trunk allowed vlan 10,20,30,99
+exit
+
+int fa0/1
+sw mode trunk
+sw trunk allowed vlan 10,20,30,99
+exit
+
+
+switch_verdieping_2
+en
+conf t
+int g0/1
+sw mode trunk
+sw trunk allowed vlan 10,20,30,99
+exit 
+
+
+switch_verdieping_3
+en
+conf t
+int g0/1
+sw mode trunk
+sw trunk allowed vlan 10,20,30,99
+exit 
+
+#nu we alle trunk poorten geconfigureerd hebben kunnen we gaan kijken als in elke switch nu ook de vlans aankomen.
+
+#Dit gaat nog niet want we moeten eerst nog efkes de vtp mode van de switchen van de verdiepingen op client zetten zodat ze alles overpakken van de VTP server switch. 
+
+switch_verdieping_1
+en
+conf t
+vtp mode client
+vtp domain pxl
+vtp password cisco 
+do show vlan brief
+
+switch_verdieping_2
+en
+conf t
+vtp mode client
+vtp domain pxl
+vtp password cisco 
+do show vlan brief
+
+switch_verdieping_3
+en
+conf t
+vtp mode client
+vtp domain pxl
+vtp password cisco 
+do show vlan brief
+
+# mogelijke fouten, een typfout bij domain in de server ivm de andere servers. Altijd zorgen dat het domain juist is. Een mismatch op de trunk poorten die niet juist zijn? Andere fouten ben ik zelf nog niet tegen gekomen. 
+
+# nu de switchen de vlans kennen kunnen we de accespoorten en de vlans toewijzen op de andere poorten op de switch. 
+# In mijn voorbeeld ga ik ook de andere switchpoorten (de resterende) die ik geteld heb voor de andere gebruikers mee configureren. 
+
+switch_verdieping_1
+# op deze switch zijn er 10 lijnen voorzien voor verkoop, de volgende 8 voor administratie, dan 4 voor de directie en als laatste 1tje voor de netwerkbeheerder
+
+en
+conf t 
+int range fa0/1-10
+sw mode acc
+sw acc vlan 10 
+
+int range fa0/11-18 
+sw mode acc
+sw acc vlan 20 
+
+int range fa0/19-22
+sw mode acc
+sw acc vlan 30 
+
+int range fa0/23
+sw mode acc
+sw acc vlan 99
+
+
+switch_verdieping_2 
+# op deze switch zijn er 10 lijnen voorzien voor verkoop, 6 voor administratie en 3 voor directie de andere poorten laat ik open
+
+en
+conf t
+int range fa0/1-10
+sw mode acc
+sw acc vlan 10 
+
+int range fa0/11-16
+sw mode acc
+sw acc vlan 20
+
+int range fa0/17-20
+sw mode acc
+sw acc vlan 30 
+ 
+switch_verdieping_3
+# op deze switch zijn er 12 lijnen voorzien voor verkoop en 8 voor administratie
+
+en 
+conf t
+int range fa0/1-12
+sw mode acc
+sw acc vlan 10
+
+int range fa0/13-21
+sw mode acc
+sw acc vlan 20
+
+# controleer als alle poorten de juiste configuratie hebben gekrijgen, kijk dan of de kabels ook op de juiste poort steken en dan gaan we over naar het geven van de ip adressen aan de computers en gaan we kijken of we kunnen pingen. Als we kunnen pingen is het in orde. 
+
+VLSM:
+
+VLAN 10 verkoop (22)
+192.168.10.1 /26 255.255.255.224 
+192.168.10.2-62 usable
+
+VLAN 20 Administratie (22)
+192.168.10.64 /27
+255.255.255.224
+192.168.10.65-94 usable
+
+VLAN 30 Directie (7)
+192.168.10.96 /28
+255.255.255.240
+192.168.10.97-110 usable
+
+VLAN 99 Beheer (1)
+192.168.10.112 /30
+255.255.255.252
+192.168.10.113-114 usable
+
+pc verkoop 1 geven we het eerst beschikbare netwerk, pc verkoop 2 geven we het eerst beschikbare netwerk in de range dus het 11e adres en verkoop 3 het 21e adres
+
+pc administratie doen we ook in die volgorde en voor directie ook 
+
+verdieping 1
+pc verkoop 1: 
+192.168.10.2 255.255.255.192
+
+laptop_administratie_1
+192.168.10.65 255.255.255.224
+
+pc_directie 1: 
+192.168.10.97 225.255.255.240
+
+laptop_netwerkbeheerder_1
+192.168.10.113 255.255.255.252
+
+
+verdieping 2:
+pc_verkoop_v2
+192.168.10.12 255.255.255.224
+
+pc_administratie_v2
+192.168.10.73 255.255.255.224
+
+pc_directie_v2
+192.168.10.101 255.255.255.240
+
+verdieping 3: 
+pc_verkoop_v3
+192.168.10.22 255.255.255.192
+
+pc_administratie_v3
+192.168.10.71 255.255.255.224
+
+
+#alle computers binnen in de zelfde vlan kunnen elkaar bereiken
+#dit is de basis configuratie wat nog gedaan moet worden is zaken van beveiliging: 
+# - versleutelde paswoorden
+# - ssh-connecties
+# - blackhole vlan en ongebruikte poorten afzetten
+# - appart native VLAN gebruiken 
+# deze dingen moeten nog gedaan worden in deze oefening wat nu gedaan is is eigenlijk de basis configuratie van vtp
+
+
+
+

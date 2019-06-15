@@ -1,0 +1,75 @@
+C:\Users\Nillo\source\repos\ccnaV6V52\ccnaV6V52\bin\Debug\ccnaV6V52.exe.config
+C:\Users\Nillo\source\repos\ccnaV6V52\ccnaV6V52\bin\Debug\ccnaV6V52.exe
+C:\Users\Nillo\source\repos\ccnaV6V52\ccnaV6V52\bin\Debug\ccnaV6V52.pdb
+C:\Users\Nillo\source\repos\ccnaV6V52\ccnaV6V52\obj\Debug\ccnaV6V52.csprojResolveAssemblyReference.cache
+C:\Users\Nillo\source\repos\ccnaV6V52\ccnaV6V52\obj\Debug\MainWindow.g.cs
+C:\Users\Nillo\source\repos\ccnaV6V52\ccnaV6V52\obj\Debug\App.g.cs
+C:\Users\Nillo\source\repos\ccnaV6V52\ccnaV6V52\obj\Debug\ccnaV6V52_MarkupCompile.cache
+C:\Users\Nillo\source\repos\ccnaV6V52\ccnaV6V52\obj\Debug\ccnaV6V52_MarkupCompile.lref
+C:\Users\Nillo\source\repos\ccnaV6V52\ccnaV6V52\obj\Debug\MainWindow.baml
+C:\Users\Nillo\source\repos\ccnaV6V52\ccnaV6V52\obj\Debug\ccnaV6V52.g.resources
+C:\Users\Nillo\source\repos\ccnaV6V52\ccnaV6V52\obj\Debug\ccnaV6V52.Properties.Resources.resources
+C:\Users\Nillo\source\repos\ccnaV6V52\ccnaV6V52\obj\Debug\ccnaV6V52.csproj.GenerateResource.Cache
+C:\Users\Nillo\source\repos\ccnaV6V52\ccnaV6V52\obj\Debug\ccnaV6V52.csproj.CoreCompileInputs.cache
+C:\Users\Nillo\source\repos\ccnaV6V52\ccnaV6V52\obj\Debug\ccnaV6V52.exe
+C:\Users\Nillo\source\repos\ccnaV6V52\ccnaV6V52\obj\Debug\ccnaV6V52.pdb
+C:\Users\Nillo\PXL\Net Advanced\Extra\ccnaV6V52\ccnaV6V52\bin\Debug\ccnaV6V52.exe.config
+C:\Users\Nillo\PXL\Net Advanced\Extra\ccnaV6V52\ccnaV6V52\bin\Debug\ccnaV6V52.exe
+C:\Users\Nillo\PXL\Net Advanced\Extra\ccnaV6V52\ccnaV6V52\bin\Debug\ccnaV6V52.pdb
+C:\Users\Nillo\PXL\Net Advanced\Extra\ccnaV6V52\ccnaV6V52\obj\Debug\ccnaV6V52.csprojResolveAssemblyReference.cache
+C:\Users\Nillo\PXL\Net Advanced\Extra\ccnaV6V52\ccnaV6V52\obj\Debug\MainWindow.g.cs
+C:\Users\Nillo\PXL\Net Advanced\Extra\ccnaV6V52\ccnaV6V52\obj\Debug\App.g.cs
+C:\Users\Nillo\PXL\Net Advanced\Extra\ccnaV6V52\ccnaV6V52\obj\Debug\ccnaV6V52_MarkupCompile.cache
+C:\Users\Nillo\PXL\Net Advanced\Extra\ccnaV6V52\ccnaV6V52\obj\Debug\ccnaV6V52_MarkupCompile.lref
+C:\Users\Nillo\PXL\Net Advanced\Extra\ccnaV6V52\ccnaV6V52\obj\Debug\MainWindow.baml
+C:\Users\Nillo\PXL\Net Advanced\Extra\ccnaV6V52\ccnaV6V52\obj\Debug\ccnaV6V52.g.resources
+C:\Users\Nillo\PXL\Net Advanced\Extra\ccnaV6V52\ccnaV6V52\obj\Debug\ccnaV6V52.Properties.Resources.resources
+C:\Users\Nillo\PXL\Net Advanced\Extra\ccnaV6V52\ccnaV6V52\obj\Debug\ccnaV6V52.csproj.GenerateResource.Cache
+C:\Users\Nillo\PXL\Net Advanced\Extra\ccnaV6V52\ccnaV6V52\obj\Debug\ccnaV6V52.csproj.CoreCompileInputs.cache
+C:\Users\Nillo\PXL\Net Advanced\Extra\ccnaV6V52\ccnaV6V52\obj\Debug\ccnaV6V52.exe
+C:\Users\Nillo\PXL\Net Advanced\Extra\ccnaV6V52\ccnaV6V52\obj\Debug\ccnaV6V52.pdb
+D:\PXL-IT\JAAR 2\Cisco CCNA II\ccnaV6V52\ccnaV6V52\bin\Debug\ccnaV6V52.exe.config
+D:\PXL-IT\JAAR 2\Cisco CCNA II\ccnaV6V52\ccnaV6V52\bin\Debug\ccnaV6V52.exe
+D:\PXL-IT\JAAR 2\Cisco CCNA II\ccnaV6V52\ccnaV6V52\bin\Debug\ccnaV6V52.pdb
+D:\PXL-IT\JAAR 2\Cisco CCNA II\ccnaV6V52\ccnaV6V52\obj\Debug\ccnaV6V52.csprojResolveAssemblyReference.cache
+D:\PXL-IT\JAAR 2\Cisco CCNA II\ccnaV6V52\ccnaV6V52\obj\Debug\MainWindow.g.cs
+D:\PXL-IT\JAAR 2\Cisco CCNA II\ccnaV6V52\ccnaV6V52\obj\Debug\App.g.cs
+D:\PXL-IT\JAAR 2\Cisco CCNA II\ccnaV6V52\ccnaV6V52\obj\Debug\ccnaV6V52_MarkupCompile.cache
+D:\PXL-IT\JAAR 2\Cisco CCNA II\ccnaV6V52\ccnaV6V52\obj\Debug\ccnaV6V52_MarkupCompile.lref
+D:\PXL-IT\JAAR 2\Cisco CCNA II\ccnaV6V52\ccnaV6V52\obj\Debug\MainWindow.baml
+D:\PXL-IT\JAAR 2\Cisco CCNA II\ccnaV6V52\ccnaV6V52\obj\Debug\ccnaV6V52.g.resources
+D:\PXL-IT\JAAR 2\Cisco CCNA II\ccnaV6V52\ccnaV6V52\obj\Debug\ccnaV6V52.Properties.Resources.resources
+D:\PXL-IT\JAAR 2\Cisco CCNA II\ccnaV6V52\ccnaV6V52\obj\Debug\ccnaV6V52.csproj.GenerateResource.Cache
+D:\PXL-IT\JAAR 2\Cisco CCNA II\ccnaV6V52\ccnaV6V52\obj\Debug\ccnaV6V52.csproj.CoreCompileInputs.cache
+D:\PXL-IT\JAAR 2\Cisco CCNA II\ccnaV6V52\ccnaV6V52\obj\Debug\ccnaV6V52.exe
+D:\PXL-IT\JAAR 2\Cisco CCNA II\ccnaV6V52\ccnaV6V52\obj\Debug\ccnaV6V52.pdb
+D:\PXL-IT\JAAR 2\Semester 1\Cisco CCNA II\ccnaV6V52\ccnaV6V52\bin\Debug\ccnaV6V52.exe.config
+D:\PXL-IT\JAAR 2\Semester 1\Cisco CCNA II\ccnaV6V52\ccnaV6V52\bin\Debug\ccnaV6V52.exe
+D:\PXL-IT\JAAR 2\Semester 1\Cisco CCNA II\ccnaV6V52\ccnaV6V52\bin\Debug\ccnaV6V52.pdb
+D:\PXL-IT\JAAR 2\Semester 1\Cisco CCNA II\ccnaV6V52\ccnaV6V52\obj\Debug\ccnaV6V52.csprojResolveAssemblyReference.cache
+D:\PXL-IT\JAAR 2\Semester 1\Cisco CCNA II\ccnaV6V52\ccnaV6V52\obj\Debug\MainWindow.g.cs
+D:\PXL-IT\JAAR 2\Semester 1\Cisco CCNA II\ccnaV6V52\ccnaV6V52\obj\Debug\App.g.cs
+D:\PXL-IT\JAAR 2\Semester 1\Cisco CCNA II\ccnaV6V52\ccnaV6V52\obj\Debug\ccnaV6V52_MarkupCompile.cache
+D:\PXL-IT\JAAR 2\Semester 1\Cisco CCNA II\ccnaV6V52\ccnaV6V52\obj\Debug\ccnaV6V52_MarkupCompile.lref
+D:\PXL-IT\JAAR 2\Semester 1\Cisco CCNA II\ccnaV6V52\ccnaV6V52\obj\Debug\MainWindow.baml
+D:\PXL-IT\JAAR 2\Semester 1\Cisco CCNA II\ccnaV6V52\ccnaV6V52\obj\Debug\ccnaV6V52.g.resources
+D:\PXL-IT\JAAR 2\Semester 1\Cisco CCNA II\ccnaV6V52\ccnaV6V52\obj\Debug\ccnaV6V52.Properties.Resources.resources
+D:\PXL-IT\JAAR 2\Semester 1\Cisco CCNA II\ccnaV6V52\ccnaV6V52\obj\Debug\ccnaV6V52.csproj.GenerateResource.Cache
+D:\PXL-IT\JAAR 2\Semester 1\Cisco CCNA II\ccnaV6V52\ccnaV6V52\obj\Debug\ccnaV6V52.csproj.CoreCompileInputs.cache
+D:\PXL-IT\JAAR 2\Semester 1\Cisco CCNA II\ccnaV6V52\ccnaV6V52\obj\Debug\ccnaV6V52.exe
+D:\PXL-IT\JAAR 2\Semester 1\Cisco CCNA II\ccnaV6V52\ccnaV6V52\obj\Debug\ccnaV6V52.pdb
+D:\PXL-IT\JAAR 2\Semester 2\CCNA 3\ccnaV6V52\ccnaV6V52\bin\Debug\ccnaV6V52.exe.config
+D:\PXL-IT\JAAR 2\Semester 2\CCNA 3\ccnaV6V52\ccnaV6V52\bin\Debug\ccnaV6V52.exe
+D:\PXL-IT\JAAR 2\Semester 2\CCNA 3\ccnaV6V52\ccnaV6V52\bin\Debug\ccnaV6V52.pdb
+D:\PXL-IT\JAAR 2\Semester 2\CCNA 3\ccnaV6V52\ccnaV6V52\obj\Debug\ccnaV6V52.csprojResolveAssemblyReference.cache
+D:\PXL-IT\JAAR 2\Semester 2\CCNA 3\ccnaV6V52\ccnaV6V52\obj\Debug\MainWindow.g.cs
+D:\PXL-IT\JAAR 2\Semester 2\CCNA 3\ccnaV6V52\ccnaV6V52\obj\Debug\App.g.cs
+D:\PXL-IT\JAAR 2\Semester 2\CCNA 3\ccnaV6V52\ccnaV6V52\obj\Debug\ccnaV6V52_MarkupCompile.cache
+D:\PXL-IT\JAAR 2\Semester 2\CCNA 3\ccnaV6V52\ccnaV6V52\obj\Debug\ccnaV6V52_MarkupCompile.lref
+D:\PXL-IT\JAAR 2\Semester 2\CCNA 3\ccnaV6V52\ccnaV6V52\obj\Debug\MainWindow.baml
+D:\PXL-IT\JAAR 2\Semester 2\CCNA 3\ccnaV6V52\ccnaV6V52\obj\Debug\ccnaV6V52.g.resources
+D:\PXL-IT\JAAR 2\Semester 2\CCNA 3\ccnaV6V52\ccnaV6V52\obj\Debug\ccnaV6V52.Properties.Resources.resources
+D:\PXL-IT\JAAR 2\Semester 2\CCNA 3\ccnaV6V52\ccnaV6V52\obj\Debug\ccnaV6V52.csproj.GenerateResource.Cache
+D:\PXL-IT\JAAR 2\Semester 2\CCNA 3\ccnaV6V52\ccnaV6V52\obj\Debug\ccnaV6V52.csproj.CoreCompileInputs.cache
+D:\PXL-IT\JAAR 2\Semester 2\CCNA 3\ccnaV6V52\ccnaV6V52\obj\Debug\ccnaV6V52.exe
+D:\PXL-IT\JAAR 2\Semester 2\CCNA 3\ccnaV6V52\ccnaV6V52\obj\Debug\ccnaV6V52.pdb

@@ -1,0 +1,8 @@
+R1
+---
+en 
+conf t
+interface s0/0/0
+ip ospf hello-interval 15
+ip ospf dead-interval 60
+bandwidth 64

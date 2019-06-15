@@ -1,0 +1,114 @@
+HQ-sw
+
+en
+conf t
+ip default-gateway 10.10.10.145
+int vlan 60
+ip address 10.10.10.146 255.255.255.240
+no shut
+exit
+ip domain-name cisco.com
+en secret ciscoenpass
+username Admin password letmein 
+crypto key generate rsa 
+1024
+ip ssh version 2 
+ip ssh authentication-retries 2 
+ip ssh time-out 60 
+line vty 0 15 
+transport input ssh 
+login local 
+exit
+
+service password-encryption 
+vlan 15 
+name Servers 
+vlan 30 
+name PCs
+vlan 45 
+name Native
+vlan 60 
+name Management
+
+exit 
+
+interface range f0/11-20
+sw mode acces 
+sw acces vlan 15
+
+int range f0/1-10
+sw mode acces 
+sw acces vlan 30
+
+int range g0/1 
+sw mode trunk 
+sw trunk native vlan 45
+
+int rang f0/1
+sw port-security max 2 
+sw port-security mac-address sticky
+sw port-security violation restrict
+int range fa0/21-24, g0/2
+shutdown
+
+
+HQ (router)
+---------
+en
+conf t
+int g0/0.15
+encapsulation dot1Q 15
+ip address 10.10.10.161 255.255.255.224
+int g0/0.30
+encapsulation dot1Q 30
+ip address 10.10.10.193 255.255.255.192
+int g0/0.45 
+encapsulation dot1Q 45 native
+ip address 10.10.10.129 255.255.255.240
+int g0/0.60 
+encapsulation dot1Q 60
+ip address 10.10.10.145 255.255.255.240
+
+int g0/0
+no shut
+exit
+ip dhcp excluded-address 10.10.10.193
+ip dhcp pool LAN
+default-router 10.10.10.193
+network 10.10.10.192 255.255.255.192
+exit
+
+(check nu eens of ge bij de computer staff ene ip adresske krijgt :) als dat niet is dan hebt ge iets fout gedaan) 
+
+router rip 
+version 2 
+network 10.10.10.0
+passive-interface s0/1/0
+passive-interface g0/0.15
+passive-interface g0/0.30
+passive-interface g0/0.45
+passive-interface g0/0.60
+
+default-information originate 
+exit
+ip route 0.0.0.0 0.0.0.0 s0/1/0
+ip access-list standard 1
+permit 10.10.10.0 0.0.0.255
+exit
+ip nat inside source static 10.10.10.162 198.133.219.130
+ip nat pool MYPOOL 198.133.219.128 198.133.219.129 netmask 255.255.255.252
+ip nat inside source list 1 pool MYPOOL overload 
+interface g0/0.15
+ip nat inside
+interface g0/0.30
+ip nat inside
+interface g0/0.45
+ip nat inside
+interface g0/0.60
+ip nat inside
+int s0/0/0
+ip nat inside
+int s0/0/1 
+ip nat inside
+int s0/1/0
+ip nat outside
