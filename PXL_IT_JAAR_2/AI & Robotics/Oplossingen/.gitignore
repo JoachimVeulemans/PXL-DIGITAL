@@ -1,0 +1,14 @@
+
+\.idea/
+
+venv/
+
+src/CourseMaterials/Spring Break/notebooks/\.ipynb_checkpoints/
+
+src/__pycache__/
+
+src/CourseMaterials/__pycache__/
+
+Spring_Break/\.vscode/
+
+Spring_Break/jupyter/\.ipynb_checkpoints/

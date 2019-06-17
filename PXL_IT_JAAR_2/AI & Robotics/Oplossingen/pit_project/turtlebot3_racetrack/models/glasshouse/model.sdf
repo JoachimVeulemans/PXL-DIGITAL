@@ -1,0 +1,32 @@
+<?xml version='1.0'?>
+<sdf version="1.4">
+<model name="glasshouse">
+  <pose>0 0 0.01 0 0 0</pose>
+  <static>true</static>
+    <link name="link">
+      <collision name="collision">
+        <geometry>
+          <plane>
+              <normal>0 0 1</normal>
+              <size>10.5325 7.45</size>
+            </plane>
+        </geometry>
+      </collision>
+      <visual name="visual">
+        <geometry>
+          <plane>
+              <normal>0 0 1</normal>
+              <size>10.5325 7.45</size>
+            </plane>
+        </geometry>
+	<material>
+          <script>
+		<uri>model://glasshouse/materials/scripts</uri>
+		<uri>model://glasshouse/materials/textures</uri>        	
+            	<name>glasshouse</name>
+          </script>
+  	</material>
+      </visual>
+    </link>
+  </model>
+</sdf>

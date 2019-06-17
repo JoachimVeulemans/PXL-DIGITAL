@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<launch>
+  <arg name="model" default="waffle" doc="model type [burger, waffle, waffle_pi]"/>
+  <env name="GAZEBO_MODEL_PATH" value="$(find turtlebot3_racetrack)/models:$GAZEBO_MODEL_PATH" />
+
+  <arg name="player_one" default="player_one"/>
+  <arg name="player_two" default="player_two"/>
+
+  <arg name="player_one_x_pos" default="-1.5"/>
+  <arg name="player_one_y_pos" default="0.05"/>
+  <arg name="player_one_z_pos" default="0.0"/>
+  <arg name="player_one_yaw" default="0.0"/>
+
+  <arg name="player_two_x_pos" default="3.5"/>
+  <arg name="player_two_y_pos" default="0.355"/>
+  <arg name="player_two_z_pos" default="0.0"/>
+  <arg name="player_two_yaw" default="0.0"/>
+
+  <include file="$(find gazebo_ros)/launch/empty_world.launch">
+    <arg name="world_name" value="$(find turtlebot3_racetrack)/worlds/battleracetrack.world"/>
+    <arg name="paused" value="false"/>
+    <arg name="use_sim_time" value="true"/>
+    <arg name="gui" value="true"/>
+    <arg name="headless" value="false"/>
+    <arg name="debug" value="false"/>
+  </include>
+
+
+  <group ns = "$(arg player_one)">
+    <param name="robot_description" command="$(find xacro)/xacro --inorder $(find turtlebot3_description)/urdf/turtlebot3_$(arg model).urdf.xacro" />
+
+    <node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher" output="screen">
+      <param name="publish_frequency" type="double" value="50.0" />
+      <param name="tf_prefix" value="$(arg player_one)" />
+    </node>
+    
+    <node name="spawn_urdf" pkg="gazebo_ros" type="spawn_model" args="-urdf -model $(arg player_one) -x $(arg player_one_x_pos) -y $(arg player_one_y_pos) -z $(arg player_one_z_pos) -Y $(arg player_one_yaw) -param robot_description" />
+  </group>
+
+  <group ns = "$(arg player_two)">
+    <param name="robot_description" command="$(find xacro)/xacro --inorder $(find turtlebot3_description)/urdf/turtlebot3_$(arg model).urdf.xacro" />
+
+    <node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher" output="screen">
+      <param name="publish_frequency" type="double" value="50.0" />
+      <param name="tf_prefix" value="$(arg player_two)" />
+    </node>
+    
+    <node name="spawn_urdf" pkg="gazebo_ros" type="spawn_model" args="-urdf -model $(arg player_two) -x $(arg player_two_x_pos) -y $(arg player_two_y_pos) -z $(arg player_two_z_pos) -Y $(arg player_two_yaw) -param robot_description" />
+  </group>
+
+</launch>

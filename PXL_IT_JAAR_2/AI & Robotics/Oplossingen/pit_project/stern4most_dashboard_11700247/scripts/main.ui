@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>RosControllerRP1819G01</class>
+ <widget class="QDialog" name="RosControllerRP1819G01">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1128</width>
+    <height>382</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Controller 11700247</string>
+  </property>
+  <widget class="QPushButton" name="pushButton_EXIT">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>330</y>
+     <width>89</width>
+     <height>25</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Afsluiten</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="pushButton_FW">
+   <property name="geometry">
+    <rect>
+     <x>120</x>
+     <y>50</y>
+     <width>89</width>
+     <height>25</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>FW</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="pushButton_BW">
+   <property name="geometry">
+    <rect>
+     <x>120</x>
+     <y>160</y>
+     <width>89</width>
+     <height>25</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>BW</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="pushButton_LEFT">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>100</y>
+     <width>89</width>
+     <height>25</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>LEFT</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="pushButton_RIGHT">
+   <property name="geometry">
+    <rect>
+     <x>230</x>
+     <y>100</y>
+     <width>89</width>
+     <height>25</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>RIGHT</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="pushButton_AUTO">
+   <property name="geometry">
+    <rect>
+     <x>120</x>
+     <y>100</y>
+     <width>89</width>
+     <height>25</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Auto</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="pushButton_STOP">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>290</y>
+     <width>89</width>
+     <height>25</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Stop</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label">
+   <property name="geometry">
+    <rect>
+     <x>720</x>
+     <y>110</y>
+     <width>67</width>
+     <height>17</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>TextLabel</string>
+   </property>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
