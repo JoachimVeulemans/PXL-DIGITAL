@@ -175,6 +175,10 @@ Here are a few extra resources to get you up and running:
 - [Python Cheat Sheet](Extras/mementopython3-english.pdf)
   
    This is an interesting and useful cheat sheet. There are others. If you find one which is inherently better, notify us! We will add it here.
+   
+- [Comprehensive Python Cheatsheet](https://github.com/gto76/python-cheatsheet)
+
+   This repository gives an outstanding overview of Python.
 
 - [Python: Getting Started](https://app.pluralsight.com/library/courses/python-getting-started/table-of-contents)
 
