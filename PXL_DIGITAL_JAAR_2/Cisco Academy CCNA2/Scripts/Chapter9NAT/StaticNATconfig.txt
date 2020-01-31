@@ -1,0 +1,20 @@
+#Configuring static NAT
+ip nat inside source static SPECIFY LOCAL-IP SPECIFY GLOBAL-IP
+interface SPECIFY INTERFACE (This is the inside interface)
+ip nat inside
+exit
+interface SECIFY INTERFACE
+ip nat outside
+
+#Removing the static source translation
+no ip nat inside source static
+
+
+#TROUBLESHOOTING:
+show ip nat translations
+clear ip nat statistics
+show ip nat statistics
+
+CONDITIONS static nat:
+inside interface has an ip
+outside interface has an ip

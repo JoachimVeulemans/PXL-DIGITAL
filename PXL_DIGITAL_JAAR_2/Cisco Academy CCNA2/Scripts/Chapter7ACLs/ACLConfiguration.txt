@@ -1,0 +1,34 @@
+#Access list aanmaken en op een interface deployen
+access-list 7 deny SPECIFY IP SPECIFY WILDCARDMASK
+access-list 7 permit any
+interface SPECIFY INTERFACE
+ip access-group 7 out
+
+#Access list verwijderen
+no access-list 7
+
+#Named ACL maken (makkelijker te editten)
+ip access-list standard SPECIFY NAME
+deny SPECIFY IP SPECIFY WILDCARD MASK
+permit any
+exit
+interface SPECIFY INTERFACE
+ip access-group SPECIFIED NAME out
+exit
+ip access-list standard SPECIFIED NAME
+no 10
+10 deny SPECIFY IP SPECIFY WILDCARD MASK
+15 deny host SPECIFY IP
+
+#VTY lines beveiligen met ssh en acl`
+enable
+configure terminal
+line vty 0 4
+login local
+transport input ssh
+access-class 21 in
+exit
+access-list 21 permit SPECIFY IP
+
+
+

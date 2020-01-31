@@ -1,0 +1,8 @@
+MAKING SUB INTERFACES
+------------------------
+configure terminal
+interface g0/0.10
+encapsulation dot1q 10 (native for the native vlan)
+ip address SPECIFY IP SUBNET
+interface g0/0
+no shutdown

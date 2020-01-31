@@ -1,0 +1,47 @@
+BASIC ROUTER CONFIG:
+
+Name the device
+--------------------
+configure terminal
+hostname SPECIFY NAME
+
+
+Secrue the device
+--------------------
+configure terminal
+enable secret SPECIFY SECRET
+line console 0
+password SPECIFY PWD
+login
+exit
+line vty 0 4
+password SPECIFY PWD
+login
+exit
+service password-encryption 
+
+
+Configure a banner
+---------------------
+configure terminal
+banner motd @ Authorized Access only! @
+
+
+Configure an interface (Serial interface may need clock rate)
+---------------------
+configure terminal
+interface SPECIFY INTERFACE
+description SPECIFY DESCRIPTION
+ip address SPECIFY IP
+#(clock rate 128000)
+no shutdown
+exit
+
+
+Configure loopback interface
+---------------------
+configure terminal
+interface loopback 0
+ip address SPECIFY IP SPECIFY SUBNETMASK
+
+

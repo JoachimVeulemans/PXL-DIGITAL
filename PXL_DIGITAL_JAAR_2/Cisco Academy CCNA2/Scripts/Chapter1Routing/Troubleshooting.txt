@@ -1,0 +1,30 @@
+BASIC ROUTING SHOW COMMANDS:
+
+DISPLAY ALL INTERFACES AND STATUS
+---------------------------------
+do show ip interface brief
+OR
+show interfaces
+OR
+show ip interface
+
+
+DISPLAY CONTENTS OF ROUTING TABLE
+---------------------------------
+do show ip route
+
+
+DISPLAY COMMANDS CONFIGURED ON AN INTERFACE
+---------------------------------
+show running-config interface SPECIFY INTERFACE
+
+
+FILTERING OPTIONS EXAMPLE
+---------------------------------
+show running-config | [section | include | exclude | begin] line vty
+
+
+HISTORY
+---------------------------------
+terminal history size 200
+show history

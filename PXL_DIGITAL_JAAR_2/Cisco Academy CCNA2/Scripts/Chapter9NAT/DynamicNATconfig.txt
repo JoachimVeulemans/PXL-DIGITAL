@@ -1,0 +1,19 @@
+#Configuring Dynamic NAT
+ip nat pool SPECIFY NAME START-IP END-IP {netmask | prefix-length}
+access-list SPECIFY ACCES-LIST-NUMBER permit SPECIFY SOURCE SOURCE-WILDCARD
+ip nat inside source list SPECIFY ACCESS-LIST-NUMBER pool SPECIFY NAME
+interface SPECIFY INTERFACE
+ip nat inside
+interface SPECIFY INTERFACE
+ip nat outside
+
+
+#TROUBLESHOOTING:
+show ip nat translations
+show ip nat translations verbose
+clear ip nat translation *
+SEE Screens folder --> DynamicNATdegubExample
+
+
+#CONDITIONS dynamic NAT:
+configuration of the inside and outside interfaces participating in NAT

@@ -1,0 +1,25 @@
+SETTING UP A TRUNK
+------------------------
+configure terminal
+interface SPECIFY INTERFACE
+switchport mode trunk
+switchport trunk native vlan SPECIFY VLAN ID
+switchport trunk allowed vlan SPECIFY VLAN LIST (, as seperator)
+end
+
+
+RESETTING CONFIGURED VALUES ON TRUNK LINKS
+------------------------
+configure terminal
+interface SPECIFY INTERFACE
+no switchport trunk allowed vlan
+no switchport trunk native vlan
+end
+
+
+
+TROUBLESHOOTING
+------------------------
+show interfaces SPECIFY INTERFACE switchport
+show mac address-table
+show interfaces trunk

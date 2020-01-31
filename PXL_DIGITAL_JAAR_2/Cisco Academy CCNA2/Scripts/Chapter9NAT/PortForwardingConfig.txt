@@ -1,0 +1,7 @@
+#Configuring port forwarding
+ip nat inside source static {tcp | udp SPECIFY LOCAL-IP LOCAL-PORT GLOBAL-IP GLOBAL-PORT} [extendable]
+
+
+#TROUBLESHOOTING
+debug ip nat
+show access-lists

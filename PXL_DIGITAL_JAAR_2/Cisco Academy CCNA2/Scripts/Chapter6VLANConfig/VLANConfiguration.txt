@@ -1,0 +1,70 @@
+#Create a VLAN
+-------------------------------------------------
+enable
+configure terminal
+vlan SPECIFY ID
+name SPECIFY NAME
+
+#Assigning ports to a VLAN
+-------------------------------------------
+enable
+configure terminal
+interface SPECIFY ID
+switchport mode access
+switchport acces vlan SPECIFY ID
+end
+
+#Making a voice VLAN and assign to a port
+-------------------------------------------------------------------
+enable
+configure terminal
+vlan 150
+name VOICE
+exit
+interface SPECIFY INTERFACE
+mls qos trust cos #set the trusted state of an interface
+switchport voice vlan 150
+
+#Changing VLAN Port Membership (after the no switchport access vlan the interface is no longer member of the vlan)
+-----------------------------------------------------
+enable
+configure terminal
+interface SPECIFY INTERFACE
+no switchport access vlan
+end
+
+#Deleting VLANs
+--------------------------
+enable
+configure terminal
+interface SPECIFY INTERFACE
+no vlan SPECIFY NUMBER
+end
+show vlan brief
+
+#Configuring trunk ports
+---------------------------------------
+enable
+configure terminal
+interface SPECIFY ID
+switchport mode trunk
+switchport trunk native vlan SPECIFY ID
+switchport trunk allowed vlan SPECIFY LIST(optional)
+end
+
+#Resetting the trunk to default state
+---------------------------------------------------------
+enable
+configure terminal
+interface SPECIFY ID
+no switchport trunk allowed vlan
+no switchport trunk native vlan
+end
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------
+SHOW COMMANDS FOR TROUBLESHOOTING
+
+show vlan [brief | id VLAN-ID | name VLAN-NAME | summary]
+show interfaces[INTERFACE-id | vlan VLAN-ID | switchport]
+

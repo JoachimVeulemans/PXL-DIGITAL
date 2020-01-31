@@ -1,0 +1,42 @@
+#DHCPv4 STEPS
+
+#Configure excluded addresses
+ip dhcp excluded-address SPECIFY LOW-ADDRESS [high-address]
+
+
+#Configure DHCPv4 pool
+ip dhcp pool SPECIFY POOLNAME
+network SPECIFY NETWORK [mask]
+default-router SPECIFY ADDRESS [address2...] (dit is het address van de interface van de aanliggende router waar alle data op binnenkomt/de interface waar het lokale netwerk zijn shit dus op binnen komt)
+dns-server SPECIFY ADDRESS [address2...]
+domain-name SPECIFY DOMAIN
+lease {days [hours] [minutes] | infinite}
+netbios-name-server SPECIFY ADDRESS [address2...]
+
+
+#DHCPv4 Relay (interface where the packet comes in to the router, address from the dhcpserver/router)
+interface SPECIFY INTERFACE
+ip helper-address SPECIFY ADDRESS
+
+
+#Release address and send a DHCPDISCOVER (broadcast so may need ip helper if router is on another network)
+ipconfig /release
+ipconfig /renew
+
+
+#Configuring a router as DHCP client
+interface SPECIFY INTERFACE
+ip address dhcp
+no shutdown
+
+
+#TROUBLESHOOTING:
+show running config | section dhcp
+show ip dhcp binding
+show ip dhcp server statistics
+show ip interface SPECIFY INTERFACE
+
+
+NOTES TROUBLESHOOT:
+ip dhcp binding --> displays a list of IPv4 address to MAC address bindings that have been provided by the DHCPv4 service
+show ip dhcp server statistics --> verify that messages are being received or sent by the router. This command displays count information regarding the number of DHCPv4 messages that have been sent and received

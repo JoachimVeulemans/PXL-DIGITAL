@@ -1,0 +1,22 @@
+STATIC ROUTING:
+
+Static route maken
+---------------------------
+ip route SPECIFY NETWORK MASK SPECIFY NEXT-HOP-IP | EXIT-INTF
+
+
+Default static route maken
+---------------------------
+ip route 0.0.0.0 0.0.0.0 SPECIFY NETWORK MASK SPECIFY NEXT-HOP-IP | EXIT-INTF
+
+
+
+Next hop static route
+--------------------------
+ip route SPECIFY NETW MASK SPECIFY NEXT-HOP-IP
+
+
+
+Directly connected static route
+-------------------------------
+ip route SPECIFY NETW MASK SPECIFY EXIT-INTF

@@ -1,0 +1,44 @@
+CREATE A VLAN
+-------------------------
+vlan SPECIFY ID
+name SPECIFY NAME
+end
+
+
+ASSIGNING PORTS TO VLANs
+-------------------------
+interface SPECIFY INTERFACE
+switchport mode access
+switchport access vlan SPECIFY VLAN
+
+ASSIGNING VOICE VLAN TO A PORT
+-------------------------
+interface SPECIFY INTERFACE
+switchport mode access
+switchport voice vlan SPECIFY VLAN ID
+
+
+CHANGE VLAN PORT MEMBERSHIP
+-------------------------
+interface SPECIFY INTERFACE
+no switchport access vlan
+end
+
+
+DELETE VLANs (PRECONDITION PORTS OF THE VLAN HAVE CHANGED MEMBERSHIP)
+-------------------------
+configure terminal
+no vlan SPECIFY VLAN ID
+
+OR
+
+delete vlan.dat
+erase startup-config (LET HIER MEE OP)
+
+
+TROUBLESHOOTING
+-------------------------
+show vlan brief
+show vlan name SPECIFY NAME
+show vlan summary
+show interfaces vlan SPECIFY VLAN ID

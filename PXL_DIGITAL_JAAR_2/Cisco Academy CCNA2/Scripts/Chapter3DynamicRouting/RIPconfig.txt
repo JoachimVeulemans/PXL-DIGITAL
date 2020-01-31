@@ -1,0 +1,13 @@
+(version 2 = version we use for rip)
+(no auto-summary = stop summarizing network addresses that can be summarized)
+(passive interface = stop advertising a specific port e.g. g0/0 doesn't get advertised)
+(default-information originate = the edge router wants to propagate it's default route along with rip updates...)
+
+CONFIGURE RIP
+--------------------
+configure terminal
+router rip
+version 2
+no auto-summary
+network SPECIFY NETWORKS
+#default-information originate SPECIFY INTERFACE

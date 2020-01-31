@@ -1,0 +1,25 @@
+NOTES:
+To use ssh following things must be configure first:
+
+PRE-CONFIGURATIONS
+---------------------------
+ip domain-name SPECIFY DOMAIN NAME
+crypto key generate rsa
+1024
+username admin secret class
+line vty 0 15
+transport input ssh
+login local
+exit
+ip ssh version 2
+exit
+
+
+
+
+
+
+TROUBLESHOOT
+--------------------------
+show ip ssh
+show ssh

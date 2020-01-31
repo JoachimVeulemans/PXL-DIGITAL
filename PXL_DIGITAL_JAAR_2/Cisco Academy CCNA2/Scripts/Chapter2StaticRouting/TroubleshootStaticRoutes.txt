@@ -1,0 +1,3 @@
+show ip route
+show ip route static
+show ip route network

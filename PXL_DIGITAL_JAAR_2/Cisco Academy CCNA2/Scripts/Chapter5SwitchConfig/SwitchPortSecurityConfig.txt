@@ -1,0 +1,37 @@
+NOTES:
+!!!EERST PORT SECURITY ENABLE!!!
+switchport port-security
+
+STATIC SECURE MAC ADDRESSES
+-----------------------------
+switchport port-security mac-address SPECIFY ADDRESS
+
+
+STICKY SECURE MAC ADDRESSES(address dynamically learned or manually configure. stored in the address table and added to the running config until the switch restarts)
+-----------------------------
+switchport port-security maximum 10
+switchport port-security mac-address sticky (dynamic)
+switchport port-security mac-address sticky SPECIFY ADDRESS (manual)
+
+
+DISABLE STICKY SECURE MAC ADDRESSES
+-----------------------------
+no switchport port-security mac-address sticky
+
+
+PORT SECURITY VIOLATION MODES
+-----------------------------
+switchport port-security violation protect | restrict | shutdown
+
+
+TROUBLESHOOTING
+-----------------------------
+show port-security interface SPECIFY INTERFACE
+show port-security address
+
+
+
+REMARK:
+violation --> when violation occurs, switchport will be taken out of service until manually re-enabled.
+protect --> when violation occurs, permit traffic from known MAC add. and drop packets from unknows MAC add. + NO NOTIFICATION SEND
+restrict --> when violation occurs, permit traffic from known MAC add. and drop packets from unknows MAC add. + NOTIFICATION SEND WITH VIOLATION INFO

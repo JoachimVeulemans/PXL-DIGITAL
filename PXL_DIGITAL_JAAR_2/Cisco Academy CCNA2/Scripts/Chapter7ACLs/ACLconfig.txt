@@ -1,0 +1,43 @@
+CREATE NUMBERED ACLs
+-------------------------
+access-list SPECIFY NUMBER [permit | deny] [host] SPECIFY IP
+
+
+CREATE NAMED ACLs
+-------------------------
+ip access-list standard SPECIFY NAME
+permit | deny | remark host SPECIFY IP
+
+
+DEPLOY ACL ON INTERFACE
+-------------------------
+ip access-group SPECIFY NUMBER OR NAME [in | out]
+
+
+SECURE VTY LINES
+-------------------------
+access-class SPECIFY NUMBER [in | out]
+
+
+REMOVE ACCESS-LIST
+-------------------------
+no access-list SPECIFY NUMBER
+
+OR
+
+no ip access-list standard SPECIFY NAME
+
+
+REMOVE ACCESS-LIST FROM INTERFACE
+-------------------------
+no ip access-group SPECIFY NAME [in | out]
+
+
+
+
+
+TROUBLESHOOTING
+-------------------------
+show access-lists
+access-list SPECIFY NUMBER remark SPECIFY MESSAGE
+clear access-list counters

@@ -1,0 +1,22 @@
+#Configuring PAT address pool
+ip nat pool SPECIFY NAME START-IP END-IP {netmask | prefix-length}
+access-list SPECIFY ACCESS-LIST-NUMBER permit SPECIFY SOURCE SOURCE-WILDCARD
+ip nat inside source list SPECIFY ACCESS-LIST-NUMBER pool SPEFICY NAME overload
+interface SPECIFY INTERFACE
+ip nat inside
+interface SPECIFY INTERFACE
+ip nat outside
+
+#Configuring PAT Single address
+access-list SPECIFY ACCESS-LIST-NUMBER permit SPECIFY SOURCE SOURCE-WILDCARD
+ip nat inside source list SPECIFY ACCESS-LIST-NUMBER interface SPECIFY INTERFACE overload
+interface SPECIFY INTERFACE
+ip nat inside
+interface SPECIFY INTERFACE
+ip nat outside
+
+
+TROUBLESHOOTING:
+show ip nat translations
+clear ip nat statistics
+show ip nat statistics

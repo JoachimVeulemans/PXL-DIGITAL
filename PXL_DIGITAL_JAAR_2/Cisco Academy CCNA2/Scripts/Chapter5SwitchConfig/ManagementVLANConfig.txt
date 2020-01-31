@@ -1,0 +1,18 @@
+MAKE ONE VLAN THE MANAGEMENT VLAN
+----------------------------------
+configure terminal
+interface vlan SPECIFY VLAN
+ip address SPECIFY IP SUBNET
+no shutdown
+end
+
+CREATE A VLAN
+----------------------------------
+vlan SPECIFY ID
+name SPECIFY NAME
+exit
+interface SPECIFY INTERFACE
+switchport access vlan SPECIFY ID
+
+NOTES:
+VLAN must be created before it can be deployed (switchport mode access command)

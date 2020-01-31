@@ -1,0 +1,25 @@
+NOTES:
+(Auto-MDIX automatically detects the required cable connection type)
+
+CONFIGURE DUPLEX ON INTERFACE
+------------------------------
+configure terminal
+interface SPECIFY INTERFACE
+duplex full
+speed 100
+end
+
+OR
+
+configure terminal
+interface SPECIFY INTERFACE
+duplex auto
+speed auto
+mdix auto
+end
+
+ALS mdix auto aan staat moet duplex en speed ook op auto staan
+
+TROUBLESHOOT
+------------------------------
+show controllers ethernet-controller SPECIFY INTERFACE phy | include Auto-MDIX
