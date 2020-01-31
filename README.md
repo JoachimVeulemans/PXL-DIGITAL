@@ -13,4 +13,4 @@ Indien je oplossingen wilt delen of cursusmateriaal wilt toevoegen, is het altij
 Bij elk vak is een map genaamd 'TiX' voorzien. Hier staan alle bestanden van de [TiX-groep op Facebook](https://www.facebook.com/groups/919101731450526/) in.
 
 ## Contact
-Je kan mij altijd contacteren op joachim.veulemans@student.pxl.be.
+Je kan mij altijd contacteren op joachim.veulemans@outlook.be.
