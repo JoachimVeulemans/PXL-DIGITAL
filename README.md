@@ -1,4 +1,4 @@
-# PXL_IT
+# PXL-DIGITAL
 
 ## Samenvatting
 Deze repository bevat al het cursusmateriaal evenals oplossingen over alle vakken van de 3-jarige bacheloropleiding aan de Hogeschool PXL.
